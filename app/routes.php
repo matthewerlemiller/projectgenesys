@@ -11,7 +11,66 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function() {
+
+	if ( Auth::check() ) {
+		return Redirect::to('dashboard');
+	} else {
+		return Redirect::to('login');
+	}
+
 });
+
+Route::get('login', function() {
+
+	if(Auth::check()) {
+		return Redirect::to('dashboard');
+	} else {
+		return View::make('login');	
+	}
+
+});
+
+Route::post('login', function() {
+
+	$username = Input::get('username');
+	$password = Input::get('password');
+
+	if (Auth::attempt(array('username' => $username, 'password' => $password))) {
+		return Redirect::to('dashboard');
+	} else {
+		return Redirect::to('login');
+	}
+
+});
+
+Route::get('logout', function() {
+
+	Auth::logout();
+
+	return Redirect::to('login');
+
+});
+
+Route::get('dashboard', function() {
+
+	if (Auth::check()) {
+		return View::make('dashboard');	
+	} else {
+		return Redirect::to('login');
+	}
+});
+
+
+
+// Route::get('setadmin', function() {
+// 	$user = new User;
+
+// 	$user->username = 'admin';
+// 	$user->password = Hash::make('projectgenesys');
+// 	$user->save();
+
+// 	return "Admin Set";
+// });
+
+

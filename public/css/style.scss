@@ -1,0 +1,92 @@
+@import 'bourbon/_bourbon.scss';
+@import 'reset.css';
+
+// Variables
+$helvetica-thin : 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica-Neue UltraLight', 'Helvetica', Arial, sans-serif;
+$helvetica : 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$black : #464646;
+$green : #ACCC56;
+
+//Mixins
+@mixin center {
+	position: absolute;
+	top:50%;
+	left:50%;
+	@include transform(translate(-50%,-50%));
+}
+
+@mixin stretch {
+	width:100%;
+	height:100%;
+}
+
+@mixin centerLeft {
+	position: absolute;
+	top:50%;
+	left:0;
+	@include transform(translate(0%,-50%));
+}
+
+@mixin centerRight {
+	position: absolute;
+	top:50%;
+	right:0;
+	@include transform(translate(0%,-50%));
+}
+
+@mixin centerHorizontal {
+	position: absolute;
+	left:50%;
+	@include transform(translate(-50%, 0%));
+}
+
+@mixin triangle($direction, $color) {
+	border-style: solid;
+	@if $direction == left {
+		border-width: 15px 26.0px 15px 0;
+		border-color: transparent $color transparent transparent;
+	}
+	@else if $direction == right {
+		border-width: 15px 0 15px 26.0px;
+		border-color: transparent transparent transparent $color;
+	}
+	
+}
+
+@mixin breakpoint($point) {
+	@if $point == small {
+    	@media (max-width: 500px) { @content; }
+	}
+	@else if $point == medium {
+    	@media (max-width: 1250px) { @content; }
+	}
+	@else {
+		@media (max-width: $point) { @content; }
+	}
+  
+}
+
+@mixin change {
+	@include transition(all .15s ease);
+}
+
+//Main
+html, body {
+	background-color: $black;
+}
+
+
+
+.form-container {
+	@include center;
+	width:300px;
+	height:400px;
+	background-color: $green;
+	@include box-sizing(border-box);
+	padding: 30px;
+
+}
+
+
+

@@ -96,7 +96,7 @@ return array(
 	|
 	*/
 
-	'cookie' => 'laravel_session',
+	'cookie' => 'genesys_session_test',
 
 	/*
 	|--------------------------------------------------------------------------
