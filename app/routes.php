@@ -1,17 +1,8 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
-Route::get('/', function() {
+// Home Route. Check for login, redirect to dash if true,
+// back to login if false.
+Route::get('/', array('as' => 'home', function() {
 
 	if ( Auth::check() ) {
 		return Redirect::to('dashboard');
@@ -19,58 +10,34 @@ Route::get('/', function() {
 		return Redirect::to('login');
 	}
 
-});
+}));
 
-Route::get('login', function() {
 
-	if(Auth::check()) {
-		return Redirect::to('dashboard');
-	} else {
-		return View::make('login');	
-	}
+// Login/Logout routes
+Route::get('login', 'LoginController@getLogin');
+Route::post('login', 'LoginController@postLogin');
+Route::get('logout', 'LoginController@logout');
 
-});
 
-Route::post('login', function() {
-
-	$username = Input::get('username');
-	$password = Input::get('password');
-
-	if (Auth::attempt(array('username' => $username, 'password' => $password))) {
-		return Redirect::to('dashboard');
-	} else {
-		return Redirect::to('login');
-	}
-
-});
-
-Route::get('logout', function() {
-
-	Auth::logout();
-
-	return Redirect::to('login');
-
-});
-
+// Dash Route
 Route::get('dashboard', function() {
 
 	if (Auth::check()) {
+
 		return View::make('dashboard');	
+
 	} else {
+
 		return Redirect::to('login');
+		
 	}
 });
 
 
+// Add Member Route.
+Route::get('addmember', 'MemberController@getAddMember');
+Route::post('addmember', 'MemberController@submitNewMember');
 
-// Route::get('setadmin', function() {
-// 	$user = new User;
 
-// 	$user->username = 'admin';
-// 	$user->password = Hash::make('projectgenesys');
-// 	$user->save();
-
-// 	return "Admin Set";
-// });
 
 
