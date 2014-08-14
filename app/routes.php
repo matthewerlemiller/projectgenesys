@@ -14,9 +14,9 @@ Route::get('/', array('as' => 'home', function() {
 
 
 // Login/Logout routes
-Route::get('login', 'LoginController@getLogin');
+Route::get('login', ['as' => 'login', 'uses' => 'LoginController@getLogin']);
 Route::post('login', 'LoginController@postLogin');
-Route::get('logout', 'LoginController@logout');
+Route::get('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
 
 
 // Dash Route
@@ -35,8 +35,10 @@ Route::get('dashboard', function() {
 
 
 // Add Member Route.
-Route::get('addmember', 'MemberController@getAddMember');
-Route::post('addmember', 'MemberController@submitNewMember');
+Route::get('member/create', [ 'as' => 'createMember', 'uses' => 'MemberController@getAddMember']);
+Route::post('member/create', 'MemberController@submitNewMember');
+Route::get('member/list', [ 'as' => 'listMembers', 'uses' => 'MemberController@listMembers']);
+Route::get('member/{id}', [ 'as' => 'viewMember', 'uses' => 'MemberController@viewMember']);
 
 
 

@@ -8,9 +8,9 @@
         
     	<div id="mast">
             <ul>
-
-                <li><a href="logout">Logout</a></li>
-                <li><a href="addmember">New</a></li>
+                <li><a href="{{ route('logout') }}">Logout</a></li>
+                <li><a href="{{ route('listMembers') }}">List</a></li>
+                <li><a href="{{ route('createMember') }}">New</a></li>
                 <li><a href="{{ route('home') }}">Home</a></li>
             </ul>
     		 

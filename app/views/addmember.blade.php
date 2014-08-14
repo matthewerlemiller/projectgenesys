@@ -1,16 +1,20 @@
 @extends ('layouts.master')
 
 @section ('content')
-	{{ Form::open(array('url' => 'addmember')) }}
-		<p>{{ Form::text('firstname', 'First Name') }}</p>
-		<p>{{ Form::text('lastname', 'Last name') }}</p>
-		<p>{{ Form::text('phone', 'Phone Number') }}</p>
-		<p>{{ Form::email('email', 'Email Address') }}</p>
-		<p>{{ Form::text('address', 'Address') }}</p>
-		<p>{{ Form::text('parent-name-1', 'Parent Name') }}</p>
-		<p>{{ Form::text('parent-name-2', 'Parent Name') }}</p>
-		<p>{{ Form::text('parent-contact', 'Parent Phone') }}</p>
+	
+	{{ Form::open(array('url' => 'member/create')) }}
+		<p>{{ Form::text('firstname','',['placeholder' => 'First Name']) }}</p>
+		<p>{{ Form::text('lastname','', ['placeholder' => 'Last Name']) }}</p>
+		<p>{{ Form::text('phone', '', ['placeholder' => 'Phone']) }}</p>
+		<p>{{ Form::email('email', '', ['placeholder' => 'Email']) }}</p>
+		<p>{{ Form::text('address', '', ['placeholder' => 'Address']) }}</p>
+		<p>{{ Form::text('city', '', ['placeholder' => 'City']) }}</p>
+		<p>{{ Form::text('parent-name-1', '', ['placeholder' => 'Parent\'s Name']) }}</p>
+		<p>{{ Form::text('parent-name-2', '', ['placeholder' => 'Parent\'s Name']) }}</p>
+		<p>{{ Form::text('parent-contact', '', ['placeholder' => 'Parent Number']) }}</p>
 		{{ Form::submit('SAVE')}}
 	{{ Form::close() }}
+	
+	
 
 @stop
