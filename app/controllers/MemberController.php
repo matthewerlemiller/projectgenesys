@@ -1,109 +1,125 @@
 <?php 
 
-	class MemberController extends BaseController {
+class MemberController extends BaseController {
 
-		/**
-		 * GET /addmember
-		 *
-		 * Check for logged in user, proceed to addmember view if true,
-		 * if false redirect to login.
-		 *
-		 */
+	/**
+	 * GET /addmember
+	 *
+	 * Check for logged in user, proceed to addmember view if true,
+	 * if false redirect to login.
+	 *
+	 */
+	
+	public function getAddMember() {
+
+		if(Auth::check()) {
+			return View::make('addmember');	
+		} else {
+			return Redirect::to('login');
+		}
 		
-		public function getAddMember() {
+	}
 
-			if(Auth::check()) {
-				return View::make('addmember');	
-			} else {
-				return Redirect::to('login');
-			}
-			
-		}
+	/**
+	 * POST /addmember
+	 *
+	 * Collect data from the Add New Members form,
+	 * process, and save to database.
+	 *
+	 */
 
-		/**
-		 * POST /addmember
-		 *
-		 * Collect data from the Add New Members form,
-		 * process, and save to database.
-		 *
-		 */
+	public function submitNewMember() {
 
-		public function submitNewMember() {
+		// Collect the data from the form.
+		$mFirstName = Input::get('firstname');
+		$mLastName = Input::get('lastname');
+		$mPhone = Input::get('phone');
+		$mEmail = Input::get('email');
+		$mAddress = Input::get('address');
+		$mCity = Input::get('city');
+		$mFirstParentName = Input::get('parent-name-1');
+		$mSecondParentName = Input::get('parent-name-2');
+		$mParentContact = Input::get('parent-contact');
 
-			// Collect the data from the form.
-			$mFirstName = Input::get('firstname');
-			$mLastName = Input::get('lastname');
-			$mPhone = Input::get('phone');
-			$mEmail = Input::get('email');
-			$mAddress = Input::get('address');
-			$mCity = Input::get('city');
-			$mFirstParentName = Input::get('parent-name-1');
-			$mSecondParentName = Input::get('parent-name-2');
-			$mParentContact = Input::get('parent-contact');
+		// Parse Phone numbers to remove dashes and parenthesis.
+		$mPhone = preg_replace('/\D+/', '', $mPhone);
+		$mParentContact = preg_replace('/\D+/', '', $mParentContact);
 
-			// Parse Phone numbers to remove dashes and parenthesis.
-			$mPhone = preg_replace('/\D+/', '', $mPhone);
-			$mParentContact = preg_replace('/\D+/', '', $mParentContact);
+		// Concatonate City onto Address input
+		$mAddress = $mAddress . " " . $mCity;
+		
+		// Assign the data and save to model.
+		$member = new Member;
+		$member->NameFirst = $mFirstName;
+		$member->NameLast = $mLastName;
+		$member->NumberPhone = $mPhone;
+		$member->AddressHome = $mAddress;
+		$member->AddressEmail = $mEmail;
+		$member->Parent1NameFirst = $mFirstParentName;
+		$member->Parent2NameFirst = $mSecondParentName;
+		$member->Parent1Phone1 = $mParentContact;
+		$member->save();
 
-			// Concatonate City onto Address input
-			$mAddress = $mAddress . " " . $mCity;
-			
-			// Assign the data and save to model.
-			$member = new Member;
-			$member->NameFirst = $mFirstName;
-			$member->NameLast = $mLastName;
-			$member->NumberPhone = $mPhone;
-			$member->AddressHome = $mAddress;
-			$member->AddressEmail = $mEmail;
-			$member->Parent1NameFirst = $mFirstParentName;
-			$member->Parent2NameFirst = $mSecondParentName;
-			$member->Parent1Phone1 = $mParentContact;
-			$member->save();
-
-			return Redirect::route('listMembers');
-
-		}
-
-		/**
-		 * GET /listmember
-		 *
-		 * Produce array of entire members list and
-		 * send it to the listmembers view, where
-		 * it will be displayed as a list.
-		 * For admin only?
-		 *
-		 */
-
-		public function listMembers() {
-
-			if (!Auth::check()) { return Redirect::to('login');  }
-
-			// Gather Member information from database
-			$members = Member::all();
-
-			// Send data to view.
-			return View::make('listmembers',['members' => $members]);
-		}
-
-
-		/**
-		 * GET /member/{id}
-		 *
-		 * show SINGLE Member information page.
-		 * @param string $id
-		 */
-
-		public function viewMember($id) {
-
-			if (!Auth::check()) { return Redirect::to('login');  }
-
-			$member = Member::find($id);
-
-			return View::make('viewmember',['member' => $member]);
-		}
-
+		return Redirect::route('listMembers');
 
 	}
+
+	/**
+	 * GET /listmember
+	 *
+	 * Produce array of entire members list and
+	 * send it to the listmembers view, where
+	 * it will be displayed as a list.
+	 * For admin only?
+	 *
+	 */
+
+	public function listMembers() {
+
+		if (!Auth::check()) { return Redirect::to('login');  }
+
+		// Gather Member information from database
+		$members = Member::all();
+
+		// Send data to view.
+		return View::make('listmembers',['members' => $members]);
+	}
+
+
+	/**
+	 * GET /member/{id}
+	 *
+	 * show SINGLE Member information page.
+	 * @param string $id
+	 */
+
+	public function viewMember($id) {
+
+		if (!Auth::check()) { return Redirect::to('login');  }
+
+		$member = Member::find($id);
+
+		return View::make('viewmember',['member' => $member]);
+	}
+
+
+	/**
+	 * POST Search members functionality.
+	 *
+	 * Display results based on First or Last name.
+	 */
+
+	public function searchMembers() {
+
+		$query = Input::get('query');
+
+		$members = Member::where('NameFirst', '=', $query)->get();
+
+		return $members->toJson();
+	}
+
+
+}
 
 
 

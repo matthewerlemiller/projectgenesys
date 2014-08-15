@@ -34,11 +34,12 @@ Route::get('dashboard', function() {
 });
 
 
-// Add Member Route.
+//Member Route.
 Route::get('member/create', [ 'as' => 'createMember', 'uses' => 'MemberController@getAddMember']);
 Route::post('member/create', 'MemberController@submitNewMember');
 Route::get('member/list', [ 'as' => 'listMembers', 'uses' => 'MemberController@listMembers']);
 Route::get('member/{id}', [ 'as' => 'viewMember', 'uses' => 'MemberController@viewMember']);
+Route::post('member/search', ['as' => 'searchMembers', 'uses' => 'MemberController@searchMembers']);
 
 
 
