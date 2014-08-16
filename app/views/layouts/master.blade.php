@@ -7,16 +7,19 @@
     <body>
         
     	<div id="mast">
-            <ul>
-                <li><a href="{{ route('logout') }}">Logout</a></li>
-                <li><a href="{{ route('listMembers') }}">List</a></li>
-                <li><a href="{{ route('createMember') }}">New</a></li>
-                <li><a href="{{ route('home') }}">Home</a></li>
-            </ul>
-    		 
+            <div class="container">
+                <ul>
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                    <li><a href="{{ route('listMembers') }}">List</a></li>
+                    <li><a href="{{ route('createMember') }}">New</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                </ul>
+            </div> 
     	</div>
-
-        @yield('content')
+        <div class="container">
+             @yield('content')
+        </div>
+       
         
     </body>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

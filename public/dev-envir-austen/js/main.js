@@ -11,6 +11,8 @@ var search = {
 
 		$("#search-form").submit(function(e) {
 			e.preventDefault();
+			// Clean up input.
+			$(this).serialize();
 
 			var query = $("#query-field").val();
 
@@ -24,21 +26,32 @@ var search = {
 				var results = [];
 
 				for(var i = 0; i < response.length; i++) {
-					var name = response[i].NameFirst;
-					var id = response[i].id;
-					var html = "<li class='search-result'><a href='member/" + id + "'>" + name + "</a></li>"
+					var member = response[i];
+					var firstName = member.NameFirst;
+					var lastName = member.NameLast;
+					var id = member.id;
+					var html = "<li class='search-result'><a href='member/" + id + "'>" + firstName + " " + lastName +"</a></li>"
 
 					results.push(html)
 				}
 
 				$(".search-results-list").html(results);
 
-			
+				if (!response.length) {
+					$(".search-status-message").removeClass('success').addClass('failure').html('<p> No results found :(</p>')
+				} else {
+					$(".search-status-message").removeClass('failure').addClass('success').html('<p>' + response.length + ' results found</p>')	
+				}
+				
+
+			}).fail(function( response ) {
+
+				$(".search-status-message").removeClass('success').addClass('failure').html('<p> There was an error connecting to the database, try another time?</p>')
 
 			});
 
-			// TODO: Check for errors
-		})
+			
+		});
 
 	}
 }

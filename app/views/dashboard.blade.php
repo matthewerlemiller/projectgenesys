@@ -13,6 +13,10 @@
 			
 		</ul>
 	</div>
+
+	<div class="search-status-message">
+
+	</div>
 	
 
 @stop

@@ -111,11 +111,22 @@ class MemberController extends BaseController {
 
 	public function searchMembers() {
 
-		$query = Input::get('query');
+		$q = Input::get('query');
 
-		$members = Member::where('NameFirst', '=', $query)->get();
+		//$searchTerms = explode(' ', $q);
 
-		return $members->toJson();
+		$query = DB::table('members');
+
+		//foreach($searchTerms as $term) {
+			$query->where('NameFirst', 'LIKE', '%'. $q .'%');
+		//}
+
+		$results = $query->get();
+		//$members = Member::where('NameFirst', '=', $query)->get();
+		//$members = Member::where('NameFirst', 'LIKE', $query)->get();
+
+		return $results;
+		
 	}
 
 

@@ -72,10 +72,32 @@ $light : #D8D8D8;
 	@include transition(all .15s ease);
 }
 
+// Helpers
+
+
+.success {
+	background-color: #2ecc71;
+}
+
+.failure {
+	background-color: #e74c3c;
+}
+
 //Main
 html, body {
 	background-color: $light;
+	font-family: $helvetica;
 }
+
+h1 {
+	font-size: 2rem;
+}
+
+.container {
+	width:1000px;
+	margin:0 auto;
+}
+
 
 #mast {
 	background-color: white;
@@ -106,6 +128,20 @@ html, body {
 	@include box-sizing(border-box);
 	padding: 30px;
 
+}
+
+.search-status-message {
+	color:white;
+	height:50px;
+	width:200px;
+}
+
+
+
+
+.member-name {
+	font-weight: bold;
+	margin-top: 20px;
 }
 
 
