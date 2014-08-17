@@ -107,24 +107,33 @@ class MemberController extends BaseController {
 	 * POST Search members functionality.
 	 *
 	 * Display results based on First or Last name.
+	 *
+	 * TODO: write logic that collects both the first and possible
+	 *       last name of the query input field and check it against the database.
+	 *       Currently, only one single string checked against the 
+	 *       Name First column is functional.
 	 */
 
 	public function searchMembers() {
 
 		$q = Input::get('query');
 
-		//$searchTerms = explode(' ', $q);
-
 		$query = DB::table('members');
 
-		//foreach($searchTerms as $term) {
-			$query->where('NameFirst', 'LIKE', '%'. $q .'%');
-		//}
+		// Possible solution to space-seperates strings
+		// in search query.
+
+		$searchTerms = explode(' ', $q);
+		foreach($searchTerms as $term) {	
+			$query->where('NameFirst', 'LIKE', '%'. $term .'%')
+		          ->orWhere('NameLast', 'LIKE', '%' . $term . '%');
+		}
+
+		// $query->where('NameFirst', 'LIKE', '%'. $q .'%')
+		//       ->orWhere('NameLast', 'LIKE', '%' . $q . '%');
 
 		$results = $query->get();
-		//$members = Member::where('NameFirst', '=', $query)->get();
-		//$members = Member::where('NameFirst', 'LIKE', $query)->get();
-
+		
 		return $results;
 		
 	}
