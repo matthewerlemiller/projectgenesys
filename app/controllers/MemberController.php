@@ -33,6 +33,7 @@ class MemberController extends BaseController {
 		// Collect the data from the form.
 		$mFirstName = Input::get('firstname');
 		$mLastName = Input::get('lastname');
+		$mImage = Input::file('image-upload');
 		$mPhone = Input::get('phone');
 		$mEmail = Input::get('email');
 		$mAddress = Input::get('address');
@@ -47,11 +48,34 @@ class MemberController extends BaseController {
 
 		// Concatonate City onto Address input
 		$mAddress = $mAddress . " " . $mCity;
+
+		// Parse and Process Image Upload
+		$valid_exts = array('jpeg', 'jpg', 'png', 'gif');
+		$max_size = 2000 * 1024;
+		$path = public_path() . '/img/uploads/';
+		$ext = $mImage->guessClientExtension();
+		$size = $mImage->getClientSize();
+		$name = $mImage->getClientOriginalName();
+
+		$imagePath = 'img/uploads/' . $name;
+
+		if (in_array($ext, $valid_exts) AND $size < $max_size) {
+		    // move uploaded file from temp to uploads directory
+		    if ($mImage->move($path,$name)) {
+		        $status = 'Image successfully uploaded!';
+		    } else {
+		        $status = 'Upload Fail: Unknown error occurred!';
+		    }
+
+		} else {
+		    $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
+		}
 		
 		// Assign the data and save to model.
 		$member = new Member;
 		$member->NameFirst = $mFirstName;
 		$member->NameLast = $mLastName;
+		$member->ImagePath = $imagePath;
 		$member->NumberPhone = $mPhone;
 		$member->AddressHome = $mAddress;
 		$member->AddressEmail = $mEmail;

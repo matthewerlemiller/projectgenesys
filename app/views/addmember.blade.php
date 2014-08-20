@@ -2,9 +2,10 @@
 
 @section ('content')
 	
-	{{ Form::open(array('url' => 'member/create')) }}
+	{{ Form::open(array('url' => 'member/create', 'files' => true)) }}
 		<p>{{ Form::text('firstname','',['placeholder' => 'First Name']) }}</p>
 		<p>{{ Form::text('lastname','', ['placeholder' => 'Last Name']) }}</p>
+		<p> {{ Form::file('image-upload') }} </p>
 		<p>{{ Form::text('phone', '', ['placeholder' => 'Phone']) }}</p>
 		<p>{{ Form::email('email', '', ['placeholder' => 'Email']) }}</p>
 		<p>{{ Form::text('address', '', ['placeholder' => 'Address']) }}</p>
