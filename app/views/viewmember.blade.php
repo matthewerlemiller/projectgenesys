@@ -3,8 +3,8 @@
 @section ('content')
 
 	<h1 class="member-name">{{{ $member->NameFirst . ' ' . $member->NameLast }}}</h1>
-	<img src="{{{ asset($member->ImagePath) }}}">
-	<p>Status : {{{ $member->Status }}} </p>
+	<div class="profile-image" style="background-image:url({{{ asset($member->ImagePath) }}})"></div>
+	<p>Status : {{{ $member->Status or "Good" }}} </p>
 	<p>Birthdate : {{{ $member->DateBirth or 'n/a' }}} </p>
 	<p>Phone Number : {{{ $member->NumberPhone or 'n/a'}}} </p>
 	<p>Email : {{{ $member->AddressEmail or 'n/a' }}} </p>
@@ -23,6 +23,9 @@
 	<p>Baptized Date : {{{ null != $member->BaptizedDate or 'n/a' }}} </p>
 	<p>Saved : {{{ null != $member->Saved ? 'yes' : 'no' }}} </p>
 	<p>Skatepark : {{{ null != $member->Skatepark ? 'yes' : 'no' }}} </p>
+
+
+	<a href="{{ route('getEditMember', ['id' => $member->id])}}">EDIT</a>
 
 
 

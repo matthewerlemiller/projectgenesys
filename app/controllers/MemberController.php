@@ -3,7 +3,112 @@
 class MemberController extends BaseController {
 
 	/**
-	 * GET /addmember
+	 * GET /member/{id}
+	 *
+	 * show SINGLE Member information page.
+	 * @param string $id
+	 */
+
+	public function viewMember($id) {
+
+		if (!Auth::check()) { return Redirect::to('login');  }
+
+		$member = Member::find($id);
+
+		return View::make('viewmember')->withMember($member);
+	}
+
+	/**
+	 * GET /member/{id}/edit
+	 *
+	 * show SINGLE Member EDIT page.
+	 * @param string $id
+	 */
+
+	public function getEditMember($id) {
+
+		$member = Member::find($id);
+
+		return View::make('editmember')->withMember($member);
+	}
+
+	/**
+	 * PUT /member/{id}/edit
+	 *
+	 * PUT SINGLE Member EDIT page.
+	 * @param string $id
+	 */
+
+	public function postEditMember($id) {
+
+		//TODO : Improve Edit functionality and validation.
+
+		// Collect the data from the form.
+		$mFirstName = Input::get('NameFirst');
+		$mLastName = Input::get('NameLast');
+		$mImage = Input::file('ImagePath');
+		$mPhone = Input::get('NumberPhone');
+		$mEmail = Input::get('AddressEmail');
+		$mAddress = Input::get('AddressHome');
+		// $mCity = Input::get('city');
+		$mFirstParentName = Input::get('Parent1NameFirst');
+		$mSecondParentName = Input::get('Parent2NameFirst');
+		$mParentContact = Input::get('Parent1Phone1');
+
+		// Parse Phone numbers to remove dashes and parenthesis.
+		$mPhone = preg_replace('/\D+/', '', $mPhone);
+		$mParentContact = preg_replace('/\D+/', '', $mParentContact);
+
+		// Concatonate City onto Address input
+		// $mAddress = $mAddress . " " . $mCity;
+
+		$imagePath = null;
+
+		// Parse and Process Image Upload if applicable
+		if($mImage) {
+
+			$valid_exts = array('jpeg', 'jpg', 'png', 'gif');
+			$max_size = 2000 * 1024;
+			$path = public_path() . '/img/uploads/';
+			$ext = $mImage->guessClientExtension();
+			$size = $mImage->getClientSize();
+			$name = $mImage->getClientOriginalName();
+
+			$imagePath = 'img/uploads/' . $name;
+
+			if (in_array($ext, $valid_exts) AND $size < $max_size) {
+			    // move uploaded file from temp to uploads directory
+			    if ($mImage->move($path,$name)) {
+			        $status = 'Image successfully uploaded!';
+			    } else {
+			        $status = 'Upload Fail: Unknown error occurred!';
+			    }
+
+			} else {
+			    $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
+			}
+
+		}
+				
+		// Assign the data and save to model.
+		$member = Member::findOrFail($id);
+		$member->NameFirst = $mFirstName;
+		$member->NameLast = $mLastName;
+		if($imagePath != null){ $member->ImagePath = $imagePath; }
+		$member->NumberPhone = $mPhone;
+		$member->AddressHome = $mAddress;
+		$member->AddressEmail = $mEmail;
+		$member->Parent1NameFirst = $mFirstParentName;
+		$member->Parent2NameFirst = $mSecondParentName;
+		$member->Parent1Phone1 = $mParentContact;
+		$member->update();
+
+		return Redirect::route('viewMember', ['id' => $id]);
+	}
+
+
+	/**
+	 * GET /member/create
 	 *
 	 * Check for logged in user, proceed to addmember view if true,
 	 * if false redirect to login.
@@ -21,7 +126,7 @@ class MemberController extends BaseController {
 	}
 
 	/**
-	 * POST /addmember
+	 * POST /member/create
 	 *
 	 * Collect data from the Add New Members form,
 	 * process, and save to database.
@@ -37,7 +142,7 @@ class MemberController extends BaseController {
 		$mPhone = Input::get('phone');
 		$mEmail = Input::get('email');
 		$mAddress = Input::get('address');
-		$mCity = Input::get('city');
+		// $mCity = Input::get('city');
 		$mFirstParentName = Input::get('parent-name-1');
 		$mSecondParentName = Input::get('parent-name-2');
 		$mParentContact = Input::get('parent-contact');
@@ -47,7 +152,7 @@ class MemberController extends BaseController {
 		$mParentContact = preg_replace('/\D+/', '', $mParentContact);
 
 		// Concatonate City onto Address input
-		$mAddress = $mAddress . " " . $mCity;
+		// $mAddress = $mAddress . " " . $mCity;
 
 		// Parse and Process Image Upload
 		$valid_exts = array('jpeg', 'jpg', 'png', 'gif');
@@ -88,8 +193,9 @@ class MemberController extends BaseController {
 
 	}
 
+
 	/**
-	 * GET /listmember
+	 * GET member/list
 	 *
 	 * Produce array of entire members list and
 	 * send it to the listmembers view, where
@@ -106,29 +212,12 @@ class MemberController extends BaseController {
 		$members = Member::all();
 
 		// Send data to view.
-		return View::make('listmembers',['members' => $members]);
+		return View::make('listmembers')->withMembers($members);
 	}
 
 
 	/**
-	 * GET /member/{id}
-	 *
-	 * show SINGLE Member information page.
-	 * @param string $id
-	 */
-
-	public function viewMember($id) {
-
-		if (!Auth::check()) { return Redirect::to('login');  }
-
-		$member = Member::find($id);
-
-		return View::make('viewmember',['member' => $member]);
-	}
-
-
-	/**
-	 * POST Search members functionality.
+	 * POST /member/search
 	 *
 	 * Display results based on First or Last name.
 	 *
