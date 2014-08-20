@@ -108,10 +108,6 @@ class MemberController extends BaseController {
 	 *
 	 * Display results based on First or Last name.
 	 *
-	 * TODO: write logic that collects both the first and possible
-	 *       last name of the query input field and check it against the database.
-	 *       Currently, only one single string checked against the 
-	 *       Name First column is functional.
 	 */
 
 	public function searchMembers() {
@@ -120,17 +116,13 @@ class MemberController extends BaseController {
 
 		$query = DB::table('members');
 
-		// Possible solution to space-seperates strings
-		// in search query.
-
+		// Seperate multiple words in query and place in array.
 		$searchTerms = explode(' ', $q);
+		// Loop through the array and query for the string in the database.
 		foreach($searchTerms as $term) {	
 			$query->where('NameFirst', 'LIKE', '%'. $term .'%')
 		          ->orWhere('NameLast', 'LIKE', '%' . $term . '%');
 		}
-
-		// $query->where('NameFirst', 'LIKE', '%'. $q .'%')
-		//       ->orWhere('NameLast', 'LIKE', '%' . $q . '%');
 
 		$results = $query->get();
 		
