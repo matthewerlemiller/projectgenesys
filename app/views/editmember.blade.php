@@ -7,6 +7,8 @@
 {{ Form::model($member, ['url' => 'member/' . $member->id . '/edit', 'files' => true, 'method' => 'PUT']) }}
 	<p>{{ Form::text('NameFirst') }}</p>
 	<p>{{ Form::text('NameLast') }}</p>
+	<p>{{ Form::text('Gender','Gender',['placeholder' => 'Gender']) }}</p>
+	<img src="{{ asset($member->ImagePath) }}">
 	<p> {{ Form::file('ImagePath') }} </p>
 	<p>{{ Form::text('NumberPhone') }}</p>
 	<p>{{ Form::email('AddressEmail') }}</p>

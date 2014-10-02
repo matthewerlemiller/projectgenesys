@@ -46,7 +46,14 @@ class MemberController extends BaseController {
 		// Collect the data from the form.
 		$mFirstName = Input::get('NameFirst');
 		$mLastName = Input::get('NameLast');
-		$mImage = Input::file('ImagePath');
+		$mGender = Input::get('Gender');
+
+		if (Input::hasFile('ImagePath')) {
+			$mImage = Input::file('ImagePath');	
+		} else {
+			$mImage = false;
+		}
+		
 		$mPhone = Input::get('NumberPhone');
 		$mEmail = Input::get('AddressEmail');
 		$mAddress = Input::get('AddressHome');
@@ -94,6 +101,7 @@ class MemberController extends BaseController {
 		$member = Member::findOrFail($id);
 		$member->NameFirst = $mFirstName;
 		$member->NameLast = $mLastName;
+		$member->Gender = $mGender;
 		if($imagePath != null){ $member->ImagePath = $imagePath; }
 		$member->NumberPhone = $mPhone;
 		$member->AddressHome = $mAddress;

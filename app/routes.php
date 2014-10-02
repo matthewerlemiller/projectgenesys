@@ -35,16 +35,11 @@ Route::get('dashboard', function() {
 
 
 //Member Route.
+Route::get('member/', [ 'as' => 'listMembers', 'uses' => 'MemberController@listMembers']);
 Route::get('member/create', [ 'as' => 'createMember', 'uses' => 'MemberController@getAddMember']);
 Route::post('member/create', 'MemberController@submitNewMember');
 Route::get('member/{id}', [ 'as' => 'viewMember', 'uses' => 'MemberController@viewMember']);
 Route::get('member/{id}/edit', ['as' => 'getEditMember', 'uses' => 'MemberController@getEditMember']);
 Route::put('member/{id}/edit', ['as' => 'postEditMember', 'uses' => 'MemberController@postEditMember']);
-Route::get('list-members', [ 'as' => 'listMembers', 'uses' => 'MemberController@listMembers']);
 Route::post('member/search', ['as' => 'searchMembers', 'uses' => 'MemberController@searchMembers']);
-
-
-
-
-
 
