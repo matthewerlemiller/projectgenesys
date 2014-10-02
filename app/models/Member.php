@@ -29,4 +29,10 @@ class Member extends Eloquent implements RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+	public function checklogs() {
+
+		return $this->hasMany('Checklog', 'MemberId','id');
+
+	}
+
 }

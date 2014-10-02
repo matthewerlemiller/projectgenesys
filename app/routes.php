@@ -43,3 +43,10 @@ Route::get('member/{id}/edit', ['as' => 'getEditMember', 'uses' => 'MemberContro
 Route::put('member/{id}/edit', ['as' => 'postEditMember', 'uses' => 'MemberController@postEditMember']);
 Route::post('member/search', ['as' => 'searchMembers', 'uses' => 'MemberController@searchMembers']);
 
+
+//Checkin
+Route::get('checkin/{id}', ['as' => 'checkin', 'uses' => 'CheckInController@checkIn']);
+
+
+
+
