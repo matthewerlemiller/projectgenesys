@@ -58,22 +58,48 @@ class MemberController extends BaseController {
 		} else {
 			$mImage = false;
 		}
-		
+	
 		$mPhone = Input::get('NumberPhone');
 		$mEmail = Input::get('AddressEmail');
 		$mAddress = Input::get('AddressHome');
-		// $mCity = Input::get('city');
 		$mFirstParentName = Input::get('Parent1NameFirst');
 		$mSecondParentName = Input::get('Parent2NameFirst');
-		$mParentContact = Input::get('Parent1Phone1');
+		$mParent1Phone1 = Input::get('Parent1Phone1');
+		$mParent1Phone2 = Input::get('Parent1Phone2');
+		$mParent2Phone1 = Input::get('Parent2Phone1');
+		$mParent2Phone2 = Input::get('Parent2Phone2');
+		$mEmergNameFirst = Input::get('EmergNameFirst');
+		$mEmergNameLast = Input::get('EmergNameLast');
+		$mEmergPhone1 = Input::get('EmergPhone1');
+		$mEmergPhone2 = Input::get('EmergPhone2');
+		$mPermissionSlip = Input::get('PermissionSlip');
+		$mBaptized = Input::get('Baptized');
+		$mBaptizedDate = Input::get('BaptizedDate');
+		$mSaved = Input::get('Saved');
+		$mSkatepark = Input::get('Skatepark');
+		$mSchool = Input::get('School');
+		$mHsGroup = Input::get('M_HsGroup');
+		$mHsSmGroup = Input::get('M_HsSmGroup');
+		$mJrGroup = Input::get('M_JrGroup');
+		$mHigherGround = Input::get('M_HigherGround');
+		$mBusMinistry = Input::get('M_BusMinstry');
+		$mWorshipLead = Input::get('M_WorshipLead');
+		$mKidsMinistry = Input::get('M_KidsMinistry');
+		$mSmGroupLead = Input::get('M_SmGroupLead');
+		$mLeaderCore = Input::get('M_LeaderCore');
+		$mSummerCamp = Input::get('E_SummerCamp');
+		$mWinterCamp = Input::get('E_WinterCamp');
+		$mFutureQuest = Input::get('E_FutureQuest');
 
 		// Parse Phone numbers to remove dashes and parenthesis.
 		$mPhone = preg_replace('/\D+/', '', $mPhone);
-		$mParentContact = preg_replace('/\D+/', '', $mParentContact);
-
-		// Concatonate City onto Address input
-		// $mAddress = $mAddress . " " . $mCity;
-
+		$mParent1Phone1 = preg_replace('/\D+/', '', $mParent1Phone1);
+		$mParent1Phone2 = preg_replace('/\D+/', '', $mParent1Phone2);
+		$mParent2Phone1 = preg_replace('/\D+/', '', $mParent2Phone1);
+		$mParent2Phone2 = preg_replace('/\D+/', '', $mParent2Phone2);
+		$mEmergPhone1 = preg_replace('/\D+/', '', $mEmergPhone1);
+		$mEmergPhone2 = preg_replace('/\D+/', '', $mEmergPhone2);
+		
 		$imagePath = null;
 
 		// Parse and Process Image Upload if applicable
@@ -113,7 +139,33 @@ class MemberController extends BaseController {
 		$member->AddressEmail = $mEmail;
 		$member->Parent1NameFirst = $mFirstParentName;
 		$member->Parent2NameFirst = $mSecondParentName;
-		$member->Parent1Phone1 = $mParentContact;
+		$member->Parent1Phone1 = $mParent1Phone1;
+		$member->Parent1Phone2 = $mParent1Phone2;
+		$member->Parent2Phone1 = $mParent2Phone1;
+		$member->Parent2Phone2 = $mParent2Phone2;
+		$member->EmergNameFirst = $mEmergNameFirst;
+		$member->EmergNameLast = $mEmergNameLast;
+		$member->EmergPhone1 = $mEmergPhone1;
+		$member->EmergPhone2 = $mEmergPhone2;
+		$member->PermissionSlip = $mPermissionSlip;
+		$member->Baptized = $mBaptized;
+		$member->BaptizedDate = $mBaptizedDate;
+		$member->Saved = $mSaved;
+		$member->Skatepark = $mSkatepark;
+		$member->School = $mSchool;
+		$member->M_HsGroup = $mHsGroup;
+		$member->M_HsSmGroup = $mHsSmGroup;
+		$member->M_JrGroup = $mJrGroup;
+		$member->M_HighGround = $mHigherGround;
+		$member->M_BusMinistry = $mBusMinistry;
+		$member->M_WorshipLead = $mWorshipLead;
+		$member->M_KidsMinistry = $mKidsMinistry;
+		$member->M_SmGroupLead = $mSmGroupLead;
+		$member->M_LeaderCore = $mLeaderCore;
+		$member->E_SummerCamp = $mSummerCamp;
+		$member->E_WinterCamp = $mWinterCamp;
+		$member->E_FutureQuest = $mFutureQuest;
+
 		$member->update();
 
 		return Redirect::route('viewMember', ['id' => $id]);

@@ -37,7 +37,7 @@
 	<p>Worship Leader : {{{ null != $member->M_WorshipLead ? 'yes' : 'no' }}} </p>
 	<p>Serves in Kids Ministry : {{{ null != $member->M_KidsMinistry ? 'yes' : 'no' }}} </p>
 	<p>Small Group Leader : {{{ null != $member->M_SmGroupLead ? 'yes' : 'no' }}} </p>
-	<p>In Leadership Core : {{{ null != $member->M_LeaderCore? 'yes' : 'no' }}} </p>
+	<p>In Leadership Core : {{{ null != $member->M_LeaderCore ? 'yes' : 'no' }}} </p>
 
 	<h2>Event Attendance</h2>
 
@@ -52,7 +52,7 @@
 	<a href="{{ route('getEditMember', ['id' => $member->id])}}">EDIT</a>
 
 
-	
+
 	<p>{{ $memberCheckedIn ? 'checked in' : 'not checked in' }}</p>
 
 

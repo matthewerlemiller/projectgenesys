@@ -17,6 +17,8 @@
 	<div class="search-status-message">
 
 	</div>
+
+	<a href="{{ route('createMember') }}">Create New Member</a>
 	
 
 @stop
