@@ -1,4 +1,5 @@
 <?php 
+use Carbon\Carbon;
 
 class MemberController extends BaseController {
 
@@ -14,8 +15,12 @@ class MemberController extends BaseController {
 		if (!Auth::check()) { return Redirect::to('login');  }
 
 		$member = Member::find($id);
+		$memberLastCheckIn = $member->checklogs()->orderBy('CheckLogId', 'desc')->get()->first()["CheckInDateTime"];
+		$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
 
-		return View::make('viewmember')->withMember($member);
+		Log::info($memberLastCheckIn);
+
+		return View::make('viewmember')->with(['member' => $member, 'memberCheckedIn' => $memberCheckedIn]);
 	}
 
 	/**

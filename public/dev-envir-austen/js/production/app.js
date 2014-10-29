@@ -30,7 +30,7 @@ var search = {
 					var firstName = member.NameFirst;
 					var lastName = member.NameLast;
 					var id = member.id;
-					var html = "<li class='search-result'><a href='member/" + id + "'>" + firstName + " " + lastName +"</a></li>"
+					var html = "<li class='search-result'><a href='member/" + id + "'>" + firstName + " " + lastName +"</a> <a href='checkin/" + id + "'>Check In</a></li>"
 
 					results.push(html)
 				}

@@ -52,6 +52,8 @@
 	<a href="{{ route('getEditMember', ['id' => $member->id])}}">EDIT</a>
 
 
+	
+	<p>{{ $memberCheckedIn ? 'checked in' : 'not checked in' }}</p>
 
 
 
