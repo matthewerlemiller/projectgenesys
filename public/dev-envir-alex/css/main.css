@@ -204,7 +204,7 @@ body.home {
           background-color: rgba(51, 51, 51, 0.8);
           border-radius: 10px 0 10px 0; }
         body.home .results-wrapper .result input[type="checkbox"]:checked + label {
-          background-image: url(/img/checkbox/checkbox-checked.svg);
+          background-image: url(../img/checkbox/checkbox-checked.svg);
           background-repeat: no-repeat; }
       body.home .results-wrapper .result label {
         position: absolute;
@@ -216,10 +216,10 @@ body.home {
         padding: 0;
         cursor: pointer;
         transition: .15s;
-        background-image: url(/img/checkbox/checkbox-unchecked.svg);
+        background-image: url(../img/checkbox/checkbox-unchecked.svg);
         background-repeat: no-repeat; }
         body.home .results-wrapper .result label:hover {
-          background-image: url(/img/checkbox/checkbox-hover.svg);
+          background-image: url(../img/checkbox/checkbox-hover.svg);
           background-repeat: no-repeat; }
       body.home .results-wrapper .result .pic {
         display: block;

@@ -4,11 +4,11 @@
 // back to login if false.
 Route::get('/', array('as' => 'home', function() {
 
-	if ( Auth::check() ) {
+	//if ( Auth::check() ) {
 		return Redirect::to('dashboard');
-	} else {
-		return Redirect::to('login');
-	}
+	//} else {
+		//return Redirect::to('login');
+	//}
 
 }));
 
@@ -22,15 +22,15 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
 // Dash Route
 Route::get('dashboard', function() {
 
-	if (Auth::check()) {
+	//if (Auth::check()) {
 
 		return View::make('dashboard');	
 
-	} else {
+	//} else {
 
 		return Redirect::to('login');
 		
-	}
+	//}
 });
 
 

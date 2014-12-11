@@ -1,27 +1,25 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>GENESYS</title>
-        <link rel="stylesheet" type="text/css" href="{{ asset('dev-envir-austen/css/reset.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{ asset('dev-envir-austen/css/style.css')}}">
-	</head>
-    <body>
-        
-    	<div id="mast">
-            <div class="container">
-                <ul>
-                    <li><a href="{{ route('logout') }}">Logout</a></li>
-                    <!-- <li><a href="{{ route('listMembers') }}">List</a></li> -->
-                    
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                </ul>
-            </div> 
-    	</div>
-        <div class="container">
-             @yield('content')
-        </div>
-       
-        
-    </body>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="{{ asset('dev-envir-austen/js/main.js')}}"></script>
+<head>
+    <title>Genesys - Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('dev-envir-alex/css/main.css') }}">
+</head>
+<body class="home">
+    <div class="search-container">
+        <a class="log-out" href="#">Log Out</a>
+        <input class="member-search" type="search"  placeholder="SEARCH MEMBERS" autofocus>
+    </div>  
+
+
+
+@yield('content')
+
+
+
+<script src="{{ asset('dev-envir-alex/js/jquery.js')}}"></script>
+<script src="{{ asset('dev-envir-alex/js/pages/home.js')}}"></script>
+
+
+</body>
+
 </html>
