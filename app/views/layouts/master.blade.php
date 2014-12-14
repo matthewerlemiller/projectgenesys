@@ -17,8 +17,9 @@
 
 
 <script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('js/pages/home.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/pages/home.js') }}"></script>
+
 
 
 </body>
