@@ -22,7 +22,7 @@
 						<input type="checkbox" id="cb<?php echo $i ?>">
 						<label for="cb<?php echo $i ?>"></label>
 					</form>
-					<img class="pic" src="{{ asset('dev-envir-alex/img/test.jpg') }}"/>
+					<img class="pic" src="{{ asset('img/test.jpg') }}"/>
 					<p class="name">Test Name</p>
 				</div>
 			<?php } ?>

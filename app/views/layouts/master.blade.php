@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Genesys - Home</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('dev-envir-alex/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 </head>
 <body class="home">
     <div class="search-container">
@@ -16,8 +16,9 @@
 
 
 
-<script src="{{ asset('dev-envir-alex/js/jquery.js')}}"></script>
-<script src="{{ asset('dev-envir-alex/js/pages/home.js')}}"></script>
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/pages/home.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 
 
 </body>
