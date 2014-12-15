@@ -18,18 +18,20 @@ return array(
 	|
 	*/
 
+	'default' => 'pgsql',
+
 	'connections' => array(
 
-		'mysql' => array(
-			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'genesys',
-			'username'  => 'homestead',
-			'password'  => 'secret',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-		),
+		// 'mysql' => array(
+		// 	'driver'    => 'mysql',
+		// 	'host'      => 'localhost',
+		// 	'database'  => 'genesys',
+		// 	'username'  => 'homestead',
+		// 	'password'  => 'secret',
+		// 	'charset'   => 'utf8',
+		// 	'collation' => 'utf8_unicode_ci',
+		// 	'prefix'    => '',
+		// ),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
@@ -40,8 +42,8 @@ return array(
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
-		),
+		)
 
-	),
+	)
 
 );

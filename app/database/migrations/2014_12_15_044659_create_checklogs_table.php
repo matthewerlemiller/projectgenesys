@@ -15,11 +15,12 @@ class CreateChecklogsTable extends Migration {
 		Schema::create('checklogs', function(Blueprint $table)
 		{
 			$table->increments('CheckLogId');
-			$table->integer('MemberId');
-			$table->foreign('MemberId')->references('id')->on('members');
+			$table->integer('MemberId')->unsigned();
+			$table->foreign('MemberId')->references('MemberId')->on('members');
 			$table->dateTime('CheckInDateTime');
 			$table->dateTime('CheckOutDateTime');
-			$table->string('Center');
+			$table->integer('LocationId')->unsigned();
+			$table->foreign('LocationId')->references('LocationId')->on('locations');
 			$table->timestamps();
 		});
 	}

@@ -2,9 +2,11 @@
 
 class Checklog extends Eloquent {
 
-		public function user() {
+	protected $primaryKey = 'CheckLogId';
 
-	        return $this->belongsTo('Member', 'MemberId', 'id');
-	    }
+	public function user() {
+
+        return $this->belongsTo('Member', 'MemberId', 'id');
+    }
 
 }

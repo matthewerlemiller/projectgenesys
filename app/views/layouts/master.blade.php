@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Genesys - Home</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 </head>
 <body class="home">
     <div class="search-container">
