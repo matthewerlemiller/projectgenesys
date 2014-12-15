@@ -17,7 +17,7 @@ class CreateLocationsTable extends Migration {
 			$table->increments('LocationId');
 			$table->string('LocationName');
 			$table->boolean('Admin');
-			$table->string('Password');
+			$table->string('Password', 100);
 			$table->rememberToken();
 			$table->timestamps();
 		});

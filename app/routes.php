@@ -14,23 +14,23 @@ Route::get('/', array('as' => 'home', function() {
 
 
 // Login/Logout routes
-Route::get('login', ['as' => 'login', 'uses' => 'LoginController@getLogin']);
-Route::post('login', 'LoginController@postLogin');
+Route::get('login', ['as' => 'login.get', 'uses' => 'LoginController@getLogin']);
+Route::post('login', ['as' => 'login.post', 'uses' => 'LoginController@postLogin']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
 
 
 // Dash Route
 Route::get('dashboard', function() {
 
-	//if (Auth::check()) {
+	if (Auth::check()) {
 
 		return View::make('dashboard');	
 
-	//} else {
+	} else {
 
-		return Redirect::to('login');
+		return Redirect::route('login.get');
 		
-	//}
+	}
 });
 
 

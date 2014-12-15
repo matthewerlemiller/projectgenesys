@@ -11,6 +11,12 @@ class Location extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $hidden = array('password', 'remember_token');
 
+	public function getAuthPassword() {
+
+		return $this->Password;
+
+	}
+
 	protected $primaryKey = 'LocationId';
 
 	public function checklogs() {

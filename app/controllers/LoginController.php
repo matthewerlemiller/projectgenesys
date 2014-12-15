@@ -10,7 +10,16 @@ class LoginController extends BaseController {
 
 		} else {
 
-			return View::make('login');	
+			$locations = Location::all();
+			$locationSelect = [];
+
+			foreach($locations as $location) {
+
+				$locationsSelect[$location->LocationId] = $location->LocationName;
+
+			}
+
+			return View::make('login', ['locationsSelect' => $locationsSelect]);	
 
 		}
 
@@ -18,16 +27,16 @@ class LoginController extends BaseController {
 
 	public function postLogin() {
 
-		$username = Input::get('username');
+		$location = Input::get('location');
 		$password = Input::get('password');
 
-		if (Auth::attempt(['LocationName' => $username, 'Password' => $password])) {
+		if (Auth::attempt(['LocationId' => $location, 'password' => $password])) {
 
 			return Redirect::to('dashboard');
 
 		} else {
 
-			return Redirect::to('login');
+			return Redirect::route('login.get');
 
 		}
 
@@ -37,7 +46,7 @@ class LoginController extends BaseController {
 		
 		Auth::logout();
 
-		return Redirect::to('login');
+		return Redirect::route('login.get');
 		
 	}
 

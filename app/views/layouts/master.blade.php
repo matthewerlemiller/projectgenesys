@@ -4,11 +4,19 @@
     <title>Genesys - Home</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 </head>
+
+@if(Route::currentRouteName() == 'login.get')
+<body class="login">
+@else
 <body class="home">
+@endif
+
+    @if(Auth::check())
     <div class="search-container">
-        <a class="log-out" href="#">Log Out</a>
+        <a class="log-out" href="{{ route('logout') }}">Log Out</a>
         <input class="member-search" type="search"  placeholder="SEARCH MEMBERS" autofocus>
     </div>  
+    @endif
 
 
 
