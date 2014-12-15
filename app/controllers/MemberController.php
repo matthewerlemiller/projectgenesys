@@ -1,16 +1,128 @@
-<?php 
-use Carbon\Carbon;
+<?php
 
 class MemberController extends BaseController {
 
 	/**
-	 * GET /member/{id}
+	 * Display a listing of the resource.
 	 *
-	 * show SINGLE Member information page.
-	 * @param string $id
+	 * @return Response
 	 */
+	public function index() {
+		
+		if (!Auth::check()) { return Redirect::to('login');  }
 
-	public function viewMember($id) {
+		// Gather Member information from database
+		$members = Member::all();
+
+		// Send data to view.
+		return View::make('listmembers')->withMembers($members);
+
+	}
+
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create() {
+
+		if(Auth::check()) {
+
+			return View::make('addmember');	
+
+		} else {
+
+			return Redirect::to('login');
+		}
+	}
+
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store() {
+
+		// Collect the data from the form.
+		$mFirstName = Input::get('firstname');
+		$mLastName = Input::get('lastname');
+		$mImage = Input::file('image-upload');
+		$mPhone = Input::get('phone');
+		$mEmail = Input::get('email');
+		$mAddress = Input::get('address');
+		// $mCity = Input::get('city');
+		$mFirstParentName = Input::get('parent-name-1');
+		$mSecondParentName = Input::get('parent-name-2');
+		$mParentContact = Input::get('parent-contact');
+
+		// Parse Phone numbers to remove dashes and parenthesis.
+		$mPhone = preg_replace('/\D+/', '', $mPhone);
+		$mParentContact = preg_replace('/\D+/', '', $mParentContact);
+
+		// Concatonate City onto Address input
+		// $mAddress = $mAddress . " " . $mCity;
+
+		// Parse and Process Image Upload
+		// $valid_exts = array('jpeg', 'jpg', 'png', 'gif');
+		// $max_size = 2000 * 1024;
+		// $path = public_path() . '/img/uploads/';
+		// $ext = $mImage->guessClientExtension();
+		// $size = $mImage->getClientSize();
+		// $name = $mImage->getClientOriginalName();
+
+		// $imagePath = 'img/uploads/' . $name;
+
+		// if (in_array($ext, $valid_exts) AND $size < $max_size) {
+		//     // move uploaded file from temp to uploads directory
+		//     if ($mImage->move($path,$name)) {
+		//         $status = 'Image successfully uploaded!';
+		//     } else {
+		//         $status = 'Upload Fail: Unknown error occurred!';
+		//     }
+
+		// } else {
+		//     $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
+		// }
+
+		// New image upload
+		// $image = Input::file('file');
+
+		$imageName = $mImage->getClientOriginalName();
+		$uploadPath = public_path() . '/img/uploads/' . $imageName;
+		Image::make($mImage)->resize('800',null, function($constraint){ $constraint->aspectRatio();})->save($uploadPath);
+		$imagePath = asset('/img/uploads/' . $imageName);
+		// Assign the data and save to model.
+		$member = new Member;
+		$member->NameFirst = $mFirstName;
+		$member->NameLast = $mLastName;
+		$member->ImagePath = $imagePath;
+		$member->NumberPhone = $mPhone;
+		$member->AddressHome = $mAddress;
+		$member->AddressEmail = $mEmail;
+		$member->Parent1NameFirst = $mFirstParentName;
+		$member->Parent2NameFirst = $mSecondParentName;
+		$member->Parent1Phone1 = $mParentContact;
+		$member->save();
+
+
+
+		// TODO : implement functionality to allow an optional automatic check 
+		// in of member after creation. 
+
+		return Redirect::route('dashboard');
+
+	}
+
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id) {
 
 		if (!Auth::check()) { return Redirect::to('login');  }
 
@@ -18,34 +130,33 @@ class MemberController extends BaseController {
 		$memberLastCheckIn = $member->checklogs()->orderBy('CheckLogId', 'desc')->get()->first()["CheckInDateTime"];
 		$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
 
-		Log::info($memberLastCheckIn);
-
 		return View::make('viewmember')->with(['member' => $member, 'memberCheckedIn' => $memberCheckedIn]);
+
 	}
 
+
 	/**
-	 * GET /member/{id}/edit
+	 * Show the form for editing the specified resource.
 	 *
-	 * show SINGLE Member EDIT page.
-	 * @param string $id
+	 * @param  int  $id
+	 * @return Response
 	 */
-
-	public function getEditMember($id) {
-
+	public function edit($id) {
+		
 		$member = Member::find($id);
 
 		return View::make('editmember')->withMember($member);
+
 	}
 
+
 	/**
-	 * PUT /member/{id}/edit
+	 * Update the specified resource in storage.
 	 *
-	 * PUT SINGLE Member EDIT page.
-	 * @param string $id
+	 * @param  int  $id
+	 * @return Response
 	 */
-
-	public function postEditMember($id) {
-
+	public function update($id) {
 		//TODO : Improve Edit functionality and validation.
 
 		// Collect the data from the form.
@@ -58,7 +169,7 @@ class MemberController extends BaseController {
 		} else {
 			$mImage = false;
 		}
-	
+		
 		$mPhone = Input::get('NumberPhone');
 		$mEmail = Input::get('AddressEmail');
 		$mAddress = Input::get('AddressHome');
@@ -173,120 +284,16 @@ class MemberController extends BaseController {
 
 
 	/**
-	 * GET /member/create
+	 * Remove the specified resource from storage.
 	 *
-	 * Check for logged in user, proceed to addmember view if true,
-	 * if false redirect to login.
-	 *
+	 * @param  int  $id
+	 * @return Response
 	 */
-	
-	public function getAddMember() {
+	public function destroy($id) {
 
-		if(Auth::check()) {
-			return View::make('addmember');	
-		} else {
-			return Redirect::to('login');
-		}
-		
+		// TODO : create ability to delete members.
 	}
 
-	/**
-	 * POST /member/create
-	 *
-	 * Collect data from the Add New Members form,
-	 * process, and save to database.
-	 *
-	 */
-
-	public function submitNewMember() {
-
-		// Collect the data from the form.
-		$mFirstName = Input::get('firstname');
-		$mLastName = Input::get('lastname');
-		$mImage = Input::file('image-upload');
-		$mPhone = Input::get('phone');
-		$mEmail = Input::get('email');
-		$mAddress = Input::get('address');
-		// $mCity = Input::get('city');
-		$mFirstParentName = Input::get('parent-name-1');
-		$mSecondParentName = Input::get('parent-name-2');
-		$mParentContact = Input::get('parent-contact');
-
-		// Parse Phone numbers to remove dashes and parenthesis.
-		$mPhone = preg_replace('/\D+/', '', $mPhone);
-		$mParentContact = preg_replace('/\D+/', '', $mParentContact);
-
-		// Concatonate City onto Address input
-		// $mAddress = $mAddress . " " . $mCity;
-
-		// Parse and Process Image Upload
-		$valid_exts = array('jpeg', 'jpg', 'png', 'gif');
-		$max_size = 2000 * 1024;
-		$path = public_path() . '/img/uploads/';
-		$ext = $mImage->guessClientExtension();
-		$size = $mImage->getClientSize();
-		$name = $mImage->getClientOriginalName();
-
-		$imagePath = 'img/uploads/' . $name;
-
-		if (in_array($ext, $valid_exts) AND $size < $max_size) {
-		    // move uploaded file from temp to uploads directory
-		    if ($mImage->move($path,$name)) {
-		        $status = 'Image successfully uploaded!';
-		    } else {
-		        $status = 'Upload Fail: Unknown error occurred!';
-		    }
-
-		} else {
-		    $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
-		}
-		
-		// Assign the data and save to model.
-		$member = new Member;
-		$member->NameFirst = $mFirstName;
-		$member->NameLast = $mLastName;
-		$member->ImagePath = $imagePath;
-		$member->NumberPhone = $mPhone;
-		$member->AddressHome = $mAddress;
-		$member->AddressEmail = $mEmail;
-		$member->Parent1NameFirst = $mFirstParentName;
-		$member->Parent2NameFirst = $mSecondParentName;
-		$member->Parent1Phone1 = $mParentContact;
-		$member->save();
-
-		return Redirect::route('listMembers');
-
-	}
-
-
-	/**
-	 * GET member/list
-	 *
-	 * Produce array of entire members list and
-	 * send it to the listmembers view, where
-	 * it will be displayed as a list.
-	 * For admin only?
-	 *
-	 */
-
-	public function listMembers() {
-
-		if (!Auth::check()) { return Redirect::to('login');  }
-
-		// Gather Member information from database
-		$members = Member::all();
-
-		// Send data to view.
-		return View::make('listmembers')->withMembers($members);
-	}
-
-
-	/**
-	 * POST /member/search
-	 *
-	 * Display results based on First or Last name.
-	 *
-	 */
 
 	public function searchMembers() {
 
@@ -308,15 +315,4 @@ class MemberController extends BaseController {
 		
 	}
 
-
 }
-
-
-
-
-
-
-
-
-
-

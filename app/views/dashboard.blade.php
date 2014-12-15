@@ -5,7 +5,7 @@
 		<div class="results-wrapper">
 			
 		<div class="result result-create-new">
-			<a href="#" class="create-new">
+			<a href="{{ route('member.create') }}" class="create-new">
 				<div class="text-container">
 					<h2 class="plus">+</h2>
 					<h2 class="add-new">Add new</h2>	
@@ -28,7 +28,7 @@
 			<?php } ?>
 			<!--  -->
 
-	
+
 
 		</div>
 	</div>

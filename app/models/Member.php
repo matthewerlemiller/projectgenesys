@@ -2,7 +2,7 @@
 
 
 
-class Member extends Eloquent implements RemindableInterface {
+class Member extends Eloquent {
 
 	protected $primaryKey = 'MemberId';
 

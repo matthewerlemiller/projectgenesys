@@ -13,6 +13,7 @@
 
     @if(Auth::check())
     <div class="search-container">
+    	<a class="log-in" href="{{ route('dashboard') }}">Home</a>
         <a class="log-out" href="{{ route('logout') }}">Log Out</a>
         <input class="member-search" type="search"  placeholder="SEARCH MEMBERS" autofocus>
     </div>  

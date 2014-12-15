@@ -55,7 +55,7 @@ var scrollPosition = 0;
 
 sizeResults();
 
-stickyHeader();
+// stickyHeader();
 
 /*$(window).scroll(function(){
 	var newScrollPosition = $(window).scrollTop();

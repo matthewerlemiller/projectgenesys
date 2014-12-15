@@ -4,6 +4,7 @@
 
 	<h1 class="member-name">{{{ $member->NameFirst . ' ' . $member->NameLast }}}</h1>
 	<div class="profile-image" style="background-image:url({{{ asset($member->ImagePath) }}})"></div>
+	<!-- TODO: access the LessonId field and display relevant ranking this student currently holds -->
 	<p>Gender : {{{ $member->Gender or 'n/a' }}} </p>
 	<p>Status : {{{ $member->Status or "Good" }}} </p>
 	<p>Birthdate : {{{ $member->DateBirth or 'n/a' }}} </p>
@@ -31,13 +32,17 @@
 	<p>Attends High School Group : {{{ null != $member->M_HsGroup ? 'yes' : 'no' }}}</p>
 	<p>Attends High School Small Group : {{{ null != $member->M_HsSmGroup ? 'yes' : 'no' }}}</p>
 	<p>Attends Jr High Group : {{{ null != $member->M_JrGroup ? 'yes' : 'no' }}}</p>
-	<p>Attends High School Group : {{{ null != $member->M_HsGroup ? 'yes' : 'no' }}}</p>
 	<p>Attends Higher Ground : {{{ null != $member->M_HighGround ? 'yes' : 'no' }}}</p>
-	<p>Serves in Bus Ministry : {{{ null != $member->M_BusMinistry ? 'yes' : 'no' }}}</p>
-	<p>Worship Leader : {{{ null != $member->M_WorshipLead ? 'yes' : 'no' }}} </p>
-	<p>Serves in Kids Ministry : {{{ null != $member->M_KidsMinistry ? 'yes' : 'no' }}} </p>
-	<p>Small Group Leader : {{{ null != $member->M_SmGroupLead ? 'yes' : 'no' }}} </p>
 	<p>In Leadership Core : {{{ null != $member->M_LeaderCore ? 'yes' : 'no' }}} </p>
+
+	<h2>Leadership Info</h2>
+	<p>Serves in Bus Ministry : {{{ null != $member->L_BusMinistry ? 'yes' : 'no' }}}</p>
+	<p>Worship Leader : {{{ null != $member->L_WorshipLead ? 'yes' : 'no' }}} </p>
+	<p>Serves in Kids Ministry : {{{ null != $member->L_KidsMinistry ? 'yes' : 'no' }}} </p>
+	<p>High School Small Group Leader : {{{ null != $member->L_HsSmGroup ? 'yes' : 'no' }}} </p>
+	<p>Jr High Group Leader : {{{ null != $member->L_JrGroup ? 'yes' : 'no' }}} </p>
+	<p>HigherGround Leader : {{{ null != $member->L_HigherGround ? 'yes' : 'no' }}} </p>
+	
 
 	<h2>Event Attendance</h2>
 
@@ -49,7 +54,7 @@
 
 
 
-	<a href="{{ route('getEditMember', ['id' => $member->id])}}">EDIT</a>
+	<a href="{{ route('member.edit', ['id' => $member->id])}}">EDIT</a>
 
 
 

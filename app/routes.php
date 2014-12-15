@@ -2,15 +2,11 @@
 
 // Home Route. Check for login, redirect to dash if true,
 // back to login if false.
-Route::get('/', array('as' => 'home', function() {
+Route::get('/', ['before' => 'auth', 'as' => 'home', function() {
+	
+	return Redirect::route('dashboard');
 
-	//if ( Auth::check() ) {
-		return Redirect::to('dashboard');
-	//} else {
-		//return Redirect::to('login');
-	//}
-
-}));
+}]);
 
 
 // Login/Logout routes
@@ -20,33 +16,24 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
 
 
 // Dash Route
-Route::get('dashboard', function() {
+Route::get('dashboard', ['before' => 'auth', 'as' =>'dashboard', function() {
 
-	if (Auth::check()) {
+	return View::make('dashboard');	
 
-		return View::make('dashboard');	
-
-	} else {
-
-		return Redirect::route('login.get');
-		
-	}
-});
+}]);
 
 
 //Member Route.
-Route::get('member/', [ 'as' => 'listMembers', 'uses' => 'MemberController@listMembers']);
-Route::get('member/create', [ 'as' => 'createMember', 'uses' => 'MemberController@getAddMember']);
-Route::post('member/create', 'MemberController@submitNewMember');
-Route::get('member/{id}', [ 'as' => 'viewMember', 'uses' => 'MemberController@viewMember']);
-Route::get('member/{id}/edit', ['as' => 'getEditMember', 'uses' => 'MemberController@getEditMember']);
-Route::put('member/{id}/edit', ['as' => 'postEditMember', 'uses' => 'MemberController@postEditMember']);
+Route::resource('member', 'MemberController');
 Route::post('member/search', ['as' => 'searchMembers', 'uses' => 'MemberController@searchMembers']);
 
 
 //Checkin
 Route::get('checkin/{id}', ['as' => 'checkin', 'uses' => 'CheckInController@checkIn']);
 
+//Shift 
+Route::get('shift', ['as' => 'shift.index', 'before' => 'auth', 'uses' => 'ShiftController@index']);
 
 
-
+//Admin
+Route::get('admin', ['as' => 'admin.index', 'before' => 'auth|admin', 'uses' => 'AdminController@index']);

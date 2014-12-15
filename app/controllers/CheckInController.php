@@ -10,7 +10,7 @@ class CheckInController extends BaseController {
 		$checklog->MemberId = $id;
 		$checklog->CheckInDateTime = Carbon::now();
 		$checklog->CheckOutDateTime = Carbon::tomorrow();
-		$checklog->Center = "El Cajon";
+		$checklog->LocationId = Auth::user()->LocationId;
 		$checklog->save();
 
 		return Redirect::route('home');

@@ -19,7 +19,7 @@ input, select, password{
 
 .search-container {
 	position: static;
-	margin-bottom:-150px;
+	// margin-bottom:-150px;
 	width:100%;
 	background-color: $darkgray;
 	height:150px;
@@ -37,6 +37,19 @@ input, select, password{
 		letter-spacing: 1px;
 		padding-bottom:2px;
 		border-bottom: 1px solid white;
+	}
+
+	.log-in {
+
+		position: absolute;
+		top:10px;
+		left:10px;
+		color:white;
+		font-size: .8em;
+		letter-spacing: 1px;
+		padding-bottom:2px;
+		border-bottom: 1px solid white;
+
 	}
 
 	.member-search {
