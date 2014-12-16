@@ -30,8 +30,15 @@ class CheckInController extends BaseController {
 		if (!Auth::user()->Admin) {
 
 			// $checkedInMembers = Auth::user()->checklogs()->whereBetween('created_at', [Carbon::now(), Carbon::now()->subDay()])->get();
-			$checkedInMembers = Auth::user()->checklogs()->where('created_at', '>', Carbon::today())->with('member')->get();			
+			$checkedInMembers = Auth::user()->checklogs()->where('created_at', '>=', Carbon::today())->with('member')->orderBy('CheckLogId', 'desc')->get();			
 
+			// foreach ($checkedInMembers as $checklog) {
+				
+			// 	$tester = $checklog->created_at;
+
+			// 	Log::info($tester->isToday());
+
+			// }
 		}
 
 		return Response::json(['data' => $checkedInMembers], 200);

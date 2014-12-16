@@ -3,12 +3,14 @@
 	<div class="links-container">
 		<a class="left" href="{{ route('dashboard') }}">Home</a>
     	<a class="logout right" href="{{ route('logout') }}">Log Out</a>
+        @if(Auth::user()->Admin)
     	<a class="right" href="{{ route('admin.index') }}">Admin</a>
+        @endif
 	</div>
 	
 		
-	<form ng-submit="searchForMember()">
-		<input ng-model="query" class="member-search" type="search"  placeholder="SEARCH MEMBERS" autofocus ng-model="query">
+	<form >
+		<input ng-keyup="searchForMember()" ng-model="query" class="member-search" type="search"  placeholder="SEARCH MEMBERS" autofocus ng-model="query">
 	</form>
     
     <div class="results-pane" ng-show="showResults" ng-cloak>

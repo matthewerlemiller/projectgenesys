@@ -303,9 +303,8 @@ class MemberController extends BaseController {
 
 		$query = DB::table('members');
 
-		// Seperate multiple words in query and place in array.
 		$searchTerms = explode(' ', $q);
-		// Loop through the array and query for the string in the database.
+		
 		foreach($searchTerms as $term) {	
 			$query->where('NameFirst', 'LIKE', '%'. $term .'%')
 		          ->orWhere('NameLast', 'LIKE', '%' . $term . '%');
@@ -317,7 +316,16 @@ class MemberController extends BaseController {
 
 			$member = Member::find($result->MemberId);
 			$memberLastCheckIn = $member->checklogs()->orderBy('CheckLogId', 'desc')->get()->first()["CheckInDateTime"];
-			$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
+
+			if ($memberLastCheckIn) {
+
+				$memberCheckedIn = Carbon::parse($memberLastCheckIn)->isToday() ? true : false;
+
+			} else {
+
+				$memberCheckedIn = false;
+			}
+			
 			$result->CheckedIn = $memberCheckedIn;
 		}
 		

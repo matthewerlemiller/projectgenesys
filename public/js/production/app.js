@@ -1,12 +1,5 @@
 var app = angular.module('genesys', ['angularFileUpload']);
 
-app.factory('SharedService', function($rootScope) {
-
-
-
-
-});
-
 app.factory('Member', function($http) {
 
 	return {
@@ -31,6 +24,20 @@ app.factory('Member', function($http) {
 	}
 });
 
+app.factory('SharedService', function($rootScope) {
+
+	var sharedService = {};
+
+	sharedService.broadcastShowCheckedIn = function() {
+
+		$rootScope.$broadcast('showCheckedIn');
+
+	}
+
+	return sharedService;
+
+});
+
 app.controller('SearchController', function($scope, Member, SharedService) {
 
 	$scope.query = "";
@@ -41,20 +48,38 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 	$scope.searchForMember = function() {
 
-		var data = { query : $scope.query };
+		if ($scope.query.length >= 2) {
 
-		Member.search(data).success(function(response) {
+			var data = { query : $scope.query };
 
-			// console.log(response.data);
-			$scope.results = response.data;
-			$scope.showResults = true;
-			console.log($scope.results);
+			Member.search(data).success(function(response) {
 
-		}).error(function() {
+				if ($scope.query.length >= 2) {
 
-			console.log("There was a problem searching for this member");
+					$scope.results = response.data;
+					$scope.showResults = true;
 
-		});
+				}
+				
+
+			}).error(function() {
+
+				console.log("There was a problem searching for this member");
+
+			});
+
+		} else {
+
+			$scope.clear();
+
+		}
+	}
+
+	$scope.clear = function() {
+
+		$scope.showResults = false;
+		$scope.results = [];
+		// $scope.query = "";
 
 	}
 
@@ -65,6 +90,14 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 			console.log(response.message);
 
 			$scope.results[index].CheckedIn = true;
+
+			setTimeout(function() {
+
+				SharedService.broadcastShowCheckedIn();
+
+				$scope.results = [];
+
+			}, 1000)
 			
 		}).error(function(response){
 
@@ -73,6 +106,12 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 		})
 
 	}
+
+	$scope.$on('showCheckedIn', function() {
+
+		$scope.showResults = false;
+
+	});
 
 
 });
@@ -86,11 +125,8 @@ app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService
 		Member.getCheckedIn().success(function(response) {
 
 			$scope.Checklogs = response.data;
-			console.log(response.data);
-
+			
 		}).error(function() {
-
-
 
 		});
 
@@ -98,6 +134,12 @@ app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService
 
 	$scope.getCheckedIn();
 	
+	$scope.$on('showCheckedIn', function() {
+
+		$scope.getCheckedIn();
+
+	});
+
 
 
 });
