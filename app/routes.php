@@ -25,11 +25,13 @@ Route::get('dashboard', ['before' => 'auth', 'as' =>'dashboard', function() {
 
 //Member Route.
 Route::resource('member', 'MemberController');
-Route::post('member/search', ['as' => 'searchMembers', 'uses' => 'MemberController@searchMembers']);
+Route::post('member/search', ['as' => 'member.search', 'uses' => 'MemberController@searchMembers']);
 
 
 //Checkin
 Route::get('checkin/{id}', ['as' => 'checkin', 'uses' => 'CheckInController@checkIn']);
+Route::get('checkedin', ['as' => 'getCheckedIn', 'uses' => 'CheckInController@getCheckedIn']);
+
 
 //Shift 
 Route::get('shift', ['as' => 'shift.index', 'before' => 'auth', 'uses' => 'ShiftController@index']);

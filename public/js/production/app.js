@@ -1,3 +1,123 @@
+var app = angular.module('genesys', ['angularFileUpload']);
+
+app.factory('SharedService', function($rootScope) {
+
+
+
+
+});
+
+app.factory('Member', function($http) {
+
+	return {
+
+		search : function(query) {
+
+			return $http.post('/member/search', query);
+			
+		},
+
+		checkIn : function(id) {
+
+			return $http.get('/checkin/' + id);
+
+		},
+
+		getCheckedIn : function() {
+
+			return $http.get('/checkedin');
+
+		}
+	}
+});
+
+app.controller('SearchController', function($scope, Member, SharedService) {
+
+	$scope.query = "";
+
+	$scope.results = [];
+
+	$scope.showResults = false;
+
+	$scope.searchForMember = function() {
+
+		var data = { query : $scope.query };
+
+		Member.search(data).success(function(response) {
+
+			// console.log(response.data);
+			$scope.results = response.data;
+			$scope.showResults = true;
+			console.log($scope.results);
+
+		}).error(function() {
+
+			console.log("There was a problem searching for this member");
+
+		});
+
+	}
+
+	$scope.checkIn = function(id, index) {
+
+		Member.checkIn(id).success(function(response) {
+
+			console.log(response.message);
+
+			$scope.results[index].CheckedIn = true;
+			
+		}).error(function(response){
+
+			console.log(response.message);
+
+		})
+
+	}
+
+
+});
+
+app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService) {
+
+	$scope.Checklogs = [];
+
+	$scope.getCheckedIn = function() {
+
+		Member.getCheckedIn().success(function(response) {
+
+			$scope.Checklogs = response.data;
+			console.log(response.data);
+
+		}).error(function() {
+
+
+
+		});
+
+	}
+
+	$scope.getCheckedIn();
+	
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //   This whole part is the live results search functionality
 
@@ -78,30 +198,30 @@ function returnResults(query) {
 
 //this could be more effiecient but I'm just not sure how to do it yet. currently it is removing all results from the DOM, then adding the matches. It should just remove results that are no longer matches, and only add new matches.
 
-$search.on('input', function() {
+// $search.on('input', function() {
 
-	$('.result').remove();
-	var searchQuery = $search.val().trim();
-	var results = returnResults($search.val());
-	var addedHTML = [];
+// 	$('.result').remove();
+// 	var searchQuery = $search.val().trim();
+// 	var results = returnResults($search.val());
+// 	var addedHTML = [];
 
-	// console.log(results);
+// 	// console.log(results);
 
-	if (results != []) { 
+// 	if (results != []) { 
 
-		for (var i = 0; i<results.length; i++) {
-			var resultHTML = "<a href = '#' class='result'><img class='photo' src='" + results[i].photoURL()	 + "'/></a>";
-			addedHTML.push(resultHTML);
-			$resultsWrapper.append(resultHTML);
-		}
+// 		for (var i = 0; i<results.length; i++) {
+// 			var resultHTML = "<a href = '#' class='result'><img class='photo' src='" + results[i].photoURL()	 + "'/></a>";
+// 			addedHTML.push(resultHTML);
+// 			$resultsWrapper.append(resultHTML);
+// 		}
 
-	} else {
+// 	} else {
 
-		$('.result').remove();
+// 		$('.result').remove();
 
-	}
+// 	}
 
-});
+// });
 
 
 

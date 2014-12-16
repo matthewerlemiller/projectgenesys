@@ -3,21 +3,20 @@
 <head>
     <title>Genesys - Home</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <script src="{{ asset('js/vendor/angular.js') }}"></script>
 </head>
 
 @if(Route::currentRouteName() == 'login.get')
 <body class="login">
 @else
-<body class="home">
+<body class="home" ng-app="genesys">
 @endif
 
     @if(Auth::check())
-    <div class="search-container">
-    	<a class="log-in" href="{{ route('dashboard') }}">Home</a>
-        <a class="log-out" href="{{ route('logout') }}">Log Out</a>
-        <input class="member-search" type="search"  placeholder="SEARCH MEMBERS" autofocus>
-    </div>  
-    @endif
+    
+    @include('partials.nav')
+
+   	@endif
 
 
 
@@ -26,6 +25,8 @@
 
 
 <script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/vendor/angular-file-upload-html5-shim.min.js') }}"></script>
+<script src="{{ asset('js/vendor/angular-file-upload.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/pages/home.js') }}"></script>
 

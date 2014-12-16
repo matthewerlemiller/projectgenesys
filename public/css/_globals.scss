@@ -17,8 +17,20 @@ input, select, password{
 	outline: none;
 }
 
+.left {
+
+	float:left;
+
+}
+
+.right {
+
+	float:right;
+
+}
+
 .search-container {
-	position: static;
+	position: relative;
 	// margin-bottom:-150px;
 	width:100%;
 	background-color: $darkgray;
@@ -27,30 +39,31 @@ input, select, password{
 	text-align: center;
 	// transition: .5s;
 	z-index: 100;
+	overflow: visible;
 
-	a.log-out {
-		position: absolute;
-		top:10px;
-		right:10px;
-		color:white;
-		font-size: .8em;
-		letter-spacing: 1px;
-		padding-bottom:2px;
-		border-bottom: 1px solid white;
-	}
+	// a.log-out {
+	// 	position: absolute;
+	// 	top:10px;
+	// 	right:10px;
+	// 	color:white;
+	// 	font-size: .8em;
+	// 	letter-spacing: 1px;
+	// 	padding-bottom:2px;
+	// 	border-bottom: 1px solid white;
+	// }
 
-	.log-in {
+	// .log-in {
 
-		position: absolute;
-		top:10px;
-		left:10px;
-		color:white;
-		font-size: .8em;
-		letter-spacing: 1px;
-		padding-bottom:2px;
-		border-bottom: 1px solid white;
+	// 	position: absolute;
+	// 	top:10px;
+	// 	left:10px;
+	// 	color:white;
+	// 	font-size: .8em;
+	// 	letter-spacing: 1px;
+	// 	padding-bottom:2px;
+	// 	border-bottom: 1px solid white;
 
-	}
+	// }
 
 	.member-search {
 		border: none;
@@ -66,4 +79,32 @@ input, select, password{
 		font-weight:bold;
 		font-size: 1.2em;
 	}
+}
+
+.links-container {
+
+	position: absolute;
+	width:100%;
+	height:auto;
+	overflow: auto;
+	top:0;
+	@include box-sizing(border-box);
+	padding:10px;
+
+	a {
+
+		color:white;
+		font-size: .8em;
+		letter-spacing: 1px;
+		padding-bottom:2px;
+		border-bottom: 1px solid white;
+
+	}
+
+}
+
+.logout {
+
+	margin-left: 30px;
+
 }

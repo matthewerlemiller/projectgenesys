@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class MemberController extends BaseController {
 
 	/**
@@ -310,8 +312,16 @@ class MemberController extends BaseController {
 		}
 
 		$results = $query->get();
+
+		foreach($results as $result) {
+
+			$member = Member::find($result->MemberId);
+			$memberLastCheckIn = $member->checklogs()->orderBy('CheckLogId', 'desc')->get()->first()["CheckInDateTime"];
+			$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
+			$result->CheckedIn = $memberCheckedIn;
+		}
 		
-		return $results;
+		return Response::json(['data' => $results], 200);
 		
 	}
 
