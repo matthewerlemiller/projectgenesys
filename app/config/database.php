@@ -61,7 +61,7 @@ return array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
 			'database' => 'postgres',
-			'username' => 'web',
+			'username' => 'postgres',
 			'password' => 'WfL78V2vQR1tfqloILyQjDRbJizCplC3sF4zdbA7R6N0bHGMPTzbczh78Su6rnM5',
 			'charset'  => 'utf8',
 			'prefix'   => '',
