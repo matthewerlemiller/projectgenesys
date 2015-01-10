@@ -66,31 +66,6 @@ class MemberController extends BaseController {
 		// Concatonate City onto Address input
 		// $mAddress = $mAddress . " " . $mCity;
 
-		// Parse and Process Image Upload
-		// $valid_exts = array('jpeg', 'jpg', 'png', 'gif');
-		// $max_size = 2000 * 1024;
-		// $path = public_path() . '/img/uploads/';
-		// $ext = $mImage->guessClientExtension();
-		// $size = $mImage->getClientSize();
-		// $name = $mImage->getClientOriginalName();
-
-		// $imagePath = 'img/uploads/' . $name;
-
-		// if (in_array($ext, $valid_exts) AND $size < $max_size) {
-		//     // move uploaded file from temp to uploads directory
-		//     if ($mImage->move($path,$name)) {
-		//         $status = 'Image successfully uploaded!';
-		//     } else {
-		//         $status = 'Upload Fail: Unknown error occurred!';
-		//     }
-
-		// } else {
-		//     $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
-		// }
-
-		// New image upload
-		// $image = Input::file('file');
-
 		$imageName = $mImage->getClientOriginalName();
 		$uploadPath = public_path() . '/img/uploads/' . $imageName;
 		Image::make($mImage)->resize('800',null, function($constraint){ $constraint->aspectRatio();})->save($uploadPath);
@@ -107,8 +82,6 @@ class MemberController extends BaseController {
 		$member->Parent2NameFirst = $mSecondParentName;
 		$member->Parent1Phone1 = $mParentContact;
 		$member->save();
-
-
 
 		// TODO : implement functionality to allow an optional automatic check 
 		// in of member after creation. 

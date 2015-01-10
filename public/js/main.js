@@ -96,6 +96,7 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 				SharedService.broadcastShowCheckedIn();
 
 				$scope.results = [];
+				$scope.query = '';
 
 			}, 1000)
 			
