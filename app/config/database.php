@@ -60,7 +60,7 @@ return array(
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
-			'database' => 'postgres',
+			'database' => 'DB_ProjectGenesys',
 			'username' => 'postgres',
 			'password' => 'WfL78V2vQR1tfqloILyQjDRbJizCplC3sF4zdbA7R6N0bHGMPTzbczh78Su6rnM5',
 			'charset'  => 'utf8',
