@@ -14,9 +14,9 @@ class CreateLeadersTable extends Migration {
 	{
 		Schema::create('leaders', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->increments('Id');
 			$table->integer('LocationId')->unsigned();
-			$table->foreign('LocationId')->references('LocationId')->on('locations');
+			$table->foreign('LocationId')->references('Id')->on('locations');
 			$table->string('LeaderFirstName');
 			$table->string('LeaderLastName');
 			$table->string('Email');

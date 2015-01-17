@@ -14,7 +14,7 @@ class CreateMembersTable extends Migration {
 	{
 		Schema::create('members', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->increments('Id');
 			$table->string('NameFirst');
 			$table->string('NameMiddle')->nullable();
 			$table->string('NameLast');
@@ -42,7 +42,7 @@ class CreateMembersTable extends Migration {
 			$table->date('BaptizedDate')->nullable();
 			$table->string('status')->nullable();
 			$table->integer('School')->unsigned()->nullable();
-			$table->foreign('School')->references('SchoolId')->on('schools');
+			$table->foreign('School')->references('Id')->on('schools');
 			$table->string('Gender')->nullable();
 			$table->string('Ethnicity')->nullable();
 			$table->boolean('M_HsGroup')->nullable();
@@ -61,7 +61,7 @@ class CreateMembersTable extends Migration {
 			$table->boolean('L_HigherGround')->nullable();
 			$table->boolean('CheckedIn')->nullable();
 			$table->integer('LessonId')->unsigned()->nullable();
-			$table->foreign('LessonId')->references('LessonId')->on('lessons');
+			$table->foreign('LessonId')->references('Id')->on('lessons');
 			$table->timestamps();
 			
 		});

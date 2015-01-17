@@ -16,11 +16,11 @@ class CreateSessionsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('LeaderId')->unsigned();
-			$table->foreign('LeaderId')->references('LeaderId')->on('leaders');
+			$table->foreign('LeaderId')->references('Id')->on('leaders');
 			$table->integer('MemberId')->unsigned();
-			$table->foreign('MemberId')->references('MemberId')->on('members');
+			$table->foreign('MemberId')->references('Id')->on('members');
 			$table->integer('LessonId')->unsigned();
-			$table->foreign('LessonId')->references('LessonId')->on('lessons');
+			$table->foreign('LessonId')->references('Id')->on('lessons');
 			$table->timestamps();
 		});
 	}

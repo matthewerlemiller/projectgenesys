@@ -10,6 +10,8 @@
 
 		{{ Form::select('location', $locationsSelect) }}
 
+		{{ var_dump($locationsSelect) }}
+
 		<div class="input-container">
 
 			{{ Form::password('password', ['class' => 'password', 'placeholder' => 'Password']) }}
