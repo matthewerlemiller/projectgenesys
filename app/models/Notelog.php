@@ -3,11 +3,11 @@
 
 class Notelog extends Eloquent {
 
-	// protected $primaryKey = 'NoteLogId';
+	protected $primaryKey = 'Id';
 
 	public function location() {
 
-		return $this->belongsTo('Location', 'id');
+		return $this->belongsTo('Location', 'Id');
 
 	}
 

@@ -17,23 +17,23 @@ class Location extends Eloquent implements UserInterface, RemindableInterface {
 
 	}
 
-	// protected $primaryKey = 'LocationId';
+	protected $primaryKey = 'Id';
 
 	public function checklogs() {
 
-		return $this->hasMany('Checklog', 'id');
+		return $this->hasMany('Checklog', 'Id');
 
 	}
 
 	public function leaders() {
 
-		return $this->hasMany('Leader', 'id');
+		return $this->hasMany('Leader', 'Id');
 
 	}
 
 	public function notelogs() {
 
-		return $this->hasMany('Notelog', 'id');
+		return $this->hasMany('Notelog', 'Id');
 
 	}
 

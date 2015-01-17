@@ -3,17 +3,17 @@
 
 class Leader extends Eloquent {
 
-	// protected $primaryKey = 'LeaderId';
+	protected $primaryKey = 'Id';
 
 	public function sessions() {
 
-		return $this->hasMany('Session', 'id');
+		return $this->hasMany('Session', 'Id');
 
 	}
 
 	public function location() {
 
-		return $this->belongsTo('Location', 'id');
+		return $this->belongsTo('Location', 'Id');
 
 	}
 

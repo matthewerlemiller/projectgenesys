@@ -4,23 +4,23 @@
 
 class Member extends Eloquent {
 
-	// protected $primaryKey = 'MemberId';
+	protected $primaryKey = 'Id';
 
 	public function checklogs() {
 
-		return $this->hasMany('Checklog', 'id');
+		return $this->hasMany('Checklog', 'Id');
 
 	}
 
 	public function school() {
 
-		return $this->hasOne('School', 'id');
+		return $this->hasOne('School', 'Id');
 
 	}
 
 	public function sessions() {
 
-		return $this->hasMany('Session', 'id');
+		return $this->hasMany('Session', 'Id');
 
 	}
 
