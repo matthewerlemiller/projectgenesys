@@ -7,13 +7,13 @@ class Leader extends Eloquent {
 
 	public function sessions() {
 
-		return $this->hasMany('Session', 'LeaderId');
+		return $this->hasMany('Session', 'id');
 
 	}
 
 	public function location() {
 
-		return $this->belongsTo('Location', 'LocationId');
+		return $this->belongsTo('Location', 'id');
 
 	}
 

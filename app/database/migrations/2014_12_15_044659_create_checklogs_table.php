@@ -14,7 +14,7 @@ class CreateChecklogsTable extends Migration {
 	{
 		Schema::create('checklogs', function(Blueprint $table)
 		{
-			$table->increments('CheckLogId');
+			$table->increments('id');
 			$table->integer('MemberId')->unsigned();
 			$table->foreign('MemberId')->references('MemberId')->on('members');
 			$table->dateTime('CheckInDateTime');

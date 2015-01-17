@@ -6,7 +6,7 @@ class Checklog extends Eloquent {
 
 	public function member() {
 
-        return $this->belongsTo('Member', 'MemberId', 'MemberId');
+        return $this->belongsTo('Member', 'id', 'MemberId');
     }
 
 }

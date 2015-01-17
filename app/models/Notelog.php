@@ -7,7 +7,7 @@ class Notelog extends Eloquent {
 
 	public function location() {
 
-		return $this->belongsTo('Location', 'LocationId');
+		return $this->belongsTo('Location', 'id');
 
 	}
 

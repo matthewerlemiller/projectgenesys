@@ -8,19 +8,19 @@ class Member extends Eloquent {
 
 	public function checklogs() {
 
-		return $this->hasMany('Checklog', 'MemberId');
+		return $this->hasMany('Checklog', 'id');
 
 	}
 
 	public function school() {
 
-		return $this->hasOne('School', 'MemberId');
+		return $this->hasOne('School', 'id');
 
 	}
 
 	public function sessions() {
 
-		return $this->hasMany('Session', 'MemberId');
+		return $this->hasMany('Session', 'id');
 
 	}
 

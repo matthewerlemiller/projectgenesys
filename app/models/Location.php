@@ -21,19 +21,19 @@ class Location extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function checklogs() {
 
-		return $this->hasMany('Checklog', 'LocationId');
+		return $this->hasMany('Checklog', 'id');
 
 	}
 
 	public function leaders() {
 
-		return $this->hasMany('Leader', 'LocationId');
+		return $this->hasMany('Leader', 'id');
 
 	}
 
 	public function notelogs() {
 
-		return $this->hasMany('Notelog', 'LocationId');
+		return $this->hasMany('Notelog', 'id');
 
 	}
 
