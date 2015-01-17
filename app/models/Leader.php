@@ -3,7 +3,7 @@
 
 class Leader extends Eloquent {
 
-	protected $primaryKey = 'LeaderId';
+	// protected $primaryKey = 'LeaderId';
 
 	public function sessions() {
 

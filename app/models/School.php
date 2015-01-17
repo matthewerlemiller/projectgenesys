@@ -3,6 +3,6 @@
 
 class School extends Eloquent {
 
-	protected $primaryKey = 'SchoolId';
+	// protected $primaryKey = 'SchoolId';
 
 }

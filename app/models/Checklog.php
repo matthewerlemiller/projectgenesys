@@ -2,7 +2,7 @@
 
 class Checklog extends Eloquent {
 
-	protected $primaryKey = 'CheckLogId';
+	// protected $primaryKey = 'CheckLogId';
 
 	public function member() {
 

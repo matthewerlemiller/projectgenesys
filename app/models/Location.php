@@ -17,7 +17,7 @@ class Location extends Eloquent implements UserInterface, RemindableInterface {
 
 	}
 
-	protected $primaryKey = 'LocationId';
+	// protected $primaryKey = 'LocationId';
 
 	public function checklogs() {
 

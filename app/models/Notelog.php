@@ -3,7 +3,7 @@
 
 class Notelog extends Eloquent {
 
-	protected $primaryKey = 'NoteLogId';
+	// protected $primaryKey = 'NoteLogId';
 
 	public function location() {
 

@@ -4,7 +4,7 @@
 
 class Member extends Eloquent {
 
-	protected $primaryKey = 'MemberId';
+	// protected $primaryKey = 'MemberId';
 
 	public function checklogs() {
 
