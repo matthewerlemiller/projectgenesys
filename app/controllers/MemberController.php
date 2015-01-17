@@ -287,8 +287,8 @@ class MemberController extends BaseController {
 
 		foreach($results as $result) {
 
-			$member = Member::find($result->MemberId);
-			$memberLastCheckIn = $member->checklogs()->orderBy('CheckLogId', 'desc')->get()->first()["CheckInDateTime"];
+			$member = Member::find($result->Id);
+			$memberLastCheckIn = $member->checklogs()->orderBy('Id', 'desc')->get()->first()["CheckInDateTime"];
 
 			if ($memberLastCheckIn) {
 

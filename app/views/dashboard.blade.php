@@ -15,7 +15,7 @@
 				</a>
 			</div>
 
-			<a href="member/@{{ Checklog.member.MemberId }}" ng-repeat="Checklog in Checklogs"><div class="result" >
+			<a href="member/@{{ Checklog.member.Id }}" ng-repeat="Checklog in Checklogs"><div class="result" >
 				<div class="dot"></div>
 				<!-- <form action="">
 					<input type="checkbox" id="cb@{{ $index }}">

@@ -12,11 +12,13 @@ class CheckInController extends BaseController {
 			$checklog->MemberId = $id;
 			$checklog->CheckInDateTime = Carbon::now();
 			$checklog->CheckOutDateTime = Carbon::tomorrow();
-			$checklog->LocationId = Auth::user()->LocationId;
+			$checklog->LocationId = Auth::user()->Id;
 			$checklog->save();
 
 		} catch (Exception $e) {
 			
+			Log::error($e);
+
 			return Response::json(['message' => 'Something went wrong with this check-in =['], 404);
 
 		}
@@ -30,7 +32,7 @@ class CheckInController extends BaseController {
 		if (!Auth::user()->Admin) {
 
 			// $checkedInMembers = Auth::user()->checklogs()->whereBetween('created_at', [Carbon::now(), Carbon::now()->subDay()])->get();
-			$checkedInMembers = Auth::user()->checklogs()->where('created_at', '>=', Carbon::today())->with('member')->orderBy('CheckLogId', 'desc')->get();			
+			$checkedInMembers = Auth::user()->checklogs()->where('created_at', '>=', Carbon::today())->with('member')->orderBy('Id', 'desc')->get();			
 
 			// foreach ($checkedInMembers as $checklog) {
 				

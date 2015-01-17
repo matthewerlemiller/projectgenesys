@@ -7,19 +7,19 @@ class Session extends Eloquent {
 
 	public function leader() {
 
-		return $this->belongsTo('Leader', 'Id');
+		return $this->belongsTo('Leader', 'LeaderId', 'Id');
 
 	}
 
 	public function member() {
 
-		return $this->belongsTo('Member', 'Id');
+		return $this->belongsTo('Member', 'MemberId', 'Id');
 
 	}	
 
 	public function lesson() {
 
-		return $this->hasOne('Lesson', 'Id');
+		return $this->hasOne('Lesson', 'Id', 'LessonId');
 
 	}
 
