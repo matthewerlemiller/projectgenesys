@@ -12,7 +12,7 @@ class LoginController extends BaseController {
 
 			// $locations = Location::orderBy('Id', 'asc')->get();
 			$locations = Location::all();
-			$locationSelect = [];
+			$locationsSelect = [];
 
 			foreach($locations as $location) {
 
