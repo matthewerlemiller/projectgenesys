@@ -1,3 +1,11 @@
+/* TEMP STYLES */
+
+.right,.left {
+	display:none;
+}
+
+/* END TEMP STYLES */
+
 * {
   box-sizing:border-box;
 }
@@ -19,65 +27,56 @@ input, select, password{
 
 .left {
 
-	float:left;
+	// float:left;
 
 }
 
 .right {
 
-	float:right;
+	// float:right;
 
 }
-
-.search-container {
+.nav-container {
 	position: relative;
-	// margin-bottom:-150px;
 	width:100%;
 	background-color: $darkgray;
-	height:150px;
+	height: 70px;
 	top:0px;
-	text-align: center;
-	// transition: .5s;
+	margin-bottom:-70px;
 	z-index: 100;
 	overflow: visible;
 
-	// a.log-out {
-	// 	position: absolute;
-	// 	top:10px;
-	// 	right:10px;
-	// 	color:white;
-	// 	font-size: .8em;
-	// 	letter-spacing: 1px;
-	// 	padding-bottom:2px;
-	// 	border-bottom: 1px solid white;
-	// }
+	.hamburger {
+		position:absolute;
+		margin-top:15px;
+		margin-left:15px;
+		width:40px;
+		height:40px;
 
-	// .log-in {
-
-	// 	position: absolute;
-	// 	top:10px;
-	// 	left:10px;
-	// 	color:white;
-	// 	font-size: .8em;
-	// 	letter-spacing: 1px;
-	// 	padding-bottom:2px;
-	// 	border-bottom: 1px solid white;
-
-	// }
+		.pattie {
+			height:6px;
+			margin-bottom:9px;
+			border-radius: 2px;
+			background:white;
+		}
+	}
 
 	.member-search {
+		position:absolute;
+		right:15px;
+		text-align:right;
 		border: none;
 		width:90%;
 		max-width:600px;
-		height:50px;
-		margin-top: 45px;
-		padding-left:10px;
-		padding-right: 10px;
+		height:40px;
+		margin-top:15px;
 		@include round3px;
 		@include helvetica;
 		color: $darkgray;
 		font-weight:bold;
 		font-size: 1.2em;
+		text-align:center;
+		padding:10px;
 	}
 }
 
