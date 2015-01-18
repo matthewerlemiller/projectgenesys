@@ -54,7 +54,7 @@
 
 
 
-	<a href="{{ route('member.edit', ['id' => $member->id])}}">EDIT</a>
+	<a href="{{ route('member.edit', ['id' => $member->Id])}}">EDIT</a>
 
 
 

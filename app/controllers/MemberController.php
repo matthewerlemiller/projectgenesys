@@ -102,7 +102,7 @@ class MemberController extends BaseController {
 		if (!Auth::check()) { return Redirect::to('login');  }
 
 		$member = Member::find($id);
-		$memberLastCheckIn = $member->checklogs()->orderBy('CheckLogId', 'desc')->get()->first()["CheckInDateTime"];
+		$memberLastCheckIn = $member->checklogs()->orderBy('Id', 'desc')->get()->first()["CheckInDateTime"];
 		$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
 
 		return View::make('viewmember')->with(['member' => $member, 'memberCheckedIn' => $memberCheckedIn]);
