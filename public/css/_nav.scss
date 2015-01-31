@@ -5,14 +5,10 @@
 	background-color: $darkgray;
 	height: 70px;
 	top:0px;
-	// margin-bottom:-70px;
 	z-index: 100;
 	overflow: visible;
 
 	.hamburger {
-		// position:absolute;
-		// margin-top:15px;
-		// margin-left:15px;
 		float:left;
 		width:40px;
 		height:40px;
@@ -26,8 +22,6 @@
 	}
 
 	.member-search {
-		// position:absolute;
-		// right:15px;
 		float:right;
 		text-align:right;
 		border: none;

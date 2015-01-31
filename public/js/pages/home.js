@@ -44,7 +44,7 @@ function stickyHeader(){
 		else if (newScrollPosition == 0){
 			$('.search-container').css('position','static')
 			// $header.css('transition', '0s');
-		}d
+		}
 	});
 }
 
