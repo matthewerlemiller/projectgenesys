@@ -3,10 +3,10 @@
 @section ('content')
 
 	<h1 class="member-name">{{{ $member->NameFirst . ' ' . $member->NameLast }}}</h1>
-	<div class="profile-image" style="background-image:url({{{ asset($member->ImagePath) }}})"></div>
+	<div class="profile-image" style="background-image:url({{$member->ImagePath}})"></div>
 
 	<!-- TODO: access the LessonId field and display relevant ranking this student currently holds -->
-	
+
 	<p>Gender : {{{ $member->Gender or 'n/a' }}} </p>
 	<p>Status : {{{ $member->Status or "Good" }}} </p>
 	<p>Birthdate : {{{ $member->DateBirth or 'n/a' }}} </p>
