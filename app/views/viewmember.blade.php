@@ -4,7 +4,9 @@
 
 	<h1 class="member-name">{{{ $member->NameFirst . ' ' . $member->NameLast }}}</h1>
 	<div class="profile-image" style="background-image:url({{{ asset($member->ImagePath) }}})"></div>
+
 	<!-- TODO: access the LessonId field and display relevant ranking this student currently holds -->
+	
 	<p>Gender : {{{ $member->Gender or 'n/a' }}} </p>
 	<p>Status : {{{ $member->Status or "Good" }}} </p>
 	<p>Birthdate : {{{ $member->DateBirth or 'n/a' }}} </p>
@@ -43,20 +45,13 @@
 	<p>Jr High Group Leader : {{{ null != $member->L_JrGroup ? 'yes' : 'no' }}} </p>
 	<p>HigherGround Leader : {{{ null != $member->L_HigherGround ? 'yes' : 'no' }}} </p>
 	
-
 	<h2>Event Attendance</h2>
 
 	<p>Summer Camp : {{{ null != $member->E_SummerCamp ? 'yes' : 'no' }}} </p>
 	<p>Winter Camp : {{{ null != $member->E_WinterCamp ? 'yes' : 'no' }}} </p>
 	<p>Future Quest : {{{ null != $member->E_FutureQuest ? 'yes' : 'no' }}} </p>
 
-
-
-
-
 	<a href="{{ route('member.edit', ['id' => $member->Id])}}">EDIT</a>
-
-
 
 	<p>{{ $memberCheckedIn ? 'checked in' : 'not checked in' }}</p>
 
