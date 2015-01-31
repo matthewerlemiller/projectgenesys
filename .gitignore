@@ -6,6 +6,7 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
 public/.sass-cache/
 public/css/.sass-cache/
 public/img/uploads/

@@ -6,6 +6,8 @@ class Member extends Eloquent {
 
 	protected $primaryKey = 'Id';
 
+	// protected $timestamps = true;
+
 	public function checklogs() {
 
 		return $this->hasMany('Checklog', 'MemberId', 'Id');

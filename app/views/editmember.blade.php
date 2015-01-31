@@ -4,7 +4,7 @@
 
 <p> {{{ $member->NameFirst . ' ' . $member->NameLast }}} </p>
 
-{{ Form::model($member, ['url' => 'member/' . $member->id . '/edit', 'files' => true, 'method' => 'PUT']) }}
+{{ Form::model($member, ['route' => array('member.update', $member->Id), 'files' => true, 'method' => 'PATCH']) }}
 	<p>{{ Form::text('NameFirst') }}</p>
 	<p>{{ Form::text('NameLast') }}</p>
 	<p>{{ Form::text('Gender','Gender',['placeholder' => 'Gender']) }}</p>
