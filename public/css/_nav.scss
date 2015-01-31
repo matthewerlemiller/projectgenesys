@@ -5,14 +5,15 @@
 	background-color: $darkgray;
 	height: 70px;
 	top:0px;
-	margin-bottom:-70px;
+	// margin-bottom:-70px;
 	z-index: 100;
 	overflow: visible;
 
 	.hamburger {
-		position:absolute;
-		margin-top:15px;
-		margin-left:15px;
+		// position:absolute;
+		// margin-top:15px;
+		// margin-left:15px;
+		float:left;
 		width:40px;
 		height:40px;
 
@@ -25,8 +26,9 @@
 	}
 
 	.member-search {
-		position:absolute;
-		right:15px;
+		// position:absolute;
+		// right:15px;
+		float:right;
 		text-align:right;
 		border: none;
 		width:90%;
@@ -43,17 +45,20 @@
 	}
 }
 
+.logo {
+
+	width:40px;
+	float:left;
+
+}
+
 
 // Results
-
-
 .results-pane {
 
-	position: absolute;
-	@include centerHorizontal;
 	width:100%;
-	height:500px;
-	background-color: $darkgray;
+	height:auto;
+	background-color: white;
 	z-index: 100;
 	top:100px;
 	text-align: left;
