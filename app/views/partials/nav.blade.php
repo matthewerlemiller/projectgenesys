@@ -1,8 +1,8 @@
 <div class="nav-container" ng-controller="SearchController">
     <div class="hamburger">
-        <div class="pattie"></div>
-        <div class="pattie"></div>
-        <div class="pattie"></div>
+        <div class="patty"></div>
+        <div class="patty"></div>
+        <div class="patty"></div>
     </div>
 	<div class="links-container">
 		<a class="left" href="{{ route('dashboard') }}">Home</a>
@@ -17,7 +17,6 @@
 	<form >
 		<input ng-keyup="searchForMember()" ng-model="query" class="member-search" type="search"  placeholder="SEARCH MEMBERS" autofocus ng-model="query">
 	</form>
-
     <div class="results-pane" ng-show="showResults" ng-cloak>
 
     	<div class="main-wrapper">

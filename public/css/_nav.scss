@@ -1,0 +1,98 @@
+// header/nav
+.nav-container {
+	position: relative;
+	width:100%;
+	background-color: $darkgray;
+	height: 70px;
+	top:0px;
+	margin-bottom:-70px;
+	z-index: 100;
+	overflow: visible;
+
+	.hamburger {
+		position:absolute;
+		margin-top:15px;
+		margin-left:15px;
+		width:40px;
+		height:40px;
+
+		.patty {
+			height:6px;
+			margin-bottom:9px;
+			border-radius: 2px;
+			background:white;
+		}
+	}
+
+	.member-search {
+		position:absolute;
+		right:15px;
+		text-align:right;
+		border: none;
+		width:90%;
+		max-width:600px;
+		height:40px;
+		margin-top:15px;
+		@include round3px;
+		@include helvetica;
+		color: $darkgray;
+		font-weight:bold;
+		font-size: 1.2em;
+		text-align:center;
+		padding:10px;
+	}
+}
+
+
+// Results
+
+
+.results-pane {
+
+	position: absolute;
+	@include centerHorizontal;
+	width:100%;
+	height:500px;
+	background-color: $darkgray;
+	z-index: 100;
+	top:100px;
+	text-align: left;
+
+}
+
+.result-block {
+	width:100%;
+	height:140px;
+	padding:10px;
+	border-radius:10px;
+	background-color: white;
+
+}
+
+.result-image {
+
+	width:120px;
+	height:120px;
+	border-radius:10px;
+	background-color: gray;
+	background-size: cover;
+	background-position: center;
+	float:left;
+
+}
+
+.result-checkin {
+
+	float:right;
+	width:200px;
+	height:60px;
+	background-color: #eeeeee;
+	cursor:pointer;
+
+}
+
+.result-checkin-green {
+
+	background-color: green;
+
+}
