@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Genesys - Home</title>
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <script src="{{ asset('js/vendor/angular.js') }}"></script>
 </head>
@@ -13,7 +14,7 @@
 @endif
 
     @if(Auth::check())
-    
+
     @include('partials.nav')
 
    	@endif

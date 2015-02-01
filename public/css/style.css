@@ -37,7 +37,7 @@ table {
 html, body {
   width: 100%;
   height: 100%;
-  font-family: "Helvetica Neue",Helvetica,Arial,Sans-serif; }
+  font-family: 'Lato', "helvetica neue",helvetica,Arial, sans-serif; }
 
 a {
   color: inherit;
@@ -72,6 +72,7 @@ input, select, password {
 
 .nav-container {
   position: relative;
+  padding: 15px;
   width: 100%;
   background-color: #333;
   height: 70px;
@@ -94,11 +95,10 @@ input, select, password {
     width: 90%;
     max-width: 600px;
     height: 40px;
-    margin-top: 15px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    font-family: "helvetica neue",helvetica,Arial,Sans-serif;
+    font-family: 'Lato', "helvetica neue",helvetica,Arial, sans-serif;
     color: #333;
     font-weight: bold;
     font-size: 1.2em;
@@ -107,41 +107,71 @@ input, select, password {
 
 .logo {
   width: 40px;
-  float: left; }
+  float: left;
+  margin-right: 15px; }
 
 .results-pane {
   width: 100%;
   height: auto;
-  background-color: white;
   z-index: 100;
   top: 100px;
   text-align: left; }
-
-.result-block {
-  width: 100%;
-  height: 140px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: white; }
-
-.result-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 10px;
-  background-color: gray;
-  background-size: cover;
-  background-position: center;
-  float: left; }
-
-.result-checkin {
-  float: right;
-  width: 200px;
-  height: 60px;
-  background-color: #eeeeee;
-  cursor: pointer; }
-
-.result-checkin-green {
-  background-color: green; }
+  .results-pane .result-block {
+    margin-top: 70px;
+    width: 100%;
+    height: 140px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ccc; }
+    .results-pane .result-block .result-name {
+      font-size: 36px;
+      margin-left: 30px;
+      margin-top: 10px;
+      display: inline-block;
+      line-height: 48px;
+      width: auto;
+      color: #333;
+      font-weight: bold;
+      letter-spacing: 1px; }
+    .results-pane .result-block .result-image {
+      margin-left: -10px;
+      margin-top: -30px;
+      width: 180px;
+      height: 180px;
+      border-radius: 10px;
+      background-color: gray;
+      background-size: cover;
+      background-position: center;
+      float: left;
+      border: 3px solid #333; }
+    .results-pane .result-block .result-checkin {
+      float: right;
+      margin-top: 20px;
+      margin-right: 20px;
+      width: 175px;
+      height: 75px;
+      background-color: #3050FF;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 2px;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      padding-top: 26px;
+      box-shadow: 3px 3px 0px 0px #001fc9;
+      transition: .1s; }
+    .results-pane .result-block .result-checkin:active {
+      -webkit-transform: translateY(3px);
+      -ms-transform: translateY(3px);
+      transform: translateY(3px);
+      -webkit-transform: translateX(3px);
+      -ms-transform: translateX(3px);
+      transform: translateX(3px);
+      box-shadow: 0px 0px 0px 0px; }
+    .results-pane .result-block .result-checkin-green {
+      background-color: #63CC12;
+      box-shadow: 3px 3px 0px 0px #366e0a; }
 
 body.login {
   background-color: #333; }
@@ -230,7 +260,6 @@ body.home {
     margin: auto; }
   body.home .results-wrapper {
     margin: auto;
-    margin-top: 100px;
     width: 100%;
     height: 100%;
     text-align: center;

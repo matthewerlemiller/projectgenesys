@@ -16,7 +16,6 @@
 			</div>
 
 			<a href="member/@{{ Checklog.member.Id }}" ng-repeat="Checklog in Checklogs"><div class="result" >
-				<div class="dot"></div>
 				<div class="pic" back-img="@{{Checklog.member.ImagePath}}"></div>
 				<p class="name">@{{ Checklog.member.NameFirst }} @{{ Checklog.member.NameLast }}</p>
 			</div></a>
