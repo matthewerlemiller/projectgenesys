@@ -112,7 +112,7 @@
 
 			<div class="member-lesson-form">
 
-				<!-- TODO create search feature for leaders to search for themselves when adding a lesson session -->
+				<!-- TODO create search feature for leaders to search for themselves when adding a lesson session --> 
 
 				<form>
 
