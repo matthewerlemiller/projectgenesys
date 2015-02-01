@@ -39,3 +39,10 @@ Route::get('shift', ['as' => 'shift.index', 'before' => 'auth', 'uses' => 'Shift
 
 //Admin
 Route::get('admin', ['as' => 'admin.index', 'before' => 'auth|admin', 'uses' => 'AdminController@index']);
+
+
+//Sessions
+Route::get('session/{memberId}', ['as' => 'session.get', 'uses' => 'SessionController@get']);
+
+//Leader
+Route::post('leader/search', ['as' => 'leader.search', 'uses' => 'LeaderController@search']);

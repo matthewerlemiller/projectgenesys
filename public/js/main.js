@@ -36,6 +36,34 @@ app.factory('Member', function($http) {
 	}
 });
 
+app.factory('Leader', function($http) {
+
+	return  {
+
+		search : function(query) {
+
+			return $http.post('/leader/search', query);
+			
+		},
+
+	}
+
+});
+
+app.factory('Session', function($http) {
+
+	return {
+
+		get : function(userId) {
+
+			return $http.get('/session/' + memberId);
+
+		}
+
+	}
+
+});
+
 app.factory('SharedService', function($rootScope) {
 
 	var sharedService = {};
@@ -159,7 +187,56 @@ app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService
 
 
 
+app.controller('MemberPageController', ['$scope', 'Session', function($scope, Session) {
 
+	$scope.details = true;
+	$scope.lessons = false;
+	$scope.kickout = false;
+
+	$scope.sessions = [];
+
+	$scope.changePage = function(pageName) {
+
+		$scope.details = false;
+		$scope.lessons = false;
+		$scope.kickout = false;
+
+		if (pageName == 'details') {
+
+			$scope.details = true;
+
+		} else if (pageName == 'lessons') {
+
+			$scope.lessons = true;
+
+		} else if (pageName == 'kickout') {
+
+			$scope.kickout = true;
+
+		} else {
+
+			$scope.details = true;
+
+		}
+
+	}
+
+	$scope.getSessions = function(memberId) {
+
+		Session.get(memberId).success(function(response) {
+
+			$scope.sessions = response.data;
+
+		}).error(function(response) {
+
+			console.log(response.message);
+
+		});
+
+	}
+
+
+}]);
 
 
 

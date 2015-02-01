@@ -21,6 +21,7 @@ class CreateSessionsTable extends Migration {
 			$table->foreign('MemberId')->references('Id')->on('members');
 			$table->integer('LessonId')->unsigned();
 			$table->foreign('LessonId')->references('Id')->on('lessons');
+			$table->text('notes')->nullable();
 			$table->timestamps();
 		});
 	}
