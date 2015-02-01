@@ -7,6 +7,11 @@
 		"laravel/framework": "4.2.*",
 		"intervention/image": "2.*"
 	},
+	"require-dev" : {
+
+		"fzaninotto/faker" : "dev-master"
+
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
