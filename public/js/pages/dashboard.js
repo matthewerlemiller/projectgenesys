@@ -86,7 +86,8 @@ var Header = {
 
 	init : function() {
 
-		requestAnimationFrame(Header.stickify);
+		// requestAnimationFrame(Header.stickify);
+		Header.stickify();
 
 	},
 
@@ -96,39 +97,43 @@ var Header = {
 
 	stickify : function() {
 
-		var distance = $(document).scrollTop();
+		$(window).scroll(function() {
 
-		if(distance > 150) {
+			var distance = $(document).scrollTop();
 
-			if(distance > Header.previousDistance && distance > Header.previousDistance + 10) {
+			if(distance > 150) {
 
-				Header.element.addClass('hidden');
+				if(distance > Header.previousDistance && distance > Header.previousDistance + 10) {
 
-			} else if (distance < Header.previousDistance && distance < Header.previousDistance + 10) {
+					Header.element.addClass('hidden');
 
-				Header.element.removeClass('hidden');
+				} else if (distance < Header.previousDistance && distance < Header.previousDistance + 10) {
+
+					Header.element.removeClass('hidden');
+
+				}
+
+				Header.previousDistance = distance;
+
+			} else if(distance > 0) {
+
+				if(distance > Header.previousDistance) {
+
+					Header.element.addClass('hidden');
+
+				} else if (distance < Header.previousDistance) {
+
+					Header.element.removeClass('hidden');
+
+				}
+
+				Header.previousDistance = distance;
 
 			}
 
-			Header.previousDistance = distance;
+			// requestAnimationFrame(Header.stickify);
 
-		} else if(distance > 0) {
-
-			if(distance > Header.previousDistance) {
-
-				Header.element.addClass('hidden');
-
-			} else if (distance < Header.previousDistance) {
-
-				Header.element.removeClass('hidden');
-
-			}
-
-			Header.previousDistance = distance;
-
-		}
-
-		requestAnimationFrame(Header.stickify);
+		});
 
 	}
 
