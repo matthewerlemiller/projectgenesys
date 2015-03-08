@@ -41,15 +41,35 @@ app.factory('Session', function($http) {
 
 	return {
 
-		get : function(userId) {
+		get : function(memberId) {
 
 			return $http.get('/session/' + memberId);
+
+		},
+
+		store : function(data) {
+
+			return $http.post('/session', data);
 
 		}
 
 	}
 
 });
+
+app.factory('Lesson', ['$http', function($http) {
+
+	return {
+
+		get : function() {
+
+			return $http.get('/lesson');
+
+		}
+
+	}
+
+}]);
 
 app.factory('SharedService', function($rootScope) {
 

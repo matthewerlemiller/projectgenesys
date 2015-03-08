@@ -16,8 +16,9 @@ class CreateLessonsTable extends Migration {
 		{
 			$table->increments('Id');
 			$table->string('LessonName');
-			$table->string('LessonRank');
-			$table->string('LessonCoverPhoto');
+			$table->integer('LessonRank')->unsigned();
+			$table->foreign('LessonRank')->references('Id')->on('rank')->onDelete('cascade');
+			$table->string('LessonCoverPhoto')->nullable();
 			$table->timestamps();
 		});
 	}
