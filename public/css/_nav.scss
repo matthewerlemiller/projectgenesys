@@ -10,7 +10,7 @@
 
 // header/nav
 .nav-container {
-	position: relative;
+	position: fixed;
 	padding:15px;
 	width:100%;
 	background-color: $darkgray;
@@ -18,6 +18,8 @@
 	top:0px;
 	z-index: 100;
 	overflow: visible;
+	@include transform(translate(0%, 0));
+	@include transition(all .25s ease);
 
 	.hamburger {
 		float:left;
@@ -46,6 +48,12 @@
 		font-weight:bold;
 		font-size: 1.2em;
 		padding:10px;
+	}
+
+	&.hidden {
+
+		@include transform(translate(0, -100%));
+
 	}
 }
 
