@@ -1,9 +1,11 @@
 <?php
 
 
-class Session extends Eloquent {
+class SessionLog extends Eloquent {
 
 	protected $primaryKey = 'Id';
+
+	protected $table = 'sessions';
 
 	public function leader() {
 

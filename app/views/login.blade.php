@@ -4,7 +4,7 @@
 	
 <div class="login-container">
 
-	<div class="yv-logo"></div>
+	<div class="yv-logo"><img src="{{ asset('img/yv-logo.png') }}"></div>
 	
 	{{ Form::open(['route' => 'login.post']) }}
 

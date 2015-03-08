@@ -14,7 +14,7 @@ class CreateSessionsTable extends Migration {
 	{
 		Schema::create('sessions', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->increments('Id');
 			$table->integer('LeaderId')->unsigned();
 			$table->foreign('LeaderId')->references('Id')->on('leaders');
 			$table->integer('MemberId')->unsigned();

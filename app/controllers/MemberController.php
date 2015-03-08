@@ -105,7 +105,7 @@ class MemberController extends BaseController {
 		$memberLastCheckIn = $member->checklogs()->orderBy('Id', 'desc')->get()->first()["CheckInDateTime"];
 		$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
 
-		return View::make('viewmember')->with(['member' => $member, 'memberCheckedIn' => $memberCheckedIn]);
+		return View::make('member')->with(['member' => $member, 'memberCheckedIn' => $memberCheckedIn]);
 
 	}
 

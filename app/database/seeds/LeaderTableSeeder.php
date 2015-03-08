@@ -18,10 +18,8 @@ class LeaderTableSeeder extends Seeder {
 
 			]);
 
-
 		}
-
+		
 	}
 	
-
 }

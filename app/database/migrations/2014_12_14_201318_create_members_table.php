@@ -40,7 +40,7 @@ class CreateMembersTable extends Migration {
 			$table->boolean('Saved')->nullable();
 			$table->boolean('Skatepark')->nullable();
 			$table->date('BaptizedDate')->nullable();
-			$table->string('status')->nullable();
+			$table->string('Status')->nullable();
 			$table->integer('School')->unsigned()->nullable();
 			$table->foreign('School')->references('Id')->on('schools');
 			$table->string('Gender')->nullable();
@@ -59,6 +59,8 @@ class CreateMembersTable extends Migration {
 			$table->boolean('L_KidsMinistry')->nullable();
 			$table->boolean('L_BusMinistry')->nullable();
 			$table->boolean('L_HigherGround')->nullable();
+			$table->boolean('L_JrStaff')->nullable();
+			$table->timestamp('L_JrStaff_Timestamp')->nullable();
 			$table->boolean('CheckedIn')->nullable();
 			$table->integer('LessonId')->unsigned()->nullable();
 			$table->foreign('LessonId')->references('Id')->on('lessons');

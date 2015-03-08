@@ -43,6 +43,10 @@ Route::get('admin', ['as' => 'admin.index', 'before' => 'auth|admin', 'uses' => 
 
 //Sessions
 Route::get('session/{memberId}', ['as' => 'session.get', 'uses' => 'SessionController@get']);
+Route::post('session', ['as' => 'session.store', 'uses' => 'SessionController@store']);
 
 //Leader
 Route::post('leader/search', ['as' => 'leader.search', 'uses' => 'LeaderController@search']);
+
+//Lesson
+Route::get('lesson', ['as' => 'lesson.get', 'uses' => 'LessonController@get']);

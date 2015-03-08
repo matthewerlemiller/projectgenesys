@@ -88,7 +88,7 @@
 
 
 
-		<div class="member-lessons-controller" ng-show="lessons">
+		<div class="member-lessons-container" ng-show="lessons" ng-controller="LessonLogController" ng-init="memberId = {{ $member->Id }}; getSessions({{ $member->Id }})">
 
 			<table class="member-lessons-table">
 
@@ -99,10 +99,10 @@
 					<th>Notes</th>
 				</tr>
 
-				<tr ng-repeat="session in sessions" ng-init="getSessions({{ $member->Id }})">
-					<td>@{{ session.leader }}</td>
+				<tr ng-repeat="session in sessions" >
+					<td>@{{ session.leader.LeaderFirstName + ' ' + session.leader.LeaderLastName }}</td>
 					<td>@{{ session.date }}</td>
-					<td>@{{ session.lesson }}</td>
+					<td>@{{ session.lesson.LessonName }}</td>
 					<td>@{{ session.notes }}</td>
 				</tr>
 
@@ -112,13 +112,35 @@
 
 			<div class="member-lesson-form">
 
-				<!-- TODO create search feature for leaders to search for themselves when adding a lesson session -->
-
 				<form>
 
+					<p><label for="leader-query">Leaders, search for your name.</label></p>
+					<p><input name="leader-query" ng-model="leaderQuery" ng-keyup="searchLeaders()"></p>
 
+					{{-- leader query results container --}}
+					<div class="leader-search-results">
+						{{-- Loop through results --}}
+						<div class="leader-search-result" ng-repeat="result in leaderQueryResults">
+
+							<p>@{{ result.LeaderFirstName + ' ' + result.LeaderLastName }}</p>
+							<div ng-click="setLeader(result.Id)">Select</div>
+
+						</div>
+
+					</div>
+
+					<p><label for="lesson">Choose Lesson</label></p>
+					<p><select name="lesson" ng-model="lessonId">
+						<option ng-repeat="lesson in lessonsArray" value="@{{lesson.Id}}">@{{ lesson.LessonName }}</option>
+					</select></p>
+
+					<p><label for="notes">Notes</label></p>
+					<p><textarea name="notes" ng-model="sessionNotes"></textarea></p>
+					<div ng-click="saveSession()">Submit</div>
 
 				</form>
+
+
 
 			</div>
 
@@ -127,7 +149,7 @@
 
 		<div class="member-kickout-controller" ng-show="kickout">
 
-			<p>This is the kickout area</p>
+
 
 		</div>
 
