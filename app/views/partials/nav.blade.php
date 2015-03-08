@@ -1,5 +1,13 @@
+<!-- <div class="flyout">
+    <ul class="menu">
+        <li class="nav-item"><a href="" class="nav-link"></a></li>
+        <li class="nav-item"><a href="" class="nav-link"></a></li>
+        <li class="nav-item"><a href="" class="nav-link"></a></li>
+        <li class="nav-item"><a href="" class="nav-link"></a></li>
+        <li class="nav-item"><a href="" class="nav-link"></a></li>
+    </ul>
+</div> -->
 <div class="header-container" ng-controller="SearchController">
-
     <div class="nav-container">
         <a href="{{ route('home') }}"><img class="logo" src="{{ asset('img/yv-logo.png') }}"></a>
 
@@ -36,6 +44,7 @@
 
             </div>
         </div>
+        <div class="rule"></div>
     </div>
 
 </div>

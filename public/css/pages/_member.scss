@@ -1,53 +1,65 @@
-.member-section-navigation {
+.member-page-container {
 
-	float:right;
-	overflow: auto;
+	width:768px;
+	margin:auto;
+	margi
 
-	li {
+	.member-section-navigation {
+
+		float:right;
+		overflow: auto;
+
+		li {
+
+			float:left;
+			background-color: gray;
+			@include box-sizing(border-box);
+			margin-right: 5px;
+			cursor: pointer;
+			color:white;
+
+		}
+
+		.member-section-selected {
+
+			background-color: #bdc3c7;
+			color:black;
+
+		}
+
+	}
+
+	.member-header-info {
 
 		float:left;
-		background-color: gray;
-		@include box-sizing(border-box);
-		padding: 15px;
-		margin-right: 5px;
-		cursor: pointer;
+
+	}
+
+	.member-profile-image {
+
+		width:150px;
+		height:150px;
+		background-size: cover;
+		background-position: center;
+
+	}
+
+	.member-checkedin-status {
+
+		background-color: $green;
 		color:white;
+		@include box-sizing(border-box);
+		padding: 10px;
+		text-align: center;
+		margin-bottom: 20px;
 
 	}
 
-	.member-section-selected {
+	.member-details-container {
 
-		background-color: #bdc3c7;
-		color:black;
-
+		p {
+			line-height:1.5em;
+		}
 	}
-
-}
-
-.member-header-info {
-
-	float:left;
-
-}
-
-
-
-.member-profile-image {
-
-	width:150px;
-	height:150px;
-	background-size: cover;
-	background-position: center;
-
-}
-
-.member-checkedin-status {
-
-	// display: inline-block;
-	background-color: $green;
-	color:white;
-	@include box-sizing(border-box);
-	padding: 10px;
-	text-align: center;
 
 }

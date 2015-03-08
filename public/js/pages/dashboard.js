@@ -1,5 +1,6 @@
 //declaring functions to be used on this page
 
+//sizes the checked in members to be 1/3 of the page with some padding
 function sizeResults() {
 	var $results = $('.result')
 	var wrapperWidth = $('.results-wrapper').width();
@@ -8,6 +9,10 @@ function sizeResults() {
 	$results.height(resultSize);
 }
 
+//handles the clicking of the hamburger menu
+
+
+//function to animate the header out of view when scrolling down and back into view when scrolling up. needs to be replaced.
 function stickyHeader(){
 
 	var $header = $('.nav-container');
@@ -48,7 +53,7 @@ function stickyHeader(){
 	});
 }
 
-//initializing some variables
+//initializing some global variables
 
 var scrollPosition = 0;
 

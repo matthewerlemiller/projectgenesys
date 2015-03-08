@@ -35,7 +35,7 @@
 <script src="{{ asset('js/factories.js') }}"></script>
 <script src="{{ asset('js/controllers.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-<script src="{{ asset('js/pages/home.js') }}"></script>
+<script src="{{ asset('js/pages/dashboard.js') }}"></script>
 
 
 

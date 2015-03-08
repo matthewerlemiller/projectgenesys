@@ -2,7 +2,7 @@
 
 @section ('content')
 
-	<div class="page-container" ng-controller="MemberPageController">
+	<div class="member-page-container" ng-controller="MemberPageController">
 
 		<div class="member-header-container">
 
@@ -10,13 +10,13 @@
 
 				<h1 class="member-profile-name">{{{ $member->NameFirst . ' ' . $member->NameLast }}}</h1>
 				<div class="member-profile-image" style="background-image:url({{$member->ImagePath}})"></div>
-				
+
 				@if ($memberCheckedIn)
 				<div class="member-checkedin-status">
 					Checked In
 				</div>
 				@endif
-			
+
 
 			</div>
 
@@ -34,8 +34,8 @@
 
 		</div>
 
-		
-		
+
+
 		<div class="member-details-container" ng-show="details">
 
 			<p>Gender : {{{ $member->Gender or 'n/a' }}} </p>
@@ -75,7 +75,7 @@
 			<p>High School Small Group Leader : {{{ null != $member->L_HsSmGroup ? 'yes' : 'no' }}} </p>
 			<p>Jr High Group Leader : {{{ null != $member->L_JrGroup ? 'yes' : 'no' }}} </p>
 			<p>HigherGround Leader : {{{ null != $member->L_HigherGround ? 'yes' : 'no' }}} </p>
-			
+
 			<h2>Event Attendance</h2>
 
 			<p>Summer Camp : {{{ null != $member->E_SummerCamp ? 'yes' : 'no' }}} </p>
@@ -112,7 +112,7 @@
 
 			<div class="member-lesson-form">
 
-				<!-- TODO create search feature for leaders to search for themselves when adding a lesson session --> 
+				<!-- TODO create search feature for leaders to search for themselves when adding a lesson session -->
 
 				<form>
 
@@ -134,11 +134,11 @@
 
 
 	</div>
-	
-	
-	
 
-	
+
+
+
+
 
 
 
