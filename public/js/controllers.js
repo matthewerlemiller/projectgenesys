@@ -45,26 +45,30 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 	$scope.checkIn = function(id, index) {
 
-		Member.checkIn(id).success(function(response) {
+		if ($scope.results[index].CheckedIn !== true) {
 
-			console.log(response.message);
+			Member.checkIn(id).success(function(response) {
 
-			$scope.results[index].CheckedIn = true;
+				console.log(response.message);
 
-			setTimeout(function() {
+				$scope.results[index].CheckedIn = true;
 
-				SharedService.broadcastShowCheckedIn();
+				setTimeout(function() {
 
-				$scope.results = [];
-				$scope.query = '';
+					SharedService.broadcastShowCheckedIn();
 
-			}, 1000)
-			
-		}).error(function(response){
+					$scope.results = [];
+					$scope.query = '';
 
-			console.log(response.message);
+				}, 1000)
+				
+			}).error(function(response){
 
-		})
+				console.log(response.message);
+
+			});
+
+		}
 
 	}
 
