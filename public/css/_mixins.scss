@@ -5,7 +5,7 @@
 }
 
 @mixin helvetica {
-	font-family:"helvetica neue",helvetica,Arial,Sans-serif;
+	font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif;
 }
 
 @mixin lato {
@@ -32,6 +32,19 @@
 	padding-top:26px;
 	box-shadow: 3px 3px 0px 0px darken($primary,20);
 	transition:.1s;
+}
+
+@mixin small-button {
+	background-color: $primary;
+	font-size:100%;
+	font-weight:bold;
+	color:white;
+	letter-spacing:.75px;
+	border-radius:5px;
+	cursor:pointer;
+	box-shadow: 3px 3px 0px 0px darken($primary,20);
+	transition:.1s;
+	margin-bottom: 3px;
 }
 
 @mixin button-clicked {

@@ -9,7 +9,8 @@ function sizeResults() {
 	$results.height(resultSize);
 }
 
-(function() {
+// requestanimationframe disabled until we figure out ios stuff
+/*(function() {
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -32,7 +33,7 @@ function sizeResults() {
         window.cancelAnimationFrame = function(id) {
             clearTimeout(id);
         };
-}());
+}());*/
 
 //handles the clicking of the hamburger menu
 
@@ -138,8 +139,8 @@ var Header = {
 	}
 
 }
-
-Header.init();
+// ** header animations disabled until ios solution is found. **
+//Header.init();
 
 //calling functions
 

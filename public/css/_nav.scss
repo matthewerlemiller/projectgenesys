@@ -10,7 +10,10 @@
 
 // header/nav
 .nav-container {
-	position: fixed;
+	// ** Temporarily static until we figure out a solution for iOS **
+	position: static;
+	// position: fixed;
+
 	padding:15px;
 	width:100%;
 	background-color: $darkgray;
@@ -36,6 +39,7 @@
 	}
 
 	.member-search {
+		display:block;
 		float:right;
 		text-align:left;
 		border: none;

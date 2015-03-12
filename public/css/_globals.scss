@@ -1,7 +1,7 @@
 /* TEMP STYLES */
 
 .right,.left {
-	display:none;
+	// display:none;
 }
 
 /* END TEMP STYLES */
@@ -23,6 +23,7 @@ a {
 
 input, select, password{
 	outline: none;
+	webkit-appearance: none;
 }
 
 .left {

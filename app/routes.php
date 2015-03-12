@@ -3,7 +3,7 @@
 // Home Route. Check for login, redirect to dash if true,
 // back to login if false.
 Route::get('/', ['before' => 'auth', 'as' => 'home', function() {
-	
+
 	return Redirect::route('dashboard');
 
 }]);
@@ -18,7 +18,7 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'LoginController@logout']);
 // Dash Route
 Route::get('dashboard', ['before' => 'auth', 'as' =>'dashboard', function() {
 
-	return View::make('dashboard');	
+	return View::make('dashboard');
 
 }]);
 
@@ -33,7 +33,7 @@ Route::get('checkin/{id}', ['as' => 'checkin', 'uses' => 'CheckInController@chec
 Route::get('checkedin', ['as' => 'getCheckedIn', 'uses' => 'CheckInController@getCheckedIn']);
 
 
-//Shift 
+//Shift
 Route::get('shift', ['as' => 'shift.index', 'before' => 'auth', 'uses' => 'ShiftController@index']);
 
 
