@@ -52,9 +52,10 @@ input {
 		height:33px;
 		width:100%;
 		margin-top:2px;
-		padding-left:15px;
+		padding-left:10px;
 		border:none;
 		border-bottom:1px solid $lightgray;
+		border-radius: 0px;
 		@include lato;
 		font-size: .75em;
 		letter-spacing:.5px;

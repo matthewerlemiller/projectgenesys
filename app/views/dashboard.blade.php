@@ -5,6 +5,7 @@
 	<div class="main-wrapper">
 
 	<div class="add-new-button">
+
 		<a href="{{ route('member.create') }}" class="create-new">+</a>
 	</div>
 
