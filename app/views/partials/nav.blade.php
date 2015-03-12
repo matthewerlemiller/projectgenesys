@@ -36,6 +36,15 @@
 
         <div class="main-wrapper">
 
+            <!-- Display this if no results -->
+
+            <div class="no-result-block result-block">
+                <h4 class="no-result-heading">No Results Were Returned</h4>
+                <p class="no-result-message">Please try another search term or add a new member</p>
+            </div>
+
+            <!--  End of no results -->
+
             <div class="result-block" ng-repeat="result in results">
 
                 <a href="/member/@{{ result.Id }}"><div class="result-image" style="background-image:url(@{{ result.ImagePath }})"></div></a>

@@ -20,8 +20,6 @@
 
    	@endif
 
-   	<div class="spacer"></div>
-
 
 @yield('content')
 

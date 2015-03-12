@@ -39,6 +39,17 @@
 	}
 
 	.member-search {
+
+	.main-wrapper {
+		width:768px;
+		margin:auto;
+	}
+
+	.top-spacer {
+		width:100%;
+		height:20px;
+	}
+
 		display:block;
 		float:right;
 		text-align:left;
@@ -49,8 +60,8 @@
 		@include round3px;
 		@include lato;
 		color: $darkgray;
-		font-weight:bold;
-		font-size: 1.2em;
+		letter-spacing:1px;
+		font-size: 1.25em;
 		padding:10px;
 	}
 
