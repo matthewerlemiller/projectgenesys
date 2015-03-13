@@ -9,6 +9,11 @@ function sizeResults() {
 	$results.height(resultSize);
 }
 
+function hideKeyboard() {
+    document.activeElement.blur();
+    $("input").blur();
+};
+
 // requestanimationframe disabled until we figure out ios stuff
 /*(function() {
     var lastTime = 0;

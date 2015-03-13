@@ -23,7 +23,8 @@
 
 @yield('content')
 
-
+<!-- End of site wrap opened in nav.blade.php -->
+</div>
 
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/vendor/angular-file-upload-html5-shim.min.js') }}"></script>

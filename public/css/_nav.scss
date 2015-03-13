@@ -1,11 +1,81 @@
-//flyout
 
-.flyout {
-	position:absolute;
-	width: 800px;
+
+.offscreen-nav {
+
+	position: absolute;
+	text-align:left;
+	width:100%;
 	height:100%;
-	color:blue;
-	z-index:100;
+	background-color: $medgray;
+	overflow: auto;
+	top:0;
+	@include box-sizing(border-box);
+	padding:10px;
+
+	.links-container {
+		width:175px;
+		padding:25px;
+		text-align:center;
+		padding-top: 8px;
+	}
+
+	a {
+
+		color:white;
+		display:block;
+		font-size: 1.75em;
+		font-weight:300;
+		margin-bottom:45px;
+	}
+
+}
+
+// button uses hidden checkbox
+
+.nav-trigger {
+	position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+//style the clickable label instead of the label itself
+label[for="nav-trigger"] {
+
+	position: absolute;
+	width:40px;
+	height:40px;
+  top: 15px;
+  left: 70px;
+  z-index: 2;
+
+	.hamburger {
+		float:left;
+		width:40px;
+		height:40px;
+		cursor: pointer;
+
+		.patty {
+			height:6px;
+			margin-bottom:9px;
+			border-radius: 2px;
+			background:white;
+		}
+	}
+
+}
+
+// trigger functionality
+.nav-trigger:checked + label {
+    left: 270px;
+}
+
+// move site content to the right
+.nav-trigger:checked ~ .site-wrap {
+    left: 200px;
+    box-shadow: 0 0 15px 10px rgba(0,0,0,0.5);
+}
+
+.nav-trigger + label, .site-wrap {
+    transition: left 0.2s;
 }
 
 // header/nav
@@ -23,20 +93,6 @@
 	overflow: visible;
 	@include transform(translate(0%, 0));
 	@include transition(all .25s ease);
-
-	.hamburger {
-		float:left;
-		width:40px;
-		height:40px;
-		cursor: pointer;
-
-		.patty {
-			height:6px;
-			margin-bottom:9px;
-			border-radius: 2px;
-			background:white;
-		}
-	}
 
 	.member-search {
 
