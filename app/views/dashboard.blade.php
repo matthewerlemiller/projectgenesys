@@ -13,7 +13,7 @@
 
 		<div class="results-wrapper" ng-controller="DisplayCheckedInMembers">
 
-		<h1 class="title">Current Checked In Members</h1>
+		<h1 class="title">Checked In Members</h1>
 		<div class="title-rule"></div>
 
 			<a href="member/@{{ Checklog.member.Id }}" ng-repeat="Checklog in Checklogs"><div class="result" >
