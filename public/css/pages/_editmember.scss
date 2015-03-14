@@ -2,6 +2,10 @@ input {
 	-webkit-appearance:none;
 }
 
+.break {
+	height:0px;
+}
+
 .back-to {
 
 	float:right;
@@ -12,18 +16,17 @@ input {
 	margin-right: 10px;
 	cursor: pointer;
 	color:white;
-	// margin-right:40px
+	margin-right:28px;
+	margin-top:-13px;
 
+}
+
+.back-to:active {
+	@include button-clicked;
 }
 
 .title-wrap {
 	text-align:center;
-}
-
-.title {
-	font-size:2em;
-	margin-bottom: 25px;
-	color:$darkgray;
 }
 
 .light-rule {
@@ -32,6 +35,7 @@ input {
 	position:relative;
 	top:0px;
 	border-bottom: 1.5px solid white;
+	margin-bottom: 25px;
 }
 
 .dark-rule {
@@ -49,6 +53,19 @@ input {
 	padding-left: 40px;
 	padding-right: 40px;
 	padding-top: 30px;
+	margin:auto;
+
+	.title {
+		font-size:2em;
+		margin-bottom: 40px;
+		color:white;
+	}
+
+	.subsection-title {
+		font-size: 1.75em;
+		color: white;
+		margin-bottom: 20px;
+	}
 
 	.member-name {
 
@@ -121,30 +138,40 @@ input {
 
 		}
 
-		input[type="checkbox"] {
-			background-color: blue;
+	}
+
+	p.check-box {
+
+		label {
+			display: inline;
+		}
+
+		input {
+			width:50px;
+			height:50px;
+			display: inline;
 		}
 
 	}
 
 	input[type="submit"] {
-			position:fixed;
-			bottom: 25px;
-			right: 25px;
-			border-radius: 100%;
-			border:none;
-			box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
-			-webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
-			background-color: $primary;
-			width: 75px;
-			height: 75px;
-			@include lato;
-			text-rendering:geometricPrecision;
-			letter-spacing:1px;
-			font-size: 2em;
-			color:white;
-			z-index: 10;
-			cursor:pointer;
-		}
+		position:fixed;
+		bottom: 25px;
+		right: 50px;
+		border-radius: 100%;
+		border:none;
+		box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
+		-webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
+		background-color: $primary;
+		width: 75px;
+		height: 75px;
+		@include lato;
+		text-rendering:geometricPrecision;
+		letter-spacing:1px;
+		font-size: 2em;
+		color:white;
+		z-index: 10;
+		cursor:pointer;
+	}
 
 }

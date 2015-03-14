@@ -64,16 +64,23 @@
 		}
 
 	input[type="submit"] {
-		@include lato;
-		text-rendering: geometricPrecision;
-		-webkit-appearance:none;
+		position:fixed;
+		bottom: 25px;
+		right: 50px;
+		border-radius: 100%;
 		border:none;
-		padding: 15px;
-		padding-left: 20px;
-		padding-right: 20px;
-
-		@include small-button;
-		letter-spacing:3px;
+		box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
+		-webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
+		background-color: $primary;
+		width: 75px;
+		height: 75px;
+		@include lato;
+		text-rendering:geometricPrecision;
+		letter-spacing:1px;
+		font-size: 2em;
+		color:white;
+		z-index: 10;
+		cursor:pointer;
 	}
 
 }
