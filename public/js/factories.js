@@ -27,11 +27,17 @@ app.factory('Leader', function($http) {
 
 	return  {
 
+		all : function() {
+
+			return $http.get('/leader/all');
+
+		},
+
 		search : function(query) {
 
 			return $http.post('/leader/search', query);
 			
-		},
+		}
 
 	}
 

@@ -154,8 +154,9 @@ app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', f
 
 	$scope.sessions = [];
 	$scope.lessonsArray = [];
-	$scope.leaderQueryResults = [];
-	$scope.leaderQuery = '';
+	// $scope.leaderQueryResults = [];
+	// $scope.leaderQuery = '';
+	$scope.leaders = [];
 	$scope.showLeaderResults = false;
 
 	$scope.leaderId = null;
@@ -210,35 +211,49 @@ app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', f
 
 	}
 
-	$scope.searchLeaders = function() {
+	$scope.getLeaders = function() {
 
-		if ($scope.leaderQuery.length >= 2) {
+		Leader.all().success(function(response) {
 
-			var data = { query : $scope.leaderQuery };
+			$scope.leaders = response.data;
 
-			Leader.search(data).success(function(response) {
+		}).error(function(response) {
 
-				if ($scope.leaderQuery.length >= 2) {
+			console.log("there was an error");
 
-					$scope.leaderQueryResults = response.data;
-					$scope.showLeaderResults = true;
-
-
-				}
-				
-			}).error(function() {
-
-				console.log("There was a problem searching for this member");
-
-			});
-
-		} else {
-
-			$scope.clear();
-
-		}
+		});
 
 	}
+
+	// $scope.searchLeaders = function() {
+
+	// 	if ($scope.leaderQuery.length >= 2) {
+
+	// 		var data = { query : $scope.leaderQuery };
+
+	// 		Leader.search(data).success(function(response) {
+
+	// 			if ($scope.leaderQuery.length >= 2) {
+
+	// 				$scope.leaderQueryResults = response.data;
+	// 				$scope.showLeaderResults = true;
+
+
+	// 			}
+				
+	// 		}).error(function() {
+
+	// 			console.log("There was a problem searching for this member");
+
+	// 		});
+
+	// 	} else {
+
+	// 		$scope.clear();
+
+	// 	}
+
+	// }
 
 	$scope.getLessons = function() {
 

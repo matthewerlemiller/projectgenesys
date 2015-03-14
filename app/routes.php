@@ -46,6 +46,7 @@ Route::get('session/{memberId}', ['as' => 'session.get', 'uses' => 'SessionContr
 Route::post('session', ['as' => 'session.store', 'uses' => 'SessionController@store']);
 
 //Leader
+Route::get('leader/all', ['as' => 'leader.all', 'uses' => 'LeaderController@all']);
 Route::post('leader/search', ['as' => 'leader.search', 'uses' => 'LeaderController@search']);
 
 //Lesson
