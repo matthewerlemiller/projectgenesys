@@ -30,7 +30,7 @@
 					<a href="{{ route('home') }}"><img class="logo" src="{{ asset('img/yv-logo.png') }}"></a>
 
 					<form >
-							<input ng-keyup="searchForMember()" ng-model="query" class="member-search" type="search"  placeholder="SEARCH MEMBERS" autofocus ng-model="query">
+							<input id="member-search-input" ng-keyup="searchForMember()" ng-model="query" class="member-search" type="search" placeholder="SEARCH MEMBERS" autofocus ng-model="query" off-click="blurSearch()">
 					</form>
 
 			</div>

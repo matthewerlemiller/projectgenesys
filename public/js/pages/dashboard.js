@@ -14,6 +14,8 @@ function hideKeyboard() {
     $("input").blur();
 };
 
+
+
 // requestanimationframe disabled until we figure out ios stuff
 /*(function() {
     var lastTime = 0;

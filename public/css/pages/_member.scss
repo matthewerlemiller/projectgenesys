@@ -279,6 +279,7 @@
 	.member-lessons-table {
 
 		width: 100%;
+		font-size: .8rem;
 
 		th {
 			height:auto;
@@ -286,6 +287,26 @@
 			color:$darkgray;
 			// background-color: white;
 			padding: 20px;
+		}
+
+		tr {
+
+
+
+			&:nth-child(2n+2) {
+
+				background-color: lighten($lightgray, 10%);
+
+			}
+
+		}
+
+		td {
+
+			@include box-sizing(border-box);
+			padding:10px;
+			text-align: center;
+
 		}
 
 	}

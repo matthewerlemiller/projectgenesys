@@ -72,6 +72,12 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 	}
 
+	$scope.blurSearch = function() {
+
+		// $("#member-search-input").blur();
+
+	}
+
 	$scope.$on('showCheckedIn', function() {
 
 		$scope.showResults = false;
@@ -167,12 +173,11 @@ app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', f
 	$scope.init = function() {
 
 		$scope.getLessons();
+		$scope.getLeaders();
 
 	}
 
 	$scope.getSessions = function(memberId) {
-
-		console.log("hello");
 
 		Session.get(memberId).success(function(response) {
 
@@ -201,7 +206,12 @@ app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', f
 
 		Session.store(data).success(function(response) {
 
-			$scope.sessions.push(response.data);
+			$scope.sessions.unshift(response.data);
+
+			
+			$scope.lessonId = null;
+			$scope.leaderId = null;
+			$scope.sessionNotes = '';
 
 		}).error(function(response) {
 
@@ -225,42 +235,12 @@ app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', f
 
 	}
 
-	// $scope.searchLeaders = function() {
-
-	// 	if ($scope.leaderQuery.length >= 2) {
-
-	// 		var data = { query : $scope.leaderQuery };
-
-	// 		Leader.search(data).success(function(response) {
-
-	// 			if ($scope.leaderQuery.length >= 2) {
-
-	// 				$scope.leaderQueryResults = response.data;
-	// 				$scope.showLeaderResults = true;
-
-
-	// 			}
-				
-	// 		}).error(function() {
-
-	// 			console.log("There was a problem searching for this member");
-
-	// 		});
-
-	// 	} else {
-
-	// 		$scope.clear();
-
-	// 	}
-
-	// }
-
+	
 	$scope.getLessons = function() {
 
 		Lesson.get().success(function(response) {
 
 			$scope.lessonsArray = response.data;
-			console.log("happening");
 
 		}).error(function(response) {
 
@@ -270,11 +250,6 @@ app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', f
 
 	}
 
-	$scope.setLeader = function(id) {
-
-		$scope.leaderId = id;
-
-	}
 
 	$scope.clear = function() {
 
