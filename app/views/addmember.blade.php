@@ -27,7 +27,7 @@
 				<p>{{ Form::text('parent-name-2', '', ['placeholder' => 'John Doe Sr.']) }}</p>
 				<label for="parent-contact">Parent Contact Phone</label>
 				<p>{{ Form::text('parent-contact', '', ['placeholder' => '000.000.0000']) }}</p>
-				{{ Form::submit('SAVE')}}
+				{{ Form::submit('√')}}
 			{{ Form::close() }}
 		</div>
 	</div>

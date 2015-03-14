@@ -40,6 +40,11 @@
 
 		}
 
+		li:active {
+			@include button-clicked
+
+		}
+
 		.member-section-selected {
 
 			background-color: $green;

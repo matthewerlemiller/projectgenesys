@@ -154,7 +154,6 @@ body.home {
 
 		.result-checkin:active {
 			@include button-clicked;
-			box-shadow: 0px 0px 0px 0px;
 		}
 
 		.result-checkin-green {
