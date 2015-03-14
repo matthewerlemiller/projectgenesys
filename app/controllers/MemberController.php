@@ -50,7 +50,12 @@ class MemberController extends BaseController {
 		// Collect the data from the form.
 		$mFirstName = Input::get('firstname');
 		$mLastName = Input::get('lastname');
-		$mImage = Input::file('image-upload');
+
+		if (Input::hasFile('image-upload')) {
+			$mImage = Input::file('image-upload');	
+		} else {
+			$mImage = false;
+		}
 		$mPhone = Input::get('phone');
 		$mEmail = Input::get('email');
 		$mAddress = Input::get('address');
@@ -66,17 +71,27 @@ class MemberController extends BaseController {
 		// Concatonate City onto Address input
 		// $mAddress = $mAddress . " " . $mCity;
 
-		$imageName = $mImage->getClientOriginalName();
-		$imageName = preg_replace('/\s+/', '', $imageName);
-		$imageName = mt_rand(1,999999999) . $imageName;
-		$uploadPath = public_path() . '/img/uploads/' . $imageName;
-		Image::make($mImage)->resize('800',null, function($constraint){ $constraint->aspectRatio();})->save($uploadPath);
-		$imagePath = asset('/img/uploads/' . $imageName);
+		$imageName = null;
+
+		if ($mImage) {
+
+			$imageName = $mImage->getClientOriginalName();
+			$imageName = preg_replace('/\s+/', '', $imageName);
+			$imageName = mt_rand(1,999999999) . $imageName;
+			$uploadPath = public_path() . '/img/uploads/' . $imageName;
+			Image::make($mImage)->resize('800',null, function($constraint){ $constraint->aspectRatio();})->save($uploadPath);
+			$imagePath = asset('/img/uploads/' . $imageName);
+		}
+
+		
+		
 		// Assign the data and save to model.
 		$member = new Member;
 		$member->NameFirst = $mFirstName;
 		$member->NameLast = $mLastName;
-		$member->ImagePath = $imagePath;
+		if ($imageName !== null) {
+			$member->ImagePath = $imagePath;	
+		}
 		$member->NumberPhone = $mPhone;
 		$member->AddressHome = $mAddress;
 		$member->AddressEmail = $mEmail;
@@ -194,28 +209,7 @@ class MemberController extends BaseController {
 
 			// Parse and Process Image Upload if applicable
 			if($mImage) {
-
-				// $valid_exts = array('jpeg', 'jpg', 'png', 'gif');
-				// $max_size = 2000 * 1024;
-				// $path = public_path() . '/img/uploads/';
-				// $ext = $mImage->guessClientExtension();
-				// $size = $mImage->getClientSize();
-				// $name = $mImage->getClientOriginalName();
-
-				// $imagePath = 'img/uploads/' . $name;
-
-				// if (in_array($ext, $valid_exts) AND $size < $max_size) {
-				//     // move uploaded file from temp to uploads directory
-				//     if ($mImage->move($path,$name)) {
-				//         $status = 'Image successfully uploaded!';
-				//     } else {
-				//         $status = 'Upload Fail: Unknown error occurred!';
-				//     }
-
-				// } else {
-				//     $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
-				// }
-
+				
 				$imageName = $mImage->getClientOriginalName();
 				$imageName = preg_replace('/\s+/', '', $imageName);
 				$imageName = mt_rand(1,999999999) . $imageName;
