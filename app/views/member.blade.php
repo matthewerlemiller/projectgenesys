@@ -146,37 +146,68 @@
 		</div>
 
 		<div class="member-lessons-container" ng-show="lessons" ng-controller="LessonLogController">
+			<div class="table-container">
+				<table class="member-lessons-table">
 
-			<table class="member-lessons-table">
+					<tr>
+						<th>Leader</th>
+						<th>Date</th>
+						<th>Lesson</th>
+						<th>Notes</th>
+					</tr>
 
-				<tr>
-					<th>Leader</th>
-					<th>Date</th>
-					<th>Lesson</th>
-					<th>Notes</th>
-				</tr>
+					<tr ng-repeat="session in sessions" ng-init="getSessions({{ $member->Id }})">
+						<td>@{{ session.leader }}</td>
+						<td>@{{ session.date }}</td>
+						<td>@{{ session.lesson }}</td>
+						<td>@{{ session.notes }}</td>
+					</tr>
 
-				<tr ng-repeat="session in sessions" ng-init="getSessions({{ $member->Id }})">
-					<td>@{{ session.leader }}</td>
-					<td>@{{ session.date }}</td>
-					<td>@{{ session.lesson }}</td>
-					<td>@{{ session.notes }}</td>
-				</tr>
+				</table>
+			</div>
 
-			</table>
+			<div class="add-lesson-container">
 
-			<div>Add Lesson</div>
+				<div class="title-wrap"><h1 class="section-title-white">Add Lesson</h1></div>
 
-			<div class="member-lesson-form">
+				<div class="rule"></div>
 
-				<!-- TODO create search feature for leaders to search for themselves when adding a lesson session -->
-
-				<form>
-
+				<div class="member-lesson-form">
 
 
-				</form>
+						<p><label for="leader-query">Leaders, search for your name.</label></p>
+						<p><input placeholder="Jeremy Miller" name="leader-query" ng-model="leaderQuery" ng-keyup="searchLeaders()"></p>
 
+						{{-- leader query results container --}}
+						<div class="leader-search-results">
+							{{-- Loop through results --}}
+							<div class="leader-search-result" ng-repeat="result in leaderQueryResults">
+
+								<p>@{{ result.LeaderFirstName + ' ' + result.LeaderLastName }}</p>
+								<div ng-click="setLeader(result.Id)">Select</div>
+
+							</div>
+
+						</div>
+
+						<p><label for="lesson">Choose Lesson</label></p>
+						<p><select name="lesson" ng-model="lessonId">
+							<option ng-repeat="lesson in lessonsArray" value="@{{lesson.Id}}">@{{ lesson.LessonName }}</option>
+						</select></p>
+
+						<p><label value="Type lesson notes here." for="notes">Notes</label></p>
+						<p><textarea name="notes" ng-model="sessionNotes"></textarea></p>
+						<div class="submit" ng-click="saveSession()">Submit</div>
+
+					<!-- TODO create search feature for leaders to search for themselves when adding a lesson session -->
+
+					<form>
+
+
+
+					</form>
+
+				</div>
 			</div>
 
 		</div>
