@@ -175,7 +175,7 @@
 				<div class="member-lesson-form">
 
 
-						<p><label for="leader-query">Leaders, search for your name.</label></p>
+						<p><label for="leader-query">Leaders, select your name.</label></p>
 					
 						<p>	<select ng-options="leader.Id as leader.LeaderFirstName + ' ' + leader.LeaderLastName for leader in leaders" ng-model="leaderId"></select> </p>
 
