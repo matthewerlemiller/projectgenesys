@@ -5,7 +5,7 @@ class Leader extends Eloquent {
 
 	protected $primaryKey = 'Id';
 
-	protected $fillable = array('LeaderFirstName', 'LeaderLastName', 'Email');
+	protected $fillable = array('LeaderFirstName', 'LeaderLastName', 'Email', 'LocationId');
 
 	public function sessions() {
 

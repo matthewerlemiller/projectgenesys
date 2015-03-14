@@ -20,11 +20,11 @@ class LeaderTableSeeder extends Seeder {
 
 		// }
 
-		Leader::create(['LeaderFirstName' => 'Jeremy', 'LeaderLastName' => 'Miller', 'Email' => 'random@gmail.com']);
-		Leader::create(['LeaderFirstName' => 'David', 'LeaderLastName' => 'Matranga', 'Email' => 'random@gmail.com']);
-		Leader::create(['LeaderFirstName' => 'Josh', 'LeaderLastName' => 'Simmons', 'Email' => 'random@gmail.com']);
-		Leader::create(['LeaderFirstName' => 'Mark', 'LeaderLastName' => 'Hoffman', 'Email' => 'random@gmail.com']);
-		Leader::create(['LeaderFirstName' => 'John', 'LeaderLastName' => 'Doe', 'Email' => 'random@gmail.com']);
+		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'Jeremy', 'LeaderLastName' => 'Miller', 'Email' => 'random@gmail.com']);
+		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'David', 'LeaderLastName' => 'Matranga', 'Email' => 'random@gmail.com']);
+		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'Josh', 'LeaderLastName' => 'Simmons', 'Email' => 'random@gmail.com']);
+		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'Mark', 'LeaderLastName' => 'Hoffman', 'Email' => 'random@gmail.com']);
+		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'John', 'LeaderLastName' => 'Doe', 'Email' => 'random@gmail.com']);
 		
 	}
 	
