@@ -143,6 +143,8 @@ app.controller('MemberPageController', ['$scope', function($scope) {
 
 		}
 
+		console.log("page changed");
+
 	}
 
 }]);

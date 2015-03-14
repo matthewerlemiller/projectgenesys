@@ -42,7 +42,7 @@
 
 		<div class="member-details-container" ng-show="details">
 
-		<div class="rule"></div>
+			<div class="rule"></div>
 
 			<h2 class="section-title">Basic Info</h2>
 
@@ -139,13 +139,13 @@
 					<p class="boolean-data">Future Quest : {{{ null != $member->E_FutureQuest ? 'yes' : 'no' }}} </p>
 					<div class="spacer"></div>
 
-				<div/>
+				</div>
 
-			<div/>
+			</div>
 
 		</div>
 
-		<div class="member-lessons-controller" ng-show="lessons">
+		<div class="member-lessons-container" ng-show="lessons" ng-controller="LessonLogController">
 
 			<table class="member-lessons-table">
 
@@ -182,7 +182,7 @@
 		</div>
 
 
-		<div class="member-kickout-controller" ng-show="kickout">
+		<div class="member-kickout-container" ng-show="kickout">
 
 			<p>This is the kickout area</p>
 
