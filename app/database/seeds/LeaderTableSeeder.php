@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class LeaderTableSeeder extends Seeder {
 
 	public function run() {
@@ -20,11 +22,11 @@ class LeaderTableSeeder extends Seeder {
 
 		// }
 
-		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'Jeremy', 'LeaderLastName' => 'Miller', 'Email' => 'random@gmail.com']);
-		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'David', 'LeaderLastName' => 'Matranga', 'Email' => 'random@gmail.com']);
-		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'Josh', 'LeaderLastName' => 'Simmons', 'Email' => 'random@gmail.com']);
-		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'Mark', 'LeaderLastName' => 'Hoffman', 'Email' => 'random@gmail.com']);
-		Leader::create(['LocationId' => 1, 'LeaderFirstName' => 'John', 'LeaderLastName' => 'Doe', 'Email' => 'random@gmail.com']);
+		Leader::create(['StartDate' => Carbon::now(), 'LocationId' => 1, 'LeaderFirstName' => 'Jeremy', 'LeaderLastName' => 'Miller', 'Email' => 'random@gmail.com']);
+		Leader::create(['StartDate' => Carbon::now(), 'LocationId' => 1, 'LeaderFirstName' => 'David', 'LeaderLastName' => 'Matranga', 'Email' => 'random@gmail.com']);
+		Leader::create(['StartDate' => Carbon::now(), 'LocationId' => 1, 'LeaderFirstName' => 'Josh', 'LeaderLastName' => 'Simmons', 'Email' => 'random@gmail.com']);
+		Leader::create(['StartDate' => Carbon::now(), 'LocationId' => 1, 'LeaderFirstName' => 'Mark', 'LeaderLastName' => 'Hoffman', 'Email' => 'random@gmail.com']);
+		Leader::create(['StartDate' => Carbon::now(), 'LocationId' => 1, 'LeaderFirstName' => 'John', 'LeaderLastName' => 'Doe', 'Email' => 'random@gmail.com']);
 		
 	}
 	
