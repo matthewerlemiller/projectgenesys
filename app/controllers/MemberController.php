@@ -67,6 +67,8 @@ class MemberController extends BaseController {
 		// $mAddress = $mAddress . " " . $mCity;
 
 		$imageName = $mImage->getClientOriginalName();
+		$imageName = preg_replace('/\s+/', '', $imageName);
+		$imageName = mt_rand(1,999999999) . $imageName;
 		$uploadPath = public_path() . '/img/uploads/' . $imageName;
 		Image::make($mImage)->resize('800',null, function($constraint){ $constraint->aspectRatio();})->save($uploadPath);
 		$imagePath = asset('/img/uploads/' . $imageName);
@@ -193,26 +195,33 @@ class MemberController extends BaseController {
 			// Parse and Process Image Upload if applicable
 			if($mImage) {
 
-				$valid_exts = array('jpeg', 'jpg', 'png', 'gif');
-				$max_size = 2000 * 1024;
-				$path = public_path() . '/img/uploads/';
-				$ext = $mImage->guessClientExtension();
-				$size = $mImage->getClientSize();
-				$name = $mImage->getClientOriginalName();
+				// $valid_exts = array('jpeg', 'jpg', 'png', 'gif');
+				// $max_size = 2000 * 1024;
+				// $path = public_path() . '/img/uploads/';
+				// $ext = $mImage->guessClientExtension();
+				// $size = $mImage->getClientSize();
+				// $name = $mImage->getClientOriginalName();
 
-				$imagePath = 'img/uploads/' . $name;
+				// $imagePath = 'img/uploads/' . $name;
 
-				if (in_array($ext, $valid_exts) AND $size < $max_size) {
-				    // move uploaded file from temp to uploads directory
-				    if ($mImage->move($path,$name)) {
-				        $status = 'Image successfully uploaded!';
-				    } else {
-				        $status = 'Upload Fail: Unknown error occurred!';
-				    }
+				// if (in_array($ext, $valid_exts) AND $size < $max_size) {
+				//     // move uploaded file from temp to uploads directory
+				//     if ($mImage->move($path,$name)) {
+				//         $status = 'Image successfully uploaded!';
+				//     } else {
+				//         $status = 'Upload Fail: Unknown error occurred!';
+				//     }
 
-				} else {
-				    $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
-				}
+				// } else {
+				//     $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
+				// }
+
+				$imageName = $mImage->getClientOriginalName();
+				$imageName = preg_replace('/\s+/', '', $imageName);
+				$imageName = mt_rand(1,999999999) . $imageName;
+				$uploadPath = public_path() . '/img/uploads/' . $imageName;
+				Image::make($mImage)->resize('800',null, function($constraint){ $constraint->aspectRatio();})->save($uploadPath);
+				$imagePath = asset('/img/uploads/' . $imageName);
 
 			}
 					
