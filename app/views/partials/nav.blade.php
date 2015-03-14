@@ -41,7 +41,7 @@
 
 							<!-- Display this if no results -->
 
-							<div class="no-result-block result-block">
+							<div class="no-result-block result-block" ng-if="!results.length">
 									<h4 class="no-result-heading">No Results Were Returned</h4>
 									<p class="no-result-message">Please try another search term or add a new member</p>
 							</div>
