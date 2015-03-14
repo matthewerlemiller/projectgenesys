@@ -1,0 +1,150 @@
+input {
+	-webkit-appearance:none;
+}
+
+.back-to {
+
+	float:right;
+	padding: 10px;
+	letter-spacing: .75px;
+	background-color:$primary;
+	@include small-button;
+	margin-right: 10px;
+	cursor: pointer;
+	color:white;
+	// margin-right:40px
+
+}
+
+.title-wrap {
+	text-align:center;
+}
+
+.title {
+	font-size:2em;
+	margin-bottom: 25px;
+	color:$darkgray;
+}
+
+.light-rule {
+	width: 80%;
+	left:10%;
+	position:relative;
+	top:0px;
+	border-bottom: 1.5px solid white;
+}
+
+.dark-rule {
+	width: 80%;
+	left:10%;
+	position:relative;
+	top:-15px;
+	border-bottom: 1.5px solid $darkgray;
+	margin-bottom:20px;
+}
+
+.edit-member-wrap {
+
+	width: 786px;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 30px;
+
+	.member-name {
+
+		font-size: 2.5em;
+		font-weight: 300;
+		padding:0px;
+		margin:0px;
+		margin-top:-15.5px;
+		margin-bottom:20px;
+
+	}
+
+	.profile-image {
+
+		float: left;
+		clear: left;
+		width:200px;
+		height:200px;
+		background-size: cover;
+		background-position: center;
+		margin-bottom: 10px;
+		border-radius: 10px;
+		border: 3px solid $darkgray;
+
+	}
+
+	.rank-container {
+		float: right;
+		margin-right:24px;
+		margin-top:.5px;
+ 		width: 450px;
+ 		height:200px;
+	}
+
+	.color-wrap {
+		background-color: $darkgray;
+		border-radius: 10px;
+		overflow:auto;
+		padding: 40px;
+
+		text-align:center;
+		margin-top: 40px;
+	}
+
+	label {
+		color:white;
+		display:block;
+		font-size:1.125em;
+		letter-spacing:1px;
+		margin-bottom:5px;
+
+	}
+
+	p {
+		margin: 40px;
+		margin-top: 10px;
+		display:block;
+
+		input {
+
+			border:none;
+			height: 40px;
+			width: 400px;
+			font-size:1.25em;
+			padding:10px;
+			@include lato;
+			@include round3px;
+			color:$darkgray;
+			margin:0px;
+
+		}
+
+		input[type="checkbox"] {
+			background-color: blue;
+		}
+
+	}
+
+	input[type="submit"] {
+			position:fixed;
+			bottom: 25px;
+			right: 25px;
+			border-radius: 100%;
+			border:none;
+			box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
+			-webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
+			background-color: $primary;
+			width: 75px;
+			height: 75px;
+			@include lato;
+			text-rendering:geometricPrecision;
+			letter-spacing:1px;
+			font-size: 2em;
+			color:white;
+			z-index: 10;
+			cursor:pointer;
+		}
+
+}

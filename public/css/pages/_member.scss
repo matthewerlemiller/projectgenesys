@@ -6,10 +6,13 @@
 	margin:auto;
 
 	.member-header-container {
+
 		margin-top: 15px;
+
 	}
 
 	.member-profile-name {
+
 		float: left;
 		font-size: 2.5em;
 		font-weight: 300;
@@ -18,6 +21,7 @@
 	}
 
 	.member-section-navigation {
+
 		margin-top: 3px;
 		float:right;
 		overflow: auto;
@@ -46,6 +50,7 @@
 	}
 
 	.member-profile-image {
+
 		float: left;
 		clear: left;
 		position: relative;
@@ -54,8 +59,8 @@
 		height:200px;
 		background-size: cover;
 		background-position: center;
-		// margin-top: 70px;
 		margin-bottom: 10px;
+		border: 3px solid $darkgray;
 
 		.member-checkedin-status {
 
@@ -86,7 +91,6 @@
 		margin-right:6px;
  		width: 450px;
  		height:200px;
- 		background-color: $primary;
 	}
 
 	.member-details-container {
@@ -157,6 +161,12 @@
 			color: $medgray
 		}
 
+	}
+
+	.member-lessons-table {
+		background-color: blue;
+		width: 100%;
+		height:100%;
 	}
 
 }
