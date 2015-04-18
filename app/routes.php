@@ -26,7 +26,7 @@ Route::get('dashboard', ['before' => 'auth', 'as' =>'dashboard', function() {
 //Member Route.
 Route::resource('member', 'MemberController');
 Route::post('member/search', ['as' => 'member.search', 'uses' => 'MemberController@searchMembers']);
-
+Route::post('member/image', ['as' => 'member.image', 'uses' => 'MemberController@uploadImage']);
 
 //Checkin
 Route::get('checkin/{id}', ['as' => 'checkin', 'uses' => 'CheckInController@checkIn']);
@@ -51,3 +51,6 @@ Route::post('leader/search', ['as' => 'leader.search', 'uses' => 'LeaderControll
 
 //Lesson
 Route::get('lesson', ['as' => 'lesson.get', 'uses' => 'LessonController@get']);
+
+
+

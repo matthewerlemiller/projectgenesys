@@ -1,8 +1,18 @@
 <?php
 
 use Carbon\Carbon;
+use Austen\Repositories\ImageRepository;
 
 class MemberController extends BaseController {
+
+	protected $image;
+
+	public function __construct(ImageRepository $image) {
+
+		$this->image = $image;
+
+	}
+
 
 	/**
 	 * Display a listing of the resource.
@@ -51,8 +61,8 @@ class MemberController extends BaseController {
 		$mFirstName = Input::get('firstname');
 		$mLastName = Input::get('lastname');
 
-		if (Input::hasFile('image-upload')) {
-			$mImage = Input::file('image-upload');	
+		if (Input::has('imagePath')) {
+			$mImage = Input::get('imagePath');	
 		} else {
 			$mImage = false;
 		}
@@ -68,29 +78,12 @@ class MemberController extends BaseController {
 		$mPhone = preg_replace('/\D+/', '', $mPhone);
 		$mParentContact = preg_replace('/\D+/', '', $mParentContact);
 
-		// Concatonate City onto Address input
-		// $mAddress = $mAddress . " " . $mCity;
-
-		$imageName = null;
-
-		if ($mImage) {
-
-			$imageName = $mImage->getClientOriginalName();
-			$imageName = preg_replace('/\s+/', '', $imageName);
-			$imageName = mt_rand(1,999999999) . $imageName;
-			$uploadPath = public_path() . '/img/uploads/' . $imageName;
-			Image::make($mImage)->resize('800',null, function($constraint){ $constraint->aspectRatio();})->save($uploadPath);
-			$imagePath = asset('/img/uploads/' . $imageName);
-		}
-
-		
-		
 		// Assign the data and save to model.
 		$member = new Member;
 		$member->NameFirst = $mFirstName;
 		$member->NameLast = $mLastName;
-		if ($imageName !== null) {
-			$member->ImagePath = $imagePath;	
+		if ($mImage) {
+			$member->ImagePath = $mImage;	
 		}
 		$member->NumberPhone = $mPhone;
 		$member->AddressHome = $mAddress;
@@ -321,6 +314,24 @@ class MemberController extends BaseController {
 		
 		return Response::json(['data' => $results], 200);
 		
+	}
+
+
+
+	public function uploadImage() {
+
+		$file = Input::file('file');
+
+		$upload = $this->image->upload($file, 'img/uploads/', false);
+
+		if ($upload === false) {
+
+			return Response::json(['message' => 'There was an error uploading the image'], 404);
+
+		}
+
+		return Response::json(['data' => $upload['imagePath']], 200);
+
 	}
 
 }

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Genesys - Home</title>
-		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <title>Project Genesys | YV Centers</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{{ asset('js/vendor/angular.js') }}"></script>
@@ -31,6 +32,8 @@
 <script src="{{ asset('js/vendor/angular-file-upload.min.js') }}"></script>
 <script src="{{ asset('bower_components/angular-touch/angular-touch.js') }}"></script>
 <script src="{{ asset('bower_components/angular-off-click/offClick.js') }}"></script>
+<script src="{{ asset('bower_components/ng-file-upload/angular-file-upload-shim.js') }}"></script>
+<script src="{{ asset('bower_components/ng-file-upload/angular-file-upload-all.js') }}"></script>
 <script src="{{ asset('js/config.js') }}"></script>
 <script src="{{ asset('js/directives.js') }}"></script>
 <script src="{{ asset('js/factories.js') }}"></script>

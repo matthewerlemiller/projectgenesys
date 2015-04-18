@@ -1,1 +1,1 @@
-var app = angular.module('genesys', ['angularFileUpload', 'ngTouch', 'offClick']);
+var app = angular.module('genesys', ['angularFileUpload', 'ngTouch', 'offClick', 'angularFileUpload']);

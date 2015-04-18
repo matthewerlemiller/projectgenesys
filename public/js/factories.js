@@ -90,3 +90,24 @@ app.factory('SharedService', function($rootScope) {
 	return sharedService;
 
 });
+
+
+app.factory('Image', ['$http', '$upload', function($http, $upload) {
+
+	return {
+
+		upload : function(file) {
+
+			return $upload.upload({
+
+				url : '/member/image',
+				file : file
+
+			});
+
+		}
+
+	}
+
+}]);
+
