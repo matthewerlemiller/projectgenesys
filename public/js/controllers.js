@@ -117,13 +117,15 @@ app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService
 
 
 
-app.controller('MemberPageController', ['$scope', function($scope) {
+app.controller('MemberPageController', ['$scope', 'Member', function($scope, Member) {
 
 	$scope.details = true;
 	$scope.lessons = false;
 	$scope.kickout = false;
 
-	
+	$scope.member = {};
+
+	$scope.loaded = false;
 
 	$scope.changePage = function(pageName) {
 
@@ -149,9 +151,26 @@ app.controller('MemberPageController', ['$scope', function($scope) {
 
 		}
 
-		console.log("page changed");
+	}
+
+	$scope.fetchData = function() {
+
+		if (MEMBER_ID === null) return false;
+
+		Member.get(MEMBER_ID).success(function(response) {
+
+			$scope.member = response.data;
+			$scope.loaded = true;
+
+		}).error(function(response) {
+
+			
+			
+		});
 
 	}
+
+	$scope.fetchData();
 
 }]);
 

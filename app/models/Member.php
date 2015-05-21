@@ -22,9 +22,10 @@ class Member extends Eloquent {
 
 	public function sessions() {
 
-		return $this->hasMany('Session', 'MemberId', 'Id');
+		return $this->hasMany('SessionLog', 'MemberId', 'Id');
 
 	}
+
 
 }
 

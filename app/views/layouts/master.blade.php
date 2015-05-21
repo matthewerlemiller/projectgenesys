@@ -7,6 +7,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{{ asset('js/vendor/angular.js') }}"></script>
+    <script>
+
+    	var CONFIG = {};
+    	var MEMBER_ID = null;
+
+    	@if(isset($member))
+    	MEMBER_ID = {{ $member->Id }}
+    	@endif
+
+    </script>
 </head>
 
 @if(Route::currentRouteName() == 'login.get')

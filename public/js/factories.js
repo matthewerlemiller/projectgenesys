@@ -19,6 +19,12 @@ app.factory('Member', function($http) {
 
 			return $http.get('/checkedin');
 
+		},
+
+		get : function(memberId) {
+
+			return $http.get('/member/get/' + memberId);
+
 		}
 	}
 });

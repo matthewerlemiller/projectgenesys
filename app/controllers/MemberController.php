@@ -2,14 +2,18 @@
 
 use Carbon\Carbon;
 use Austen\Repositories\ImageRepository;
+use Austen\Repositories\MemberRepository;
 
 class MemberController extends BaseController {
 
 	protected $image;
 
-	public function __construct(ImageRepository $image) {
+	protected $member;
+
+	public function __construct(ImageRepository $image, MemberRepository $member) {
 
 		$this->image = $image;
+		$this->member = $member;
 
 	}
 
@@ -331,6 +335,41 @@ class MemberController extends BaseController {
 		}
 
 		return Response::json(['data' => $upload['imagePath']], 200);
+
+	}
+
+
+	/**
+	 * API Endpoint. Fetches all relevant data for displaying
+	 * member page and for associated behaviors and actions.
+	 *
+	 */
+	public function get($memberId) {
+
+		try {
+			
+			$member = Member::findOrFail($memberId);
+			$member->load('sessions.lesson.rank');
+
+			$rank = $this->member->rank($member);
+
+			if ($rank === false) {
+
+				$rank = Rank::where('Name', '=', 'New')->first();
+
+			}
+
+			$member->rank = $rank;
+
+		} catch (Exception $e) {
+			
+			Log::error($e);
+
+			return Response::json(['message' => 'Sorry, there was an error'], 404);
+
+		}
+
+		return Response::json(['data' => $member], 200);
 
 	}
 

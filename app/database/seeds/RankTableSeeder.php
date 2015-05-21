@@ -5,10 +5,10 @@ class RankTableSeeder extends Seeder {
 
 	public function run() {
 
-		Rank::create(['Rank' => 'Member']);
-		Rank::create(['Rank' => 'JV']);
-		Rank::create(['Rank' => 'Varsity']);
-		Rank::create(['Rank' => 'Advanced']);
+		Rank::create(['Name' => 'New', 'Abbreviation' => 'N']);
+		Rank::create(['Name' => 'JV', 'Abbreviation' => 'JV']);
+		Rank::create(['Name' => 'Varsity', 'Abbreviation' => 'V']);
+		Rank::create(['Name' => 'Advanced', 'Abbreviation' => 'A']);
 
 	}
 
