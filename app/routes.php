@@ -55,4 +55,6 @@ Route::post('leader/search', ['as' => 'leader.search', 'uses' => 'LeaderControll
 Route::get('lesson', ['as' => 'lesson.get', 'uses' => 'LessonController@get']);
 
 
+//Shifts
+Route::get('shift', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
 

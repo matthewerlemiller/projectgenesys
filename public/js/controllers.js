@@ -117,15 +117,25 @@ app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService
 
 
 
-app.controller('MemberPageController', ['$scope', 'Member', function($scope, Member) {
+app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', function($scope, Member, Session, Lesson, Leader, Shift) {
 
 	$scope.details = true;
 	$scope.lessons = false;
 	$scope.kickout = false;
 
 	$scope.member = {};
-
 	$scope.loaded = false;
+
+	$scope.sessions = [];
+	$scope.lessonsArray = [];
+	$scope.leaders = [];
+	$scope.shifts = [];
+	$scope.showLeaderResults = false;
+
+	$scope.leaderId = null;
+	$scope.memberId = null;
+	$scope.lessonId = null;
+	$scope.sessionNotes = null;
 
 	$scope.changePage = function(pageName) {
 
@@ -170,29 +180,11 @@ app.controller('MemberPageController', ['$scope', 'Member', function($scope, Mem
 
 	}
 
-	$scope.fetchData();
-
-}]);
-
-
-app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', function($scope, Session, Lesson, Leader) {
-
-	$scope.sessions = [];
-	$scope.lessonsArray = [];
-	// $scope.leaderQueryResults = [];
-	// $scope.leaderQuery = '';
-	$scope.leaders = [];
-	$scope.showLeaderResults = false;
-
-	$scope.leaderId = null;
-	$scope.memberId = null;
-	$scope.lessonId = null;
-	$scope.sessionNotes = null;
-
 	$scope.init = function() {
 
 		$scope.getLessons();
 		$scope.getLeaders();
+		getShifts();
 
 	}
 
@@ -269,6 +261,20 @@ app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', f
 
 	}
 
+	function getShifts() {
+
+		Shift.get().success(function(response) {
+
+			$scope.shifts = response.data;
+
+		}).error(function(response) {
+
+			console.log(response.message);
+
+		});
+
+	}
+
 
 	$scope.clear = function() {
 
@@ -279,7 +285,116 @@ app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', f
 
 	$scope.init();
 
+	$scope.fetchData();
+
 }]);
+
+
+// app.controller('LessonLogController', ['$scope', 'Session','Lesson', 'Leader', function($scope, Session, Lesson, Leader) {
+
+// 	$scope.sessions = [];
+// 	$scope.lessonsArray = [];
+// 	// $scope.leaderQueryResults = [];
+// 	// $scope.leaderQuery = '';
+// 	$scope.leaders = [];
+// 	$scope.showLeaderResults = false;
+
+// 	$scope.leaderId = null;
+// 	$scope.memberId = null;
+// 	$scope.lessonId = null;
+// 	$scope.sessionNotes = null;
+
+// 	$scope.init = function() {
+
+// 		$scope.getLessons();
+// 		$scope.getLeaders();
+
+// 	}
+
+// 	$scope.getSessions = function(memberId) {
+
+// 		Session.get(memberId).success(function(response) {
+
+// 			$scope.sessions = response.data;
+
+// 			console.log(response.data);
+
+// 		}).error(function(response) {
+
+// 			console.log(response.message);
+
+// 		});
+
+// 	}
+
+// 	$scope.saveSession = function() {
+
+// 		var data = {
+
+// 			memberId : $scope.memberId,
+// 			lessonId : $scope.lessonId,
+// 			leaderId : $scope.leaderId,
+// 			notes : $scope.sessionNotes
+
+// 		}
+
+// 		Session.store(data).success(function(response) {
+
+// 			$scope.sessions.unshift(response.data);
+
+			
+// 			$scope.lessonId = null;
+// 			$scope.leaderId = null;
+// 			$scope.sessionNotes = '';
+
+// 		}).error(function(response) {
+
+// 			console.log("Something went wrong");
+
+// 		});
+
+// 	}
+
+// 	$scope.getLeaders = function() {
+
+// 		Leader.all().success(function(response) {
+
+// 			$scope.leaders = response.data;
+
+// 		}).error(function(response) {
+
+// 			console.log("there was an error");
+
+// 		});
+
+// 	}
+
+	
+// 	$scope.getLessons = function() {
+
+// 		Lesson.get().success(function(response) {
+
+// 			$scope.lessonsArray = response.data;
+
+// 		}).error(function(response) {
+
+// 			console.log("There was en error getting the lessons");
+
+// 		});
+
+// 	}
+
+
+// 	$scope.clear = function() {
+
+// 		$scope.showResults = false;
+// 		$scope.leaderQueryResults = [];
+
+// 	}
+
+// 	$scope.init();
+
+// }]);
 
 
 

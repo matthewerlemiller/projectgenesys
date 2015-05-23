@@ -69,6 +69,20 @@ app.factory('Session', function($http) {
 
 });
 
+app.factory('Shift', ['$http', function($http) {
+
+	return {
+
+		get : function() {
+
+			return $http.get('/shift');
+
+		}
+
+	}
+
+}]);
+
 app.factory('Lesson', ['$http', function($http) {
 
 	return {

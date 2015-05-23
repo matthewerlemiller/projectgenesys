@@ -10,7 +10,8 @@
 	},
 	"require-dev" : {
 
-		"fzaninotto/faker" : "dev-master"
+		"fzaninotto/faker" : "dev-master",
+		"way/generators": "~2.0"
 
 	},
 	"autoload": {

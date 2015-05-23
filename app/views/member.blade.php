@@ -152,7 +152,7 @@
 
 		</div>
 
-		<div class="member-lessons-container" ng-show="lessons" ng-controller="LessonLogController" ng-init="memberId = {{ $member->Id }}; getSessions({{ $member->Id }})">
+		<div class="member-lessons-container" ng-show="lessons" ng-init="memberId = {{ $member->Id }}; getSessions({{ $member->Id }})">
 			<div class="table-container">
 				<table class="member-lessons-table">
 
@@ -164,7 +164,7 @@
 					</tr>
 
 					<tr ng-repeat="session in sessions">
-						<td>@{{ session.leader.LeaderFirstName + ' ' + session.leader.LeaderLastName}}</td>
+						<td>@{{ session.leader.LeaderFirstName + ' ' + session.leader.LeaderLastName }}</td>
 						<td>@{{ session.date }}</td>
 						<td>@{{ session.lesson.LessonName }}</td>
 						<td>@{{ session.notes }}</td>
@@ -196,10 +196,7 @@
 						<p><textarea name="notes" ng-model="sessionNotes"></textarea></p>
 						<div class="submit" ng-click="saveSession()">Submit</div>
 
-					<!-- TODO create search feature for leaders to search for themselves when adding a lesson session -->
-
 					<form>
-
 
 
 					</form>
@@ -212,7 +209,20 @@
 
 		<div class="member-kickout-container" ng-show="kickout">
 
-			<p>This is the kickout area</p>
+			<div class="member-kickout-form">
+
+				<label for="kickout-form-shift">Shift</label>
+				<select name="kickout-form-shift" id="kickout-form-shift" ng-options="shift.Id as shift.Day + ' ' + shift.Time for shift in shifts" ng-model="kickoutForm.shiftId"></select>				
+
+				<label>Leader</label>
+				<select name="kickout-form-leader" id="kickout-form-leader" ng-options="leader.Id as leader.LeaderFirstName + ' ' + leader.LeaderLastName for leader in leaders" ng-model="kickoutForm.leaderId"></select>
+
+				<label for="kickout-form-comments">Comments</label>
+				<textarea name="kickout-form-comments" id="kickout-form-comments" ng-model="kickoutForm.comments"></textarea>
+
+				<div class="button">Submit</div>
+
+			</div>
 
 		</div>
 

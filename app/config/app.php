@@ -121,7 +121,8 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Intervention\Image\ImageServiceProvider'
+		'Intervention\Image\ImageServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider'
 
 	),
 
