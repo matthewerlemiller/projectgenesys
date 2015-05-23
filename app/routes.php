@@ -56,5 +56,5 @@ Route::get('lesson', ['as' => 'lesson.get', 'uses' => 'LessonController@get']);
 
 
 //Shifts
-Route::get('shift', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
+Route::get('shift/get', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
 

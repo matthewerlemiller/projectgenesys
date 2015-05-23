@@ -75,7 +75,7 @@ app.factory('Shift', ['$http', function($http) {
 
 		get : function() {
 
-			return $http.get('/shift');
+			return $http.get('/shift/get');
 
 		}
 
