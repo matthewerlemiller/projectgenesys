@@ -24,10 +24,10 @@
 
 				<ul class="member-section-navigation">
 
-					<li ng-click="changePage('details')" ng-class="{'member-section-selected' : details}">Details</li>
-					<li ng-click="changePage('lessons')" ng-class="{'member-section-selected' : lessons}">Lessons</li>
-					<li ng-click="changePage('kickout')" ng-class="{'member-section-selected' : kickout}">Kickout</li>
-					<a href="{{ route('member.edit', $member->Id) }}"><li>Edit</li></a>
+					<li ng-click="changePage('details')" ng-class="{'member-section-selected' : details}"><i class="fa fa-list"></i>Details</li>
+					<li ng-click="changePage('lessons')" ng-class="{'member-section-selected' : lessons}"><i class="fa fa-star"></i>Lessons</li>
+					<li ng-click="changePage('kickout')" ng-class="{'member-section-selected' : kickout}"><i class="fa fa-thumbs-down"></i>Kickout</li>
+					<li><i class="fa fa-pencil"></i>Edit</li>
 				</ul>
 
 				<div class="clear"></div>
