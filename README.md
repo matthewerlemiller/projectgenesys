@@ -1,8 +1,8 @@
 Project Genesys
 ==============
 
-Local environemtn database credentials - 
+Local environment database credentials - 
 
-Database : genesys
-Username : homestead
-Password : secret
+* Database : genesys
+* Username : homestead
+* Password : secret
