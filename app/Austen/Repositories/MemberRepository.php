@@ -8,11 +8,7 @@ class MemberRepository {
 
 		$sorter = [];
 
-		// Log::info($member);
-
 		foreach($member->sessions as $i => $session) {
-
-			Log::info($session->lesson->rank);
 
 			if ($i < 1) {
 
