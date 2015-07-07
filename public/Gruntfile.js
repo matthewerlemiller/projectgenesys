@@ -7,8 +7,20 @@ module.exports = function(grunt) {
         concat: {
             dist : {
                 src : [
+                    'js/jquery.js',
+                    'js/vendor/angular-file-upload-html5-shim.min.js',
+                    'js/vendor/angular-file-upload.min.js',
+                    'bower_components/angular-touch/angular-touch.js',
+                    'bower_components/angular-off-click/offClick.js',
+                    'bower_components/ng-file-upload/angular-file-upload-shim.js',
+                    'bower_components/ng-file-upload/angular-file-upload-all.js',
+                    'js/config.js',
+                    'js/directives.js',
+                    'js/factories.js',
+                    'js/controllers/*.js',
+                    'js/main.js',
+                    'js/pages/dashboard.js',
                     'js/plugins.js',
-                    'js/main.js'
                 ],
                 dest: 'js/production/app.js'
             }

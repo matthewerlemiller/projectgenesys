@@ -25,12 +25,8 @@ class MemberController extends BaseController {
 	 */
 	public function index() {
 		
-		if (!Auth::check()) { return Redirect::to('login');  }
-
-		// Gather Member information from database
-		$members = Member::all();
-
-		// Send data to view.
+		$members = $this->member->all();
+		
 		return View::make('listmembers')->withMembers($members);
 
 	}
@@ -43,14 +39,8 @@ class MemberController extends BaseController {
 	 */
 	public function create() {
 
-		if(Auth::check()) {
+		return View::make('addmember');	
 
-			return View::make('addmember');	
-
-		} else {
-
-			return Redirect::to('login');
-		}
 	}
 
 
@@ -61,46 +51,14 @@ class MemberController extends BaseController {
 	 */
 	public function store() {
 
-		// Collect the data from the form.
-		$mFirstName = Input::get('firstname');
-		$mLastName = Input::get('lastname');
-
-		if (Input::has('imagePath')) {
-			$mImage = Input::get('imagePath');	
-		} else {
-			$mImage = false;
-		}
-		$mPhone = Input::get('phone');
-		$mEmail = Input::get('email');
-		$mAddress = Input::get('address');
-		// $mCity = Input::get('city');
-		$mFirstParentName = Input::get('parent-name-1');
-		$mSecondParentName = Input::get('parent-name-2');
-		$mParentContact = Input::get('parent-contact');
-
-		// Parse Phone numbers to remove dashes and parenthesis.
-		$mPhone = preg_replace('/\D+/', '', $mPhone);
-		$mParentContact = preg_replace('/\D+/', '', $mParentContact);
-
-		// Assign the data and save to model.
-		$member = new Member;
-		$member->NameFirst = $mFirstName;
-		$member->NameLast = $mLastName;
-		if ($mImage) {
-			$member->ImagePath = $mImage;	
-		}
-		$member->NumberPhone = $mPhone;
-		$member->AddressHome = $mAddress;
-		$member->AddressEmail = $mEmail;
-		$member->Parent1NameFirst = $mFirstParentName;
-		$member->Parent2NameFirst = $mSecondParentName;
-		$member->Parent1Phone1 = $mParentContact;
-		$member->save();
-
 		// TODO : implement functionality to allow an optional automatic check 
 		// in of member after creation. 
 
-		return Redirect::route('dashboard');
+		$member = $this->member->store(Input::all());
+
+		if ($member === false) return Response::json(['message' => 'Sorry, there was an error.'], 404);
+
+		return Response::json(['data' => $member], 200);
 
 	}
 
@@ -113,13 +71,11 @@ class MemberController extends BaseController {
 	 */
 	public function show($id) {
 
-		if (!Auth::check()) { return Redirect::to('login');  }
+		$member = $this->member->find($id);
 
-		$member = Member::find($id);
-		$memberLastCheckIn = $member->checklogs()->orderBy('Id', 'desc')->get()->first()["CheckInDateTime"];
-		$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
+		if ($member === false) return Redirect::route('dashboard');
 
-		return View::make('member')->with(['member' => $member, 'memberCheckedIn' => $memberCheckedIn]);
+		return View::make('member')->with($member);
 
 	}
 
@@ -280,7 +236,12 @@ class MemberController extends BaseController {
 	 */
 	public function destroy($id) {
 
-		// TODO : create ability to delete members.
+		$deletion = $this->member->delete($id);
+
+		if ($deletion === false) return Response::json(['message' => 'Sorry, there was a problem.'], 404);
+
+		return Response::json(['message' => 'Member deleted from database'], 200);
+
 	}
 
 
@@ -339,35 +300,12 @@ class MemberController extends BaseController {
 	}
 
 
-	/**
-	 * API Endpoint. Fetches all relevant data for displaying
-	 * member page and for associated behaviors and actions.
-	 *
-	 */
+	
 	public function get($memberId) {
 
-		try {
-			
-			$member = Member::findOrFail($memberId);
-			$member->load('sessions.lesson.rank');
+		$member = $this->member->get($memberId);
 
-			$rank = $this->member->rank($member);
-
-			if ($rank === false) {
-
-				$rank = Rank::where('Name', '=', 'New')->first();
-
-			}
-
-			$member->rank = $rank;
-
-		} catch (Exception $e) {
-			
-			Log::error($e);
-
-			return Response::json(['message' => 'Sorry, there was an error'], 404);
-
-		}
+		if ($member === false) return Response::json(['message' => 'Sorry, there was an error'], 404);
 
 		return Response::json(['data' => $member], 200);
 

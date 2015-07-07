@@ -37,19 +37,7 @@
 <!-- End of site wrap opened in nav.blade.php -->
 </div>
 
-<script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('js/vendor/angular-file-upload-html5-shim.min.js') }}"></script>
-<script src="{{ asset('js/vendor/angular-file-upload.min.js') }}"></script>
-<script src="{{ asset('bower_components/angular-touch/angular-touch.js') }}"></script>
-<script src="{{ asset('bower_components/angular-off-click/offClick.js') }}"></script>
-<script src="{{ asset('bower_components/ng-file-upload/angular-file-upload-shim.js') }}"></script>
-<script src="{{ asset('bower_components/ng-file-upload/angular-file-upload-all.js') }}"></script>
-<script src="{{ asset('js/config.js') }}"></script>
-<script src="{{ asset('js/directives.js') }}"></script>
-<script src="{{ asset('js/factories.js') }}"></script>
-<script src="{{ asset('js/controllers.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
-<script src="{{ asset('js/pages/dashboard.js') }}"></script>
+<script src="{{ asset('js/production/app.js') }}"></script>
 
 
 

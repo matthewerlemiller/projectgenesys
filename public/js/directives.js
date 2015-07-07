@@ -46,13 +46,6 @@ app.directive('rankTube', ['Member', function(Member) {
 
 		link : function($scope, element, attrs) {
 
-			// $scope.abbreviation = $scope.member.rank.abbreviation;
-
-			function parseRank() {
-
-
-
-			}
 
 		}
 

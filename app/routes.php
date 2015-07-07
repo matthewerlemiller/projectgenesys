@@ -24,7 +24,7 @@ Route::get('dashboard', ['before' => 'auth', 'as' =>'dashboard', function() {
 
 
 //Member Route.
-Route::resource('member', 'MemberController');
+Route::resource('member', 'MemberController', ['before' => 'auth']);
 Route::post('member/search', ['as' => 'member.search', 'uses' => 'MemberController@searchMembers']);
 Route::post('member/image', ['as' => 'member.image', 'uses' => 'MemberController@uploadImage']);
 // Route::get('member/rank/{memberId}', ['as' => 'member.rank', 'uses' => 'MemberController@getRank']);
