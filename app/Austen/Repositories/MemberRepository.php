@@ -4,6 +4,8 @@ use Log;
 use Member;
 use Rank;
 use Carbon\Carbon;
+use Status;
+use BadBehaviorEvent;
 
 class MemberRepository {
 
@@ -166,6 +168,7 @@ class MemberRepository {
 
 	} 
 
+
 	public function destroy($id) 
 	{
 
@@ -186,6 +189,73 @@ class MemberRepository {
 
 	}
 
+
+	public function status($id) 
+	{
+
+		try {
+				
+			$member = Member::where('Id', '=', $id)->with('badBehaviorEvents.status')->get();
+
+			$member = $member[0];
+			
+			$badBehaviorEvents = $member->badBehaviorEvents;
+
+			if (count($badBehaviorEvents)) {
+
+				foreach($badBehaviorEvents as $event) {
+
+					if ($event->status->Name === 'Suspended') {
+
+						return $event->status;
+
+					}
+
+				}
+
+				return $badBehaviorEvents[0]->status;
+				
+			}
+
+			$goodStatus = Status::where('Name', '=', 'Good')->first();
+
+			return $goodStatus;
+
+		} catch (Exception $e) {
+			
+			Log::error($e);
+
+			return false;
+
+		}
+
+	}
+
+
+	public function kickout($id) 
+	{
+
+		try {
+			
+			$kickoutStatus = Status::where('Name', '=', 'Kicked Out')->first();
+
+			$badBehaviorEvent = new BadBehaviorEvent;
+			$badBehaviorEvent->statusId = $kickoutStatus->Id;
+			$badBehaviorEvent->memberId = $id;
+			$badBehaviorEvent->save();
+
+
+		} catch (Exception $e) {
+		
+			Log::error($e);
+
+			return false;
+
+		}
+
+		return true;
+
+	}
 
 
 }

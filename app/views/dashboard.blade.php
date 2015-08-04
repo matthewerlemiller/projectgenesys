@@ -16,10 +16,13 @@
 		<h1 class="title">Checked In Members</h1>
 		<div class="title-rule"></div>
 
-			<a href="member/@{{ Checklog.member.Id }}" ng-repeat="Checklog in Checklogs"><div class="result" >
-				<div class="pic" back-img="@{{Checklog.member.ImagePath}}"></div>
-				<p class="name">@{{ Checklog.member.NameFirst }} @{{ Checklog.member.NameLast }}</p>
-			</div></a>
+			<a href="member/@{{ Checklog.member.Id }}" ng-repeat="Checklog in Checklogs">
+				
+				<div class="result">
+					<div class="pic" back-img="@{{Checklog.member.ImagePath}}"></div>
+					<p class="name">@{{ Checklog.member.NameFirst }} @{{ Checklog.member.NameLast }}</p>
+				</div>
+			</a>
 
 		</div>
 	</div>

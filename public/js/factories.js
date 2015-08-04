@@ -25,7 +25,14 @@ app.factory('Member', function($http) {
 
 			return $http.get('/member/get/' + memberId);
 
+		},
+
+		getStatus : function(memberId) {
+
+			return $http.get('/member/status/' + memberId);
+
 		}
+
 	}
 });
 
@@ -124,6 +131,20 @@ app.factory('Image', ['$http', '$upload', function($http, $upload) {
 				file : file
 
 			});
+
+		}
+
+	}
+
+}]);
+
+app.factory('Kickout', ['$http', function($http) {
+
+	return {
+
+		store : function(data) {
+
+			return $http.post('/member/kickout', data);
 
 		}
 

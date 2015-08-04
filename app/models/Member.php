@@ -1,7 +1,6 @@
 <?php
 
 
-
 class Member extends Eloquent {
 
 	protected $primaryKey = 'Id';
@@ -26,6 +25,11 @@ class Member extends Eloquent {
 
 	}
 
+	public function badBehaviorEvents() {
+
+		return $this->hasMany('BadBehaviorEvent', 'MemberId', 'Id');
+
+	}
 
 }
 

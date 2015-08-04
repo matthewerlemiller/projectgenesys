@@ -76,32 +76,7 @@ function returnResults(query) {
 }
 
 
-//this could be more effiecient but I'm just not sure how to do it yet. currently it is removing all results from the DOM, then adding the matches. It should just remove results that are no longer matches, and only add new matches.
 
-// $search.on('input', function() {
-
-// 	$('.result').remove();
-// 	var searchQuery = $search.val().trim();
-// 	var results = returnResults($search.val());
-// 	var addedHTML = [];
-
-// 	// console.log(results);
-
-// 	if (results != []) { 
-
-// 		for (var i = 0; i<results.length; i++) {
-// 			var resultHTML = "<a href = '#' class='result'><img class='photo' src='" + results[i].photoURL()	 + "'/></a>";
-// 			addedHTML.push(resultHTML);
-// 			$resultsWrapper.append(resultHTML);
-// 		}
-
-// 	} else {
-
-// 		$('.result').remove();
-
-// 	}
-
-// });
 
 
 

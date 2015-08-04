@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKickoutlogsTable extends Migration {
+class CreateBadBehaviorEventsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,13 @@ class CreateKickoutlogsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('kickoutlogs', function(Blueprint $table)
+		Schema::create('bad_behavior_events', function(Blueprint $table)
 		{
 			$table->increments('Id');
 			$table->integer('MemberId')->unsigned();
-			$table->foreign('MemberId')->references('Id')->on('members')->onDelete('cascade');
+			$table->foreign('MemberId')->references('Id')->on('members');
+			$table->integer('StatusId')->unsigned();
+			$table->foreign('StatusId')->references('Id')->on('statuses');
 			$table->timestamps();
 		});
 	}
@@ -28,7 +30,7 @@ class CreateKickoutlogsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('kickoutlogs');
+		Schema::drop('bad_behavior_events');
 	}
 
 }

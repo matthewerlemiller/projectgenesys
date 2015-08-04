@@ -13,7 +13,7 @@
     	var MEMBER_ID = null;
 
     	@if(isset($member))
-    	MEMBER_ID = {{ $member->Id }}
+    	MEMBER_ID = {{ $member->Id }};
     	@endif
 
     </script>
@@ -24,6 +24,8 @@
 @else
 <body class="home" ng-app="genesys">
 @endif
+    
+    <alerter></alerter>
 
     @if(Auth::check())
 

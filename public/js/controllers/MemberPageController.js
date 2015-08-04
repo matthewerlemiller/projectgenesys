@@ -1,4 +1,4 @@
-app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', function($scope, Member, Session, Lesson, Leader, Shift) {
+app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', function($scope, Member, Session, Lesson, Leader, Shift, Kickout, AlertService) {
 
 	$scope.details = true;
 	$scope.lessons = false;
@@ -161,6 +161,25 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 		$scope.showResults = false;
 		$scope.leaderQueryResults = [];
+
+	}
+
+	$scope.createKickout = function() {
+
+		var data = $scope.kickoutForm;
+		data.memberId = MEMBER_ID;
+
+		console.log(data);
+
+		Kickout.store(data).success(function(response) {
+
+			AlertService.broadcast(response.message, 'success');
+
+		}).error(function(response) {
+
+			AlertService.broadcast(response.message, 'error');
+
+		});
 
 	}
 

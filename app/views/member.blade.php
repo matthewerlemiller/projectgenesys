@@ -16,7 +16,7 @@
 					@endif
 				</div>
 
-				<h1 class="member-profile-name">{{{ $member->NameFirst . ' ' . $member->NameLast }}}<span class="status-tag good">Good</span></h1>
+				<h1 class="member-profile-name">{{{ $member->NameFirst . ' ' . $member->NameLast }}}<status-tag member="member" loaded="loaded"></status-tag></h1>
 				
 				<rank-tube member="member" loaded="loaded"></rank-tube>
 
@@ -210,15 +210,15 @@
 			<div class="member-kickout-form">
 
 				<label for="kickout-form-shift">Shift</label>
-				<select name="kickout-form-shift" id="kickout-form-shift" ng-options="shift.Id as shift.Day + ' ' + shift.Time for shift in shifts" ng-model="kickoutForm.shiftId"></select>				
+				<select name="kickout-form-shift" id="kickout-form-shift" ng-options="shift.Id as shift.Day + ' ' + shift.Time for shift in shifts" ng-model="kickoutForm.shiftId" required></select>				
 
 				<label>Leader</label>
-				<select name="kickout-form-leader" id="kickout-form-leader" ng-options="leader.Id as leader.LeaderFirstName + ' ' + leader.LeaderLastName for leader in leaders" ng-model="kickoutForm.leaderId"></select>
+				<select name="kickout-form-leader" id="kickout-form-leader" ng-options="leader.Id as leader.LeaderFirstName + ' ' + leader.LeaderLastName for leader in leaders" ng-model="kickoutForm.leaderId" required></select>
 
 				<label for="kickout-form-comments">Comments</label>
-				<textarea name="kickout-form-comments" id="kickout-form-comments" ng-model="kickoutForm.comments"></textarea>
+				<textarea name="kickout-form-comments" id="kickout-form-comments" ng-model="kickoutForm.comments" required></textarea>
 
-				<div class="button">Submit</div>
+				<div class="button" ng-click="createKickout()">Submit</div>
 
 			</div>
 

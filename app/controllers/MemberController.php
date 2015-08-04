@@ -311,4 +311,24 @@ class MemberController extends BaseController {
 
 	}
 
+	public function getStatus($memberId) {
+
+		$status = $this->member->status($memberId);
+
+		if ($status === false) return Response::json(['message' => 'Sorry, something went wrong on our end. try again later'], 404);
+
+		return Response::json(['data' => $status], 200);
+		
+	}
+
+	public function kickout() {
+
+		$kickoutEvent = $this->member->kickout(Input::get('memberId'));
+
+		if ($kickoutEvent === false) return Response::json(['message' => 'Sorry, kickout failed because of a server error. Try again later'], 404);
+
+		return Response::json(['message' => 'Member kicked out'], 200);
+
+	}
+
 }

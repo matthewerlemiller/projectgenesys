@@ -87,3 +87,115 @@ input, select, password{
     -webkit-transform: scale(1.0);
   }
 }
+
+.alert-container {
+
+  position: fixed;
+  top:90px;
+  left:50%;
+  @include transform(translate(-50%, 0));
+  width:700px;
+  height:auto;
+  z-index: 19;
+  
+
+  div {
+
+    width:100%;
+    color:white;
+    font-family: $helvetica;
+    font-weight: bold;
+    box-sizing:border-box;
+    padding: 12px 0;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0px 0px 7px rgba(0,0,0,.3);
+    
+  }
+
+  .fa-close {
+
+    color:white;
+    position: absolute;
+    top:3px; 
+    right:5px;
+    cursor: pointer;  
+
+  }
+
+  @include breakpoint(small) {
+
+    width:95%;
+
+  }
+
+}
+
+.success-alert {
+
+  background-color: $green;
+  border:1px solid darken($green, 10%);
+
+}
+
+.error-alert {
+
+  background-color: $red;
+  border:1px solid darken($red, 10%);
+
+}
+
+.info-alert {
+
+  background-color: $light;
+  border:1px solid darken($light, 10%);
+  color:black !important;
+
+}
+
+
+.empty-alert {
+
+  text-align: center;
+
+}
+
+.slide-up {
+
+  
+  &.ng-hide-add, &.ng-hide-remove {
+
+    @include transition(all .25s ease);
+
+  } 
+
+  &.ng-hide-add {
+
+    opacity: 1;
+    @include transform(translate(-50%, 0));
+
+  }
+
+  &.ng-hide-add-active {
+
+    opacity: 0;
+    @include transform(translate(-50%, 10px));
+
+  }
+
+  &.ng-hide-remove {
+
+    opacity: 0;
+    @include transform(translate(-50%, 10px));
+
+  }
+
+  &.ng-hide-remove-active {
+
+    opacity: 1;
+    @include transform(translate(-50%, 0));
+
+  }
+
+
+}

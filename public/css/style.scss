@@ -4,6 +4,7 @@
 @import "_reset.scss";
 @import "_globals.scss";
 @import "_nav.scss";
+@import "_components.scss";
 @import "pages/_login.scss";
 @import "pages/_dashboard.scss";
 @import "pages/_member.scss";
@@ -14,9 +15,7 @@
 
 // Styles for Development Purposes (A.P.)
 .admin-member-container {
-
 	padding: 30px 0;
-
 }
 
 .admin-member-image {

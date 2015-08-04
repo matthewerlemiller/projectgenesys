@@ -19,14 +19,14 @@
 }
 
 @mixin button {
-	width:175px;
-	height:75px;
+	width:150px;
+	height:60px;
 	background-color: $primary;
-	font-size:24px;
-	font-weight:bold;
+	font-size:1.2rem;
+	line-height: .6rem;
 	color:white;
-	letter-spacing:2px;
-	border-radius:5px;
+	letter-spacing:1px;
+	border-radius:4px;
 	text-align:center;
 	cursor:pointer;
 	padding-top:26px;

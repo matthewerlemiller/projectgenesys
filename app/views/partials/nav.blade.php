@@ -51,8 +51,14 @@
 							<div class="result-block" ng-repeat="result in results">
 
 									<a href="/member/@{{ result.Id }}"><div class="result-image" style="background-image:url(@{{ result.ImagePath }})"></div></a>
-									<a href="/member/@{{ result.Id }}"><p class="result-name">@{{ result.NameFirst }}<br/>@{{ result.NameLast }}</p></a>
+									<div class="result-block-content">
+										<a href="/member/@{{ result.Id }}"><p class="result-name">@{{ result.NameFirst }} @{{ result.NameLast }}</p></a>
+										<status-tag member="result" loaded="showResults"></status-tag>	
+									</div>
+									
 									<div class="result-checkin" ng-class="{'result-checkin-green' : result.CheckedIn }" ng-click="checkIn(result.Id, $index)">@{{ result.CheckedIn ? 'Checked In!' : 'Check In' }}</div>
+
+									<div class="clear"></div>
 
 							</div>
 					</div>

@@ -99,98 +99,110 @@ body.home {
 	// Searching section:
 
 	// Results
-.results-pane {
+	.results-pane {
 
-	width:100%;
-	height:auto;
-	z-index: 100;
-	top:100px;
-	text-align: left;
-	margin-bottom: 100px;
-
-	.result-block {
-
-		margin-top:70px;
 		width:100%;
-		height:140px;
-		padding:10px;
-		border-radius:10px;
-		background-color: $lightgray;
+		height:auto;
+		z-index: 100;
+		top:100px;
+		text-align: left;
+		margin-bottom: 100px;
 
-		.result-name {
+		.result-block {
 
-			font-size:36px;
-			margin-left: 30px;
-			margin-top:10px;
-			display:inline-block;
-			line-height:48px;
-			width:auto;
-			color:$darkgray;
-			font-weight:bold;
-			letter-spacing:1px;
+			margin-top:70px;
+			width:100%;
+			height:140px;
+			padding:10px;
+			border-radius:5px;
+			// background-color: $lightgray;
+			border:1px solid $lightgray;
+
+
+			.result-block-content {
+
+				float:left;
+				position: relative;
+				
+			}
+
+			.result-name {
+
+				font-size:1.75rem;
+				margin-left: 20px;
+				// margin-top:10px;
+				display:inline-block;
+				line-height:48px;
+				width:auto;
+				color:$darkgray;
+				font-weight:bold;
+				letter-spacing:1px;
+			}
+
+			status-tag {
+
+				display: block;
+
+			}
+
+			.result-image {
+				width:117px;
+				height:117px;
+				border-radius:5px;
+				background-color: gray;
+				background-size: cover;
+				background-position: center;
+				float:left;
+				border:2px solid $darkgray;
+			}
+
+			.result-checkin {
+
+				float:right;
+				margin-top:20px;
+				margin-right:20px;
+				@include button;
+			}
+
+			.result-checkin:active {
+				@include button-clicked;
+			}
+
+			.result-checkin-green {
+				background-color: $tertiary;
+				box-shadow: 3px 3px 0px 0px darken($tertiary,20);
+
+			}
+
 		}
 
-		.result-image {
-
-			margin-left:-10px;
-			margin-top:-30px;
-			width:180px;
-			height:180px;
-			border-radius:10px;
-			background-color: gray;
-			background-size: cover;
-			background-position: center;
-			float:left;
-			border:3px solid $darkgray;
+		.no-result-block {
+			text-align: center;
+			margin-top: 45px;
 		}
 
-		.result-checkin {
-
-			float:right;
-			margin-top:20px;
-			margin-right:20px;
-			@include button;
+		.no-result-heading {
+			letter-spacing: 1px;
+			color:$secondary;
+			font-weight:700;
+			font-size: 2em;
+			padding-top: 23px;
+			margin-bottom: 15px;
 		}
 
-		.result-checkin:active {
-			@include button-clicked;
+		.no-result-message {
+			color: $darkgray;
+			font-size: 1.25em
 		}
 
-		.result-checkin-green {
-			background-color: $tertiary;
-			box-shadow: 3px 3px 0px 0px darken($tertiary,20);
-
+		.rule {
+			position: relative;
+			top: 53px;
+			left: 10%;
+			border-top: 1px solid $medgray;
+			width: 80%;
 		}
 
 	}
-
-	.no-result-block {
-		text-align: center;
-		margin-top: 45px;
-	}
-
-	.no-result-heading {
-		letter-spacing: 1px;
-		color:$secondary;
-		font-weight:700;
-		font-size: 2em;
-		padding-top: 23px;
-		margin-bottom: 15px;
-	}
-
-	.no-result-message {
-		color: $darkgray;
-		font-size: 1.25em
-	}
-
-	.rule {
-		position: relative;
-		top: 53px;
-		left: 10%;
-		border-top: 1px solid $medgray;
-		width: 80%;
-	}
-
-}
 
 }
