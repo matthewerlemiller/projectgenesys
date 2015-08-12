@@ -2,9 +2,6 @@ body.login {
 	background-color: $darkgray
 }
 
-input {
-	-webkit-appearance:none;
-}
 
 .login-container {
 	@include center;

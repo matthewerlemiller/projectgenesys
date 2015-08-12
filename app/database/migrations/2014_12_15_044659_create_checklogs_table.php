@@ -14,13 +14,13 @@ class CreateChecklogsTable extends Migration {
 	{
 		Schema::create('checklogs', function(Blueprint $table)
 		{
-			$table->increments('Id');
-			$table->integer('MemberId')->unsigned();
-			$table->foreign('MemberId')->references('Id')->on('members');
-			$table->dateTime('CheckInDateTime');
-			$table->dateTime('CheckOutDateTime');
-			$table->integer('LocationId')->unsigned();
-			$table->foreign('LocationId')->references('Id')->on('locations');
+			$table->increments('id');
+			$table->integer('memberId')->unsigned();
+			$table->foreign('memberId')->references('id')->on('members');
+			$table->dateTime('checkInDateTime');
+			$table->dateTime('checkOutDateTime');
+			$table->integer('locationId')->unsigned();
+			$table->foreign('locationId')->references('id')->on('locations');
 			$table->timestamps();
 		});
 	}

@@ -4,14 +4,14 @@ class LessonTableSeeder extends Seeder {
 
 	public function run() {
 
-		Lesson::create(['LessonName' => 'JV1', 'LessonRank' => '2']);
-		Lesson::create(['LessonName' => 'JV2', 'LessonRank' => '2']);
-		Lesson::create(['LessonName' => 'JV3', 'LessonRank' => '2']);
-		Lesson::create(['LessonName' => 'Varsity1', 'LessonRank' => '3']);
-		Lesson::create(['LessonName' => 'Varsity2', 'LessonRank' => '3']);
-		Lesson::create(['LessonName' => 'Varsity3', 'LessonRank' => '3']);
-		Lesson::create(['LessonName' => 'Varsity4', 'LessonRank' => '3']);
-		Lesson::create(['LessonName' => 'Advanced1', 'LessonRank' => '4']);
+		Lesson::create(['name' => 'JV1', 'rankId' => '2']);
+		Lesson::create(['name' => 'JV2', 'rankId' => '2']);
+		Lesson::create(['name' => 'JV3', 'rankId' => '2']);
+		Lesson::create(['name' => 'Varsity1', 'rankId' => '3']);
+		Lesson::create(['name' => 'Varsity2', 'rankId' => '3']);
+		Lesson::create(['name' => 'Varsity3', 'rankId' => '3']);
+		Lesson::create(['name' => 'Varsity4', 'rankId' => '3']);
+		Lesson::create(['name' => 'Advanced1', 'rankId' => '4']);
 
 		
 	}

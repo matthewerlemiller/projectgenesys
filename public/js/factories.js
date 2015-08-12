@@ -31,6 +31,12 @@ app.factory('Member', function($http) {
 
 			return $http.get('/member/status/' + memberId);
 
+		},
+
+		update : function(data) {
+
+			return $http.put('/member/update/', data);
+
 		}
 
 	}
@@ -145,6 +151,20 @@ app.factory('Kickout', ['$http', function($http) {
 		store : function(data) {
 
 			return $http.post('/member/kickout', data);
+
+		}
+
+	}
+
+}]);
+
+app.factory('School', ['$http', function($http) {
+
+	return {
+
+		getAll : function() {
+
+			return $http.get('/school');
 
 		}
 

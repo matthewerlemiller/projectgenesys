@@ -13,7 +13,7 @@ class SessionController extends BaseController {
 
 		try {
 			
-			$sessions = SessionLog::where('MemberId', '=', $memberId)->with('lesson', 'leader')->orderBy('created_at', 'desc')->get();
+			$sessions = SessionLog::where('memberId', '=', $memberId)->with('lesson', 'leader')->orderBy('created_at', 'desc')->get();
 
 		} catch (Exception $e) {
 			
@@ -47,13 +47,13 @@ class SessionController extends BaseController {
 			$memberId = Input::get('memberId');
 			$lessonId = Input::get('lessonId');
 			$leaderId = Input::get('leaderId');
-			$notes = Input::get('notes');
+			$comments = Input::get('notes');
 
 			$session = new SessionLog;
-			$session->MemberId = $memberId;
-			$session->LessonId = $lessonId;
-			$session->LeaderId = $leaderId;
-			$session->notes = $notes;
+			$session->memberId = $memberId;
+			$session->lessonId = $lessonId;
+			$session->leaderId = $leaderId;
+			$session->comments = $comments;
 			$session->save();
 
 		} catch (Exception $e) {
@@ -68,7 +68,7 @@ class SessionController extends BaseController {
 		try {
 			
 			$leader = Leader::findOrFail($leaderId);
-			$leader->LessonCount++;
+			$leader->lessonCount++;
 			$leader->save();
 
 		} catch (Exception $e) {

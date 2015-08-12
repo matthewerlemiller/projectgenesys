@@ -2,8 +2,6 @@
 
 class Shift extends Eloquent {
 
-	protected $primaryKey = 'Id';
-
-	protected $fillable = array('Time', 'Day');
+	protected $fillable = array('time', 'day');
 
 }

@@ -10,13 +10,13 @@ class LoginController extends BaseController {
 
 		} else {
 
-			$locations = Location::orderBy('Id', 'asc')->get();
+			$locations = Location::orderBy('id', 'asc')->get();
 
 			$locationsSelect = [];
 
 			foreach($locations as $location) {
 
-				$locationsSelect[$location->Id] = $location->LocationName;
+				$locationsSelect[$location->id] = $location->name;
 
 			}
 
@@ -31,7 +31,7 @@ class LoginController extends BaseController {
 		$location = Input::get('location');
 		$password = Input::get('password');
 
-		if (Auth::attempt(['Id' => $location, 'password' => $password])) {
+		if (Auth::attempt(['id' => $location, 'password' => $password])) {
 
 			return Redirect::to('dashboard');
 

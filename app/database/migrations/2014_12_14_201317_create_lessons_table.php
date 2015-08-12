@@ -14,11 +14,11 @@ class CreateLessonsTable extends Migration {
 	{
 		Schema::create('lessons', function(Blueprint $table)
 		{
-			$table->increments('Id');
-			$table->string('LessonName');
-			$table->integer('LessonRank')->unsigned();
-			$table->foreign('LessonRank')->references('Id')->on('rank')->onDelete('cascade');
-			$table->string('LessonCoverPhoto')->nullable();
+			$table->increments('id');
+			$table->string('name');
+			$table->integer('rankId')->unsigned();
+			$table->foreign('rankId')->references('id')->on('rank')->onDelete('cascade');
+			$table->string('coverPhoto')->nullable();
 			$table->timestamps();
 		});
 	}

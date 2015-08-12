@@ -3,19 +3,17 @@
 
 class Leader extends Eloquent {
 
-	protected $primaryKey = 'Id';
-
-	protected $fillable = array('LeaderFirstName', 'LeaderLastName', 'Email', 'LocationId');
+	protected $fillable = array('firstName', 'lastName', 'email', 'locationId');
 
 	public function sessions() {
 
-		return $this->hasMany('Session', 'Id', 'sessionId');
+		return $this->hasMany('Session', 'id', 'sessionId');
 
 	}
 
 	public function location() {
 
-		return $this->belongsTo('Location', 'Id', 'locationId');
+		return $this->belongsTo('Location', 'id', 'locationId');
 
 	}
 

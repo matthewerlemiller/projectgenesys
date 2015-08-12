@@ -1,0 +1,53 @@
+.Form {
+
+	input[type="text"], input[type="date"] {
+
+		border:1px solid $mediumGray;
+
+	}
+
+	select {
+
+
+
+	}
+
+	&-field {
+
+		margin-bottom: 15px;
+
+	}
+
+}
+
+.StatusTag {
+
+	border-radius: 3px;
+	font-size: .90rem;
+	box-sizing:border-box;
+	padding:5px 10px;
+	white-space: nowrap;
+
+	&--good {
+
+		border: 1px solid $green;
+		background-color: lighten($green, 47%);
+		color:$green;
+
+	}
+
+	&--bad {
+
+		border: 1px solid $red;
+		background-color: lighten($red, 41%);
+		color:$red;
+
+	}
+
+	&--block {
+
+		display: block;
+
+	}
+
+}

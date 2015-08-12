@@ -14,9 +14,9 @@ class LeaderTableSeeder extends Seeder {
 
 			$leader = Leader::create([
 
-				'LeaderFirstName' => $faker->firstNameMale,
-				'LeaderLastName' => $faker->lastName,
-				'Email' => $faker->email,
+				'firstName' => $faker->firstNameMale,
+				'lastName' => $faker->lastName,
+				'email' => $faker->email,
 
 			]);
 

@@ -24,8 +24,8 @@ class MemberRepository {
 
 		try {
 		
-			$member = Member::find($id);
-			$memberLastCheckIn = $member->checklogs()->orderBy('Id', 'desc')->get()->first()["CheckInDateTime"];
+			$member = Member::findOrFail($id);
+			$memberLastCheckIn = $member->checklogs()->orderBy('id', 'desc')->get()->first()["checkInDateTime"];
 			$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
 
 		} catch (Exception $e) {
@@ -51,13 +51,13 @@ class MemberRepository {
 		try {
 		
 			$member = Member::findOrFail($memberId);
-			$member->load('sessions.lesson.rank');
+			$member->load('sessions.lesson.rank', 'school');
 
 			$rank = $this->rank($member);
 
 			if ($rank === false) {
 
-				$rank = Rank::where('Name', '=', 'New')->first();
+				$rank = Rank::where('name', '=', 'New')->first();
 
 			}
 
@@ -81,38 +81,38 @@ class MemberRepository {
 
 		try {
 			
-			$mFirstName = $input['firstname'];
-			$mLastName = $input['lastname'];
+			$firstName = $input['firstname'];
+			$lastName = $input['lastname'];
 
 			if (isset($input['imagePath'])) {
-				$mImage = $input['imagePath']	;
+				$image = $input['imagePath']	;
 			} else {
-				$mImage = false;
+				$image = false;
 			}
-			$mPhone = $input['phone'];
-			$mEmail = $input['email'];
-			$mAddress = $input['address'];
+			$phone = $input['phone'];
+			$email = $input['email'];
+			$address = $input['address'];
 			
-			$mFirstParentName = $input['parent-name-1'];
-			$mSecondParentName = $input['parent-name-2'];
-			$mParentContact = $input['parent-contact'];
+			$parent1Name = $input['parent-name-1'];
+			$parent2Name = $input['parent-name-2'];
+			$parent1Phone = $input['parent-contact'];
 
 			// Parse Phone numbers to remove dashes and parenthesis.
-			$mPhone = preg_replace('/\D+/', '', $mPhone);
-			$mParentContact = preg_replace('/\D+/', '', $mParentContact);
+			$phone = preg_replace('/\D+/', '', $phone);
+			$parent1Phone = preg_replace('/\D+/', '', $parent1Phone);
 
 			$member = new Member;
-			$member->NameFirst = $mFirstName;
-			$member->NameLast = $mLastName;
-			if ($mImage) {
-				$member->ImagePath = $mImage;	
+			$member->firstName = $firstName;
+			$member->lastName = $lastName;
+			if ($image) {
+				$member->image = $image;	
 			}
-			$member->NumberPhone = $mPhone;
-			$member->AddressHome = $mAddress;
-			$member->AddressEmail = $mEmail;
-			$member->Parent1NameFirst = $mFirstParentName;
-			$member->Parent2NameFirst = $mSecondParentName;
-			$member->Parent1Phone1 = $mParentContact;
+			$member->phone = $phone;
+			$member->address = $address;
+			$member->email = $email;
+			$member->parent1Name = $parent1Name;
+			$member->parent2Name = $parent2Name;
+			$member->parent1Phone = $parent1Phone;
 			$member->save();
 
 		} catch (Exception $e) {
@@ -126,6 +126,61 @@ class MemberRepository {
 		return $member;
 
 	}
+
+	public function update($input) {
+
+		try {
+								
+			$member = Member::findOrFail($input['id']);
+			$member->firstName = $input['firstName'];
+			$member->lastName = $input['lastName'];
+			if (isset($input['gender'])) $member->gender = $input['gender'];
+			if (isset($input['birthDate'])) $member->birthDate = $input['birthDate'];
+			if (isset($input['phone'])) $member->phone = preg_replace('/\D+/', '', $input['phone']);
+			if (isset($input['address'])) $member->address = $input['address'];
+			if (isset($input['email'])) $member->email = $input['email'];
+			if (isset($input['parent1Name'])) $member->parent1Name = $input['parent1Name'];
+			if (isset($input['parent2Name'])) $member->parent2Name = $input['parent2Name'];
+			if (isset($input['parent1Phone'])) $member->parent1Phone = preg_replace('/\D+/', '', $input['parent1Phone']);
+			if (isset($input['parent2Phone'])) $member->parent2Phone = preg_replace('/\D+/', '', $input['parent2Phone']);
+			if (isset($input['emergencyContactName'])) $member->emergencyContactName = $input['emergencyContactName'];
+			if (isset($input['emergencyContactPhone'])) $member->emergencyContactPhone = preg_replace('/\D+/', '', $input['emergencyContactPhone']);;
+			if (isset($input['permissionSlip'])) $member->permissionSlip = $input['permissionSlip'];
+			if (isset($input['baptized'])) $member->baptized = $input['baptized'];
+			if (isset($input['baptizedDate'])) $member->baptizedDate = $input['baptizedDate'];
+			
+			if (isset($input['saved'])) $member->saved = $input['saved'];
+			if (isset($input['skatepark'])) $member->skatepark = $input['skatepark'];
+			if (isset($input['schoolId'])) $member->schoolId = $input['schoolId'];	
+			
+			
+			if (isset($input['attendsHighSchoolGroup'])) $member->attendsHighSchoolGroup = $input['attendsHighSchoolGroup'];
+			if (isset($input['attendsHighSchoolSmallGroup'])) $member->attendsHighSchoolSmallGroup = $input['attendsHighSchoolSmallGroup'];
+			if (isset($input['attendsJrHighGroup'])) $member->attendsJrHighGroup = $input['attendsJrHighGroup'];
+			if (isset($input['attendsHigherGround'])) $member->attendsHigherGround = $input['attendsHigherGround'];
+			if (isset($input['attendsLeadershipCore'])) $member->attendsLeadershipCore = $input['attendsLeadershipCore'];
+			if (isset($input['leadsBusMinistry'])) $member->leadsBusMinistry = $input['leadsBusMinistry'];
+			if (isset($input['leadsWorship'])) $member->leadsWorship = $input['leadsWorship'];
+			if (isset($input['leadsKidsMinistry'])) $member->leadsKidsMinistry = $input['leadsKidsMinistry'];
+			if (isset($input['leadsHighSchoolSmallGroup'])) $member->leadsHighSchoolSmallGroup = $input['leadsHighSchoolSmallGroup'];
+			if (isset($input['attendsSummerCamp'])) $member->attendsSummerCamp = $input['attendsSummerCamp'];
+			if (isset($input['attendsWinterCamp'])) $member->attendsWinterCamp = $input['attendsWinterCamp'];
+			if (isset($input['attendsFutureQuest'])) $member->attendsFutureQuest = $input['attendsFutureQuest'];
+
+			$member->update();
+
+		} catch (Exception $e) {
+			
+			Log::error($e);
+
+			return false;
+
+		}
+
+		return $member;
+
+	}
+
 
 	public function rank($member) 
 	{
@@ -142,7 +197,7 @@ class MemberRepository {
 
 				$offset = $i - 1;
 
-				if ($session->lesson->Id > $sorter[$offset]->Id) {
+				if ($session->lesson->id > $sorter[$offset]->id) {
 
 					$sorter[] = $session->lesson;
 
@@ -190,12 +245,17 @@ class MemberRepository {
 	}
 
 
+	/**
+	 * Returns status object when member Id is passed
+	 *
+	 * @param integer $id
+	 **/
 	public function status($id) 
 	{
 
 		try {
 				
-			$member = Member::where('Id', '=', $id)->with('badBehaviorEvents.status')->get();
+			$member = Member::where('id', '=', $id)->with('badBehaviorEvents.status')->get();
 
 			$member = $member[0];
 			
@@ -205,7 +265,7 @@ class MemberRepository {
 
 				foreach($badBehaviorEvents as $event) {
 
-					if ($event->status->Name === 'Suspended') {
+					if ($event->status->name === 'Suspended') {
 
 						return $event->status;
 
@@ -217,7 +277,7 @@ class MemberRepository {
 				
 			}
 
-			$goodStatus = Status::where('Name', '=', 'Good')->first();
+			$goodStatus = Status::where('name', '=', 'Good')->first();
 
 			return $goodStatus;
 
@@ -231,17 +291,24 @@ class MemberRepository {
 
 	}
 
-
-	public function kickout($id) 
+	/**
+	 * Creates a kick out event for member with $id. Returns
+	 * true if successful, returns false if unsuccessful.
+	 *
+	 * @param integer $id
+	 * @return boolean
+	 **/
+	public function kickout($id, $comments) 
 	{
 
 		try {
 			
-			$kickoutStatus = Status::where('Name', '=', 'Kicked Out')->first();
+			$kickoutStatus = Status::where('name', '=', 'Kicked Out')->first();
 
 			$badBehaviorEvent = new BadBehaviorEvent;
-			$badBehaviorEvent->statusId = $kickoutStatus->Id;
+			$badBehaviorEvent->statusId = $kickoutStatus->id;
 			$badBehaviorEvent->memberId = $id;
+			$badBehaviorEvent->comments = $comments;
 			$badBehaviorEvent->save();
 
 

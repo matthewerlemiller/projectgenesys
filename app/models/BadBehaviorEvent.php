@@ -7,7 +7,7 @@ class BadBehaviorEvent extends Eloquent
 
 	public function status() {
 
-		return $this->hasOne('Status', 'Id', 'StatusId');
+		return $this->hasOne('Status', 'id', 'statusId');
 
 	}
 

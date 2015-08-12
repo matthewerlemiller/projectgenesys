@@ -3,31 +3,27 @@
 
 class Member extends Eloquent {
 
-	protected $primaryKey = 'Id';
-
-	// protected $timestamps = true;
-
 	public function checklogs() {
 
-		return $this->hasMany('Checklog', 'MemberId', 'Id');
+		return $this->hasMany('Checklog', 'memberId', 'id');
 
 	}
 
 	public function school() {
 
-		return $this->hasOne('School','MemberId', 'Id');
+		return $this->hasOne('School', 'id', 'schoolId');
 
 	}
 
 	public function sessions() {
 
-		return $this->hasMany('SessionLog', 'MemberId', 'Id');
+		return $this->hasMany('SessionLog', 'memberId', 'id');
 
 	}
 
 	public function badBehaviorEvents() {
 
-		return $this->hasMany('BadBehaviorEvent', 'MemberId', 'Id');
+		return $this->hasMany('BadBehaviorEvent', 'memberId', 'id');
 
 	}
 

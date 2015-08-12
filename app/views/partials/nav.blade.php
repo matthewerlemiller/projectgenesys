@@ -4,7 +4,7 @@
 		<a href="{{ route('dashboard') }}">Home</a>
 		<a href="{{ route('shift.index') }}">Shift</a>
 		<a class="logout" href="{{ route('logout') }}">Log Out</a>
-		@if(Auth::user()->Admin)
+		@if(Auth::user()->admin)
 		<a href="{{ route('admin.index') }}">Admin</a>
 		@endif
 	</div>
@@ -26,13 +26,18 @@
 <div class="site-wrap">
 
 	<div class="header-container" ng-controller="SearchController">
+
 			<div class="nav-container">
-					<a href="{{ route('home') }}"><img class="logo" src="{{ asset('img/yv-logo.png') }}"></a>
 
-					<form >
-							<input id="member-search-input" ng-keyup="searchForMember()" ng-model="query" class="member-search" type="search" placeholder="SEARCH MEMBERS" autofocus ng-model="query" off-click="blurSearch()">
-					</form>
-
+				<a href="{{ route('home') }}"><img class="logo" src="{{ asset('img/yv-logo.png') }}"></a>
+				
+				<div class="search-field-container">
+					
+					<input id="member-search-input" ng-keyup="searchForMember()" ng-model="query" class="search-field" type="search" autofocus ng-model="query" off-click="blurSearch()">
+					<i class="fa fa-search search-field-icon"></i>
+				</div>
+				
+					
 			</div>
 
 			<div class="results-pane" ng-show="showResults" ng-cloak>
@@ -48,15 +53,15 @@
 
 							<!--  End of no results -->
 
-							<div class="result-block" ng-repeat="result in results">
+							<div class="result-block" ng-repeat="member in results">
 
-									<a href="/member/@{{ result.Id }}"><div class="result-image" style="background-image:url(@{{ result.ImagePath }})"></div></a>
+									<a href="/member/@{{ member.id }}"><div class="result-image" style="background-image:url(@{{ member.image }})"></div></a>
 									<div class="result-block-content">
-										<a href="/member/@{{ result.Id }}"><p class="result-name">@{{ result.NameFirst }} @{{ result.NameLast }}</p></a>
-										<status-tag member="result" loaded="showResults"></status-tag>	
+										<a href="/member/@{{ member.id }}"><p class="result-name">@{{ member.firstName }} @{{ member.lastName }}</p></a>
+										<status-tag member="member" loaded="showResults"></status-tag>	
 									</div>
 									
-									<div class="result-checkin" ng-class="{'result-checkin-green' : result.CheckedIn }" ng-click="checkIn(result.Id, $index)">@{{ result.CheckedIn ? 'Checked In!' : 'Check In' }}</div>
+									<div class="result-checkin" ng-class="{'result-checkin-green' : member.checkedIn }" ng-click="checkIn(member.id, $index)">@{{ member.checkedIn ? 'Checked In!' : 'Check In' }}</div>
 
 									<div class="clear"></div>
 

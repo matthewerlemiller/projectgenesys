@@ -14,11 +14,11 @@ class CreateBadBehaviorEventsTable extends Migration {
 	{
 		Schema::create('bad_behavior_events', function(Blueprint $table)
 		{
-			$table->increments('Id');
-			$table->integer('MemberId')->unsigned();
-			$table->foreign('MemberId')->references('Id')->on('members');
-			$table->integer('StatusId')->unsigned();
-			$table->foreign('StatusId')->references('Id')->on('statuses');
+			$table->increments('id');
+			$table->integer('memberId')->unsigned();
+			$table->foreign('memberId')->references('id')->on('members');
+			$table->integer('statusId')->unsigned();
+			$table->foreign('statusId')->references('id')->on('statuses');
 			$table->timestamps();
 		});
 	}

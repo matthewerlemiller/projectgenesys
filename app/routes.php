@@ -24,13 +24,19 @@ Route::get('dashboard', ['before' => 'auth', 'as' =>'dashboard', function() {
 
 
 //Member Route.
-Route::resource('member', 'MemberController', ['before' => 'auth']);
-Route::post('member/search', ['as' => 'member.search', 'uses' => 'MemberController@searchMembers']);
-Route::post('member/image', ['as' => 'member.image', 'uses' => 'MemberController@uploadImage']);
-// Route::get('member/rank/{memberId}', ['as' => 'member.rank', 'uses' => 'MemberController@getRank']);
-Route::get('member/get/{memberId}', ['as' => 'member.get', 'uses' => 'MemberController@get']);
-Route::get('member/status/{memberId}', ['as' => 'member.status', 'uses' => 'MemberController@getStatus']);
-Route::post('member/kickout', ['as' => 'member.kickout', 'uses' => 'MemberController@kickout']);
+Route::group(['before' => 'auth'], function() {
+
+	Route::resource('member', 'MemberController');
+	Route::post('member/search', ['as' => 'member.search', 'uses' => 'MemberController@searchMembers']);
+	Route::post('member/image', ['as' => 'member.image', 'uses' => 'MemberController@uploadImage']);
+	// Route::get('member/rank/{memberId}', ['as' => 'member.rank', 'uses' => 'MemberController@getRank']);
+	Route::get('member/get/{memberId}', ['as' => 'member.get', 'uses' => 'MemberController@get']);
+	Route::get('member/status/{memberId}', ['as' => 'member.status', 'uses' => 'MemberController@getStatus']);
+	Route::post('member/kickout', ['as' => 'member.kickout', 'uses' => 'MemberController@kickout']);
+
+});
+
+Route::resource('school', 'SchoolController');
 
 //Checkin
 Route::get('checkin/{id}', ['as' => 'checkin', 'uses' => 'CheckInController@checkIn']);

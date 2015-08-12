@@ -45,13 +45,11 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 	$scope.checkIn = function(id, index) {
 
-		if ($scope.results[index].CheckedIn !== true) {
+		if ($scope.results[index].checkedIn !== true) {
 
 			Member.checkIn(id).success(function(response) {
 
-				console.log(response.message);
-
-				$scope.results[index].CheckedIn = true;
+				$scope.results[index].checkedIn = true;
 
 				setTimeout(function() {
 
@@ -72,12 +70,7 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 	}
 
-	$scope.blurSearch = function() {
-
-		// $("#member-search-input").blur();
-
-	}
-
+	
 	$scope.$on('showCheckedIn', function() {
 
 		$scope.showResults = false;

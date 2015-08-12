@@ -15,8 +15,8 @@ class AddShiftIdToNotelogsTable extends Migration {
 		Schema::table('notelogs', function(Blueprint $table)
 		{
 			
-			$table->integer('ShiftId')->unsigned();
-			$table->foreign('ShiftId')->references('Id')->on('shifts');
+			$table->integer('shiftId')->unsigned();
+			$table->foreign('shiftId')->references('id')->on('shifts');
 
 		});
 	}
@@ -31,7 +31,7 @@ class AddShiftIdToNotelogsTable extends Migration {
 		Schema::table('notelogs', function(Blueprint $table)
 		{
 			
-			$table->dropForeign('notelogs_ShiftId_foreign');
+			$table->dropForeign('notelogs_shiftId_foreign');
 
 		});
 	}

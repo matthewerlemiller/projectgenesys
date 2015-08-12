@@ -26,11 +26,11 @@
 	line-height: .6rem;
 	color:white;
 	letter-spacing:1px;
-	border-radius:4px;
+	border-radius:3px;
 	text-align:center;
 	cursor:pointer;
 	padding-top:26px;
-	box-shadow: 3px 3px 0px 0px darken($primary,20);
+	box-shadow: 2px 2px 0px 0px darken($primary,20);
 	transition:.1s;
 }
 
@@ -40,17 +40,17 @@
 	font-weight:bold;
 	color:white;
 	letter-spacing:.75px;
-	border-radius:5px;
+	border-radius:3px;
 	cursor:pointer;
-	box-shadow: 3px 3px 0px 0px darken($primary,20);
+	box-shadow: 2px 2px 0px 0px darken($primary,20);
 	transition:.05s;
 	margin-bottom: 3px;
 }
 
 @mixin button-clicked {
-	-webkit-transform: translate(3px,3px);
-	-ms-transform: translate(3px,3px);
-	transform: translate(3px,3px);
+	-webkit-transform: translate(2px,2px);
+	-ms-transform: translate(2px,2px);
+	transform: translate(2px,2px);
 	box-shadow: 0px 0px 0px 0px;
 }
 

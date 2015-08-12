@@ -31,16 +31,16 @@ app.directive('rankTube', ['Member', function(Member) {
 
 		template : '<div class="rank-container">' +
 					'<div class="rank-tube-outer">' +
-						'<div class="rank-tube-inner" ng-class="{ \'new-width\' : member.rank.Abbreviation === \'N\', \'junior-varsity-width\' : member.rank.Abbreviation === \'JV\', \'varsity-width\' : member.rank.Abbreviation === \'V\', \'advanced-width\' : member.rank.Abbreviation === \'A\' }">' +
-							'<span class="rank-abbreviation-indicator">{{ member.rank.Abbreviation }}</span>' +
+						'<div class="rank-tube-inner" ng-class="{ \'new-width\' : member.rank.abbreviation === \'N\', \'junior-varsity-width\' : member.rank.abbreviation === \'JV\', \'varsity-width\' : member.rank.abbreviation === \'V\', \'advanced-width\' : member.rank.abbreviation === \'A\' }">' +
+							'<span class="rank-abbreviation-indicator">{{ member.rank.abbreviation }}</span>' +
 						'</div>' +
 						'<span class="rank-loading-indicator" ng-hide="loaded">Fetching Rank...</span>' +
 					'</div>' +
 					'<div class="rank-labels">' +
-						'<span ng-class="{ \'active\' : member.rank.Abbreviation === \'N\' }">New</span>' +
-						'<span ng-class="{ \'active\' : member.rank.Abbreviation === \'JV\' }">Junior Varsity</span>' +
-						'<span ng-class="{ \'active\' : member.rank.Abbreviation === \'V\' }">Varsity</span>' +
-						'<span ng-class="{ \'active\' : member.rank.Abbreviation === \'A\' }">Advanced</span>' +
+						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'N\' }">New</span>' +
+						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'JV\' }">Junior Varsity</span>' +
+						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'V\' }">Varsity</span>' +
+						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'A\' }">Advanced</span>' +
 					'</div>' +
 				'</div>',
 
@@ -121,12 +121,13 @@ app.directive('statusTag', ['Member', function(Member) {
 
 		restrict : 'E',
 
-		template : '<span ng-show="loaded" class="status-tag" ng-bind="statusTagText" ng-class="{ \'good\' : good === true, \'bad\' : good !== true }"></span>',
+		template : '<span ng-show="loaded" class="StatusTag" ng-bind="statusTagText" ng-class="{ \'StatusTag--good\' : good === true, \'StatusTag--bad\' : good !== true, \'StatusTag--block\' : block }"></span>',
 
 		scope : {
 
 			member : '=member',
-			loaded : '=loaded'
+			loaded : '=loaded',
+			block : '=block'
 
 		},
 
@@ -138,11 +139,11 @@ app.directive('statusTag', ['Member', function(Member) {
 
 			function fetchStatus() {
 
-				Member.getStatus($scope.member.Id).success(function(response) {
+				Member.getStatus($scope.member.id).success(function(response) {
 
-					$scope.statusTagText = response.data.Name;
+					$scope.statusTagText = response.data.name;
 
-					if (response.data.Name === 'Good') {
+					if (response.data.name === 'Good') {
 
 						$scope.good = true;
 

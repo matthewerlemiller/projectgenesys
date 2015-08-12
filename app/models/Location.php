@@ -13,27 +13,25 @@ class Location extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function getAuthPassword() {
 
-		return $this->Password;
+		return $this->password;
 
 	}
 
-	protected $primaryKey = 'Id';
-
 	public function checklogs() {
 
-		return $this->hasMany('Checklog', 'LocationId', 'Id');
+		return $this->hasMany('Checklog', 'locationId', 'id');
 
 	}
 
 	public function leaders() {
 
-		return $this->hasMany('Leader', 'LocationId', 'Id');
+		return $this->hasMany('Leader', 'locationId', 'id');
 
 	}
 
 	public function notelogs() {
 
-		return $this->hasMany('Notelog', 'LocationId', 'Id');
+		return $this->hasMany('Notelog', 'locationId', 'id');
 
 	}
 

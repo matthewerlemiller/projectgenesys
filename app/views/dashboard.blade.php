@@ -11,16 +11,16 @@
 
 	<div class="spacer"></div>
 
-		<div class="results-wrapper" ng-controller="DisplayCheckedInMembers">
+		<div class="results-wrapper" ng-controller="DashboardController">
 
 		<h1 class="title">Checked In Members</h1>
 		<div class="title-rule"></div>
 
-			<a href="member/@{{ Checklog.member.Id }}" ng-repeat="Checklog in Checklogs">
+			<a href="member/@{{ checkInLog.member.id }}" ng-repeat="checkInLog in checkInLogs">
 				
 				<div class="result">
-					<div class="pic" back-img="@{{Checklog.member.ImagePath}}"></div>
-					<p class="name">@{{ Checklog.member.NameFirst }} @{{ Checklog.member.NameLast }}</p>
+					<div class="pic" back-img="@{{checkInLog.member.image}}"></div>
+					<p class="name">@{{ checkInLog.member.firstName }} @{{ checkInLog.member.lastName }}</p>
 				</div>
 			</a>
 

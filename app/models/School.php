@@ -3,6 +3,6 @@
 
 class School extends Eloquent {
 
-	protected $primaryKey = 'Id';
+	protected $fillable = ['name', 'type'];
 
 }

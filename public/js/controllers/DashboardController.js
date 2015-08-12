@@ -1,12 +1,12 @@
-app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService) {
+app.controller('DashboardController', function($scope, Member, SharedService) {
 
-	$scope.Checklogs = [];
+	$scope.checkInLogs = [];
 
 	$scope.getCheckedIn = function() {
 
 		Member.getCheckedIn().success(function(response) {
 
-			$scope.Checklogs = response.data;
+			$scope.checkInLogs = response.data;
 			
 		}).error(function() {
 

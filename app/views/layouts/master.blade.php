@@ -13,7 +13,7 @@
     	var MEMBER_ID = null;
 
     	@if(isset($member))
-    	MEMBER_ID = {{ $member->Id }};
+    	MEMBER_ID = {{ $member->id }};
     	@endif
 
     </script>

@@ -14,14 +14,14 @@ class CreateSessionsTable extends Migration {
 	{
 		Schema::create('sessions', function(Blueprint $table)
 		{
-			$table->increments('Id');
-			$table->integer('LeaderId')->unsigned();
-			$table->foreign('LeaderId')->references('Id')->on('leaders');
-			$table->integer('MemberId')->unsigned();
-			$table->foreign('MemberId')->references('Id')->on('members');
-			$table->integer('LessonId')->unsigned();
-			$table->foreign('LessonId')->references('Id')->on('lessons');
-			$table->text('notes')->nullable();
+			$table->increments('id');
+			$table->integer('leaderId')->unsigned();
+			$table->foreign('leaderId')->references('id')->on('leaders');
+			$table->integer('memberId')->unsigned();
+			$table->foreign('memberId')->references('id')->on('members');
+			$table->integer('lessonId')->unsigned();
+			$table->foreign('lessonId')->references('id')->on('lessons');
+			$table->text('comments')->nullable();
 			$table->timestamps();
 		});
 	}

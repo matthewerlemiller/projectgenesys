@@ -9,10 +9,10 @@ class CheckInController extends BaseController {
 		try {
 			
 			$checklog = new Checklog;
-			$checklog->MemberId = $id;
-			$checklog->CheckInDateTime = Carbon::now();
-			$checklog->CheckOutDateTime = Carbon::tomorrow();
-			$checklog->LocationId = Auth::user()->Id;
+			$checklog->memberId = $id;
+			$checklog->checkInDateTime = Carbon::now();
+			$checklog->checkOutDateTime = Carbon::tomorrow();
+			$checklog->locationId = Auth::user()->id;
 			$checklog->save();
 
 		} catch (Exception $e) {
@@ -29,10 +29,10 @@ class CheckInController extends BaseController {
 
 	public function getCheckedIn() {
 
-		if (!Auth::user()->Admin) {
+		if (!Auth::user()->admin) {
 
 			// $checkedInMembers = Auth::user()->checklogs()->whereBetween('created_at', [Carbon::now(), Carbon::now()->subDay()])->get();
-			$checkedInMembers = Auth::user()->checklogs()->where('created_at', '>=', Carbon::today())->with('member')->orderBy('Id', 'desc')->get();			
+			$checkedInMembers = Auth::user()->checklogs()->where('created_at', '>=', Carbon::today())->with('member')->orderBy('id', 'desc')->get();			
 
 			// foreach ($checkedInMembers as $checklog) {
 				

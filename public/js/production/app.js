@@ -16182,16 +16182,16 @@ app.directive('rankTube', ['Member', function(Member) {
 
 		template : '<div class="rank-container">' +
 					'<div class="rank-tube-outer">' +
-						'<div class="rank-tube-inner" ng-class="{ \'new-width\' : member.rank.Abbreviation === \'N\', \'junior-varsity-width\' : member.rank.Abbreviation === \'JV\', \'varsity-width\' : member.rank.Abbreviation === \'V\', \'advanced-width\' : member.rank.Abbreviation === \'A\' }">' +
-							'<span class="rank-abbreviation-indicator">{{ member.rank.Abbreviation }}</span>' +
+						'<div class="rank-tube-inner" ng-class="{ \'new-width\' : member.rank.abbreviation === \'N\', \'junior-varsity-width\' : member.rank.abbreviation === \'JV\', \'varsity-width\' : member.rank.abbreviation === \'V\', \'advanced-width\' : member.rank.abbreviation === \'A\' }">' +
+							'<span class="rank-abbreviation-indicator">{{ member.rank.abbreviation }}</span>' +
 						'</div>' +
 						'<span class="rank-loading-indicator" ng-hide="loaded">Fetching Rank...</span>' +
 					'</div>' +
 					'<div class="rank-labels">' +
-						'<span ng-class="{ \'active\' : member.rank.Abbreviation === \'N\' }">New</span>' +
-						'<span ng-class="{ \'active\' : member.rank.Abbreviation === \'JV\' }">Junior Varsity</span>' +
-						'<span ng-class="{ \'active\' : member.rank.Abbreviation === \'V\' }">Varsity</span>' +
-						'<span ng-class="{ \'active\' : member.rank.Abbreviation === \'A\' }">Advanced</span>' +
+						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'N\' }">New</span>' +
+						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'JV\' }">Junior Varsity</span>' +
+						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'V\' }">Varsity</span>' +
+						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'A\' }">Advanced</span>' +
 					'</div>' +
 				'</div>',
 
@@ -16272,12 +16272,13 @@ app.directive('statusTag', ['Member', function(Member) {
 
 		restrict : 'E',
 
-		template : '<span ng-show="loaded" class="status-tag" ng-bind="statusTagText" ng-class="{ \'good\' : good === true, \'bad\' : good !== true }"></span>',
+		template : '<span ng-show="loaded" class="StatusTag" ng-bind="statusTagText" ng-class="{ \'StatusTag--good\' : good === true, \'StatusTag--bad\' : good !== true, \'StatusTag--block\' : block }"></span>',
 
 		scope : {
 
 			member : '=member',
-			loaded : '=loaded'
+			loaded : '=loaded',
+			block : '=block'
 
 		},
 
@@ -16289,11 +16290,11 @@ app.directive('statusTag', ['Member', function(Member) {
 
 			function fetchStatus() {
 
-				Member.getStatus($scope.member.Id).success(function(response) {
+				Member.getStatus($scope.member.id).success(function(response) {
 
-					$scope.statusTagText = response.data.Name;
+					$scope.statusTagText = response.data.name;
 
-					if (response.data.Name === 'Good') {
+					if (response.data.name === 'Good') {
 
 						$scope.good = true;
 
@@ -16362,6 +16363,12 @@ app.factory('Member', function($http) {
 		getStatus : function(memberId) {
 
 			return $http.get('/member/status/' + memberId);
+
+		},
+
+		update : function(data) {
+
+			return $http.put('/member/update/', data);
 
 		}
 
@@ -16484,6 +16491,20 @@ app.factory('Kickout', ['$http', function($http) {
 
 }]);
 
+app.factory('School', ['$http', function($http) {
+
+	return {
+
+		getAll : function() {
+
+			return $http.get('/school');
+
+		}
+
+	}
+
+}]);
+
 
 app.controller('CreateMemberController', ['$scope', 'Image', function($scope, Image) {
 
@@ -16531,15 +16552,15 @@ app.controller('CreateMemberController', ['$scope', 'Image', function($scope, Im
 
 
 }]);
-app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService) {
+app.controller('DashboardController', function($scope, Member, SharedService) {
 
-	$scope.Checklogs = [];
+	$scope.checkInLogs = [];
 
 	$scope.getCheckedIn = function() {
 
 		Member.getCheckedIn().success(function(response) {
 
-			$scope.Checklogs = response.data;
+			$scope.checkInLogs = response.data;
 			
 		}).error(function() {
 
@@ -16558,11 +16579,12 @@ app.controller('DisplayCheckedInMembers', function($scope, Member, SharedService
 
 
 });
-app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', function($scope, Member, Session, Lesson, Leader, Shift, Kickout, AlertService) {
+app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', function($scope, Member, Session, Lesson, Leader, Shift, Kickout, AlertService, School) {
 
 	$scope.details = true;
 	$scope.lessons = false;
 	$scope.kickout = false;
+	$scope.edit = false;
 
 	$scope.member = {};
 	$scope.loaded = false;
@@ -16571,6 +16593,7 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 	$scope.lessonsArray = [];
 	$scope.leaders = [];
 	$scope.shifts = [];
+	$scope.schools = [];
 	$scope.showLeaderResults = false;
 
 	$scope.leaderId = null;
@@ -16583,6 +16606,7 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 		$scope.details = false;
 		$scope.lessons = false;
 		$scope.kickout = false;
+		$scope.edit = false;
 
 		if (pageName == 'details') {
 
@@ -16595,6 +16619,10 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 		} else if (pageName == 'kickout') {
 
 			$scope.kickout = true;
+
+		} else if (pageName == 'edit') {
+
+			$scope.edit = true;
 
 		} else {
 
@@ -16615,16 +16643,33 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 		}).error(function(response) {
 
+			AlertService.broadcast('Sorry, there was a problem fetching data. This page may be rendered incorrectly.', 'error');
 			
-			
+		});
+
+	}
+
+	$scope.updateMember = function() {
+
+		Member.update($scope.member).success(function(response) {
+
+			AlertService.broadcast(response.message, 'success');
+
+			$scope.member = response.data;
+
+		}).error(function(response) {
+
+			AlertService.broadcast("Sorry, something went wrong", 'error');
+
 		});
 
 	}
 
 	$scope.init = function() {
 
-		$scope.getLessons();
-		$scope.getLeaders();
+		getLessons();
+		getLeaders();
+		getSchools();
 		getShifts();
 
 	}
@@ -16634,8 +16679,6 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 		Session.get(memberId).success(function(response) {
 
 			$scope.sessions = response.data;
-
-			console.log(response.data);
 
 		}).error(function(response) {
 
@@ -16673,7 +16716,7 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 	}
 
-	$scope.getLeaders = function() {
+	function getLeaders() {
 
 		Leader.all().success(function(response) {
 
@@ -16688,7 +16731,7 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 	}
 
 	
-	$scope.getLessons = function() {
+	function getLessons() {
 
 		Lesson.get().success(function(response) {
 
@@ -16716,6 +16759,20 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 	}
 
+	function getSchools() {
+
+		School.getAll().success(function(response) {
+
+			$scope.schools = response.data;
+
+		}).error(function(response) {
+
+			AlertService.broadcast('There was an error, edit functionality may have problems');
+
+		});
+
+	}
+
 
 	$scope.clear = function() {
 
@@ -16728,8 +16785,6 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 		var data = $scope.kickoutForm;
 		data.memberId = MEMBER_ID;
-
-		console.log(data);
 
 		Kickout.store(data).success(function(response) {
 
@@ -16795,13 +16850,11 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 	$scope.checkIn = function(id, index) {
 
-		if ($scope.results[index].CheckedIn !== true) {
+		if ($scope.results[index].checkedIn !== true) {
 
 			Member.checkIn(id).success(function(response) {
 
-				console.log(response.message);
-
-				$scope.results[index].CheckedIn = true;
+				$scope.results[index].checkedIn = true;
 
 				setTimeout(function() {
 
@@ -16822,12 +16875,7 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 	}
 
-	$scope.blurSearch = function() {
-
-		// $("#member-search-input").blur();
-
-	}
-
+	
 	$scope.$on('showCheckedIn', function() {
 
 		$scope.showResults = false;

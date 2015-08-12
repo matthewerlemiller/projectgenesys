@@ -14,10 +14,10 @@ class CreateNotelogsTable extends Migration {
 	{
 		Schema::create('notelogs', function(Blueprint $table)
 		{
-			$table->increments('Id');
-			$table->text('Note');
-			$table->integer('LocationId')->unsigned();
-			$table->foreign('LocationId')->references('Id')->on('locations');
+			$table->increments('id');
+			$table->text('text');
+			$table->integer('locationId')->unsigned();
+			$table->foreign('locationId')->references('id')->on('locations');
 			$table->timestamps();
 		});
 	}

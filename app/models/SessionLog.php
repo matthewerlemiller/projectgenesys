@@ -3,25 +3,23 @@
 
 class SessionLog extends Eloquent {
 
-	protected $primaryKey = 'Id';
-
 	protected $table = 'sessions';
 
 	public function leader() {
 
-		return $this->belongsTo('Leader', 'LeaderId', 'Id');
+		return $this->belongsTo('Leader', 'leaderId', 'id');
 
 	}
 
 	public function member() {
 
-		return $this->belongsTo('Member', 'MemberId', 'Id');
+		return $this->belongsTo('Member', 'memberId', 'id');
 
 	}	
 
 	public function lesson() {
 
-		return $this->hasOne('Lesson', 'Id', 'LessonId');
+		return $this->hasOne('Lesson', 'id', 'lessonId');
 
 	}
 

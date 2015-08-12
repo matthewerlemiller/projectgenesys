@@ -42,8 +42,8 @@ class LeaderController extends BaseController {
 			$searchTerms = explode(' ', $q);
 			
 			foreach($searchTerms as $term) {	
-				$query->where('LeaderFirstName', 'LIKE', '%'. $term .'%')
-			          ->orWhere('LeaderLastName', 'LIKE', '%' . $term . '%');
+				$query->where('firstName', 'LIKE', '%'. $term .'%')
+			          ->orWhere('lastName', 'LIKE', '%' . $term . '%');
 			}
 
 			$results = $query->get();

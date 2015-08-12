@@ -6,12 +6,12 @@ class LocationTableSeeder extends Seeder {
 
 		DB::table('locations')->delete();
 
-		Location::create(['LocationName' => 'Admin', 'Admin' => true, 'Password' => Hash::make('projectgenesys')]);
-		Location::create(['LocationName' => 'El Cajon North', 'Admin' => false, 'Password' => Hash::make('elcajonnorth')]);
-		Location::create(['LocationName' => 'El Cajon South', 'Admin' => false, 'Password' => Hash::make('elcajonsouth')]);
-		Location::create(['LocationName' => 'Santee', 'Admin' => false, 'Password' => Hash::make('santee')]);
-		Location::create(['LocationName' => 'Lakeside', 'Admin' => false, 'Password' => Hash::make('lakeside')]);
-		Location::create(['LocationName' => 'Alpine', 'Admin' => false, 'Password' => Hash::make('alpine')]);
+		Location::create(['name' => 'Admin', 'admin' => true, 'password' => Hash::make('projectgenesys')]);
+		Location::create(['name' => 'El Cajon North', 'admin' => false, 'password' => Hash::make('elcajonnorth')]);
+		Location::create(['name' => 'El Cajon South', 'admin' => false, 'password' => Hash::make('elcajonsouth')]);
+		Location::create(['name' => 'Santee', 'admin' => false, 'password' => Hash::make('santee')]);
+		Location::create(['name' => 'Lakeside', 'admin' => false, 'password' => Hash::make('lakeside')]);
+		Location::create(['name' => 'Alpine', 'admin' => false, 'password' => Hash::make('alpine')]);
 
 	}
 

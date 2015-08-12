@@ -4,6 +4,6 @@ class Status extends Eloquent {
 
 	protected $table = 'statuses';
 
-	protected $fillable = ['Name'];
+	protected $fillable = ['name'];
 	
 }

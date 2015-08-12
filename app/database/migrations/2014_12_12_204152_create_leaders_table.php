@@ -14,13 +14,12 @@ class CreateLeadersTable extends Migration {
 	{
 		Schema::create('leaders', function(Blueprint $table)
 		{
-			$table->increments('Id');
-			$table->string('LeaderFirstName');
-			$table->string('LeaderLastName');
-			$table->string('Email');
-			$table->date('StartDate')->nullable();
-			$table->integer('LessonCount')->nullable()->default(0);
-			$table->integer('LessonCountMonth')->nullable()->default(0);
+			$table->increments('id');
+			$table->string('firstName');
+			$table->string('lastName');
+			$table->string('email');
+			$table->integer('lessonCount')->default(0);
+			$table->date('startDate')->nullable();
 			$table->timestamps();
 		});
 	}
