@@ -19,6 +19,8 @@
 		margin-left: 15px;
 		float:left;
 		overflow: auto;
+		padding-bottom: 6px;
+		box-sizing:border-box;
 
 		li {
 
@@ -247,10 +249,10 @@
 		letter-spacing: .75px;
 		background-color:$primary;
 		@include small-button;
-		margin-right: 10px;
+	
 		cursor: pointer;
 		color:white;
-		margin:auto;
+	
 
 	}
 
@@ -500,7 +502,11 @@
 
 }
 
+.member-edit-container {
 
+	margin-top: 11px;
+
+}
 
 
 

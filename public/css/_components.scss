@@ -1,20 +1,46 @@
 .Form {
 
+	table {
+
+		width:100%;
+		border:1px solid lighten($mediumGray, 10%);
+
+	}
+
 	input[type="text"], input[type="date"] {
 
 		border:1px solid $mediumGray;
+		width:100%;
 
 	}
 
-	select {
+	td {
 
-
+		padding:8px 15px;
 
 	}
 
+	tr {
+
+		&:nth-child(2n+1) {
+
+			background-color: lighten($lightgray, 15%);
+
+		}
+		
+	}
+
+	
 	&-field {
 
 		margin-bottom: 15px;
+
+	}
+
+	&-submit {
+
+		width:40%;
+		margin: 20px auto 50px auto;
 
 	}
 

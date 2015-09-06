@@ -34,8 +34,6 @@
 
 	</div>
 
-
-
 	<div class="member-details-container" ng-show="details">
 
 		<div class="member-details-section">
@@ -56,17 +54,6 @@
 				</tr>
 			</table>
 			
-			
-			
-			
-
-
-			{{-- <div class="clear"></div> --}}
-
-			
-			
-			
-
 		</div>
 
 		<div class="member-details-section">
@@ -355,32 +342,32 @@
 			</tr>
 			<tr>
 				<td><label>Parent Name</label></td>
-				<td><input type="text" ng-model="member.parent1Name"></td>
+				<td colspan="2"><input type="text" ng-model="member.parent1Name"></td>
 			</tr>
 			<tr>
 				<td><label>Parent Phone</label></td>
-				<td><input type="text" ng-model="member.parent1Phone"></td>
+				<td colspan="2"><input type="text" ng-model="member.parent1Phone"></td>
 			</tr>
 			<tr>
 				<td><label>Parent Name</label></td>
-				<td><input type="text" ng-model="member.parent2Name"></td>
+				<td colspan="2"><input type="text" ng-model="member.parent2Name"></td>
 			</tr>
 			<tr>
 				<td><label>Parent Phone</label></td>
-				<td><input type="text" ng-model="member.parent2Phone"></td>
+				<td colspan="2"><input type="text" ng-model="member.parent2Phone"></td>
 			</tr>
 			<tr>
 				<td><label>Emergency Contact</label></td>
-				<td><input type="text" ng-model="member.emergencyContactName"></td>
+				<td colspan="2"><input type="text" ng-model="member.emergencyContactName"></td>
 			</tr>
 			<tr>
 				<td><label>Emergency Contact Phone</label></td>
-				<td><input type="text" ng-model="member.emergencyContactPhone"></td>
+				<td colspan="2"><input type="text" ng-model="member.emergencyContactPhone"></td>
 			</tr>
 
 		</table>
 
-		<div class="button submit" ng-click="updateMember()">Update</div>		
+		<div class="button submit Form-submit" ng-click="updateMember()">Update</div>		
 
 	</div>
 
