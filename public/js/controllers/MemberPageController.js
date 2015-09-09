@@ -74,6 +74,8 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 			AlertService.broadcast(response.message, 'success');
 
+			console.log(response.data);
+
 			$scope.member = response.data;
 
 		}).error(function(response) {

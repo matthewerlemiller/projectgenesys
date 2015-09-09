@@ -177,7 +177,7 @@ class MemberRepository {
 
 		}
 
-		return $member;
+		return $member->load('sessions.lesson.rank', 'school');
 
 	}
 

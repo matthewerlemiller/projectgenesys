@@ -16,7 +16,7 @@
 				@endif
 			</div>
 
-			<h1 class="member-profile-name">{{{ $member->firstName . ' ' . $member->lastName }}}<status-tag member="member" loaded="loaded" block="true" class="member-info-status-tag"></status-tag></h1>
+			<h1 class="member-profile-name"><a href="{{ route('member.show', ['id' => $member->id]) }}">@{{ member.firstName + ' ' + member.lastName }}</a><status-tag member="member" loaded="loaded" block="true" class="member-info-status-tag"></status-tag></h1>
 			
 			<rank-tube member="member" loaded="loaded"></rank-tube>
 
@@ -41,16 +41,16 @@
 			<table style="table-layout:fixed;">
 				<tr>
 					<td><p class="text-data"><span class="label">Status</span> : <status-tag member="member" loaded="loaded" block="false"></status-tag> </p></td>
-					<td><p class="text-data"><span class="label">Gender</span> : {{{ $member->gender or '---' }}} </p></td>
-					<td><p class="text-data"><span class="label">School</span> : {{{ $member->school->name or '---' }}} </p></td>
+					<td><p class="text-data"><span class="label">Gender</span> : @{{ member.gender }} </p></td>
+					<td><p class="text-data"><span class="label">School</span> : @{{ member.school.name }} </p></td>
 				</tr>
 				<tr>
-					<td><p class="text-data"><span class="label">Phone</span> : {{{ $member->phone or '---'}}} </p></td>
-					<td colspan="2"><p class="text-data"><span class="label">Address</span> : {{{ $member->address or '---' }}} </p></td>
+					<td><p class="text-data"><span class="label">Phone</span> : @{{ member.phone }} </p></td>
+					<td colspan="2"><p class="text-data"><span class="label">Address</span> : @{{ member.address }} </p></td>
 				</tr>
 				<tr>
-					<td colspan="2"><p class="text-data"><span class="label">Email</span> : {{{ $member->email or '---' }}} </p></td>
-					<td><p class="text-data"><span class="label">Birthdate</span> : {{{ $member->birthDate or '---' }}} </p></td>
+					<td colspan="2"><p class="text-data"><span class="label">Email</span> : @{{ member.email }} </p></td>
+					<td><p class="text-data"><span class="label">Birthdate</span> : @{{ member.birthDate }} </p></td>
 				</tr>
 			</table>
 			
@@ -66,9 +66,9 @@
 
 					<h3 class="subsection-title">Life Events</h3>
 
-					<p class="boolean-data"><span class="label">Saved</span> : {{{ null != $member->saved ? 'yes' : 'no' }}} </p>
-					<p class="boolean-data"><span class="label">Baptized</span> : {{{ null != $member->baptized ? 'yes' : 'no' }}} </p>
-					<p class="text-data"><span class="label">Baptized Date</span> : {{{ null != $member->baptizedDate or '---' }}} </p>
+					<p class="boolean-data"><span class="label">Saved</span> : @{{ member.saved | yesno }} </p>
+					<p class="boolean-data"><span class="label">Baptized</span> : @{{ member.baptized | yesno }} </p>
+					<p class="text-data"><span class="label">Baptized Date</span> : @{{ member.baptizedDate }} </p>
 					<div class="spacer"></div>
 					<div class="spacer"></div>
 
@@ -78,11 +78,11 @@
 
 					<h3 class="subsection-title">Ministry Info </h3>
 
-					<p class="boolean-data"><span class="label">Attends High School Group</span> : {{{ null != $member->attendsHighSchoolGroup ? 'yes' : 'no' }}}</p>
-					<p class="boolean-data"><span class="label">Attends High School Small Group</span> : {{{ null != $member->attendsHighSchoolSmallGroup ? 'yes' : 'no' }}}</p>
-					<p class="boolean-data"><span class="label">Attends Jr High Group</span> : {{{ null != $member->attendsJrHighGroup ? 'yes' : 'no' }}}</p>
-					<p class="boolean-data"><span class="label">Attends Higher Ground</span> : {{{ null != $member->attendsHigherGround ? 'yes' : 'no' }}}</p>
-					<p class="boolean-data"><span class="label">In Leadership Core</span> : {{{ null != $member->attendsLeadershipCore ? 'yes' : 'no' }}} </p>
+					<p class="boolean-data"><span class="label">Attends High School Group</span> : @{{ member.attendsHighSchoolGroup | yesno }}</p>
+					<p class="boolean-data"><span class="label">Attends High School Small Group</span> : @{{ member.attendsHighSchoolSmallGroup | yesno }}</p>
+					<p class="boolean-data"><span class="label">Attends Jr High Group</span> : @{{ member.attendsJrHighGroup | yesno }}</p>
+					<p class="boolean-data"><span class="label">Attends Higher Ground</span> : @{{ member.attendsHigherGround | yesno }}</p>
+					<p class="boolean-data"><span class="label">In Leadership Core</span> : @{{ member.attendsLeadershipCore | yesno }} </p>
 					<div class="spacer"></div>
 
 				</div>
@@ -95,12 +95,12 @@
 
 					<h3 class="subsection-title">Leadership Info</h3>
 
-					<p class="boolean-data"><span class="label">Serves in Bus Ministry</span> : {{{ null != $member->leadsBusMinistry ? 'yes' : 'no' }}}</p>
-					<p class="boolean-data"><span class="label">Worship Leader</span> : {{{ null != $member->leadsWorship ? 'yes' : 'no' }}} </p>
-					<p class="boolean-data"><span class="label">Serves in Kids Ministry</span> : {{{ null != $member->leadsKidsMinistry ? 'yes' : 'no' }}} </p>
-					<p class="boolean-data"><span class="label">High School Small Group Leader</span> : {{{ null != $member->leadsHighSchoolSmallGroup ? 'yes' : 'no' }}} </p>
-					<p class="boolean-data"><span class="label">Jr High Group Leader</span> : {{{ null != $member->leadsJrHighGroup ? 'yes' : 'no' }}} </p>
-					<p class="boolean-data"><span class="label">HigherGround Leader</span> : {{{ null != $member->leadsHigherGround ? 'yes' : 'no' }}} </p>
+					<p class="boolean-data"><span class="label">Serves in Bus Ministry</span> : @{{ member.leadsBusMinistry | yesno }}</p>
+					<p class="boolean-data"><span class="label">Worship Leader</span> : @{{ member.leadsWorship | yesno }} </p>
+					<p class="boolean-data"><span class="label">Serves in Kids Ministry</span> : @{{ member.leadsKidsMinistry | yesno }} </p>
+					<p class="boolean-data"><span class="label">High School Small Group Leader</span> : @{{ member.leadsHighSchoolSmallGroup | yesno }} </p>
+					<p class="boolean-data"><span class="label">Jr High Group Leader</span> : @{{ member.leadsJrHighGroup | yesno }} </p>
+					<p class="boolean-data"><span class="label">HigherGround Leader</span> : @{{ member.leadsHigherGround | yesno }} </p>
 					<div class="spacer"></div>
 
 				</div>
@@ -109,9 +109,9 @@
 
 					<h3 class="subsection-title">Event Attendance</h3>
 
-					<p class="boolean-data"><span class="label">Summer Camp</span> : {{{ null != $member->attendsSummerCamp ? 'yes' : 'no' }}} </p>
-					<p class="boolean-data"><span class="label">Winter Camp</span> : {{{ null != $member->attendsWinterCamp ? 'yes' : 'no' }}} </p>
-					<p class="boolean-data"><span class="label">Future Quest</span> : {{{ null != $member->attendsFutureQuest ? 'yes' : 'no' }}} </p>
+					<p class="boolean-data"><span class="label">Summer Camp</span> : @{{ member.attendsSummerCamp | yesno }} </p>
+					<p class="boolean-data"><span class="label">Winter Camp</span> : @{{ member.attendsWinterCamp | yesno }} </p>
+					<p class="boolean-data"><span class="label">Future Quest</span> : @{{ member.attendsFutureQuest | yesno }} </p>
 					<div class="spacer"></div>
 
 				</div>
@@ -126,23 +126,23 @@
 
 			<table>
 				<tr>
-					<td><p class="text-data"><span class="label">Parent</span> : {{{ $member->parent1Name or '---' }}} </p></td>
-					<td><p class="text-data"><span class="label">Phone</span>: {{{ $member->parent1Phone or '---' }}} </p></td>
+					<td><p class="text-data"><span class="label">Parent</span> : @{{ member.parent1Name }} </p></td>
+					<td><p class="text-data"><span class="label">Phone</span>: @{{ member.parent1Phone }} </p></td>
 					{{-- <td><p class="text-data"><span class="label">Alternate Phone</span>: {{{ $member->p or '---' }}} </p></td> --}}
 				</tr>
 				<tr>
-					<td><p class="text-data"><span class="label">Parent</span> : {{{ $member->parent2Name or '---' }}} </p></td>
-					<td><p class="text-data"><span class="label">Phone</span>: {{{ $member->parent2Phone or '---' }}} </p></td>
+					<td><p class="text-data"><span class="label">Parent</span> : @{{ member.parent2Name }} </p></td>
+					<td><p class="text-data"><span class="label">Phone</span>: @{{ member.parent2Phone }} </p></td>
 					{{-- <td><p class="text-data"><span class="label">Alternate Phone</span>: {{{ $member->Parent2Phone2 or '---' }}} </p></td> --}}
 				</tr>
 				<tr>
-					<td><p class="text-data"><span class="label">Emergency Contact</span> : {{{ null != $member->emergencyContactName ? $member->emergencyContactName : '---' }}} </p></td>
-					<td><p class="text-data"><span class="label">Phone</span> : {{{ $member->emergencyContactPhone or '---' }}} </p></td>
+					<td><p class="text-data"><span class="label">Emergency Contact</span> : @{{ member.emergencyContactName }} </p></td>
+					<td><p class="text-data"><span class="label">Phone</span> : @{{ member.emergencyContactPhone }} </p></td>
 					{{-- <td><p class="text-data"><span class="label">Alternate Phone</span> : {{{ $member->emergencyContactPhone or '---' }}} </p></td> --}}
 				</tr>
 				<tr>
-					<td><p class="boolean-data"><span class="label">Permission Slip</span> : {{{ null != $member->permissionSlip ? 'yes' : 'no' }}} </p></td>
-					<td><p class="boolean-data"><span class="label">Skatepark</span> : {{{ null != $member->skatepark ? 'yes' : 'no' }}} </p></td>
+					<td><p class="boolean-data"><span class="label">Permission Slip</span> : @{{ member.permissionSlip | yesno }} </p></td>
+					<td><p class="boolean-data"><span class="label">Skatepark</span> : @{{ member.skatepark | yesno}} </p></td>
 				</tr>
 			</table>
 
@@ -183,12 +183,16 @@
 
 					<p><label for="leader-query">Leaders, select your name.</label></p>
 					
-					<p>	<select ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="leaderId"></select> </p>
+					<p>
+						<select ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="leaderId">
+							<option value="">Find your name...</option>
+						</select> 
+					</p>
 
 					<p><label for="lesson">Choose Lesson</label></p>
 
-					<p><select name="lesson" ng-model="lessonId">
-						<option ng-repeat="lesson in lessonsArray" value="@{{lesson.id}}">@{{ lesson.name }}</option>
+					<p><select name="lesson" ng-model="lessonId" ng-options="lesson.id as lesson.name for lesson in lessonsArray">
+						<option value="">Choose lesson...</option>
 					</select></p>
 
 					<p><label value="Type lesson notes here." for="notes">Notes</label></p>
@@ -209,12 +213,16 @@
 
 			<div class="member-kickout-form-select">
 				<label for="kickout-form-shift">Shift</label>
-				<select name="kickout-form-shift" id="kickout-form-shift" ng-options="shift.id as shift.day + ' ' + shift.time for shift in shifts" ng-model="kickoutForm.shiftId" required></select>				
+				<select name="kickout-form-shift" id="kickout-form-shift" ng-options="shift.id as shift.day + ' ' + shift.time for shift in shifts" ng-model="kickoutForm.shiftId" required>
+					<option value="">Choose One...</option>
+				</select>				
 			</div>
 			
 			<div class="member-kickout-form-select">
 				<label>Leader</label>
-				<select name="kickout-form-leader" id="kickout-form-leader" ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="kickoutForm.leaderId" required></select>
+				<select name="kickout-form-leader" id="kickout-form-leader" ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="kickoutForm.leaderId" required>
+					<option value="">Choose One...</option>
+				</select>
 			</div>
 
 			

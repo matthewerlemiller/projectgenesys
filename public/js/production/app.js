@@ -16098,6 +16098,15 @@ angular.module('ngAnimate', [])
 })(window, window.angular);
 
 var app = angular.module('genesys', ['angularFileUpload', 'ngTouch', 'offClick', 'angularFileUpload', 'ngAnimate']);
+app.filter('yesno', function() {
+
+	return function(input) {
+
+		return input ? 'yes' : 'no'
+
+	}
+
+});
 app.factory('AlertService', ['$rootScope', function($rootScope) {
 
 	var AlertService = {};
@@ -16654,6 +16663,8 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 		Member.update($scope.member).success(function(response) {
 
 			AlertService.broadcast(response.message, 'success');
+
+			console.log(response.data);
 
 			$scope.member = response.data;
 

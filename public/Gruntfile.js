@@ -16,6 +16,7 @@ module.exports = function(grunt) {
                     'bower_components/ng-file-upload/angular-file-upload-all.js',
                     'bower_components/angular-animate/angular-animate.js',
                     'js/config.js',
+                    'js/filters.js',
                     'js/services/*.js',
                     'js/directives.js',
                     'js/factories.js',
