@@ -2,22 +2,39 @@
 
 @section('content')
 	
-<div class="login-container">
+<div class="login-container Card">
 
-	<div class="yv-logo"><img src="{{ asset('img/yv-logo.png') }}"></div>
+	<div class="Card-title">
+
+		<div class="yv-logo"><img src="{{ asset('img/yv-logo-blue.png') }}"></div>
+
+	</div>
+
+	<div class="Card-content">
+
+		{{ Form::open(['route' => 'login.post', 'class' => 'Form']) }}
+
+			<div class="Form-group">
+
+				<label for="location">Choose location</label>
+				<div class="Form-select">
+					{{ Form::select('location', $locationsSelect, '', ['id' => 'location']) }}
+				</div>
+
+			</div>
+
+			<div class="Form-group">
+
+				<label for="password">Password</label>
+				{{ Form::password('password', ['class' => 'password', 'placeholder' => 'Password']) }}
+
+			</div>
 	
-	{{ Form::open(['route' => 'login.post']) }}
+			{{ Form::submit('Log In', ['class' => 'button submit-button']) }}
 
-		{{ Form::select('location', $locationsSelect) }}
+		{{ Form::close() }}
 
-		<div class="input-container">
-
-			{{ Form::password('password', ['class' => 'password', 'placeholder' => 'Password']) }}
-			{{ Form::submit('Log In', ['class' => 'log-in-button']) }}
-
-		</div>
-
-	{{ Form::close() }}
+	</div>
 	
 </div>
 

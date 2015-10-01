@@ -15,7 +15,7 @@
 
 	.member-section-navigation {
 
-		margin-top: 15px;
+		margin-top: 25px;
 		margin-left: 15px;
 		float:left;
 		overflow: auto;
@@ -39,12 +39,19 @@
 
 			}
 
+			&:last-child {
+
+				margin-right: 0;
+
+			}
+
 		}
 
 		.member-section-selected {
 
 			background-color: #63B7FF;
-			box-shadow: 2px 2px 0px 0px darken(#63B7FF, 25%);
+			border:2px solid $primary;
+			// box-shadow: 2px 2px 0px 0px darken(#63B7FF, 25%);
 
 		}
 
@@ -54,14 +61,15 @@
 
 		float: left;
 		position: relative;
-		border-radius: 50%;
-		width:175px;
-		height:175px;
+		// border-radius: 50%;
+		width:200px;
+		height:200px;
 		background-size: cover;
 		background-position: center;
 		margin-bottom: 10px;
 		border: 3px solid $darkgray;
 		overflow: hidden;
+		// border-radius: 50%;
 
 		.member-checkedin-status {
 
@@ -87,23 +95,17 @@
 
 	}
 
-	
+
 	.member-details-container {
 		// text-align: center;
 
 		.rule {
 			position:relative;
-			top:18px;
-			border-bottom: 2px solid $lightgray;
+			// top:18px;
+			border-bottom: 2px solid $darkPrimary;
 		}
 
-		.section-title {
-			font-size: 2em;
-			font-weight:300;
-			margin-bottom:15px;
-			color: $primary;
-			font-weight: bold;
-		}
+		
 
 		.column {
 			margin-left:1px;
@@ -116,12 +118,14 @@
 
 			.subsection-title {
 				display:inline-block;
-				padding: 2px;
-				color:$darkgray;
+				// padding: 2px;
+				padding-bottom: 7px;
+				// color:$darkgray;
+				color:$primary;
 				font-weight: 700;
 				margin-bottom:5px;
 				margin-top: 5px;
-				border-bottom: 1px solid $darkgray;
+				border-bottom: 2px solid $darkPrimary;
 			}
 
 			p {
@@ -171,14 +175,32 @@
 	.add-lesson-container {
 
 		width: 200px;
-		background-color: $darkgray;
-		padding:15px;
-		border-radius:10px;
+		background-color: white;
+		border:2px solid $darkPrimary;
+		// padding:15px;
+		// border-radius:10px;
+
+	}
+
+	.member-lesson-form {
+
+		padding: 12px;
+		box-sizing:border-box;
+
+		label {
+
+			font-size: 12px;
+
+		}
 
 	}
 
 	.title-wrap {
 		text-align:center;
+		padding:12px 0;
+		border-bottom: 2px solid $darkPrimary;
+		color:$primary;
+		font-weight: bold;
 	}
 
 	.section-title-white {
@@ -190,11 +212,11 @@
 
 
 	.rule {
-		border-bottom: 1.5px solid white;
-		position:relative;
+		border-bottom: 2px solid $darkPrimary;
+		// position:relative;
 		width:95%;
-		left:2.5%;
-		top:-10px;
+		// left:2.5%;
+		// top:-10px;
 		margin-bottom: 10px;
 	}
 
@@ -205,25 +227,14 @@
 
 		label {
 			margin-top:15px;
-			font-size:1.125em;
-			color:white;
+			font-size:.9em;
+			// color:white;
+			color:$primary;
 
 		}
 
 	}
 
-	input {
-		
-		@include lato;
-		font-size:1.125em;
-		padding:5px;
-		color:$darkgray;
-		border:none;
-		border-radius:3px;
-		background-color: #fff;
-		// width:100%;
-		// height:30px;
-	}
 
 	select {
 
@@ -239,80 +250,35 @@
 		padding:5px;
 		height:150px;
 		width:100%;
-		border-radius:5px;
+		// border-radius:5px;
+		border:2px solid $darkPrimary;
 		outline:none;
 	}
 
-	.submit {
-		text-align:center;
-		padding: 10px;
-		letter-spacing: .75px;
-		background-color:$primary;
-		@include small-button;
-	
-		cursor: pointer;
-		color:white;
 	
 
-	}
-
-	.submit:active {
-		@include button-clicked
-	}
 
 	.table-container {
-		border: 1.5px solid $darkgray;
-		border-radius: 10px;
-		width: 450px;
+		border: 2px solid $darkPrimary;
+		// border-radius: 10px;
+		width: 465px;
 		height:600px;
 		float: right;
 		margin-right:5px;
+		background-color: white;
 
 	}
 
-	.member-lessons-table {
-
-		width: 100%;
-		font-size: .8rem;
-
-		th {
-
-			height:auto;
-			font-size:1.25em;
-			color:$darkgray;
-			padding: 20px;
-
-		}
-
-		tr {
-
-
-
-			&:nth-child(2n+2) {
-
-				background-color: lighten($lightgray, 10%);
-
-			}
-
-		}
-
-		td {
-
-			@include box-sizing(border-box);
-			padding:10px;
-			text-align: center;
-
-		}
-
-	}
-
+	
 }
 
 .member-details-section {
 
-	box-sizing:border-box;
-	padding: 30px 0;
-	border-top: 2px solid $lightgray;
+	// box-sizing:border-box;
+	// padding: 30px 30px;
+	// border: 2px solid $darkPrimary;
+	// background-color: white;
+	margin-bottom: 25px;
 
 	.label {
 
@@ -341,10 +307,10 @@
 	position: relative;
 	float: left;	
 	font-size: 2.5em;
-	font-weight: 300;
+	font-weight: normal;
 	margin-bottom:11px;
 	margin-left: 15px;
-	margin-top: 11px;
+	margin-top: 10px;
 
 }
 
@@ -362,7 +328,7 @@
 	float:left;
 	width:65%;
 	box-sizing:border-box;
-	padding-top: 5px;
+	margin-top: 16px;
 
 }
 
@@ -370,11 +336,13 @@
 
 	position: relative;
 	background-color: white;
-	box-shadow: inset 0px 0px 8px rgba(0,0,0,.3);
+	// box-shadow: inset 0px 0px 8px rgba(0,0,0,.3);
+	box-shadow:inset 0px 0px 0px 2px $lightgray;
 	width:100%;
 	height:40px;
 	border-radius: 500px;
 	overflow: hidden;
+	// border:2px solid $mediumGray;
 
 }
 
@@ -386,6 +354,7 @@
 	width:0%;
 	height:100%;
 	border-radius: 500px;
+	border:2px solid $darkPrimary;
 	@include transition(width .25s ease);
 
 	&.new-width {
@@ -475,6 +444,8 @@
 
 .member-kickout-form {
 
+	margin-top: 25px;
+
 	.submit {
 
 		margin-top: 20px;
@@ -504,9 +475,29 @@
 
 .member-edit-container {
 
-	margin-top: 11px;
+	margin-top: 25px;
+	border:2px solid $darkPrimary;
+	background-color: white;
+
+	td:first-child {
+
+		// border-right:2px solid $darkPrimary;
+
+	}
+
+	.Table {
+
+
+	}
+
+	label {
+
+		font-size: 15px;
+
+	}
 
 }
+
 
 
 

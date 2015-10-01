@@ -1,25 +1,26 @@
 body.login {
-	background-color: $darkgray
+	// background-color: lighten($primary, 44%);
+	background-color: $primary;
 }
 
 
 .login-container {
 	@include center;
-	width:200px;
+	width:300px;
 	height:auto;
-	background-color: $green;
-	border: 2px solid white;
+	// background-color: $green;
+	// border: 2px solid white;
 	margin:auto;
 
 	text-align:center;
-	@include border-radius(3px);
-	padding:30px 0 10px 0;
+	// @include border-radius(3px);
+	// padding:30px 0 10px 0;
 
 	.yv-logo {
-		width: 125px;
-		height: 125px;
+		width: 70px;
+		// height: 125px;
 		margin:auto;
-		margin-bottom: 20px;
+		// margin-bottom: 20px;
 
 		img {
 
@@ -28,54 +29,31 @@ body.login {
 		}
 	}
 
-	select {
-		margin:0 auto;
-		width:90%;
-		color:$darkgray;
-		@include lato;
-	}
+	// select {
+	// 	margin:0 auto;
+	// 	width:90%;
+	// 	color:$darkgray;
+	// 	@include lato;
+	// }
 
 	.input-container {
-		background-color:white;
+		
 		height: auto;
-		width:180px;
 		margin: auto;
 		margin-top: 20px;
-		@include border-radius(3px);
-		padding-bottom: 10px;
+		
+	}
+	
+
+	.Card-content {
+
+		padding:15px;
+
 	}
 
-	.email, .password {
-		height:33px;
-		width:100%;
-		margin-top:2px;
-		padding-left:10px;
-		border:none;
-		border-bottom:1px solid $lightgray;
-		border-radius: 0px;
-		@include lato;
-		font-size: .75em;
-		letter-spacing:.5px;
-		color: $darkgray;
-	}
+	label {
 
-	.log-in-button {
-		-webkit-appearance: none;
-		@include lato;
-		font-size:.75em;
-		text-transform:uppercase;
-		letter-spacing:1px;
-		@include border-radius(3px);
-		border:0px;
-		width:160px;
-		height:25px;
-		margin:0;
-		margin-top:8px;
-		background-color:$medBlue;
-		color:white;
-		cursor:pointer;
-		&:active {
-			background-color: darken($medBlue,10);
-		}
+		font-size: 14px;
+
 	}
 }

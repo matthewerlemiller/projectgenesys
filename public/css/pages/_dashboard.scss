@@ -17,9 +17,10 @@ body.home {
 		bottom: 25px;
 		right: 25px;
 		border-radius: 100%;
-		box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
-		-webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
+		// box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
+		// -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
 		background-color: $primary;
+		border:2px solid $darkPrimary;
 		width: 75px;
 		height: 75px;
 		font-size: 3em;
@@ -60,7 +61,7 @@ body.home {
 			width: 80%;
 			position:relative;
 			left:10%;
-			border-bottom: 1px solid $mediumGray;
+			border-bottom: 2px solid $darkPrimary;
 			margin-bottom: 25px;
 
 		}
@@ -78,13 +79,14 @@ body.home {
 				display: block;
 				margin:0;
 				padding:0;
-				border-radius: 50%;
+				// border-radius: 50%;
 				width:100%;
 				height:100%;
 				background-color:$lightgray;
 				background-size: cover;
 				background-position: center;
-				border:3px solid $darkgray;
+				border:2px solid $darkPrimary;
+				// border-radius: 50%;
 			}
 
 			.name {
@@ -114,24 +116,27 @@ body.home {
 			width:100%;
 			height:140px;
 			padding:10px;
-			border-radius:5px;
+			// border-radius:5px;
 			// background-color: $lightgray;
-			border:1px solid $lightgray;
+			border:2px solid $darkPrimary;
+			background-color: white;
 
 
 			.result-block-content {
 
 				float:left;
 				position: relative;
+				box-sizing:border-box;
+				padding-left: 20px;
 				
 			}
 
 			.result-name {
 
 				font-size:1.75rem;
-				margin-left: 20px;
+				// margin-left: 20px;
 				// margin-top:10px;
-				display:inline-block;
+				// display:block;
 				line-height:48px;
 				width:auto;
 				color:$darkgray;
@@ -149,12 +154,12 @@ body.home {
 			.result-image {
 				width:117px;
 				height:117px;
-				border-radius:50%;
+				// border-radius:50%;
 				background-color: gray;
 				background-size: cover;
 				background-position: center;
 				float:left;
-				border:2px solid $darkgray;
+				border:2px solid $darkPrimary;
 			}
 
 			.result-checkin {
@@ -170,21 +175,26 @@ body.home {
 			}
 
 			.result-checkin-green {
-				background-color: $tertiary;
-				box-shadow: 3px 3px 0px 0px darken($tertiary,20);
+				background-color: $green;
+				border: 2px solid darken($green, 15%);
+
+				// box-shadow: 3px 3px 0px 0px darken($tertiary,20);
 
 			}
 
 		}
 
 		.no-result-block {
+
 			text-align: center;
 			margin-top: 45px;
+			border-color:$red;
+
 		}
 
 		.no-result-heading {
 			letter-spacing: 1px;
-			color:$secondary;
+			color:$red;
 			font-weight:700;
 			font-size: 2em;
 			padding-top: 23px;
@@ -200,7 +210,7 @@ body.home {
 			position: relative;
 			top: 53px;
 			left: 10%;
-			border-top: 1px solid $mediumGray;
+			border-top: 2px solid $darkPrimary;
 			width: 80%;
 		}
 

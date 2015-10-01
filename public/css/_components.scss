@@ -3,14 +3,24 @@
 	table {
 
 		width:100%;
-		border:1px solid lighten($mediumGray, 10%);
-
 	}
 
-	input[type="text"], input[type="date"] {
+	input[type="text"], input[type="date"], input[type="password"], input[type="email"], textarea {
 
-		border:1px solid $mediumGray;
+		border:2px solid $darkPrimary;
 		width:100%;
+		@include lato;
+		font-size:1rem;
+		padding:6px;
+		color:$darkgray;
+		background-color: #fff;
+
+		&:focus {
+
+			outline: none;
+			border-style: dotted;
+
+		}
 
 	}
 
@@ -19,17 +29,6 @@
 		padding:8px 15px;
 
 	}
-
-	tr {
-
-		&:nth-child(2n+1) {
-
-			background-color: lighten($lightgray, 15%);
-
-		}
-		
-	}
-
 	
 	&-field {
 
@@ -41,6 +40,72 @@
 
 		width:40%;
 		margin: 20px auto 50px auto;
+
+	}
+
+	label {
+
+		color:$primary;
+		margin-bottom: 5px;
+		display: block;
+		font-size: 18px;
+		text-align: left;
+
+	}
+
+	&-group {
+
+		margin-bottom: 15px;
+
+	}
+
+	&-select {
+
+		width:100%;
+		position: relative;
+		
+		background-color: white;
+
+		select {
+
+			-webkit-appearance: none;
+			background-color: transparent;
+		    width: 100%;
+		    height:100%;
+		    border-radius: 0;
+		    border:none;
+		    padding: 6px;
+		    font-size: 1rem;
+		    border: 2px solid black;
+		    @include lato;
+
+		    &:focus {
+
+		    	outline: none;
+		    	border-style: dotted;
+
+		    }
+
+		}
+
+	    &:after {
+
+	    	position: absolute;
+	    	height:100%;
+	    	width:35px;
+	    	background-color: $primary;
+	    	right:0;
+	    	top:0;
+	    	font-family: FontAwesome;
+	    	color:white;
+	    	content:'\f107';
+	    	text-align: center;
+	    	pointer-events:none;
+	    	font-size: 20px;
+    	    padding-top: 5px;
+    	    box-sizing: border-box;
+
+	    }
 
 	}
 
@@ -56,7 +121,7 @@
 
 	&--good {
 
-		border: 1px solid $green;
+		border: 2px solid $green;
 		background-color: lighten($green, 47%);
 		color:$green;
 
@@ -64,7 +129,7 @@
 
 	&--bad {
 
-		border: 1px solid $red;
+		border: 2px solid $red;
 		background-color: lighten($red, 41%);
 		color:$red;
 
@@ -73,6 +138,81 @@
 	&--block {
 
 		display: block;
+
+	}
+
+}
+
+.Table {
+
+	width: 100%;
+	font-size: .8rem;
+
+
+	th {
+
+		height:auto;
+		font-size:1.25em;
+		color:white;
+		padding: 12px 20px;
+		background-color: $primary;
+
+		&:nth-child(n+2) {
+
+			border-left: 2px solid $darkPrimary;
+
+		}
+
+	}
+
+	tr {
+
+
+
+		&:nth-child(2n+2) {
+
+			background-color: lighten($primary, 40%);
+			border-top: 2px solid $darkPrimary;
+			border-bottom: 2px solid $darkPrimary;
+
+		}
+
+	}
+
+	td {
+
+		@include box-sizing(border-box);
+		padding:10px;
+		text-align: center;
+
+	}
+
+}
+
+
+.Card {
+
+	background-color: white;
+	width:100%;
+	border:2px solid $darkPrimary;
+
+	&-title {
+
+		text-align: center;
+		color:$primary;
+		font-size: 1.25rem;
+		border-bottom: 2px solid $darkPrimary;
+		padding:14px 0;
+		font-weight: bold;
+		box-sizing:border-box;
+
+	}
+
+	&-content {
+
+		width:100%;
+		padding:25px;
+		box-sizing:border-box;
 
 	}
 

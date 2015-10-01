@@ -1,14 +1,15 @@
 
-<div class="offscreen-nav">
-	<div class="links-container">
-		<a href="{{ route('dashboard') }}">Home</a>
-		<a href="{{ route('shift.index') }}">Shift</a>
-		<a class="logout" href="{{ route('logout') }}">Log Out</a>
+<nav class="offscreen-nav">
+	<ul class="links-container">
+		<li><a href="{{ route('dashboard') }}">Home</a></li>
+		<li><a href="{{ route('shift.index') }}">Shift</a></li>
+		<li><a href="{{ route('member.create') }}">Add Member</a></li>
+		<li><a class="logout" href="{{ route('logout') }}">Sign out</a></li>
 		@if(Auth::user()->admin)
-		<a href="{{ route('admin.index') }}">Admin</a>
+		<li><a href="{{ route('admin.index') }}">Admin</a></li>
 		@endif
-	</div>
-</div>
+	</ul>
+</nav>
 
 <input type="checkbox" id="nav-trigger" class="nav-trigger" />
 <label for="nav-trigger">

@@ -36,115 +36,131 @@
 
 	<div class="member-details-container" ng-show="details">
 
-		<div class="member-details-section">
 
-			<table style="table-layout:fixed;">
-				<tr>
-					<td><p class="text-data"><span class="label">Status</span> : <status-tag member="member" loaded="loaded" block="false"></status-tag> </p></td>
-					<td><p class="text-data"><span class="label">Gender</span> : @{{ member.gender }} </p></td>
-					<td><p class="text-data"><span class="label">School</span> : @{{ member.school.name }} </p></td>
-				</tr>
-				<tr>
-					<td><p class="text-data"><span class="label">Phone</span> : @{{ member.phone }} </p></td>
-					<td colspan="2"><p class="text-data"><span class="label">Address</span> : @{{ member.address }} </p></td>
-				</tr>
-				<tr>
-					<td colspan="2"><p class="text-data"><span class="label">Email</span> : @{{ member.email }} </p></td>
-					<td><p class="text-data"><span class="label">Birthdate</span> : @{{ member.birthDate }} </p></td>
-				</tr>
-			</table>
-			
-		</div>
-
-		<div class="member-details-section">
-
-			<h2 class="section-title">Involvement</h2>
-
-			<div class="column">
-
-				<div class="group">
-
-					<h3 class="subsection-title">Life Events</h3>
-
-					<p class="boolean-data"><span class="label">Saved</span> : @{{ member.saved | yesno }} </p>
-					<p class="boolean-data"><span class="label">Baptized</span> : @{{ member.baptized | yesno }} </p>
-					<p class="text-data"><span class="label">Baptized Date</span> : @{{ member.baptizedDate }} </p>
-					<div class="spacer"></div>
-					<div class="spacer"></div>
-
-				</div>
-
-				<div class="group">
-
-					<h3 class="subsection-title">Ministry Info </h3>
-
-					<p class="boolean-data"><span class="label">Attends High School Group</span> : @{{ member.attendsHighSchoolGroup | yesno }}</p>
-					<p class="boolean-data"><span class="label">Attends High School Small Group</span> : @{{ member.attendsHighSchoolSmallGroup | yesno }}</p>
-					<p class="boolean-data"><span class="label">Attends Jr High Group</span> : @{{ member.attendsJrHighGroup | yesno }}</p>
-					<p class="boolean-data"><span class="label">Attends Higher Ground</span> : @{{ member.attendsHigherGround | yesno }}</p>
-					<p class="boolean-data"><span class="label">In Leadership Core</span> : @{{ member.attendsLeadershipCore | yesno }} </p>
-					<div class="spacer"></div>
-
-				</div>
-
-			</div>
-
-			<div class="column">
-
-				<div class="group">
-
-					<h3 class="subsection-title">Leadership Info</h3>
-
-					<p class="boolean-data"><span class="label">Serves in Bus Ministry</span> : @{{ member.leadsBusMinistry | yesno }}</p>
-					<p class="boolean-data"><span class="label">Worship Leader</span> : @{{ member.leadsWorship | yesno }} </p>
-					<p class="boolean-data"><span class="label">Serves in Kids Ministry</span> : @{{ member.leadsKidsMinistry | yesno }} </p>
-					<p class="boolean-data"><span class="label">High School Small Group Leader</span> : @{{ member.leadsHighSchoolSmallGroup | yesno }} </p>
-					<p class="boolean-data"><span class="label">Jr High Group Leader</span> : @{{ member.leadsJrHighGroup | yesno }} </p>
-					<p class="boolean-data"><span class="label">HigherGround Leader</span> : @{{ member.leadsHigherGround | yesno }} </p>
-					<div class="spacer"></div>
-
-				</div>
-
-				<div class="group">
-
-					<h3 class="subsection-title">Event Attendance</h3>
-
-					<p class="boolean-data"><span class="label">Summer Camp</span> : @{{ member.attendsSummerCamp | yesno }} </p>
-					<p class="boolean-data"><span class="label">Winter Camp</span> : @{{ member.attendsWinterCamp | yesno }} </p>
-					<p class="boolean-data"><span class="label">Future Quest</span> : @{{ member.attendsFutureQuest | yesno }} </p>
-					<div class="spacer"></div>
-
-				</div>
-
-			</div>
-
-		</div>
 		
-		<div class="member-details-section">
+		<div class="Card member-details-section">
 
-			<h2 class="section-title">Emergency Info</h2>
+			<div class="Card-title">Info</div>
 
-			<table>
-				<tr>
-					<td><p class="text-data"><span class="label">Parent</span> : @{{ member.parent1Name }} </p></td>
-					<td><p class="text-data"><span class="label">Phone</span>: @{{ member.parent1Phone }} </p></td>
-					{{-- <td><p class="text-data"><span class="label">Alternate Phone</span>: {{{ $member->p or '---' }}} </p></td> --}}
-				</tr>
-				<tr>
-					<td><p class="text-data"><span class="label">Parent</span> : @{{ member.parent2Name }} </p></td>
-					<td><p class="text-data"><span class="label">Phone</span>: @{{ member.parent2Phone }} </p></td>
-					{{-- <td><p class="text-data"><span class="label">Alternate Phone</span>: {{{ $member->Parent2Phone2 or '---' }}} </p></td> --}}
-				</tr>
-				<tr>
-					<td><p class="text-data"><span class="label">Emergency Contact</span> : @{{ member.emergencyContactName }} </p></td>
-					<td><p class="text-data"><span class="label">Phone</span> : @{{ member.emergencyContactPhone }} </p></td>
-					{{-- <td><p class="text-data"><span class="label">Alternate Phone</span> : {{{ $member->emergencyContactPhone or '---' }}} </p></td> --}}
-				</tr>
-				<tr>
-					<td><p class="boolean-data"><span class="label">Permission Slip</span> : @{{ member.permissionSlip | yesno }} </p></td>
-					<td><p class="boolean-data"><span class="label">Skatepark</span> : @{{ member.skatepark | yesno}} </p></td>
-				</tr>
-			</table>
+			<div class="Card-content">
+
+				<table style="table-layout:fixed;">
+					<tr>
+						<td><p class="text-data"><span class="label">Status</span> : <status-tag member="member" loaded="loaded" block="false"></status-tag> </p></td>
+						<td><p class="text-data"><span class="label">Gender</span> : @{{ member.gender }} </p></td>
+						<td><p class="text-data"><span class="label">School</span> : @{{ member.school.name }} </p></td>
+					</tr>
+					<tr>
+						<td><p class="text-data"><span class="label">Phone</span> : @{{ member.phone }} </p></td>
+						<td colspan="2"><p class="text-data"><span class="label">Address</span> : @{{ member.address }} </p></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p class="text-data"><span class="label">Email</span> : @{{ member.email }} </p></td>
+						<td><p class="text-data"><span class="label">Birthdate</span> : @{{ member.birthDate }} </p></td>
+					</tr>
+				</table>
+
+			</div>
+	
+		</div>
+
+		<div class="Card member-details-section">
+
+			<div class="Card-title">Involvement</div>
+
+			<div class="Card-content">
+
+				<div class="column">
+
+					<div class="group">
+
+						<h3 class="subsection-title">Life Events</h3>
+
+						<p class="boolean-data"><span class="label">Saved</span> : @{{ member.saved | yesno }} </p>
+						<p class="boolean-data"><span class="label">Baptized</span> : @{{ member.baptized | yesno }} </p>
+						<p class="text-data"><span class="label">Baptized Date</span> : @{{ member.baptizedDate }} </p>
+						<div class="spacer"></div>
+						<div class="spacer"></div>
+
+					</div>
+
+					<div class="group">
+
+						<h3 class="subsection-title">Ministry</h3>
+
+						<p class="boolean-data"><span class="label">Attends High School Group</span> : @{{ member.attendsHighSchoolGroup | yesno }}</p>
+						<p class="boolean-data"><span class="label">Attends High School Small Group</span> : @{{ member.attendsHighSchoolSmallGroup | yesno }}</p>
+						<p class="boolean-data"><span class="label">Attends Jr High Group</span> : @{{ member.attendsJrHighGroup | yesno }}</p>
+						<p class="boolean-data"><span class="label">Attends Higher Ground</span> : @{{ member.attendsHigherGround | yesno }}</p>
+						<p class="boolean-data"><span class="label">In Leadership Core</span> : @{{ member.attendsLeadershipCore | yesno }} </p>
+						<div class="spacer"></div>
+
+					</div>
+
+				</div>
+
+				<div class="column">
+
+					<div class="group">
+
+						<h3 class="subsection-title">Leadership</h3>
+
+						<p class="boolean-data"><span class="label">Serves in Bus Ministry</span> : @{{ member.leadsBusMinistry | yesno }}</p>
+						<p class="boolean-data"><span class="label">Worship Leader</span> : @{{ member.leadsWorship | yesno }} </p>
+						<p class="boolean-data"><span class="label">Serves in Kids Ministry</span> : @{{ member.leadsKidsMinistry | yesno }} </p>
+						<p class="boolean-data"><span class="label">High School Small Group Leader</span> : @{{ member.leadsHighSchoolSmallGroup | yesno }} </p>
+						<p class="boolean-data"><span class="label">Jr High Group Leader</span> : @{{ member.leadsJrHighGroup | yesno }} </p>
+						<p class="boolean-data"><span class="label">HigherGround Leader</span> : @{{ member.leadsHigherGround | yesno }} </p>
+						<div class="spacer"></div>
+
+					</div>
+
+					<div class="group">
+
+						<h3 class="subsection-title">Event Attendance</h3>
+
+						<p class="boolean-data"><span class="label">Summer Camp</span> : @{{ member.attendsSummerCamp | yesno }} </p>
+						<p class="boolean-data"><span class="label">Winter Camp</span> : @{{ member.attendsWinterCamp | yesno }} </p>
+						<p class="boolean-data"><span class="label">Future Quest</span> : @{{ member.attendsFutureQuest | yesno }} </p>
+						<div class="spacer"></div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<div class="Card member-details-section">
+
+			<div class="Card-title">Emergency</div>
+
+			<div class="Card-content">
+				<table>
+					<tr>
+						<td><p class="text-data"><span class="label">Parent</span> : @{{ member.parent1Name }} </p></td>
+						<td><p class="text-data"><span class="label">Phone</span>: @{{ member.parent1Phone }} </p></td>
+						{{-- <td><p class="text-data"><span class="label">Alternate Phone</span>: {{{ $member->p or '---' }}} </p></td> --}}
+					</tr>
+					<tr>
+						<td><p class="text-data"><span class="label">Parent</span> : @{{ member.parent2Name }} </p></td>
+						<td><p class="text-data"><span class="label">Phone</span>: @{{ member.parent2Phone }} </p></td>
+						{{-- <td><p class="text-data"><span class="label">Alternate Phone</span>: {{{ $member->Parent2Phone2 or '---' }}} </p></td> --}}
+					</tr>
+					<tr>
+						<td><p class="text-data"><span class="label">Emergency Contact</span> : @{{ member.emergencyContactName }} </p></td>
+						<td><p class="text-data"><span class="label">Phone</span> : @{{ member.emergencyContactPhone }} </p></td>
+						{{-- <td><p class="text-data"><span class="label">Alternate Phone</span> : {{{ $member->emergencyContactPhone or '---' }}} </p></td> --}}
+					</tr>
+					<tr>
+						<td><p class="boolean-data"><span class="label">Permission Slip</span> : @{{ member.permissionSlip | yesno }} </p></td>
+						<td><p class="boolean-data"><span class="label">Skatepark</span> : @{{ member.skatepark | yesno}} </p></td>
+					</tr>
+				</table>
+
+			</div>
 
 		</div>
 
@@ -152,7 +168,7 @@
 
 	<div class="member-lessons-container" ng-show="lessons" ng-init="memberId = {{ $member->id }}; getSessions({{ $member->id }})">
 		<div class="table-container">
-			<table class="member-lessons-table">
+			<table class="Table">
 
 				<tr>
 					<th>Leader</th>
@@ -173,31 +189,50 @@
 
 		<div class="add-lesson-container">
 
-			<div class="title-wrap"><h1 class="section-title-white">Add Lesson</h1></div>
+			<div class="title-wrap">
+				<h1>Add Lesson</h1>
+			</div>
 
-			<div class="rule"></div>
+	
 
 			<div class="member-lesson-form">
 
-				<form>
+				<form class="Form">
 
-					<p><label for="leader-query">Leaders, select your name.</label></p>
+					<div class="Form-group">
+						<label for="leader-query">Leaders, select your name.</label>				
+
+						<div class="Form-select">
+							<select ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="leaderId">
+								<option value="">Find your name...</option>
+							</select> 
+						</div>	
+					</div>
+
+					<div class="Form-group">
+
+						<label for="lesson">Choose Lesson</label>
+
+						<div class="Form-select">
+
+							<select name="lesson" ng-model="lessonId" ng-options="lesson.id as lesson.name for lesson in lessonsArray">
+								<option value="">Choose lesson...</option>
+							</select>
+
+						</div>
+
+					</div>						
+
+					<div class="Form-group">
+
+						<label value="Type lesson notes here." for="notes">Notes</label>
+						<textarea name="notes" ng-model="sessionNotes" placeholder="Write a note..."></textarea>
+
+					</div>
+						
 					
-					<p>
-						<select ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="leaderId">
-							<option value="">Find your name...</option>
-						</select> 
-					</p>
-
-					<p><label for="lesson">Choose Lesson</label></p>
-
-					<p><select name="lesson" ng-model="lessonId" ng-options="lesson.id as lesson.name for lesson in lessonsArray">
-						<option value="">Choose lesson...</option>
-					</select></p>
-
-					<p><label value="Type lesson notes here." for="notes">Notes</label></p>
-					<p><textarea name="notes" ng-model="sessionNotes"></textarea></p>
-					<div class="submit" ng-click="saveSession()">Submit</div>
+					
+					<div class="submit-button" ng-click="saveSession()">Submit</div>
 
 				</form>
 
@@ -209,30 +244,52 @@
 
 	<div class="member-kickout-container" ng-show="kickout">
 
-		<div class="member-kickout-form">
 
-			<div class="member-kickout-form-select">
-				<label for="kickout-form-shift">Shift</label>
-				<select name="kickout-form-shift" id="kickout-form-shift" ng-options="shift.id as shift.day + ' ' + shift.time for shift in shifts" ng-model="kickoutForm.shiftId" required>
-					<option value="">Choose One...</option>
-				</select>				
+		<div class="Card member-kickout-form">
+
+			<div class="Card-title">Kickout Form</div>
+
+			<div class="Card-content Form">
+
+				<div class="member-kickout-form-select">
+
+					<label for="kickout-form-shift">Shift</label>
+
+					<div class="Form-select">
+
+						<select name="kickout-form-shift" id="kickout-form-shift" ng-options="shift.id as shift.day + ' ' + shift.time for shift in shifts" ng-model="kickoutForm.shiftId" required>
+							<option value="">Choose One...</option>
+						</select>				
+
+					</div>
+
+					
+				</div>
+				
+				<div class="member-kickout-form-select">
+					<label>Leader</label>
+
+					<div class="Form-select">
+
+						<select name="kickout-form-leader" id="kickout-form-leader" ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="kickoutForm.leaderId" required>
+							<option value="">Choose One...</option>
+						</select>
+
+					</div>
+
+					
+				</div>
+
+				
+
+				<div class="clear"></div>
+
+				<label for="kickout-form-comments">Comments</label>
+				<textarea name="kickout-form-comments" id="kickout-form-comments" ng-model="kickoutForm.comments" required></textarea>
+
+				<div class="button submit-button" ng-click="createKickout()">Submit</div>
+
 			</div>
-			
-			<div class="member-kickout-form-select">
-				<label>Leader</label>
-				<select name="kickout-form-leader" id="kickout-form-leader" ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="kickoutForm.leaderId" required>
-					<option value="">Choose One...</option>
-				</select>
-			</div>
-
-			
-
-			<div class="clear"></div>
-
-			<label for="kickout-form-comments">Comments</label>
-			<textarea name="kickout-form-comments" id="kickout-form-comments" ng-model="kickoutForm.comments" required></textarea>
-
-			<div class="button submit" ng-click="createKickout()">Submit</div>
 
 		</div>
 
@@ -240,7 +297,12 @@
 
 	<div class="member-edit-container Form" ng-show="edit">
 	
-		<table>
+		<table class="Table">
+
+			<tr>
+				<th>Item</th>
+				<th colspan="2">Edit Here</th>
+			</tr>
 			<tr>
 				<td><label>Gender</label></td>
 				<td><input type="radio" ng-model="member.gender" value="Male"> Male</td>
@@ -252,7 +314,11 @@
 			</tr>
 			<tr>
 				<td><label>School</label></td>
-				<td colspan="2"><select ng-options="school.id as school.name for school in schools" ng-model="member.schoolId"></td>
+				<td colspan="2">
+					<div class="Form-select">
+						<select ng-options="school.id as school.name for school in schools" ng-model="member.schoolId">
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td><label>Address</label></td>
@@ -375,7 +441,7 @@
 
 		</table>
 
-		<div class="button submit Form-submit" ng-click="updateMember()">Update</div>		
+		<div class="button submit-button Form-submit" ng-click="updateMember()">Update</div>		
 
 	</div>
 

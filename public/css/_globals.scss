@@ -27,6 +27,7 @@ input, select, password{
     bottom: 100%;
     left: 0;
     z-index: 1;
+    background-color: lighten($primary, 44%);
 }
 
 .left {
@@ -153,6 +154,26 @@ input, select, password{
 
 }
 
+.submit-button {
+  text-align:center;
+  padding: 10px;
+  letter-spacing: .75px;
+  background-color:$primary;
+  @include small-button;
+  @include lato;
+  width:100%;
+  margin-top: 10px;
+  cursor: pointer;
+  color:white;
+
+  &:active {
+
+    @include button-clicked
+
+  }
+
+
+}
 
 .empty-alert {
 

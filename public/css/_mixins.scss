@@ -23,14 +23,14 @@
 	height:60px;
 	background-color: $primary;
 	font-size:1.2rem;
-	line-height: .6rem;
+	line-height: .4rem;
 	color:white;
 	letter-spacing:1px;
-	border-radius:3px;
+	// border-radius:3px;
 	text-align:center;
 	cursor:pointer;
 	padding-top:26px;
-	box-shadow: 2px 2px 0px 0px darken($primary,20);
+	// box-shadow: 2px 2px 0px 0px darken($primary,20);
 	transition:.1s;
 }
 
@@ -40,9 +40,10 @@
 	font-weight:bold;
 	color:white;
 	letter-spacing:.75px;
-	border-radius:3px;
+	// border-radius:3px;
+	border:2px solid $darkPrimary;
 	cursor:pointer;
-	box-shadow: 2px 2px 0px 0px darken($primary,20);
+	// box-shadow: 2px 2px 0px 0px darken($primary,20);
 	transition:.05s;
 
 }

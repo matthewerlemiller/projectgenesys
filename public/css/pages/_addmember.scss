@@ -1,9 +1,10 @@
 
 .addmember-wrapper {
 
-	width: 768px;
+	width: 700px;
 	padding: 30px;
-	text-align:center;
+	// text-align:center;
+	margin:auto;
 
 	.title {
 		font-size:2em;
@@ -19,37 +20,21 @@
 	}
 
 	label {
-		width: 300px;
-		color:white;
-		display:inline;
-		text-align:left;
-		font-size:1.125em;
-		letter-spacing:1px;
+		// width: 300px;
+		// color:white;
+		// display:inline;
+		// text-align:left;
+		// font-size:1.125em;
+		// letter-spacing:1px;
 	}
 
-	p {
-		margin: 40px;
-		margin-top: 10px;
-		display: block;
-
-		input {
-
-			border:none;
-			height: 40px;
-			width: 400px;
-			font-size:1.25em;
-			padding:10px;
-			@include lato;
-			@include round3px;
-			color:$darkgray;
-
-		}
-	}
+	
 
 
 	input {
 
         -webkit-appearance:none;
+        padding:9px !important;
 		
 	}
 
@@ -79,23 +64,24 @@
 		width:260px;
 		height:260px;
 		margin:10px auto 20px auto;
-		background-color: #d2d2d2;
+		// background-color: #d2d2d2;
 		overflow: hidden;
-		@include box-sizing(border-box);
-		border: 5px solid transparent;
+		box-sizing:border-box;
+		// border: 5px solid transparent;
+		border:2px solid $darkPrimary;
 		background-clip: content-box; 
 
 		&:first-child {
 
-			border-right: 5px solid transparent;
-			border-left: none;
+			// border-right: 5px solid transparent;
+			// border-left: none;
 
 		}
 
 		&:last-child {
 			
-			border-right: none;
-			border-left: 5px solid transparent;
+			// border-right: none;
+			// border-left: 5px solid transparent;
 			
 		}
 
@@ -106,7 +92,7 @@
 		}
 
 		i {
-			color:white;
+			color:$primary;
 			@include center;
 			font-size: 2.5rem;
 		}
