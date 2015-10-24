@@ -161,10 +161,13 @@ input, select, password{
   background-color:$primary;
   @include small-button;
   @include lato;
+  border-radius: 0;
   width:100%;
   margin-top: 10px;
   cursor: pointer;
   color:white;
+  appearance:none;
+  -webkit-appearance:none;
 
   &:active {
 
