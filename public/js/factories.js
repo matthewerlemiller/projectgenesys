@@ -37,7 +37,15 @@ app.factory('Member', function($http) {
 
 			return $http.put('/member/update/', data);
 
+		},
+
+		create : function(data) {
+
+			return $http.post('/member', data);
+
 		}
+
+
 
 	}
 });

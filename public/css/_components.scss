@@ -5,7 +5,7 @@
 		width:100%;
 	}
 
-	input[type="text"], input[type="date"], input[type="password"], input[type="email"], textarea {
+	input[type="text"], input[type="date"], input[type="password"], input[type="email"], textarea, input[type="tel"] {
 
 		border:2px solid $darkPrimary;
 		width:100%;
@@ -104,6 +104,9 @@
 	    	font-size: 20px;
     	    padding-top: 5px;
     	    box-sizing: border-box;
+    	    border-top:2px solid $darkPrimary;
+    	    border-right:2px solid $darkPrimary;
+    	    border-bottom:2px solid $darkPrimary;
 
 	    }
 
@@ -213,6 +216,76 @@
 		width:100%;
 		padding:25px;
 		box-sizing:border-box;
+
+	}
+
+}
+
+.Button {
+
+	display: inline-block;
+	box-sizing:border-box;	
+	color:white;
+	padding:8px 18px;
+	background-color: $primary;
+	border:2px solid $darkPrimary;
+	border-radius: 2px;
+	cursor: pointer;
+
+	&:hover {
+
+		background-color: darken($primary, 3%);
+
+	}
+
+	&-group {
+
+		margin-top: 15px;
+
+		.Button {
+
+			margin-right: 5px;
+
+		}
+
+	}
+
+	&--success {
+
+		background-color: $green;
+		border-color:darken($green, 7%);
+
+		&:hover {
+
+			background-color: darken($green, 3%);
+
+		}
+
+	}
+
+	&--neutral {
+
+		background-color: $lightgray;
+		border-color:darken($lightgray, 7%);
+
+		&:hover {
+
+			background-color: darken($lightgray, 3%);
+
+		}
+
+	}
+
+	&--error {
+
+		background-color: $red;
+		border-color:darken($red, 7%);
+
+		&:hover {
+
+			background-color: darken($red, 3%);
+
+		}
 
 	}
 

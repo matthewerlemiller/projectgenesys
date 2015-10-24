@@ -81,8 +81,8 @@ class MemberRepository {
 
 		try {
 			
-			$firstName = $input['firstname'];
-			$lastName = $input['lastname'];
+			$firstName = $input['firstName'];
+			$lastName = $input['lastName'];
 
 			if (isset($input['imagePath'])) {
 				$image = $input['imagePath']	;
@@ -93,9 +93,9 @@ class MemberRepository {
 			$email = $input['email'];
 			$address = $input['address'];
 			
-			$parent1Name = $input['parent-name-1'];
-			$parent2Name = $input['parent-name-2'];
-			$parent1Phone = $input['parent-contact'];
+			$parent1Name = $input['parent1Name'];
+			$parent2Name = $input['parent2Name'];
+			$parent1Phone = $input['parent1Phone'];
 
 			// Parse Phone numbers to remove dashes and parenthesis.
 			$phone = preg_replace('/\D+/', '', $phone);

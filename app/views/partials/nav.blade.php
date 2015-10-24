@@ -2,7 +2,7 @@
 <nav class="offscreen-nav">
 	<ul class="links-container">
 		<li><a href="{{ route('dashboard') }}">Home</a></li>
-		<li><a href="{{ route('shift.index') }}">Shift</a></li>
+		{{-- <li><a href="{{ route('shift.index') }}">Shift</a></li> --}}
 		<li><a href="{{ route('member.create') }}">Add Member</a></li>
 		<li><a class="logout" href="{{ route('logout') }}">Sign out</a></li>
 		@if(Auth::user()->admin)

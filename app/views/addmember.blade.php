@@ -5,25 +5,27 @@
 
 	<div class="addmember-wrapper" ng-controller="CreateMemberController">
 
-		<div class="Card">
+		<div class="Card" ng-show="!created">
 
 			<div class="Card-title">Add New Member</div>
 
 			<div class="Card-content">
 
-				{{ Form::open(array('route' => 'member.store', 'files' => true, 'class' => 'Form')) }}
+				{{-- {{ Form::open(array('route' => 'member.store', 'files' => true, 'class' => 'Form')) }} --}}
+				<div class="Form">
 
 					<div class="Form-group">
 
 						<label for="firstname">First Name</label>
-						{{ Form::text('firstname','',['placeholder' => 'John']) }}	
+						<input type="text" name="firstname" ng-model="member.firstName" placeholder="First Name">	
 
 					</div>
 					
 					<div class="Form-group">
 
 						<label for="lastname">Last Name</label>
-						{{ Form::text('lastname','', ['placeholder' => 'Doe']) }}
+		
+						<input type="text" ng-model="member.lastName" placeholder="Last Name">
 
 					</div>
 					
@@ -45,7 +47,7 @@
 							<div name="angular-upload" id="angular-upload" ng-file-select ng-model="files"></div>
 
 							<!-- This input recieves the returned path of the uploaded image to be used when the entire form is submitted -->
-							<input type="text" value="@{{ image }}" id="imagePath" name="imagePath" class="post-image-path" >
+							<input type="text" value="@{{ image }}" id="imagePath" name="imagePath" class="post-image-path" ng-model="member.image">
 						</div>
 
 					</div>
@@ -54,7 +56,8 @@
 					<div class="Form-group">
 
 						<label for="phone">Phone</label>
-						{{ Form::text('phone', '', ['placeholder' => '000.000.0000']) }}
+						
+						<input type="tel" name="phone" ng-model="member.phone" placeholder="Phone Number">
 
 					</div>
 					
@@ -62,7 +65,7 @@
 					<div class="Form-group">
 
 						<label for="email">Email</label>
-						{{ Form::email('email', '', ['placeholder' => 'name@email.com']) }}
+						<input type="text" name="email" ng-model="member.email" placeholder="Email">
 
 					</div>
 					
@@ -70,45 +73,59 @@
 					<div class="Form-group">
 
 						<label for="address">Address</label>
-						{{ Form::text('address', '', ['placeholder' => '1234 Main St, City ST 00000']) }}
+						<input type="text" name="address" ng-model="member.address" placeholder="Address">
 
 					</div>
 					
 					<div class="Form-group">
 
 						<label for="parent-name-1">First Parent Name</label>
-						{{ Form::text('parent-name-1', '', ['placeholder' => 'Jane Doe']) }}
-
+						<input type="text" name="parent-name-1" ng-model="member.parent1Name" placeholder="Parent Name">
 					</div>
 					
 					<div class="Form-group">
 
 						<label for="parent-name-2">Second Parent Name</label>
-						{{ Form::text('parent-name-2', '', ['placeholder' => 'John Doe Sr.']) }}
+						<input type="text" name="parent-name-2" ng-model="member.parent2Name" placeholder="Parent Name">
 
 					</div>
 
 					<div class="Form-group">
 
 						<label for="parent-contact">Parent Contact Phone</label>
-						{{ Form::text('parent-contact', '', ['placeholder' => '000.000.0000']) }}
+						<input type="tel" name="parent-contact" ng-model="member.parent1Phone" placeholder="Parent phone number">
 
 					</div>
 				
 
-					{{ Form::submit('√')}}
+					{{-- {{ Form::submit('√')}} --}}
+					<input type="submit" value="√" ng-click="saveMember()"></input>
 					
-				{{ Form::close() }}
+				{{-- {{ Form::close() }} --}}
+				</div>
 
 			</div>
 
 		</div>
 
-		
+		<div class="Card" ng-show="created">
+
+			<div class="Card-title">Check-in new member?</div>
+
+			<div class="Card-content">
+
+				@{{ createdMember.firstName }} was successfully added to the system. Would you like to check them in?
+
+				<div class="Button-group">
+					<div class="Button Button--success" ng-click="checkInNewMember()">Yes</div>
+					<div class="Button Button--neutral" ng-click="redirectToDashboard();">Not now</div>
+				</div>
+				
+
+			</div>
+
+		</div>
 	
 	</div>
-
-
-
 
 @stop
