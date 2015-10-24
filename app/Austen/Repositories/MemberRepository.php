@@ -84,8 +84,8 @@ class MemberRepository {
 			$firstName = $input['firstName'];
 			$lastName = $input['lastName'];
 
-			if (isset($input['imagePath'])) {
-				$image = $input['imagePath']	;
+			if (isset($input['image'])) {
+				$image = $input['image']	;
 			} else {
 				$image = false;
 			}

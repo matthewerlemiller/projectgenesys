@@ -30,7 +30,7 @@
 
 			<div class="Card-title">Checked In Members</div>
 
-			<div class="Card-content">
+			<div class="Card-content" ng-cloak>
 
 				<a href="member/@{{ checkInLog.member.id }}" ng-repeat="checkInLog in checkInLogs">
 					

@@ -33,6 +33,7 @@ app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertSer
 
 				$scope.spinner = false;
 				$scope.image = response.data;
+				$scope.member.image = response.data;
 
 			}).error(function(response) {
 
