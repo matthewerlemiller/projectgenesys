@@ -74,9 +74,11 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 			AlertService.broadcast(response.message, 'success');
 
-			console.log(response.data);
-
 			$scope.member = response.data;
+
+			$scope.changePage('details');
+
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 		}).error(function(response) {
 

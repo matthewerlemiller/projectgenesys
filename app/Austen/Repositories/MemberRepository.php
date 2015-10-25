@@ -177,7 +177,19 @@ class MemberRepository {
 
 		}
 
-		return $member->load('sessions.lesson.rank', 'school');
+		$member->load('sessions.lesson.rank', 'school');
+
+		$rank = $this->rank($member);
+
+		if ($rank === false) {
+
+			$rank = Rank::where('name', '=', 'New')->first();
+
+		}
+
+		$member->rank = $rank;
+
+		return $member;
 
 	}
 
