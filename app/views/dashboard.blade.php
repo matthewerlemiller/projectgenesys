@@ -34,7 +34,7 @@
 
 				<a href="member/@{{ checkInLog.member.id }}" ng-repeat="checkInLog in checkInLogs">
 					
-					<div class="result">
+					<div class="result" ng-class="{ 'left-result' : $index % 3 === 0, 'right-result' : ($index + 1) % 3 === 0 }">
 						<div class="pic" back-img="@{{checkInLog.member.image}}"></div>
 						<p class="name">@{{ checkInLog.member.firstName }} @{{ checkInLog.member.lastName }}</p>
 					</div>

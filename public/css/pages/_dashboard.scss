@@ -73,7 +73,19 @@ body.home {
 			-o-user-select: none;
 			position:relative;
 			display: inline-block;
-			margin:0px 15px 30px 15px;
+			margin:0px 0px 30px 0px;
+
+			&.left-result {
+
+				margin-right: 13px;
+
+			}
+
+			&.right-result {
+
+				margin-left: 13px;
+
+			}
 
 			.pic {
 				display: block;
