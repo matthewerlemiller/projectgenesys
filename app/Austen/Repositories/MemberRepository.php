@@ -6,6 +6,7 @@ use Rank;
 use Carbon\Carbon;
 use Status;
 use BadBehaviorEvent;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MemberRepository {
 
@@ -28,7 +29,7 @@ class MemberRepository {
 			$memberLastCheckIn = $member->checklogs()->orderBy('id', 'desc')->get()->first()["checkInDateTime"];
 			$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
 
-		} catch (Exception $e) {
+		} catch (ModelNotFoundException $e) {
 			
 			Log::error($e);
 
@@ -161,11 +162,21 @@ class MemberRepository {
 			if (isset($input['attendsLeadershipCore'])) $member->attendsLeadershipCore = $input['attendsLeadershipCore'];
 			if (isset($input['leadsBusMinistry'])) $member->leadsBusMinistry = $input['leadsBusMinistry'];
 			if (isset($input['leadsWorship'])) $member->leadsWorship = $input['leadsWorship'];
-			if (isset($input['leadsKidsMinistry'])) $member->leadsKidsMinistry = $input['leadsKidsMinistry'];
+			if (isset($input['leadsKidsClub'])) $member->leadsKidsClub = $input['leadsKidsClub'];
+			if (isset($input['attendsKidsClub'])) $member->attendsKidsClub = $input['attendsKidsClub'];
+			if (isset($input['leadsKidsChurch'])) $member->leadsKidsChurch = $input['leadsKidsChurch'];
+			if (isset($input['attendsKidsChurch'])) $member->attendsKidsChurch = $input['attendsKidsChurch'];
 			if (isset($input['leadsHighSchoolSmallGroup'])) $member->leadsHighSchoolSmallGroup = $input['leadsHighSchoolSmallGroup'];
-			if (isset($input['attendsSummerCamp'])) $member->attendsSummerCamp = $input['attendsSummerCamp'];
-			if (isset($input['attendsWinterCamp'])) $member->attendsWinterCamp = $input['attendsWinterCamp'];
+			if (isset($input['attendsHighSchoolSummerCamp'])) $member->attendsHighSchoolSummerCamp = $input['attendsHighSchoolSummerCamp'];
+			if (isset($input['attendsHighSchoolWinterCamp'])) $member->attendsHighSchoolWinterCamp = $input['attendsHighSchoolWinterCamp'];
+			if (isset($input['attendsJrHighSummerCamp'])) $member->attendsJrHighSummerCamp = $input['attendsJrHighSummerCamp'];
+			if (isset($input['attendsJrHighWinterCamp'])) $member->attendsJrHighWinterCamp = $input['attendsJrHighWinterCamp'];
+			if (isset($input['attendsYvRetreat'])) $member->attendsYvRetreat = $input['attendsYvRetreat'];
 			if (isset($input['attendsFutureQuest'])) $member->attendsFutureQuest = $input['attendsFutureQuest'];
+			if (isset($input['attendsFutureQuest'])) $member->attendsFutureQuest = $input['attendsFutureQuest'];
+			if (isset($input['attendsSundaySchool'])) $member->attendsSundaySchool = $input['attendsSundaySchool'];
+			if (isset($input['leadsSundaySchool'])) $member->leadsSundaySchool = $input['leadsSundaySchool'];
+			if (isset($input['attendsMission910'])) $member->attendsMission910 = $input['attendsMission910'];
 
 			$member->update();
 

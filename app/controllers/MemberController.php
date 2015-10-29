@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Austen\Repositories\ImageRepository;
 use Austen\Repositories\MemberRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MemberController extends BaseController {
 

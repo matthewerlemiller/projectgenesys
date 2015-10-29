@@ -49,7 +49,10 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+
+	// return Redirect::route('home');
 });
+
 
 /*
 |--------------------------------------------------------------------------

@@ -92,7 +92,12 @@
 						<p class="boolean-data"><span class="label">Attends High School Small Group</span> : @{{ member.attendsHighSchoolSmallGroup | yesno }}</p>
 						<p class="boolean-data"><span class="label">Attends Jr High Group</span> : @{{ member.attendsJrHighGroup | yesno }}</p>
 						<p class="boolean-data"><span class="label">Attends Higher Ground</span> : @{{ member.attendsHigherGround | yesno }}</p>
+						<p class="boolean-data"><span class="label">Attends Kids Club</span> : @{{ member.attendsKidsClub | yesno }}</p>
+						<p class="boolean-data"><span class="label">Attends Kids Church</span> : @{{ member.attendsKidsChurch | yesno }}</p>
+						<p class="boolean-data"><span class="label">Attends Sunday School</span> : @{{ member.attendsSundaySchool | yesno }}</p>
 						<p class="boolean-data"><span class="label">In Leadership Core</span> : @{{ member.attendsLeadershipCore | yesno }} </p>
+						<p class="boolean-data"><span class="label">Attends Mission 9-10</span> : @{{ member.attendsMission910 | yesno }} </p>
+
 						<div class="spacer"></div>
 
 					</div>
@@ -107,7 +112,8 @@
 
 						<p class="boolean-data"><span class="label">Serves in Bus Ministry</span> : @{{ member.leadsBusMinistry | yesno }}</p>
 						<p class="boolean-data"><span class="label">Worship Leader</span> : @{{ member.leadsWorship | yesno }} </p>
-						<p class="boolean-data"><span class="label">Serves in Kids Ministry</span> : @{{ member.leadsKidsMinistry | yesno }} </p>
+						<p class="boolean-data"><span class="label">Serves in Kids Club</span> : @{{ member.leadsKidsClub | yesno }} </p>
+						<p class="boolean-data"><span class="label">Serves in Kids Church</span> : @{{ member.leadsKidsChurch | yesno }} </p>
 						<p class="boolean-data"><span class="label">High School Small Group Leader</span> : @{{ member.leadsHighSchoolSmallGroup | yesno }} </p>
 						<p class="boolean-data"><span class="label">Jr High Group Leader</span> : @{{ member.leadsJrHighGroup | yesno }} </p>
 						<p class="boolean-data"><span class="label">HigherGround Leader</span> : @{{ member.leadsHigherGround | yesno }} </p>
@@ -117,11 +123,14 @@
 
 					<div class="group">
 
-						<h3 class="subsection-title">Event Attendance</h3>
+						<h3 class="subsection-title">Event</h3>
 
-						<p class="boolean-data"><span class="label">Summer Camp</span> : @{{ member.attendsSummerCamp | yesno }} </p>
-						<p class="boolean-data"><span class="label">Winter Camp</span> : @{{ member.attendsWinterCamp | yesno }} </p>
+						<p class="boolean-data"><span class="label">HS Summer Camp</span> : @{{ member.attendsHighSchoolSummerCamp | yesno }} </p>
+						<p class="boolean-data"><span class="label">HS Winter Camp</span> : @{{ member.attendsHighSchoolWinterCamp | yesno }} </p>
+						<p class="boolean-data"><span class="label">JH Summer Camp</span> : @{{ member.attendsJrHighSummerCamp | yesno }} </p>
+						<p class="boolean-data"><span class="label">JH Winter Camp</span> : @{{ member.attendsJrHighWinterCamp | yesno }} </p>
 						<p class="boolean-data"><span class="label">Future Quest</span> : @{{ member.attendsFutureQuest | yesno }} </p>
+						<p class="boolean-data"><span class="label">YV Retreat</span> : @{{ member.attendsYvRetreat | yesno }} </p>
 						<div class="spacer"></div>
 
 					</div>
@@ -355,6 +364,26 @@
 				<td><input type="radio" ng-model="member.attendsHigherGround" ng-value="false"> No</td>
 			</tr>
 			<tr>
+				<td><label>Attends Kids Club?</label></td>
+				<td><input type="radio" ng-model="member.attendsKidsClub" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsKidsClub" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Attends Kids Church?</label></td>
+				<td><input type="radio" ng-model="member.attendsKidsChurch" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsKidsChurch" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Attends Sunday School?</label></td>
+				<td><input type="radio" ng-model="member.attendsSundaySchool" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsSundaySchool" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Attends Mission 9-10?</label></td>
+				<td><input type="radio" ng-model="member.attendsMission910" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsMission910" ng-value="false"> No</td>
+			</tr>
+			<tr>
 				<td><label>Attends Leadership Core?</label></td>
 				<td><input type="radio" ng-model="member.attendsLeadershipCore" ng-value="true"> Yes</td>
 				<td><input type="radio" ng-model="member.attendsLeadershipCore" ng-value="false"> No</td>
@@ -365,9 +394,19 @@
 				<td><input type="radio" ng-model="member.leadsBusMinistry" ng-value="false"> No</td>
 			</tr>
 			<tr>
-				<td><label>Serves in Kids Ministry?</label></td>
-				<td><input type="radio" ng-model="member.leadsKidsMinistry" ng-value="true"> Yes</td>
-				<td><input type="radio" ng-model="member.leadsKidsMinistry" ng-value="false"> No</td>
+				<td><label>Serves in Kids Club?</label></td>
+				<td><input type="radio" ng-model="member.leadsKidsClub" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.leadsKidsClub" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Serves in Kids Church?</label></td>
+				<td><input type="radio" ng-model="member.leadsKidsChurch" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.leadsKidsChurch" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Serves in Sunday School?</label></td>
+				<td><input type="radio" ng-model="member.leadsSundaySchool" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.leadsSundaySchool" ng-value="false"> No</td>
 			</tr>
 			<tr>
 				<td><label>Is High School Small Group Leader?</label></td>
@@ -390,19 +429,34 @@
 				<td><input type="radio" ng-model="member.leadsWorship" ng-value="false"> No</td>
 			</tr>
 			<tr>
-				<td><label>Attended Summer Camp?</label></td>
-				<td><input type="radio" ng-model="member.attendsSummerCamp" ng-value="true"> Yes</td>
-				<td><input type="radio" ng-model="member.attendsSummerCamp" ng-value="false"> No</td>
+				<td><label>Attended High School Summer Camp?</label></td>
+				<td><input type="radio" ng-model="member.attendsHighSchoolSummerCamp" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsHighSchoolSummerCamp" ng-value="false"> No</td>
 			</tr>
 			<tr>
-				<td><label>Attended Winter Camp?</label></td>
-				<td><input type="radio" ng-model="member.attendsWinterCamp" ng-value="true"> Yes</td>
-				<td><input type="radio" ng-model="member.attendsWinterCamp" ng-value="false"> No</td>
+				<td><label>Attended High School Winter Camp?</label></td>
+				<td><input type="radio" ng-model="member.attendsHighSchoolWinterCamp" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsHighSchoolWinterCamp" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Attended Jr High Summer Camp?</label></td>
+				<td><input type="radio" ng-model="member.attendsJrHighSummerCamp" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsJrHighSummerCamp" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Attended Jr High Winter Camp?</label></td>
+				<td><input type="radio" ng-model="member.attendsJrHighWinterCamp" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsJrHighWinterCamp" ng-value="false"> No</td>
 			</tr>
 			<tr>
 				<td><label>Attended Future Quest?</label></td>
 				<td><input type="radio" ng-model="member.attendsFutureQuest" ng-value="true"> Yes</td>
 				<td><input type="radio" ng-model="member.attendsFutureQuest" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Attended YV Retreat?</label></td>
+				<td><input type="radio" ng-model="member.attendsYvRetreat" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.attendsYvRetreat" ng-value="false"> No</td>
 			</tr>
 			<tr>
 				<td><label>Permission Slip?</label></td>
