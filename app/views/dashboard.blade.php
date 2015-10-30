@@ -28,7 +28,7 @@
 
 		<div class="Card results-wrapper" ng-controller="DashboardController">
 
-			<div class="Card-title">Checked In Members</div>
+			<div class="Card-title">Checked In Members <span class="dashboard-counter">@{{ checkInLogs.length }}</span></div>
 
 			<div class="Card-content" ng-cloak>
 
