@@ -18,7 +18,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'pgsql',
 
 	'connections' => array(
 
@@ -36,7 +36,7 @@ return array(
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
-			'database' => 'genesys',
+			'database' => 'homestead',
 			'username' => 'homestead',
 			'password' => 'secret',
 			'charset'  => 'utf8',

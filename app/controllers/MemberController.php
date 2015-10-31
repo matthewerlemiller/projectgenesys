@@ -140,9 +140,9 @@ class MemberController extends BaseController {
 		$searchTerms = explode(' ', $q);
 		
 		foreach($searchTerms as $term) {	
-			$query->where('firstName', 'LIKE', '%'. $term .'%')
-		          ->orWhere('lastName', 'LIKE', '%' . $term . '%')
-		          ->orWhereRaw('LOWER(firstName) LIKE ?', array($term));
+			$query->where('firstName', 'ILIKE', '%'. $term .'%')
+		          ->orWhere('lastName', 'ILIKE', '%' . $term . '%');
+		          // ->orWhereRaw('LOWER(firstName) LIKE ' . $term);
 		}
 
 		$results = $query->get();
