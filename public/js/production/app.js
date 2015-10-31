@@ -16645,7 +16645,8 @@ app.controller('DashboardController', function($scope, Member, SharedService) {
 
 
 });
-app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', function($scope, Member, Session, Lesson, Leader, Shift, Kickout, AlertService, School) {
+app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', 'Image', 
+	function(                            $scope,   Member,   Session,   Lesson,   Leader,   Shift,   Kickout,   AlertService,   School,   Image) {
 
 	$scope.details = true;
 	$scope.lessons = false;
@@ -16667,12 +16668,17 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 	$scope.lessonId = null;
 	$scope.sessionNotes = null;
 
+	$scope.photoHasBeenChanged = false;
+	$scope.photoHasBeenSaved = true;
+	// $scope.files = {};
+
 	$scope.changePage = function(pageName) {
 
 		$scope.details = false;
 		$scope.lessons = false;
 		$scope.kickout = false;
 		$scope.edit = false;
+		$scope.photoHasBeenChanged;
 
 		if (pageName == 'details') {
 
@@ -16724,6 +16730,8 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 			$scope.member = response.data;
 
 			$scope.changePage('details');
+
+			$scope.photoHasBeenSaved = true;
 
 			document.body.scrollTop = document.documentElement.scrollTop = 0;
 
@@ -16865,6 +16873,50 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 			AlertService.broadcast(response.message, 'error');
 
 		});
+
+	}
+
+	$scope.$watch('files', function() {
+
+		console.log('file selected');
+		console.debug('$scope.files', $scope.files);
+
+		$scope.onFileSelect($scope.files);
+
+	});
+
+	$scope.onFileSelect = function(files) {
+
+		var file;
+
+		console.debug('files', files);
+
+		if (files && files.length) {
+
+			file = files[0];
+
+			$scope.spinner = true;
+			$scope.plus = false;
+
+			Image.upload(file).success(function(response) {
+
+				$scope.spinner = false;
+				$scope.image = response.data;
+				$scope.member.image = response.data;
+				$scope.photoHasBeenChanged = true;
+				$scope.photoHasBeenSaved = false;
+
+			}).error(function(response) {
+
+				$scope.spinner = false;
+				$scope.plus = true;
+
+				console.log("There was an error");
+
+			});
+
+
+		}
 
 	}
 

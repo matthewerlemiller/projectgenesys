@@ -47,7 +47,7 @@
 							<div name="angular-upload" id="angular-upload" ng-file-select ng-model="files"></div>
 
 							<!-- This input recieves the returned path of the uploaded image to be used when the entire form is submitted -->
-							<input type="text" value="@{{ image }}" id="imagePath" name="imagePath" class="post-image-path" ng-model="member.image">
+							{{-- <input type="text" value="@{{ image }}" id="imagePath" name="imagePath" class="post-image-path" ng-model="member.image"> --}}
 						</div>
 
 					</div>

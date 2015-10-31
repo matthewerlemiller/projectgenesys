@@ -140,6 +140,7 @@ class MemberRepository {
 			if (isset($input['phone'])) $member->phone = preg_replace('/\D+/', '', $input['phone']);
 			if (isset($input['address'])) $member->address = $input['address'];
 			if (isset($input['email'])) $member->email = $input['email'];
+			if (isset($input['image'])) $member->image = $input['image'];
 			if (isset($input['parent1Name'])) $member->parent1Name = $input['parent1Name'];
 			if (isset($input['parent2Name'])) $member->parent2Name = $input['parent2Name'];
 			if (isset($input['parent1Phone'])) $member->parent1Phone = preg_replace('/\D+/', '', $input['parent1Phone']);

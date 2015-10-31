@@ -8,19 +8,27 @@
 
 		<div class="member-header-info">
 
-			<div class="member-profile-image" style="background-image:url({{$member->image}})">
+			<div class="member-profile-image" ng-style="{'background-image':'url(' + (member.image ? member.image : '') + ')'}">
 				@if ($memberCheckedIn)
 					<div class="member-checkedin-status">
 						Checked In
 					</div>
 				@endif
+				<div ng-if="edit && !photoHasBeenChanged" class="member-photo-upload">
+					<i class="fa fa-plus"></i>
+					<div name="angular-upload" id="angular-upload" ng-file-select ng-model="files" ng-file-change="onFileSelect($files)" class="member-photo-upload-field"></div>
+				</div>
+
+				<div class="member-photo-changed-message" ng-if="!photoHasBeenSaved" ng-cloak>
+					Save changes to update image permanently
+				</div>
 			</div>
 
-			<h1 class="member-profile-name"><a href="{{ route('member.show', ['id' => $member->id]) }}">@{{ member.firstName + ' ' + member.lastName }}</a><status-tag member="member" loaded="loaded" block="true" class="member-info-status-tag"></status-tag></h1>
+			<h1 class="member-profile-name" ng-cloak><a href="{{ route('member.show', ['id' => $member->id]) }}">@{{ member.firstName + ' ' + member.lastName }}</a><status-tag member="member" loaded="loaded" block="true" class="member-info-status-tag"></status-tag></h1>
 			
-			<rank-tube member="member" loaded="loaded"></rank-tube>
+			<rank-tube member="member" loaded="loaded" ng-cloak></rank-tube>
 
-			<ul class="member-section-navigation">
+			<ul class="member-section-navigation" ng-cloak>
 
 				<li ng-click="changePage('details')" ng-class="{'member-section-selected' : details}"><i class="fa fa-list"></i>Details</li>
 				<li ng-click="changePage('lessons')" ng-class="{'member-section-selected' : lessons}"><i class="fa fa-star"></i>Lessons</li>
@@ -311,6 +319,18 @@
 			<tr>
 				<th>Item</th>
 				<th colspan="2">Edit Here</th>
+			</tr>
+			<tr>
+				<td><label>First Name</label></td>
+				<td colspan="2"><input type="text" ng-model="member.firstName"></td>
+			</tr>
+			<tr>
+				<td><label>Last Name</label></td>
+				<td colspan="2"><input type="text" ng-model="member.lastName"></td>
+			</tr>
+			<tr>
+				<td><label>Email Address</label></td>
+				<td colspan="2"><input type="text" ng-model="member.email"></td>
 			</tr>
 			<tr>
 				<td><label>Gender</label></td>
