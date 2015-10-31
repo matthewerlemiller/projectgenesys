@@ -22,9 +22,10 @@
     <meta name="msapplication-TileImage" content="{{ asset('/mstile-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/production/app.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{{ asset('js/vendor/angular.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script>
 
     	var CONFIG = {};

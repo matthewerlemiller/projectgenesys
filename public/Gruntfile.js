@@ -15,6 +15,7 @@ module.exports = function(grunt) {
                     'bower_components/ng-file-upload/angular-file-upload-shim.js',
                     'bower_components/ng-file-upload/angular-file-upload-all.js',
                     'bower_components/angular-animate/angular-animate.js',
+                    'bower_components/cal-heatmap/cal-heatmap.js',
                     'js/config.js',
                     'js/filters.js',
                     'js/services/*.js',
@@ -48,7 +49,11 @@ module.exports = function(grunt) {
         cssmin : {
             combine : {
                 files : {
-                    'css/production/app.css' : ['css/style.css', 'css/reset.css']
+                    'css/production/app.css' : [
+                        'bower_components/cal-heatmap/cal-heatmap.css',
+                        'css/style.css', 
+                        'css/reset.css'
+                    ]
                 }
             }
         },

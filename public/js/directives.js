@@ -180,3 +180,63 @@ app.directive('statusTag', ['Member', function(Member) {
 	}
 
 }]);
+
+app.directive('heatMap', ['Location', function(Location) {
+
+	return {
+
+		restrict : 'E',
+
+		template : '<div id="cal-heatmap"></div>',
+
+		link : function($scope, element, attrs) {
+
+			$scope.heatmapData = {};
+
+			function init() {
+
+				fetchHeatmapData();	
+
+			}
+
+
+			function fetchHeatmapData() {
+
+				Location.heatmap().success(function(response) {
+
+					$scope.heatmapData = response.data;
+
+					initHeatmap();
+
+				});
+
+			}
+
+			function initHeatmap() {
+
+				var x = 9; 
+				var CurrentDate = new Date();
+				CurrentDate.setMonth(CurrentDate.getMonth() - x);
+
+
+				var cal = new CalHeatMap();
+				cal.init({
+					itemSelector : element[0],
+					domain: "month",
+					range: 10,
+					displayLegend: false,
+					start : CurrentDate,
+					itemName: ["check-in", "check-ins"],
+					data : $scope.heatmapData
+				});
+
+			}
+
+			init();
+
+
+		}
+
+	}
+
+}]);

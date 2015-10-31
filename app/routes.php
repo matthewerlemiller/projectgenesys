@@ -66,3 +66,12 @@ Route::get('lesson', ['as' => 'lesson.get', 'uses' => 'LessonController@get']);
 //Shifts
 Route::get('shift/get', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
 
+//Locations
+Route::get('location/heatmap', ['as' => 'location.heatmap', 'uses' => 'LocationController@heatmap']);
+Route::get('location/totals', ['as' => 'location.totals', 'uses' => 'LocationController@totals']);
+
+
+
+
+
+

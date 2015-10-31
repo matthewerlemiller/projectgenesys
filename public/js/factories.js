@@ -180,3 +180,23 @@ app.factory('School', ['$http', function($http) {
 
 }]);
 
+app.factory('Location', ['$http', function($http) {
+
+	return {
+
+		heatmap : function() {
+
+			return $http.get('location/heatmap');
+
+		},
+
+		totals : function() {
+
+			return $http.get('location/totals');
+
+		}
+
+	}
+
+}]);
+
