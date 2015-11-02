@@ -215,15 +215,13 @@ class MemberRepository {
 
 			if ($i < 1) {
 
-				$sorter[] = $session->lesson;
+				array_push($sorter, $session->lesson);
 
 			} else {
 
-				$offset = $i - 1;
+				if ($session->lesson->id > $sorter[count($sorter) - 1]->id) {
 
-				if ($session->lesson->id > array_pop($sorter)->id) {
-
-					$sorter[] = $session->lesson;
+					array_push($sorter,$session->lesson);
 
 				} else {
 
