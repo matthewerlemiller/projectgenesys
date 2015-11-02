@@ -1,12 +1,12 @@
 
 <nav class="offscreen-nav">
 	<ul class="links-container">
-		<li><a href="{{ route('dashboard') }}">Home</a></li>
-		<li><a href="{{ route('shift.index') }}">Shift</a></li>
-		<li><a href="{{ route('member.create') }}">Add Member</a></li>
-		<li><a class="logout" href="{{ route('logout') }}">Sign out</a></li>
+		<a href="{{ route('dashboard') }}"><li class="isFirst">Home</li></a>
+		<a href="{{ route('shift.index') }}"><li>Shift</li></a>
+		<a href="{{ route('member.create') }}"><li>Add Member</li></a>
+		<a class="logout" href="{{ route('logout') }}"><li>Sign out</li></a>
 		@if(Auth::user()->admin)
-		<li><a href="{{ route('admin.index') }}">Admin</a></li>
+		<a href="{{ route('admin.index') }}"><li>Admin</li></a>
 		@endif
 	</ul>
 </nav>

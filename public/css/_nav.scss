@@ -24,7 +24,7 @@
 			// background-color: darken($mediumGray, 20%);
 			background-color: lighten($primary, 2%);
 
-			&:first-child {
+			& .isFirst {
 
 				border-top: 2px solid $darkPrimary;
 
@@ -56,20 +56,20 @@ label[for="nav-trigger"] {
 	position: absolute;
 	width:40px;
 	height:40px;
-  top: 15px;
-  left: 70px;
-  z-index: 2;
+	top: 16px;
+    left: 77px;
+	z-index: 2;
 
 	.hamburger {
 		float:left;
-		width:40px;
+		width:44px;
 		height:40px;
 		cursor: pointer;
 		position: relative;
 
 		.patty {
-			height:6px;
-			margin-bottom:9px;
+			height:8px;
+			margin-bottom:7px;
 			border-radius: 2px;
 			background:white;
 		}
@@ -98,7 +98,7 @@ label[for="nav-trigger"] {
 	position: static;
 	// position: fixed;
 
-	padding:15px;
+	padding:11px;
 	width:100%;
 	// background-color: $darkgray;
 	background-color: darken($primary, 0%);
@@ -146,16 +146,17 @@ label[for="nav-trigger"] {
 	width:90%;
 	max-width:500px;
 	width:450px;
-	height:40px;
-	// @include round3px;
+	height:45px;
+	border-radius: 0;
 	border:2px solid $darkPrimary;
 	@include lato;
 	color: $darkgray;
 	letter-spacing:1px;
 	font-size: 1.25em;
 	box-sizing:border-box;
-	padding:10px;
+	padding:10px 10px;
 	padding-left: 30px;
+	@include appearance(none);
 
 	.main-wrapper {
 		width:768px;
@@ -185,7 +186,7 @@ label[for="nav-trigger"] {
 
 .logo {
 
-	width:40px;
+	width:51px;
 	float:left;
 	margin-right:15px;
 
