@@ -65,6 +65,7 @@ label[for="nav-trigger"] {
 		width:40px;
 		height:40px;
 		cursor: pointer;
+		position: relative;
 
 		.patty {
 			height:6px;
@@ -190,4 +191,15 @@ label[for="nav-trigger"] {
 
 }
 
+.nav-location-name {
+
+
+	@include center;
+	left:100%;
+	font-size: 1.2rem;
+	float:left;
+	color:white;
+	font-weight: bold;
+
+}
 

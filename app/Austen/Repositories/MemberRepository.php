@@ -221,13 +221,13 @@ class MemberRepository {
 
 				$offset = $i - 1;
 
-				if ($session->lesson->id > $sorter[$offset]->id) {
+				if ($session->lesson->id > array_pop($sorter)->id) {
 
 					$sorter[] = $session->lesson;
 
 				} else {
 
-					array_splice($sorter, $offset, 0, $session->lesson);
+					array_unshift($sorter, $session->lesson);
 
 				}
 

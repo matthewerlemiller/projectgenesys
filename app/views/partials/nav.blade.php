@@ -18,6 +18,8 @@
 		<div class="patty"></div>
 		<div class="patty"></div>
 	</div>
+
+
 </label>
 
 <!--
@@ -31,6 +33,8 @@
 			<div class="nav-container">
 
 				<a href="{{ route('home') }}"><img class="logo" src="{{ asset('img/yv-logo.png') }}"></a>
+
+
 				
 				<div class="search-field-container">
 					
