@@ -20360,7 +20360,11 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 		Member.get(MEMBER_ID).success(function(response) {
 
-			
+			if (response.data.birthDate) {
+
+				response.data.birthDate = new Date(response.data.birthDate);
+
+			}
 
 			$scope.member = response.data;
 			$scope.loaded = true;
