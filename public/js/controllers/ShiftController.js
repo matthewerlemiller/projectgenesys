@@ -1,4 +1,4 @@
-app.controller('ShiftController', ['$scope','Location', function($scope, Location) {
+app.controller('ShiftController', ['$scope','Checkin', function($scope, Checkin) {
 
 	$scope.totals = {};
 
@@ -10,7 +10,7 @@ app.controller('ShiftController', ['$scope','Location', function($scope, Locatio
 
 	function fetchTotals() {
 
-		Location.totals().success(function(response) {
+		Checkin.totalsByLocation(LOCATION_ID).success(function(response) {
 
 			$scope.totals.day = response.data.day;
 			$scope.totals.week = response.data.week;

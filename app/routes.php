@@ -1,8 +1,13 @@
 <?php
 
-// Home Route. Check for login, redirect to dash if true,
-// back to login if false.
+
 Route::get('/', ['before' => 'auth', 'as' => 'home', function() {
+
+	if (Auth::user()->admin) {
+
+		return Redirect::route('admin.index');
+
+	}
 
 	return Redirect::route('dashboard');
 
@@ -39,16 +44,18 @@ Route::group(['before' => 'auth'], function() {
 Route::resource('school', 'SchoolController');
 
 //Checkin
-Route::get('checkin/{id}', ['as' => 'checkin', 'uses' => 'CheckInController@checkIn']);
-Route::get('checkedin', ['as' => 'getCheckedIn', 'uses' => 'CheckInController@getCheckedIn']);
-
+Route::get('checkin/today/{locationId?}', ['as' => 'checkin.today', 'uses' => 'CheckInController@getTodayByLocation']);
+Route::get('checkin/heatmap/{locationId?}', ['as' => 'checkin.heatmap', 'uses' => 'CheckInController@getHeatmapData']);
+Route::get('checkin/totals/{locationId?}', ['as' => 'checkin.totals', 'uses' => 'CheckInController@getTotalsData']);
+Route::get('checkin/chart/{locationId?}', ['as' => 'checkin.chart', 'uses' => 'CheckInController@getChartData']);
+Route::post('checkin', ['as' => 'checkin.store', 'uses' => 'CheckInController@store']);
 
 //Shift
 Route::get('shift', ['as' => 'shift.index', 'before' => 'auth', 'uses' => 'ShiftController@index']);
 
 
 //Admin
-Route::get('admin', ['as' => 'admin.index', 'before' => 'auth|admin', 'uses' => 'AdminController@index']);
+Route::get('admin/dashboard', ['as' => 'admin.index', 'before' => 'auth|admin', 'uses' => 'AdminController@index']);
 
 
 //Sessions
@@ -67,8 +74,7 @@ Route::get('lesson', ['as' => 'lesson.get', 'uses' => 'LessonController@get']);
 Route::get('shift/get', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
 
 //Locations
-Route::get('location/heatmap', ['as' => 'location.heatmap', 'uses' => 'LocationController@heatmap']);
-Route::get('location/totals', ['as' => 'location.totals', 'uses' => 'LocationController@totals']);
+
 
 
 

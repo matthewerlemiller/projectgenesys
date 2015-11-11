@@ -7,7 +7,7 @@ class AdminController extends BaseController {
 
 		$members = Member::all();
 
-		return View::make('admin',['members' => $members]);
+		return View::make('admin-index');
 
 	}
 

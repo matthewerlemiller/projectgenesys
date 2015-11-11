@@ -1,10 +1,11 @@
-app.controller('DashboardController', function($scope, Member, SharedService) {
+app.controller('DashboardController',['$scope', 'Member', 'SharedService', 'Checkin', 
+	function(                          $scope,   Member,   SharedService,   Checkin) {
 
 	$scope.checkInLogs = [];
 
 	$scope.getCheckedIn = function() {
 
-		Member.getCheckedIn().success(function(response) {
+		Checkin.getTodayByLocation(LOCATION_ID).success(function(response) {
 
 			$scope.checkInLogs = response.data;
 			
@@ -24,4 +25,4 @@ app.controller('DashboardController', function($scope, Member, SharedService) {
 
 
 
-});
+}]);

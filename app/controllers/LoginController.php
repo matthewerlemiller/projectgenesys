@@ -33,7 +33,7 @@ class LoginController extends BaseController {
 
 		if (Auth::attempt(['id' => $location, 'password' => $password])) {
 
-			return Redirect::to('dashboard');
+			return Redirect::route('home');
 
 		} else {
 

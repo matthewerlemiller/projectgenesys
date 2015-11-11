@@ -50,7 +50,7 @@ Route::filter('auth', function()
 
 Route::filter('admin', function() {
 
-	if (Auth::user()->Admin == false) {
+	if (Auth::user()->admin == false) {
 
 		return Redirect::route('dashboard');
 

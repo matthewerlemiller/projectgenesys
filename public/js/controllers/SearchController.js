@@ -1,4 +1,5 @@
-app.controller('SearchController', function($scope, Member, SharedService) {
+app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin',
+	function(                       $scope,   Member,   SharedService,   Checkin) {
 
 	$scope.query = "";
 
@@ -39,7 +40,6 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 		$scope.showResults = false;
 		$scope.results = [];
-		// $scope.query = "";
 
 	}
 
@@ -47,7 +47,12 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 		if ($scope.results[index].checkedIn !== true) {
 
-			Member.checkIn(id).success(function(response) {
+			var data = {
+				memberId : id,
+				locationId : LOCATION_ID
+			};
+
+			Checkin.store(data).success(function(response) {
 
 				$scope.results[index].checkedIn = true;
 
@@ -78,4 +83,4 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 	});
 
 
-});
+}]);

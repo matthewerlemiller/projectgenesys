@@ -24,16 +24,20 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/production/app.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="{{ asset('js/vendor/angular.js') }}"></script>
+    <!--<script src="{{ asset('js/vendor/angular.js') }}"></script>-->
+    <script src="{{ asset('bower_components/angular/angular.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script>
 
     	var CONFIG = {};
     	var MEMBER_ID = null;
+        var LOCATION_ID = {{ Auth::id() ? Auth::id() : 'null' }};
 
     	@if(isset($member))
     	MEMBER_ID = {{ $member->id }};
     	@endif
+
+
 
     </script>
 </head>

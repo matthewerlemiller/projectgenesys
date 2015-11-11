@@ -19813,7 +19813,7 @@ app.directive('statusTag', ['Member', function(Member) {
 
 }]);
 
-app.directive('heatMap', ['Location', function(Location) {
+app.directive('heatMap', ['Checkin', function(Checkin) {
 
 	return {
 
@@ -19834,7 +19834,7 @@ app.directive('heatMap', ['Location', function(Location) {
 
 			function fetchHeatmapData() {
 
-				Location.heatmap().success(function(response) {
+				Checkin.heatmapDataByLocation(LOCATION_ID).success(function(response) {
 
 					$scope.heatmapData = response.data;
 
@@ -19873,6 +19873,84 @@ app.directive('heatMap', ['Location', function(Location) {
 
 }]);
 
+app.directive('adminCheckinBarChart', ['Checkin', function(Checkin) {
+
+	return {
+
+		restrict : 'E',
+
+		scope : {
+
+			locationId : '='
+
+		},
+
+		template : '<div></div>',
+
+		link : function($scope, element, attrs) {
+
+
+			function initChart() {
+
+				var n = 2; // number of layers
+				var m = 15; // number of samples per layer
+				var stack = d3.layout.stack();
+				var layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); }));
+				var yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); });
+				var yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+
+				var margin = {top: 0, right: 15, bottom: 0, left: 15};
+				// var width = 960 - margin.left - margin.right;
+				var width = 684 - margin.left - margin.right;
+				var height = 200 - margin.top - margin.bottom;
+
+				var x = d3.scale.ordinal().domain(d3.range(m)).rangeRoundBands([0, width], .08);
+
+				var y = d3.scale.linear().domain([0, yStackMax]).range([height, 0]);
+
+				var color = d3.scale.linear().domain([0, n - 1]).range(["#aad", "#556"]);
+
+				var xAxis = d3.svg.axis().scale(x).tickSize(0).tickPadding(6).orient("bottom");
+
+				var svg = d3.select(element[0]).append("svg")
+				    .attr("width", width + margin.left + margin.right)
+				    .attr("height", height + margin.top + margin.bottom)
+				  .append("g")
+				    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+				var layer = svg.selectAll(".layer")
+				    .data(layers)
+				  .enter().append("g")
+				    .attr("class", "layer")
+				    .style("fill", function(d, i) { return color(i); });
+
+				var rect = layer.selectAll("rect")
+				    .data(function(d) { return d; })
+				  .enter().append("rect")
+				    .attr("x", function(d) { return x(d.x); })
+				    .attr("y", height)
+				    .attr("width", x.rangeBand())
+				    .attr("height", 0);
+
+				rect.transition()
+				    .delay(function(d, i) { return i * 10; })
+				    .attr("y", function(d) { return y(d.y0 + d.y); })
+				    .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+
+				svg.append("g")
+				    .attr("class", "x axis")
+				    .attr("transform", "translate(0," + height + ")")
+				    .call(xAxis);
+	
+
+			}
+
+		}
+
+	}
+
+}]);
+
 app.factory('Member', function($http) {
 
 	return {
@@ -19881,18 +19959,6 @@ app.factory('Member', function($http) {
 
 			return $http.post('/member/search', query);
 			
-		},
-
-		checkIn : function(id) {
-
-			return $http.get('/checkin/' + id);
-
-		},
-
-		getCheckedIn : function() {
-
-			return $http.get('/checkedin');
-
 		},
 
 		get : function(memberId) {
@@ -20054,28 +20120,55 @@ app.factory('School', ['$http', function($http) {
 
 }]);
 
-app.factory('Location', ['$http', function($http) {
+
+app.factory('Checkin', ['$http', function($http) {
 
 	return {
 
-		heatmap : function() {
+		store : function(data) {
 
-			return $http.get('location/heatmap');
+			return $http.post('/checkin/', data);
 
 		},
 
-		totals : function() {
+		getTodayByLocation : function(locationId) {
 
-			return $http.get('location/totals');
+			return $http.get('/checkin/today/' + locationId);
+
+		},
+
+		chartDataByLocation : function(locationId) {
+
+			return $http.get('checkin/chart/' + locationId);
+
+		},
+
+		heatmapDataByLocation : function(locationId) {
+
+			return $http.get('checkin/heatmap/' + locationId);
+
+		},
+
+		totalsByLocation : function(locationId) {
+
+			return $http.get('checkin/totals/' + locationId);
 
 		}
 
 	}
 
+	
+
 }]);
 
 
-app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', function($scope, Image, Member, AlertService) {
+app.controller('AdminIndexController', ['$scope', function($scope) {
+
+	
+
+}]);
+app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', 'Checkin',
+	function(                              $scope,   Image,   Member,   AlertService,   Checkin) {
 
 	$scope.image = null;
 
@@ -20130,8 +20223,6 @@ app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertSer
 
 		Member.create($scope.member).success(function(response) {
 
-			// AlertService.broadcast('Member was saved!', 'success');
-
 			$scope.created = true;
 			$scope.createdMember = response.data;
 
@@ -20149,14 +20240,20 @@ app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertSer
 
 	$scope.checkInNewMember = function() {
 
-		Member.checkIn($scope.createdMember.id).success(function() {
+		var data = {
 
-			// AlertService.broadcast( $scope.createdMember.firstName + 'was checked In!', 'success');
+			memberId : $scope.createdMember.id,
+			locationId : LOCATION_ID
+
+		}
+
+		Checkin.store(data).success(function(response) {
+
 			document.location.href="/";
 
-		}).error(function() {
+		}).error(function(response) {
 
-			AlertService.broadcast('Sorry, there was an error =[', 'error');
+			AlertService.broadcast(response.message, 'error');
 
 		});
 
@@ -20170,13 +20267,14 @@ app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertSer
 
 
 }]);
-app.controller('DashboardController', function($scope, Member, SharedService) {
+app.controller('DashboardController',['$scope', 'Member', 'SharedService', 'Checkin', 
+	function(                          $scope,   Member,   SharedService,   Checkin) {
 
 	$scope.checkInLogs = [];
 
 	$scope.getCheckedIn = function() {
 
-		Member.getCheckedIn().success(function(response) {
+		Checkin.getTodayByLocation(LOCATION_ID).success(function(response) {
 
 			$scope.checkInLogs = response.data;
 			
@@ -20196,7 +20294,7 @@ app.controller('DashboardController', function($scope, Member, SharedService) {
 
 
 
-});
+}]);
 app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', 'Image', 
 	function(                            $scope,   Member,   Session,   Lesson,   Leader,   Shift,   Kickout,   AlertService,   School,   Image) {
 
@@ -20262,6 +20360,8 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 		Member.get(MEMBER_ID).success(function(response) {
 
+			response.data.birthDate = new Date(response.data.birthDate);
+
 			$scope.member = response.data;
 			$scope.loaded = true;
 
@@ -20279,6 +20379,8 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 			AlertService.broadcast(response.message, 'success');
 
+			response.data.birthDate = new Date(response.data.birthDate);
+			
 			$scope.member = response.data;
 
 			$scope.changePage('details');
@@ -20477,7 +20579,8 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 	$scope.fetchData();
 
 }]);
-app.controller('SearchController', function($scope, Member, SharedService) {
+app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin',
+	function(                       $scope,   Member,   SharedService,   Checkin) {
 
 	$scope.query = "";
 
@@ -20518,7 +20621,6 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 		$scope.showResults = false;
 		$scope.results = [];
-		// $scope.query = "";
 
 	}
 
@@ -20526,7 +20628,12 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 
 		if ($scope.results[index].checkedIn !== true) {
 
-			Member.checkIn(id).success(function(response) {
+			var data = {
+				memberId : id,
+				locationId : LOCATION_ID
+			};
+
+			Checkin.store(data).success(function(response) {
 
 				$scope.results[index].checkedIn = true;
 
@@ -20557,8 +20664,8 @@ app.controller('SearchController', function($scope, Member, SharedService) {
 	});
 
 
-});
-app.controller('ShiftController', ['$scope','Location', function($scope, Location) {
+}]);
+app.controller('ShiftController', ['$scope','Checkin', function($scope, Checkin) {
 
 	$scope.totals = {};
 
@@ -20570,7 +20677,7 @@ app.controller('ShiftController', ['$scope','Location', function($scope, Locatio
 
 	function fetchTotals() {
 
-		Location.totals().success(function(response) {
+		Checkin.totalsByLocation(LOCATION_ID).success(function(response) {
 
 			$scope.totals.day = response.data.day;
 			$scope.totals.week = response.data.week;

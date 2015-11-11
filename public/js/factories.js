@@ -9,18 +9,6 @@ app.factory('Member', function($http) {
 			
 		},
 
-		checkIn : function(id) {
-
-			return $http.get('/checkin/' + id);
-
-		},
-
-		getCheckedIn : function() {
-
-			return $http.get('/checkedin');
-
-		},
-
 		get : function(memberId) {
 
 			return $http.get('/member/get/' + memberId);
@@ -180,23 +168,44 @@ app.factory('School', ['$http', function($http) {
 
 }]);
 
-app.factory('Location', ['$http', function($http) {
+
+app.factory('Checkin', ['$http', function($http) {
 
 	return {
 
-		heatmap : function() {
+		store : function(data) {
 
-			return $http.get('location/heatmap');
+			return $http.post('/checkin/', data);
 
 		},
 
-		totals : function() {
+		getTodayByLocation : function(locationId) {
 
-			return $http.get('location/totals');
+			return $http.get('/checkin/today/' + locationId);
+
+		},
+
+		chartDataByLocation : function(locationId) {
+
+			return $http.get('checkin/chart/' + locationId);
+
+		},
+
+		heatmapDataByLocation : function(locationId) {
+
+			return $http.get('checkin/heatmap/' + locationId);
+
+		},
+
+		totalsByLocation : function(locationId) {
+
+			return $http.get('checkin/totals/' + locationId);
 
 		}
 
 	}
+
+	
 
 }]);
 

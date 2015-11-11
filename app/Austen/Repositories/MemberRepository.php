@@ -90,17 +90,19 @@ class MemberRepository {
 			} else {
 				$image = false;
 			}
+
+			$birthDate = $input['birthDate'];
 			$phone = $input['phone'];
-			$email = $input['email'];
 			$address = $input['address'];
+			$city = $input['city'];
+			$zip = $input['zip'];
+			$emergencyContactName = $input['emergencyContactName'];
+			$emergencyContactPhone = $input['emergencyContactPhone'];
 			
-			$parent1Name = $input['parent1Name'];
-			$parent2Name = $input['parent2Name'];
-			$parent1Phone = $input['parent1Phone'];
 
 			// Parse Phone numbers to remove dashes and parenthesis.
 			$phone = preg_replace('/\D+/', '', $phone);
-			$parent1Phone = preg_replace('/\D+/', '', $parent1Phone);
+			// $parent1Phone = preg_replace('/\D+/', '', $parent1Phone);
 
 			$member = new Member;
 			$member->firstName = $firstName;
@@ -108,12 +110,15 @@ class MemberRepository {
 			if ($image) {
 				$member->image = $image;	
 			}
+			$member->birthDate = $birthDate; 
 			$member->phone = $phone;
 			$member->address = $address;
-			$member->email = $email;
-			$member->parent1Name = $parent1Name;
-			$member->parent2Name = $parent2Name;
-			$member->parent1Phone = $parent1Phone;
+			$member->city = $city;
+			$member->zip = $zip;
+			$member->emergencyContactName = $emergencyContactName;
+			$member->emergencyContactPhone = $emergencyContactPhone;
+			
+				
 			$member->save();
 
 		} catch (Exception $e) {

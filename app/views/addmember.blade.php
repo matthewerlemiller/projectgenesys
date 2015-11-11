@@ -55,19 +55,40 @@
 
 					<div class="Form-group">
 
-						<label for="phone">Phone</label>
+						<label for="birthday">Birthday</label>
+						
+						<input type="date" name="birthday" ng-model="member.birthDate" placeholder="Birthday">
+
+					</div>
+
+					<div class="Form-group">
+
+						<label for="phone">Home Phone</label>
 						
 						<input type="tel" name="phone" ng-model="member.phone" placeholder="Phone Number">
 
 					</div>
 					
+					<div class="Form-group">
+
+						<label for="emergency-contact-name">Emergency Contact Name</label>
+						<input type="text" name="emergency-contact-name" ng-model="member.emergencyContactName" placeholder="Emergency Contact Name">
+
+					</div>
 
 					<div class="Form-group">
+
+						<label for="emergency-contact-phone">Emergency Contact Phone</label>
+						<input type="text" name="emergency-contact-phone" ng-model="member.emergencyContactPhone" placeholder="Emergency Contact Phone">
+
+					</div>
+
+					{{-- <div class="Form-group">
 
 						<label for="email">Email</label>
 						<input type="text" name="email" ng-model="member.email" placeholder="Email">
 
-					</div>
+					</div> --}}
 					
 
 					<div class="Form-group">
@@ -77,26 +98,21 @@
 
 					</div>
 					
-					<div class="Form-group">
+					<div class="Form-group Form-group--two-thirds Form-group--withPadding">
 
-						<label for="parent-name-1">First Parent Name</label>
-						<input type="text" name="parent-name-1" ng-model="member.parent1Name" placeholder="Parent Name">
+						<label for="city">City</label>
+						<input type="text" name="city" ng-model="member.city" placeholder="City">
+
+					</div>
+
+					<div class="Form-group Form-group--one-third">
+
+						<label for="zip">Zip</label>
+						<input type="text" name="zip" ng-model="member.zip" placeholder="Zip">
+
 					</div>
 					
-					<div class="Form-group">
-
-						<label for="parent-name-2">Second Parent Name</label>
-						<input type="text" name="parent-name-2" ng-model="member.parent2Name" placeholder="Parent Name">
-
-					</div>
-
-					<div class="Form-group">
-
-						<label for="parent-contact">Parent Contact Phone</label>
-						<input type="tel" name="parent-contact" ng-model="member.parent1Phone" placeholder="Parent phone number">
-
-					</div>
-				
+					<div class="clear"></div>
 
 					{{-- {{ Form::submit('√')}} --}}
 					<input type="submit" value="√" ng-click="saveMember()"></input>

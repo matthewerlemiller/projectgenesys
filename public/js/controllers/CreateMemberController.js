@@ -1,4 +1,5 @@
-app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', function($scope, Image, Member, AlertService) {
+app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', 'Checkin',
+	function(                              $scope,   Image,   Member,   AlertService,   Checkin) {
 
 	$scope.image = null;
 
@@ -53,8 +54,6 @@ app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertSer
 
 		Member.create($scope.member).success(function(response) {
 
-			// AlertService.broadcast('Member was saved!', 'success');
-
 			$scope.created = true;
 			$scope.createdMember = response.data;
 
@@ -72,14 +71,20 @@ app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertSer
 
 	$scope.checkInNewMember = function() {
 
-		Member.checkIn($scope.createdMember.id).success(function() {
+		var data = {
 
-			// AlertService.broadcast( $scope.createdMember.firstName + 'was checked In!', 'success');
+			memberId : $scope.createdMember.id,
+			locationId : LOCATION_ID
+
+		}
+
+		Checkin.store(data).success(function(response) {
+
 			document.location.href="/";
 
-		}).error(function() {
+		}).error(function(response) {
 
-			AlertService.broadcast('Sorry, there was an error =[', 'error');
+			AlertService.broadcast(response.message, 'error');
 
 		});
 

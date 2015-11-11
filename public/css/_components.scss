@@ -58,6 +58,27 @@
 
 		margin-bottom: 15px;
 
+		&--two-thirds {
+
+			width:((100% / 3) * 2);
+			float:left;
+
+		}
+
+		&--one-third {
+
+			width:(100% / 3);
+			float: left;
+
+		}
+
+		&--withPadding {
+
+			box-sizing:border-box;
+			padding-right: 15px;
+
+		}
+
 	}
 
 	&-select {

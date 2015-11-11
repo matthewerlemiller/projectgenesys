@@ -60,11 +60,12 @@
 					</tr>
 					<tr>
 						<td><p class="text-data"><span class="label">Phone</span> : @{{ member.phone }} </p></td>
-						<td colspan="2"><p class="text-data"><span class="label">Address</span> : @{{ member.address }} </p></td>
+						<td><p class="text-data"><span class="label">Address</span> : @{{ member.address }} </p></td>
+						<td><p class="text-data"><span class="label">City</span> : @{{ member.city }} </p></td>
 					</tr>
 					<tr>
 						<td colspan="2"><p class="text-data"><span class="label">Email</span> : @{{ member.email }} </p></td>
-						<td><p class="text-data"><span class="label">Birthdate</span> : @{{ member.birthDate }} </p></td>
+						<td><p class="text-data"><span class="label">Birthdate</span> : @{{ member.birthDate | date:'mediumDate' }} </p></td>
 					</tr>
 				</table>
 
