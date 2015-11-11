@@ -20360,7 +20360,7 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 		Member.get(MEMBER_ID).success(function(response) {
 
-			response.data.birthDate = new Date(response.data.birthDate);
+			
 
 			$scope.member = response.data;
 			$scope.loaded = true;
@@ -20379,8 +20379,12 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 			AlertService.broadcast(response.message, 'success');
 
-			response.data.birthDate = new Date(response.data.birthDate);
-			
+			if (response.data.birthDate) {
+
+				response.data.birthDate = new Date(response.data.birthDate);
+
+			}
+
 			$scope.member = response.data;
 
 			$scope.changePage('details');
