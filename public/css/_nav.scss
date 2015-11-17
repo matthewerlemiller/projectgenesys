@@ -100,9 +100,7 @@ label[for="nav-trigger"] {
 
 	padding:11px;
 	width:100%;
-	// background-color: $darkgray;
 	background-color: darken($primary, 0%);
-	// background-color: white;
 
 	border-bottom: 2px solid $darkPrimary;
 	border-top: 2px solid $darkPrimary;
@@ -113,7 +111,7 @@ label[for="nav-trigger"] {
 	@include transform(translate(0%, 0));
 	@include transition(all .25s ease);
 
-	
+
 
 	&.hidden {
 
@@ -143,7 +141,6 @@ label[for="nav-trigger"] {
 
 	text-align:left;
 	border: none;
-	width:90%;
 	max-width:500px;
 	width:450px;
 	height:45px;
@@ -157,6 +154,14 @@ label[for="nav-trigger"] {
 	padding:10px 10px;
 	padding-left: 30px;
 	@include appearance(none);
+
+	@media (max-width:620px) {
+		width: 300px;
+	}
+
+	@media (max-width:450px) {
+		width: 200px;
+	}
 
 	.main-wrapper {
 		width:768px;
