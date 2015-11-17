@@ -17,18 +17,18 @@
 					<div class="Form-group">
 
 						<label for="firstname">First Name</label>
-						<input type="text" name="firstname" ng-model="member.firstName" placeholder="First Name">	
+						<input type="text" name="firstname" ng-model="member.firstName" placeholder="First Name">
 
 					</div>
-					
+
 					<div class="Form-group">
 
 						<label for="lastname">Last Name</label>
-		
+
 						<input type="text" ng-model="member.lastName" placeholder="Last Name">
 
 					</div>
-					
+
 					<div class="Form-group">
 
 						<label for="image-upload">Upload Profile Picture</label>
@@ -51,12 +51,12 @@
 						</div>
 
 					</div>
-					
+
 
 					<div class="Form-group">
 
 						<label for="birthday">Birthday</label>
-						
+
 						<input type="date" name="birthday" ng-model="member.birthDate" placeholder="Birthday">
 
 					</div>
@@ -64,11 +64,11 @@
 					<div class="Form-group">
 
 						<label for="phone">Home Phone</label>
-						
+
 						<input type="tel" name="phone" ng-model="member.phone" placeholder="Phone Number">
 
 					</div>
-					
+
 					<div class="Form-group">
 
 						<label for="emergency-contact-name">Emergency Contact Name</label>
@@ -89,7 +89,7 @@
 						<input type="text" name="email" ng-model="member.email" placeholder="Email">
 
 					</div> --}}
-					
+
 
 					<div class="Form-group">
 
@@ -97,7 +97,7 @@
 						<input type="text" name="address" ng-model="member.address" placeholder="Address">
 
 					</div>
-					
+
 					<div class="Form-group Form-group--two-thirds Form-group--withPadding">
 
 						<label for="city">City</label>
@@ -111,12 +111,12 @@
 						<input type="text" name="zip" ng-model="member.zip" placeholder="Zip">
 
 					</div>
-					
+
 					<div class="clear"></div>
 
 					{{-- {{ Form::submit('√')}} --}}
 					<input type="submit" value="√" ng-click="saveMember()"></input>
-					
+
 				{{-- {{ Form::close() }} --}}
 				</div>
 
@@ -136,12 +136,12 @@
 					<div class="Button Button--success" ng-click="checkInNewMember()">Yes</div>
 					<div class="Button Button--neutral" ng-click="redirectToDashboard();">Not now</div>
 				</div>
-				
+
 
 			</div>
 
 		</div>
-	
+
 	</div>
 
 @stop
