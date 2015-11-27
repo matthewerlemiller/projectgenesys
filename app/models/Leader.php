@@ -11,9 +11,9 @@ class Leader extends Eloquent {
 
 	}
 
-	public function location() {
+	public function locations() {
 
-		return $this->belongsTo('Location', 'id', 'locationId');
+		return $this->belongsToMany('Location', 'leader_location', 'leaderId', 'locationId');
 
 	}
 

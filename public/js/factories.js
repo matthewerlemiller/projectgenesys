@@ -52,6 +52,24 @@ app.factory('Leader', function($http) {
 
 			return $http.post('/leader/search', query);
 			
+		},
+
+		updateLocations : function(data) {
+
+			return $http.post('/leader/locations', data);
+
+		},
+
+		assignToLocation : function(data) {
+
+			return $http.post('/leader/assign', data);
+
+		},
+
+		unassignFromLocation : function(data) {
+
+			return $http.post('/leader/unassign', data)
+
 		}
 
 	}
@@ -187,25 +205,37 @@ app.factory('Checkin', ['$http', function($http) {
 
 		chartDataByLocation : function(locationId) {
 
-			return $http.get('checkin/chart/' + locationId);
+			return $http.get('/checkin/chart/' + locationId);
 
 		},
 
 		heatmapDataByLocation : function(locationId) {
 
-			return $http.get('checkin/heatmap/' + locationId);
+			return $http.get('/checkin/heatmap/' + locationId);
 
 		},
 
 		totalsByLocation : function(locationId) {
 
-			return $http.get('checkin/totals/' + locationId);
+			return $http.get('/checkin/totals/' + locationId);
 
 		}
 
 	}
 
-	
+}]);
+
+app.factory('Location', ['$http', function($http) {
+
+	return {
+
+		all : function() {
+
+			return $http.get('/location');
+
+		}
+
+	}
 
 }]);
 

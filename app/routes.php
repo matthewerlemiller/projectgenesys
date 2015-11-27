@@ -55,8 +55,12 @@ Route::get('shift', ['as' => 'shift.index', 'before' => 'auth', 'uses' => 'Shift
 
 
 //Admin
-Route::get('admin/dashboard', ['as' => 'admin.index', 'before' => 'auth|admin', 'uses' => 'AdminController@index']);
+Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function() {
 
+    Route::get('dashboard', ['as' => 'admin.index', 'uses' => 'AdminController@index']);
+    Route::get('leaders', ['as' => 'admin.leaders', 'uses' => 'AdminController@leaders']);
+
+});
 
 //Sessions
 Route::get('session/{memberId}', ['as' => 'session.get', 'uses' => 'SessionController@get']);
@@ -65,6 +69,9 @@ Route::post('session', ['as' => 'session.store', 'uses' => 'SessionController@st
 //Leader
 Route::get('leader/all', ['as' => 'leader.all', 'uses' => 'LeaderController@all']);
 Route::post('leader/search', ['as' => 'leader.search', 'uses' => 'LeaderController@search']);
+Route::post('leader/assign', ['as' => 'leader.assign', 'uses' => 'LeaderController@assignToLocation']);
+Route::post('leader/locations', ['as' => 'leader.locations', 'uses' => 'LeaderController@updateLocations']);
+Route::post('leader/unassign', ['as' => 'leader.unassign', 'uses' => 'LeaderController@unassignToLocation']);
 
 //Lesson
 Route::get('lesson', ['as' => 'lesson.get', 'uses' => 'LessonController@get']);
@@ -74,7 +81,7 @@ Route::get('lesson', ['as' => 'lesson.get', 'uses' => 'LessonController@get']);
 Route::get('shift/get', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
 
 //Locations
-
+Route::get('location', ['as' => 'location.all', 'uses' => 'LocationController@all']);
 
 
 

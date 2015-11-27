@@ -8,6 +8,7 @@ module.exports = function(grunt) {
             dist : {
                 src : [
                     'js/jquery.js',
+                    'js/vendor/bootstrap.min.js',
                     'js/vendor/angular-file-upload-html5-shim.min.js',
                     'js/vendor/angular-file-upload.min.js',
                     'bower_components/angular-touch/angular-touch.js',
@@ -25,6 +26,7 @@ module.exports = function(grunt) {
                     'js/main.js',
                     'js/pages/dashboard.js',
                     'js/plugins.js',
+                    'modals/**/*.js'
                 ],
                 dest: 'js/production/app.js'
             }
@@ -60,7 +62,7 @@ module.exports = function(grunt) {
         watch: {
             
             scripts: {
-                files: ['js/*.js', 'js/**/*.js'],
+                files: ['js/*.js', 'js/**/*.js', 'modals/**/*'],
                 tasks: ['concat', 'uglify'],
                 options: {
                     spawn: false

@@ -12,7 +12,7 @@ class LeaderController extends BaseController {
 
 		try {
 			
-			$leaders = Leader::all();
+			$leaders = Leader::with('locations')->get();
 
 		} catch (Exception $e) {
 			
@@ -57,6 +57,88 @@ class LeaderController extends BaseController {
 		}
 
 		return Response::json(['data' => $results], 200);
+
+	}
+
+
+	public function assignToLocation()
+	{
+
+		try {
+			
+			$leaderId = Input::get('leaderId');
+			$locationId = Input::get('locationId');
+
+			$leader = Leader::find($leaderId);
+
+			$leader->locations()->attach($locationId);
+
+		} catch (Exception $e) {
+			
+			Log::error($e);
+
+			return Response::json(['message' => 'Something went wrong'], 400);
+
+		}
+
+		$leader->load('locations');
+
+		return Response::json(['data' => $leader], 200);
+
+	}
+
+
+	/**
+	 * Bulk-updates assigned locations for a specified leader
+	 *
+	 *
+	 */
+	public function updateLocations()
+	{
+
+		try {
+			
+			$locations = Input::get('locations');
+			$leaderId = Input::get('leaderId');
+
+			$leader = Leader::find($leaderId);
+			$leader->locations()->sync($locations);
+
+		} catch (Exception $e) {
+			
+			return Response::json(['message' => 'Something went wrong updating the locations'], 400);
+
+		}
+
+		$payload = $leader->locations;
+
+		return Response::json(['message' => 'locations updated', 'data' => $payload], 200);
+
+	}
+
+	public function unassignToLocation()
+	{
+
+		try {
+			
+			$leaderId = Input::get('leaderId');
+			$locationId = Input::get('locationId');
+
+			$leader = Leader::find($leaderId);
+
+			$leader->locations()->detach($locationId);
+
+		} catch (Exception $e) {
+			
+			Log::error($e);
+
+			return Response::json(['message' => 'Something went wrong'], 400);
+
+		}
+
+		$leader->load('locations');
+
+		return Response::json(['data' => $leader], 200);		
 
 	}
 

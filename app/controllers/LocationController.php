@@ -4,12 +4,14 @@ use Carbon\Carbon;
 
 class LocationController extends BaseController {
 
-	public function __construct() {
 
-		$this->model = Auth::user();
-		$this->checkins = $this->model->checklogs();
+	public function all()
+	{
+
+		$locations = Location::where('admin', '=', false)->with('leaders')->get();
+
+		return Response::json(['data' => $locations], 200);
 
 	}
-
 
 }

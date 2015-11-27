@@ -11,4 +11,11 @@ class AdminController extends BaseController {
 
 	}
 
+	public function leaders()
+	{
+
+		return View::make('admin-leaders');
+
+	}
+
 }

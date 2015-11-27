@@ -4,7 +4,7 @@
 		<a href="{{ route('home') }}"><li class="isFirst">Dashboard</li></a>
 		@if(Auth::user()->admin)
 		<a href=""><li>Members</li></a>
-		<a href=""><li>Leaders</li></a>
+		<a href="{{ route('admin.leaders') }}"><li>Leaders</li></a>
 		<a href=""><li>Suspensions</li></a>
 		<a href=""><li>Metrics</li></a>
 		@endif

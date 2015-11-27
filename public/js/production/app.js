@@ -10336,6 +10336,17 @@ return jQuery;
 
 }));
 
+/*!
+ * Bootstrap v3.3.5 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+/*!
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=8d320d2d03c1364dce20)
+ * Config saved to config.json and https://gist.github.com/8d320d2d03c1364dce20
+ */
+if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires jQuery");+function(n){"use strict";var t=n.fn.jquery.split(" ")[0].split(".");if(t[0]<2&&t[1]<9||1==t[0]&&9==t[1]&&t[2]<1||t[0]>2)throw new Error("Bootstrap's JavaScript requires jQuery version 1.9.1 or higher, but lower than version 3")}(jQuery),+function(n){"use strict";function t(){var n=document.createElement("bootstrap"),t={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"};for(var i in t)if(void 0!==n.style[i])return{end:t[i]};return!1}n.fn.emulateTransitionEnd=function(t){var i=!1,r=this;n(this).one("bsTransitionEnd",function(){i=!0});var e=function(){i||n(r).trigger(n.support.transition.end)};return setTimeout(e,t),this},n(function(){n.support.transition=t(),n.support.transition&&(n.event.special.bsTransitionEnd={bindType:n.support.transition.end,delegateType:n.support.transition.end,handle:function(t){return n(t.target).is(this)?t.handleObj.handler.apply(this,arguments):void 0}})})}(jQuery);
 /*! 1.6.12 */
 window.XMLHttpRequest&&window.FormData&&(XMLHttpRequest=function(a){return function(){var b=new a;return b.setRequestHeader=function(a){return function(c,d){if("__setXHR_"===c){var e=d(b);e instanceof Function&&e(b)}else a.apply(b,arguments)}}(b.setRequestHeader),b}}(XMLHttpRequest),window.XMLHttpRequest.__isShim=!0);
 /*! 1.6.12 */
@@ -19569,7 +19580,13 @@ if (typeof define === "function" && define.amd) {
 	window.CalHeatMap = CalHeatMap;
 }
 
-var app = angular.module('genesys', ['angularFileUpload', 'ngTouch', 'offClick', 'angularFileUpload', 'ngAnimate']);
+var app = angular.module('genesys', [
+	'angularFileUpload', 
+	'ngTouch', 
+	'offClick', 
+	'angularFileUpload', 
+	'ngAnimate', 
+	'ui.bootstrap']);
 app.filter('yesno', function() {
 
 	return function(input) {
@@ -20004,6 +20021,24 @@ app.factory('Leader', function($http) {
 
 			return $http.post('/leader/search', query);
 			
+		},
+
+		updateLocations : function(data) {
+
+			return $http.post('/leader/locations', data);
+
+		},
+
+		assignToLocation : function(data) {
+
+			return $http.post('/leader/assign', data);
+
+		},
+
+		unassignFromLocation : function(data) {
+
+			return $http.post('/leader/unassign', data)
+
 		}
 
 	}
@@ -20139,25 +20174,37 @@ app.factory('Checkin', ['$http', function($http) {
 
 		chartDataByLocation : function(locationId) {
 
-			return $http.get('checkin/chart/' + locationId);
+			return $http.get('/checkin/chart/' + locationId);
 
 		},
 
 		heatmapDataByLocation : function(locationId) {
 
-			return $http.get('checkin/heatmap/' + locationId);
+			return $http.get('/checkin/heatmap/' + locationId);
 
 		},
 
 		totalsByLocation : function(locationId) {
 
-			return $http.get('checkin/totals/' + locationId);
+			return $http.get('/checkin/totals/' + locationId);
 
 		}
 
 	}
 
-	
+}]);
+
+app.factory('Location', ['$http', function($http) {
+
+	return {
+
+		all : function() {
+
+			return $http.get('/location');
+
+		}
+
+	}
 
 }]);
 
@@ -20167,6 +20214,77 @@ app.controller('AdminIndexController', ['$scope', function($scope) {
 	
 
 }]);
+app.controller('AdminLeadersController', ['$scope', 'Location', 'Leader', '$uibModal', 'AlertService', 
+	function(                              $scope,   Location,   Leader,   $uibModal,   AlertService) {
+
+		$scope.leaders = [];
+
+		function init() {
+
+			getLeaders();
+
+		}
+
+		function getLeaders() {
+
+			Leader.all().success(function(response) {
+
+				$scope.leaders = response.data;
+
+			});
+
+		}
+
+		$scope.unassignFromLocation = function(leader, locationId) {
+
+			var data = {
+
+				locationId : locationId,
+				leaderId : leader.id
+
+			}
+
+			Leader.unassignFromLocation(data).success(function(response) {
+
+				$scope.leaders[$scope.leaders.indexOf(leader)] = response.data;
+				AlertService.broadcast('Location unassigned', 'success');
+
+			});
+
+		}
+
+		$scope.openLocationAssignmentModal = function(leader) {
+
+			var modalInstance = $uibModal.open({
+
+				templateUrl : '../../modals/templates/locationAssignmentModal.html',
+				controller : 'LocationAssignmentModalController',
+				resolve : {
+
+					leader : function() {
+
+						return leader;
+
+					}
+
+				}
+
+			});
+
+			modalInstance.result.then(function(locations) {	
+
+				$scope.leaders[$scope.leaders.indexOf(leader)].locations = locations;
+				AlertService.broadcast('Locations Updated!', 'success');
+
+			});
+
+		}
+
+		init();
+
+	}
+
+]);
 app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', 'Checkin',
 	function(                              $scope,   Image,   Member,   AlertService,   Checkin) {
 
@@ -20943,3 +21061,141 @@ var Header = {
 sizeResults();
 
 // stickyHeader();
+
+app.controller('LocationAssignmentModalController', ['$scope', '$uibModalInstance', 'Leader', 'Location', 'leader', 
+	function(                                         $scope,   $uibModalInstance,   Leader,   Location,   leader) {
+
+		$scope.leader = leader;
+		$scope.locations = [];
+
+		function init() {
+
+			$scope.leader.locationIdCollection = extractIds($scope.leader.locations);
+			getLocations();
+
+		}
+
+		function getLocations() {
+
+			Location.all().success(function(response) {
+
+				$scope.locations = response.data;
+				assignIsCheckedPropertyToLocations();
+
+			});
+
+		}
+
+		$scope.save = function() {
+
+			var data = {
+
+				locations : $scope.leader.locationIdCollection,
+				leaderId : $scope.leader.id
+
+			}
+
+			Leader.updateLocations(data).success(function(response) {
+
+				$uibModalInstance.close(response.data);
+
+			});
+
+		}
+
+		$scope.cancel = function() {
+
+			$uibModalInstance.dismiss('cancel');
+
+		}
+
+		$scope.changeLocationAssignment = function($locationIndex) {
+
+		    var locationId = $scope.locations[$locationIndex].id;
+
+		    if ($scope.locations[$locationIndex].isChecked) {
+
+		        if ($scope.leader.locationIdCollection.indexOf(locationId) === -1) {
+
+		            $scope.leader.locationIdCollection.push(locationId);
+
+		        }
+
+		    } else {
+
+		       if ($scope.leader.locationIdCollection.indexOf(locationId) !== -1) {
+
+		           $scope.leader.locationIdCollection.splice($scope.leader.locationIdCollection.indexOf(locationId), 1);
+
+		       } 
+
+		    }
+
+		}
+
+		/**
+		 * Checks if leader is currently assigned to
+		 * specified location
+		 *
+		 * @param int locationId
+		 */
+		function leaderIsAssignedToLocation(locationId) {
+
+			var isAssigned = false;
+
+			for(var i = 0; i < $scope.leader.locations.length; i++) {
+
+				if ($scope.leader.locations[i].id == locationId) {
+
+					isAssigned = true;
+					break;
+
+				} 
+
+				isAssigned = false;
+
+			}
+
+			return isAssigned;
+
+		}
+
+		/**
+		 * Assigns viewmodel-specific value of "isChecked"
+		 * to produce correct UI behavior with multiple choice
+		 * checkbox
+		 */
+		function assignIsCheckedPropertyToLocations() {
+
+			for(var i = 0; i < $scope.locations.length; i++) {
+
+			    if(leaderIsAssignedToLocation($scope.locations[i].id)) {
+
+			        $scope.locations[i].isChecked = true;
+
+			    } else {
+
+			        $scope.locations[i].isChecked = false;
+
+			    }
+
+			}
+
+		}
+
+		function extractIds(arrayOfObjects) {
+
+		    var newArray = arrayOfObjects.map(function(obj){
+
+		        return obj.id;
+
+		    });
+
+		    return newArray;
+
+		}
+
+		init();
+
+
+}]);

@@ -25,7 +25,7 @@ class Location extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function leaders() {
 
-		return $this->hasMany('Leader', 'locationId', 'id');
+		return $this->belongsToMany('Leader', 'leader_location', 'locationId', 'leaderId');
 
 	}
 
