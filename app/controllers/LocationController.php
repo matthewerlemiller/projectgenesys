@@ -14,4 +14,19 @@ class LocationController extends BaseController {
 
 	}
 
+	/**
+	 * Returns leaders for current logged in Location.
+	 *
+	 * @return Response
+	 */
+	public function leaders()
+	{
+
+		$location = Auth::user();
+		$leaders = $location->leaders;
+
+		return Response::json(['data' => $leaders], 200);
+
+	}
+
 }

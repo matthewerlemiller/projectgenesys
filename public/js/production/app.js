@@ -20202,6 +20202,12 @@ app.factory('Location', ['$http', function($http) {
 
 			return $http.get('/location');
 
+		},
+
+		leaders : function() {
+
+			return $http.get('/location/leaders');
+
 		}
 
 	}
@@ -20413,8 +20419,8 @@ app.controller('DashboardController',['$scope', 'Member', 'SharedService', 'Chec
 
 
 }]);
-app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', 'Image', 
-	function(                            $scope,   Member,   Session,   Lesson,   Leader,   Shift,   Kickout,   AlertService,   School,   Image) {
+app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', 'Image', 'Location',
+	function(                            $scope,   Member,   Session,   Lesson,   Leader,   Shift,   Kickout,   AlertService,   School,   Image,   Location) {
 
 	$scope.details = true;
 	$scope.lessons = false;
@@ -20576,7 +20582,7 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 	function getLeaders() {
 
-		Leader.all().success(function(response) {
+		Location.leaders().success(function(response) {
 
 			$scope.leaders = response.data;
 

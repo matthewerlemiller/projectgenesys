@@ -233,6 +233,12 @@ app.factory('Location', ['$http', function($http) {
 
 			return $http.get('/location');
 
+		},
+
+		leaders : function() {
+
+			return $http.get('/location/leaders');
+
 		}
 
 	}

@@ -82,6 +82,7 @@ Route::get('shift/get', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
 
 //Locations
 Route::get('location', ['as' => 'location.all', 'uses' => 'LocationController@all']);
+Route::get('location/leaders', ['as' => 'location.leaders', 'uses' => 'LocationController@leaders']);
 
 
 

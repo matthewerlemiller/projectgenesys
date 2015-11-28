@@ -221,7 +221,7 @@
 						<label for="leader-query">Leaders, select your name.</label>				
 
 						<div class="Form-select">
-							<select ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="leaderId">
+							<select ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders | orderBy:'firstName'" ng-model="leaderId">
 								<option value="">Find your name...</option>
 							</select> 
 						</div>	
