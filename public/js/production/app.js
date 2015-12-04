@@ -19969,249 +19969,143 @@ app.directive('adminCheckinBarChart', ['Checkin', function(Checkin) {
 }]);
 
 app.factory('Member', function($http) {
-
 	return {
-
 		search : function(query) {
-
 			return $http.post('/member/search', query);
-			
 		},
-
 		get : function(memberId) {
-
 			return $http.get('/member/get/' + memberId);
-
 		},
-
 		getStatus : function(memberId) {
-
 			return $http.get('/member/status/' + memberId);
-
 		},
-
 		update : function(data) {
-
 			return $http.put('/member/update/', data);
-
 		},
-
 		create : function(data) {
-
 			return $http.post('/member', data);
-
 		}
-
-
-
 	}
 });
 
 app.factory('Leader', function($http) {
-
 	return  {
-
 		all : function() {
-
 			return $http.get('/leader/all');
-
 		},
-
+		create : function(data) {
+			return $http.post('/leader', data)
+		},
 		search : function(query) {
-
-			return $http.post('/leader/search', query);
-			
+			return $http.post('/leader/search', query);	
 		},
-
 		updateLocations : function(data) {
-
 			return $http.post('/leader/locations', data);
-
 		},
-
 		assignToLocation : function(data) {
-
 			return $http.post('/leader/assign', data);
-
 		},
-
 		unassignFromLocation : function(data) {
-
 			return $http.post('/leader/unassign', data)
-
 		}
-
 	}
-
 });
 
 app.factory('Session', function($http) {
-
 	return {
-
 		get : function(memberId) {
-
 			return $http.get('/session/' + memberId);
-
 		},
-
 		store : function(data) {
-
 			return $http.post('/session', data);
-
 		}
-
 	}
-
 });
 
 app.factory('Shift', ['$http', function($http) {
-
 	return {
-
 		get : function() {
-
 			return $http.get('/shift/get');
-
 		}
-
 	}
-
 }]);
 
 app.factory('Lesson', ['$http', function($http) {
-
 	return {
-
 		get : function() {
-
 			return $http.get('/lesson');
-
 		}
-
 	}
-
 }]);
 
 app.factory('SharedService', function($rootScope) {
-
 	var sharedService = {};
 
 	sharedService.broadcastShowCheckedIn = function() {
-
 		$rootScope.$broadcast('showCheckedIn');
-
 	}
 
 	return sharedService;
-
 });
 
 
 app.factory('Image', ['$http', '$upload', function($http, $upload) {
-
 	return {
-
 		upload : function(file) {
-
 			return $upload.upload({
-
 				url : '/member/image',
 				file : file
-
 			});
-
 		}
-
 	}
-
 }]);
 
 app.factory('Kickout', ['$http', function($http) {
-
 	return {
-
 		store : function(data) {
-
 			return $http.post('/member/kickout', data);
-
 		}
-
 	}
-
 }]);
 
 app.factory('School', ['$http', function($http) {
-
 	return {
-
 		getAll : function() {
-
 			return $http.get('/school');
-
 		}
-
 	}
-
 }]);
 
 
 app.factory('Checkin', ['$http', function($http) {
-
 	return {
-
 		store : function(data) {
-
 			return $http.post('/checkin/', data);
-
 		},
-
 		getTodayByLocation : function(locationId) {
-
 			return $http.get('/checkin/today/' + locationId);
-
 		},
-
 		chartDataByLocation : function(locationId) {
-
 			return $http.get('/checkin/chart/' + locationId);
-
 		},
-
 		heatmapDataByLocation : function(locationId) {
-
 			return $http.get('/checkin/heatmap/' + locationId);
-
 		},
-
 		totalsByLocation : function(locationId) {
-
 			return $http.get('/checkin/totals/' + locationId);
-
 		}
-
 	}
-
 }]);
 
 app.factory('Location', ['$http', function($http) {
-
 	return {
-
 		all : function() {
-
 			return $http.get('/location');
-
 		},
-
 		leaders : function() {
-
 			return $http.get('/location/leaders');
-
 		}
-
 	}
-
 }]);
 
 
@@ -20224,72 +20118,107 @@ app.controller('AdminLeadersController', ['$scope', 'Location', 'Leader', '$uibM
 	function(                              $scope,   Location,   Leader,   $uibModal,   AlertService) {
 
 		$scope.leaders = [];
+		$scope.newLeader = {
+			locationIdCollection : []
+		};
+		$scope.locations = [];
 
 		function init() {
-
 			getLeaders();
-
+			getLocations();
 		}
 
 		function getLeaders() {
-
 			Leader.all().success(function(response) {
-
 				$scope.leaders = response.data;
-
 			});
+		}
 
+		function getLocations() {
+			Location.all().success(function(response) {
+				$scope.locations = response.data;
+			});
+		}
+
+		$scope.createLeader = function() {
+			var data = $scope.newLeader;
+
+			if (!data.firstName || !data.lastName) return false;
+
+			Leader.create(data).success(function(response) {
+				AlertService.broadcast('Leader created!', 'success');
+				$scope.leaders.push(response.data);
+				$scope.clearLeader();
+			}).error(function(response) {
+				AlertService.broadcast('Something went wront, it was not your fault', 'error');
+			})
+		}
+
+		$scope.clearLeader = function() {
+			$scope.newLeader = {
+				locationIdCollection : []
+			}
+			clearLocationChecks();
 		}
 
 		$scope.unassignFromLocation = function(leader, locationId) {
-
 			var data = {
-
 				locationId : locationId,
 				leaderId : leader.id
-
 			}
 
 			Leader.unassignFromLocation(data).success(function(response) {
-
 				$scope.leaders[$scope.leaders.indexOf(leader)] = response.data;
 				AlertService.broadcast('Location unassigned', 'success');
-
 			});
-
 		}
 
 		$scope.openLocationAssignmentModal = function(leader) {
-
 			var modalInstance = $uibModal.open({
-
 				templateUrl : '../../modals/templates/locationAssignmentModal.html',
 				controller : 'LocationAssignmentModalController',
 				resolve : {
-
 					leader : function() {
-
 						return leader;
-
 					}
-
 				}
-
 			});
 
 			modalInstance.result.then(function(locations) {	
-
 				$scope.leaders[$scope.leaders.indexOf(leader)].locations = locations;
 				AlertService.broadcast('Locations Updated!', 'success');
-
 			});
+		}
 
+		$scope.changeLocationAssignment = function($locationIndex) {
+		    var locationId = $scope.locations[$locationIndex].id;
+		    
+		    if ($scope.locations[$locationIndex].isChecked) {
+		        if ($scope.newLeader.locationIdCollection.indexOf(locationId) === -1) {
+		            $scope.newLeader.locationIdCollection.push(locationId);
+		        }
+		    } else {
+		       if ($scope.leader.locationIdCollection.indexOf(locationId) !== -1) {
+		           $scope.leader.locationIdCollection.splice($scope.leader.locationIdCollection.indexOf(locationId), 1);
+		       } 
+		    }
+		}
+
+		function clearLocationChecks() {
+			for(var i = 0; i < $scope.locations.length; i++) {
+				$scope.locations[i].isChecked = false;
+			}
+		}
+
+		function extractIds(arrayOfObjects) {
+		    var newArray = arrayOfObjects.map(function(obj){
+		        return obj.id;
+		    });
+		    return newArray;
 		}
 
 		init();
-
 	}
-
 ]);
 app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', 'Checkin',
 	function(                              $scope,   Image,   Member,   AlertService,   Checkin) {
@@ -21093,20 +21022,14 @@ app.controller('LocationAssignmentModalController', ['$scope', '$uibModalInstanc
 		}
 
 		$scope.save = function() {
-
 			var data = {
-
 				locations : $scope.leader.locationIdCollection,
 				leaderId : $scope.leader.id
-
 			}
 
 			Leader.updateLocations(data).success(function(response) {
-
 				$uibModalInstance.close(response.data);
-
 			});
-
 		}
 
 		$scope.cancel = function() {
@@ -21116,27 +21039,17 @@ app.controller('LocationAssignmentModalController', ['$scope', '$uibModalInstanc
 		}
 
 		$scope.changeLocationAssignment = function($locationIndex) {
-
 		    var locationId = $scope.locations[$locationIndex].id;
-
+		    
 		    if ($scope.locations[$locationIndex].isChecked) {
-
 		        if ($scope.leader.locationIdCollection.indexOf(locationId) === -1) {
-
 		            $scope.leader.locationIdCollection.push(locationId);
-
 		        }
-
 		    } else {
-
 		       if ($scope.leader.locationIdCollection.indexOf(locationId) !== -1) {
-
 		           $scope.leader.locationIdCollection.splice($scope.leader.locationIdCollection.indexOf(locationId), 1);
-
 		       } 
-
 		    }
-
 		}
 
 		/**
@@ -21146,24 +21059,16 @@ app.controller('LocationAssignmentModalController', ['$scope', '$uibModalInstanc
 		 * @param int locationId
 		 */
 		function leaderIsAssignedToLocation(locationId) {
-
 			var isAssigned = false;
 
 			for(var i = 0; i < $scope.leader.locations.length; i++) {
-
 				if ($scope.leader.locations[i].id == locationId) {
-
 					isAssigned = true;
 					break;
-
 				} 
-
 				isAssigned = false;
-
 			}
-
 			return isAssigned;
-
 		}
 
 		/**
@@ -21172,36 +21077,22 @@ app.controller('LocationAssignmentModalController', ['$scope', '$uibModalInstanc
 		 * checkbox
 		 */
 		function assignIsCheckedPropertyToLocations() {
-
 			for(var i = 0; i < $scope.locations.length; i++) {
-
 			    if(leaderIsAssignedToLocation($scope.locations[i].id)) {
-
 			        $scope.locations[i].isChecked = true;
-
 			    } else {
-
 			        $scope.locations[i].isChecked = false;
-
 			    }
-
 			}
-
 		}
 
 		function extractIds(arrayOfObjects) {
-
 		    var newArray = arrayOfObjects.map(function(obj){
-
 		        return obj.id;
-
 		    });
-
 		    return newArray;
-
 		}
 
 		init();
-
 
 }]);

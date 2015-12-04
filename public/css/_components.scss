@@ -1,95 +1,82 @@
+.Input {
+	border:2px solid $darkPrimary;
+	@include lato;
+	font-size:1rem;
+	padding:6px;
+	color:$darkgray;
+	background-color: #fff;
+	border-radius: 0;
+
+	&:focus {
+
+		outline: none;
+		border-style: dotted;
+
+	}
+}
+
 .Form {
 
 	table {
-
 		width:100%;
 	}
 
 	input[type="text"], input[type="date"], input[type="password"], input[type="email"], textarea, input[type="tel"] {
-
-		border:2px solid $darkPrimary;
+		@extend .Input;
 		width:100%;
-		@include lato;
-		font-size:1rem;
-		padding:6px;
-		color:$darkgray;
-		background-color: #fff;
-		border-radius: 0;
-
-		&:focus {
-
-			outline: none;
-			border-style: dotted;
-
-		}
-
 	}
 
 	td {
-
 		padding:8px 15px;
-
 	}
 	
 	&-field {
-
 		margin-bottom: 15px;
-
 	}
 
 	&-submit {
-
 		width:40%;
 		margin: 20px auto 50px auto;
-
 	}
 
 	label {
-
 		color:$primary;
 		margin-bottom: 5px;
 		display: block;
 		font-size: 18px;
 		text-align: left;
-
 	}
 
 	&-group {
-
 		margin-bottom: 15px;
 
 		&--two-thirds {
-
 			width:((100% / 3) * 2);
 			float:left;
-
 		}
 
 		&--one-third {
-
 			width:(100% / 3);
 			float: left;
+		}
 
+		&--half {
+			width:50%;
+			float:left;
 		}
 
 		&--withPadding {
-
 			box-sizing:border-box;
 			padding-right: 15px;
-
 		}
-
 	}
 
 	&-select {
-
 		width:100%;
 		position: relative;
-		
 		background-color: white;
 
 		select {
-
 			-webkit-appearance: none;
 			background-color: transparent;
 		    width: 100%;
@@ -102,16 +89,12 @@
 		    @include lato;
 
 		    &:focus {
-
 		    	outline: none;
 		    	border-style: dotted;
-
 		    }
-
 		}
 
 	    &:after {
-
 	    	position: absolute;
 	    	height:100%;
 	    	width:35px;
@@ -129,15 +112,11 @@
     	    border-top:2px solid $darkPrimary;
     	    border-right:2px solid $darkPrimary;
     	    border-bottom:2px solid $darkPrimary;
-
 	    }
-
 	}
-
 }
 
 .StatusTag {
-
 	border-radius: 3px;
 	font-size: .90rem;
 	box-sizing:border-box;
@@ -371,6 +350,5 @@
 		}
 
 	}
-
 
 }

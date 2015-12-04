@@ -1,16 +1,10 @@
 <?php
 
-
 Route::get('/', ['before' => 'auth', 'as' => 'home', function() {
-
 	if (Auth::user()->admin) {
-
 		return Redirect::route('admin.index');
-
 	}
-
 	return Redirect::route('dashboard');
-
 }]);
 
 
@@ -68,6 +62,7 @@ Route::post('session', ['as' => 'session.store', 'uses' => 'SessionController@st
 
 //Leader
 Route::get('leader/all', ['as' => 'leader.all', 'uses' => 'LeaderController@all']);
+Route::post('leader', ['as' => 'leader.store', 'uses' => 'LeaderController@store']);
 Route::post('leader/search', ['as' => 'leader.search', 'uses' => 'LeaderController@search']);
 Route::post('leader/assign', ['as' => 'leader.assign', 'uses' => 'LeaderController@assignToLocation']);
 Route::post('leader/locations', ['as' => 'leader.locations', 'uses' => 'LeaderController@updateLocations']);

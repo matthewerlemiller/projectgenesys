@@ -31,21 +31,27 @@ input, select, password{
 }
 
 .left {
-
 	float:left;
-
 }
 
 .right {
-
 	float:right;
+}
 
+.margin-right {
+    margin-right: 10px;
 }
 
 .clear {
-
 	clear:both;
+}
 
+.border-top {
+    border-top: 2px solid $darkPrimary;
+}
+
+.inline-block {
+    display: inline-block;
 }
 
 .spinner {
