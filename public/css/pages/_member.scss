@@ -1,20 +1,16 @@
 .member-page-container {
-
 	width:768px;
 	padding-left: 40px;
 	padding-right: 40px;
 	margin:auto;
 
 	.member-header-container {
-
 		margin-top:25px;
 		position: relative;
-
 	}
 
 
 	.member-section-navigation {
-
 		margin-top: 25px;
 		margin-left: 15px;
 		float:left;
@@ -23,7 +19,6 @@
 		box-sizing:border-box;
 
 		li {
-
 			float:left;
 			padding: 10px 15px;
 			letter-spacing: .75px;
@@ -34,61 +29,30 @@
 			color:white;
 
 			i {
-
 				margin-right: 5px;
-
 			}
 
 			&:last-child {
-
 				margin-right: 0;
-
 			}
-
 		}
 
 		.member-section-selected {
-
 			background-color: #63B7FF;
 			border:2px solid $primary;
-			// box-shadow: 2px 2px 0px 0px darken(#63B7FF, 25%);
-
 		}
-
 	}
 
 	.member-profile-image {
-
 		float: left;
 		position: relative;
-		// border-radius: 50%;
 		width:200px;
 		height:200px;
 		background-size: cover;
 		background-position: center;
 		margin-bottom: 10px;
-		border: 3px solid $darkgray;
+		border: 2px solid $darkgray;
 		overflow: hidden;
-		// border-radius: 50%;
-
-		.member-checkedin-status {
-
-			// background-color: transparentize($green, .15);
-			background-color: $green;
-			border-top: 2px solid darken($green, 7%);
-			color:white;
-			letter-spacing: 1px;
-			font-size: 14px;
-			@include box-sizing(border-box);
-			padding:9px 10px;
-			width:100%;
-			// border-radius:4px;
-			text-align: center;
-			position:absolute;
-			bottom: 0px;
-
-		}
-
 	}
 
 	.member-header-info {

@@ -6,8 +6,9 @@
 	<div class="member-header-container">
 		<div class="member-header-info">
 			<div class="member-profile-image" ng-style="{'background-image':'url(' + (member.image ? member.image : '') + ')'}">
+				<div class="Flair Flair--orange Flair-top" ng-if="member.leadsJrStaff" ng-cloak>Jr. Staff</div>
 				@if ($memberCheckedIn)
-					<div class="member-checkedin-status">
+					<div class="Flair Flair--green Flair-bottom">
 						Checked In
 					</div>
 				@endif
@@ -96,7 +97,7 @@
 					<div class="group">
 
 						<h3 class="subsection-title">Leadership</h3>
-
+						<p class="boolean-data"><span class="label">Jr. Staff</span> : @{{ member.leadsJrStaff | yesno }}</p>
 						<p class="boolean-data"><span class="label">Serves in Bus Ministry</span> : @{{ member.leadsBusMinistry | yesno }}</p>
 						<p class="boolean-data"><span class="label">Worship Leader</span> : @{{ member.leadsWorship | yesno }} </p>
 						<p class="boolean-data"><span class="label">Serves in Kids Club</span> : @{{ member.leadsKidsClub | yesno }} </p>
@@ -294,7 +295,6 @@
 	<div class="member-edit-container Form" ng-show="edit">
 	
 		<table class="Table">
-
 			<tr>
 				<th>Item</th>
 				<th colspan="2">Edit Here</th>
@@ -414,6 +414,11 @@
 				<td><label>Serves in Sunday School?</label></td>
 				<td><input type="radio" ng-model="member.leadsSundaySchool" ng-value="true"> Yes</td>
 				<td><input type="radio" ng-model="member.leadsSundaySchool" ng-value="false"> No</td>
+			</tr>
+			<tr>
+				<td><label>Is Jr Staff?</label></td>
+				<td><input type="radio" ng-model="member.leadsJrStaff" ng-value="true"> Yes</td>
+				<td><input type="radio" ng-model="member.leadsJrStaff" ng-value="false"> No</td>
 			</tr>
 			<tr>
 				<td><label>Is High School Small Group Leader?</label></td>

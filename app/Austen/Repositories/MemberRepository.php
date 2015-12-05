@@ -163,6 +163,7 @@ class MemberRepository {
 			if (isset($input['attendsSundaySchool'])) $member->attendsSundaySchool = $input['attendsSundaySchool'];
 			if (isset($input['leadsSundaySchool'])) $member->leadsSundaySchool = $input['leadsSundaySchool'];
 			if (isset($input['attendsMission910'])) $member->attendsMission910 = $input['attendsMission910'];
+			if (isset($input['leadsJrStaff'])) $member->leadsJrStaff = $input['leadsJrStaff'];
 
 			$member->update();
 
