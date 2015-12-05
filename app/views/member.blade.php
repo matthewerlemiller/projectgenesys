@@ -333,6 +333,10 @@
 				<td colspan="2"><input type="text" ng-model="member.address"></td>
 			</tr>
 			<tr>
+				<td><label>City</label></td>
+				<td colspan="2"><input type="text" ng-model="member.city"></td>
+			</tr>
+			<tr>
 				<td><label>Zip</label></td>
 				<td colspan="2"><input type="text" ng-model="member.zip"></td>
 			</tr>	

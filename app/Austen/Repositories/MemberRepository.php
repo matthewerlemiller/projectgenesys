@@ -125,6 +125,7 @@ class MemberRepository {
 			if (isset($input['birthDate'])) $member->birthDate = $input['birthDate'];
 			if (isset($input['phone'])) $member->phone = preg_replace('/\D+/', '', $input['phone']);
 			if (isset($input['address'])) $member->address = $input['address'];
+			if (isset($input['city'])) $member->city = $input['city'];
 			if (isset($input['zip'])) $member->zip = $input['zip'];
 			if (isset($input['email'])) $member->email = $input['email'];
 			if (isset($input['image'])) $member->image = $input['image'];
