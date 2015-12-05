@@ -1,6 +1,5 @@
 <?php
 
-
 class LeaderController extends BaseController {
 
 	/**
@@ -8,7 +7,8 @@ class LeaderController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function all() {
+	public function all() 
+	{
 		try {
 			$leaders = Leader::with('locations')->get();
 		} catch (Exception $e) {
@@ -49,8 +49,8 @@ class LeaderController extends BaseController {
 	 *
 	 * @return response
 	 */
-	public function search() {
-
+	public function search() 
+	{
 		try {
 			$q = Input::get('query');
 			$query = DB::table('leaders');

@@ -8,10 +8,8 @@
 	border-radius: 0;
 
 	&:focus {
-
 		outline: none;
 		border-style: dotted;
-
 	}
 }
 
@@ -252,103 +250,68 @@
 	}
 
 	&--success {
-
 		background-color: $green;
 		border-color:darken($green, 7%);
 
 		&:hover {
-
 			background-color: darken($green, 3%);
-
 		}
-
 	}
 
 	&--neutral {
-
 		background-color: $lightgray;
 		border-color:darken($lightgray, 7%);
 
 		&:hover {
-
 			background-color: darken($lightgray, 3%);
-
 		}
-
 	}
 
 	&--error {
-
 		background-color: $red;
 		border-color:darken($red, 7%);
 
 		&:hover {
-
 			background-color: darken($red, 3%);
-
 		}
-
 	}
-
 }
 
 
 .ActionTag {
-
-	
 	color:white;
 	border-radius: 2px;
 	display: inline-block;
 
 	&-content {
-
 		box-sizing:border-box;
 		display: inline-block;
 		padding:4px 5px 4px 8px;
-		
-
 	}
 
 	&-button {
-
 		background-color: inherit;
 		width:20px;
 		display: inline-block;
 		text-align: center;
 		cursor: pointer;
-
-		i {
-
-
-
-		}
-
 	}
 
 	&--success {
-
 		background-color: $green;
 		border:1px solid darken($green, 10%);
 
 		& .ActionTag-content {
-
 			border-right:1px solid darken($green, 10%);	
-
 		}
-
 	}
 
 	&--warning {
-
 		background-color: $red;
 		border:1px solid darken($red, 10%);
 
 		& .ActionTag-content {
-
 			border-right:1px solid darken($red, 10%);	
-
 		}
-
 	}
-
 }

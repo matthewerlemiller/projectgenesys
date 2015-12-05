@@ -1,11 +1,8 @@
 <div class="Card">
-
 	<div class="Card-title">
 		<h2>Assign Locations for {{ leader.firstName }}</h2>
 	</div>
-
 	<div class="Card-content">
-
 		<div>
 			<label ng-repeat="location in locations">
 				<input type="checkbox" ng-model="location.isChecked" ng-change="changeLocationAssignment($index)">{{ location.name }}<br>
@@ -16,7 +13,5 @@
 			<div class="Button Button--success" ng-click="save()">Save</div>
 			<div class="Button Button--neutral" ng-click="cancel()">Cancel</div>
 		</div>
-
 	</div>
-
 </div>

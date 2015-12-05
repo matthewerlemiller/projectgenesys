@@ -3,11 +3,8 @@
 @section ('content')
 
 <div class="member-page-container" ng-controller="MemberPageController">
-
 	<div class="member-header-container">
-
 		<div class="member-header-info">
-
 			<div class="member-profile-image" ng-style="{'background-image':'url(' + (member.image ? member.image : '') + ')'}">
 				@if ($memberCheckedIn)
 					<div class="member-checkedin-status">
@@ -29,7 +26,6 @@
 			<rank-tube member="member" loaded="loaded" ng-cloak></rank-tube>
 
 			<ul class="member-section-navigation" ng-cloak>
-
 				<li ng-click="changePage('details')" ng-class="{'member-section-selected' : details}"><i class="fa fa-list"></i>Details</li>
 				<li ng-click="changePage('lessons')" ng-class="{'member-section-selected' : lessons}"><i class="fa fa-star"></i>Lessons</li>
 				{{-- <li ng-click="changePage('kickout')" ng-class="{'member-section-selected' : kickout}"><i class="fa fa-thumbs-down"></i>Kickout</li> --}}
@@ -37,21 +33,13 @@
 			</ul>
 
 			<div class="clear"></div>
-
 		</div>
-
 	</div>
 
 	<div class="member-details-container" ng-show="details">
-
-
-		
 		<div class="Card member-details-section">
-
 			<div class="Card-title">Info</div>
-
 			<div class="Card-content">
-
 				<table style="table-layout:fixed;">
 					<tr>
 						<td><p class="text-data"><span class="label">Status</span> : <status-tag member="member" loaded="loaded" block="false"></status-tag> </p></td>
@@ -61,7 +49,7 @@
 					<tr>
 						<td><p class="text-data"><span class="label">Phone</span> : @{{ member.phone }} </p></td>
 						<td><p class="text-data"><span class="label">Address</span> : @{{ member.address }} </p></td>
-						<td><p class="text-data"><span class="label">City</span> : @{{ member.city }} </p></td>
+						<td><p class="text-data"><span class="label">City</span> : @{{ member.city }} @{{ member.zip }}</p></td>
 					</tr>
 					<tr>
 						<td colspan="2"><p class="text-data"><span class="label">Email</span> : @{{ member.email }} </p></td>
@@ -74,29 +62,20 @@
 		</div>
 
 		<div class="Card member-details-section">
-
 			<div class="Card-title">Involvement</div>
-
 			<div class="Card-content">
-
 				<div class="column">
-
 					<div class="group">
-
 						<h3 class="subsection-title">Life Events</h3>
-
 						<p class="boolean-data"><span class="label">Saved</span> : @{{ member.saved | yesno }} </p>
 						<p class="boolean-data"><span class="label">Baptized</span> : @{{ member.baptized | yesno }} </p>
 						<p class="text-data"><span class="label">Baptized Date</span> : @{{ member.baptizedDate }} </p>
 						<div class="spacer"></div>
 						<div class="spacer"></div>
-
 					</div>
 
 					<div class="group">
-
 						<h3 class="subsection-title">Ministry</h3>
-
 						<p class="boolean-data"><span class="label">Attends High School Group</span> : @{{ member.attendsHighSchoolGroup | yesno }}</p>
 						<p class="boolean-data"><span class="label">Attends High School Small Group</span> : @{{ member.attendsHighSchoolSmallGroup | yesno }}</p>
 						<p class="boolean-data"><span class="label">Attends Jr High Group</span> : @{{ member.attendsJrHighGroup | yesno }}</p>
@@ -110,7 +89,6 @@
 						<div class="spacer"></div>
 
 					</div>
-
 				</div>
 
 				<div class="column">
@@ -353,6 +331,10 @@
 			<tr>
 				<td><label>Address</label></td>
 				<td colspan="2"><input type="text" ng-model="member.address"></td>
+			</tr>
+			<tr>
+				<td><label>Zip</label></td>
+				<td colspan="2"><input type="text" ng-model="member.zip"></td>
 			</tr>	
 			<tr>
 				<td><label>Saved?</label></td>

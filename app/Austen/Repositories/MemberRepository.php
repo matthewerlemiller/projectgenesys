@@ -13,32 +13,21 @@ class MemberRepository {
 
 	public function all()
 	{
-
 		$members = Member::all();
-
 		return $members;
-
 	}
 
 	public function find($id) 
 	{
-
-		try {
-		
+		try {	
 			$member = Member::findOrFail($id);
 			$memberLastCheckIn = $member->checklogs()->orderBy('id', 'desc')->get()->first()["checkInDateTime"];
 			$memberCheckedIn = $memberLastCheckIn ? Carbon::parse($memberLastCheckIn)->isToday() : false;
-
 		} catch (ModelNotFoundException $e) {
-			
 			Log::error($e);
-
 			return false;
-
 		}
-
 		return array('member' => $member, 'memberCheckedIn' => $memberCheckedIn);
-
 	}
 
 	/**
@@ -48,7 +37,6 @@ class MemberRepository {
 	 */
 	public function get($memberId) 
 	{
-
 		try {
 		
 			$member = Member::findOrFail($memberId);
@@ -57,24 +45,17 @@ class MemberRepository {
 			$rank = $this->rank($member);
 
 			if ($rank === false) {
-
 				$rank = Rank::where('name', '=', 'New')->first();
-
 			}
 
 			$member->rank = $rank;
 
 		} catch (Exception $e) {
-			
 			Log::error($e);
-
 			return false;
-
 		}
 
-		
 		return $member;
-
 	}
 
 	public function store($input) 
@@ -144,6 +125,7 @@ class MemberRepository {
 			if (isset($input['birthDate'])) $member->birthDate = $input['birthDate'];
 			if (isset($input['phone'])) $member->phone = preg_replace('/\D+/', '', $input['phone']);
 			if (isset($input['address'])) $member->address = $input['address'];
+			if (isset($input['zip'])) $member->zip = $input['zip'];
 			if (isset($input['email'])) $member->email = $input['email'];
 			if (isset($input['image'])) $member->image = $input['image'];
 			if (isset($input['parent1Name'])) $member->parent1Name = $input['parent1Name'];
@@ -155,12 +137,9 @@ class MemberRepository {
 			if (isset($input['permissionSlip'])) $member->permissionSlip = $input['permissionSlip'];
 			if (isset($input['baptized'])) $member->baptized = $input['baptized'];
 			if (isset($input['baptizedDate'])) $member->baptizedDate = $input['baptizedDate'];
-			
 			if (isset($input['saved'])) $member->saved = $input['saved'];
 			if (isset($input['skatepark'])) $member->skatepark = $input['skatepark'];
 			if (isset($input['schoolId'])) $member->schoolId = $input['schoolId'];	
-			
-			
 			if (isset($input['attendsHighSchoolGroup'])) $member->attendsHighSchoolGroup = $input['attendsHighSchoolGroup'];
 			if (isset($input['attendsHighSchoolSmallGroup'])) $member->attendsHighSchoolSmallGroup = $input['attendsHighSchoolSmallGroup'];
 			if (isset($input['attendsJrHighGroup'])) $member->attendsJrHighGroup = $input['attendsJrHighGroup'];
@@ -199,9 +178,7 @@ class MemberRepository {
 		$rank = $this->rank($member);
 
 		if ($rank === false) {
-
 			$rank = Rank::where('name', '=', 'New')->first();
-
 		}
 
 		$member->rank = $rank;
@@ -213,35 +190,22 @@ class MemberRepository {
 
 	public function rank($member) 
 	{
-
 		$sorter = [];
 
 		foreach($member->sessions as $i => $session) {
-
 			if ($i < 1) {
-
 				array_push($sorter, $session->lesson);
-
 			} else {
-
 				if ($session->lesson->id > $sorter[count($sorter) - 1]->id) {
-
 					array_push($sorter,$session->lesson);
-
 				} else {
-
 					array_unshift($sorter, $session->lesson);
-
 				}
-
 			}
-
 		}
 
 		if (count($sorter) < 1) {
-
 			return false;
-
 		}
 
 		$pop = array_pop($sorter);
@@ -255,16 +219,11 @@ class MemberRepository {
 	{
 
 		try {
-			
 			$member = Member::findOrFail($id);
 			$member->delete();
-
 		} catch (Exception $e) {
-	
 			Log::error($e);
-
 			return false;
-
 		}
 
 		return true;
