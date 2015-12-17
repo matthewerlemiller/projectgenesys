@@ -115,7 +115,7 @@ class CheckInController extends BaseController {
 	public function getMemberData($memberId)
 	{ 
 		$interval = Request::query('interval');
-		$checklogs = Member::find($memberId)->checklogs()->take(7)->skip($interval * 7)->get();
+		$checklogs = Member::find($memberId)->checklogs()->take(7)->skip($interval * 7)->orderBy('checkInDateTime', 'desc')->get();
 
 		return Response::json(['data' => $checklogs], 200);
 	}
