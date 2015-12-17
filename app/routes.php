@@ -38,7 +38,7 @@ Route::group(['before' => 'auth'], function() {
 Route::resource('school', 'SchoolController');
 
 //Checkin
-Route::get('checkin/member/{locationId}', ['as' => 'checkin.member', 'uses' => 'CheckinController@getMemberData']);
+Route::get('checkin/member/{locationId}', ['as' => 'checkin.member', 'uses' => 'CheckInController@getMemberData']);
 Route::get('checkin/today/{locationId?}', ['as' => 'checkin.today', 'uses' => 'CheckInController@getTodayByLocation']);
 Route::get('checkin/heatmap/{locationId?}', ['as' => 'checkin.heatmap', 'uses' => 'CheckInController@getHeatmapData']);
 Route::get('checkin/totals/{locationId?}', ['as' => 'checkin.totals', 'uses' => 'CheckInController@getTotalsData']);
