@@ -19588,13 +19588,16 @@ var app = angular.module('genesys', [
 	'ngAnimate', 
 	'ui.bootstrap']);
 app.filter('yesno', function() {
-
 	return function(input) {
-
 		return input ? 'yes' : 'no'
-
 	}
+});
 
+app.filter('humanReadable', function humanReadable($filter){
+  return function(text){
+    var  tempdate = new Date(text.replace(/-/g,"/"));
+    return $filter('date')(tempdate, "EEE MMM d, y | h:mm a");
+  }
 });
 app.factory('AlertService', ['$rootScope', function($rootScope) {
 
@@ -20085,6 +20088,9 @@ app.factory('Checkin', ['$http', function($http) {
 		getTodayByLocation : function(locationId) {
 			return $http.get('/checkin/today/' + locationId);
 		},
+		getForMember : function(memberId, interval) {
+			return $http.get('/checkin/member/' + memberId + '?interval=' + interval);
+		},
 		chartDataByLocation : function(locationId) {
 			return $http.get('/checkin/chart/' + locationId);
 		},
@@ -20348,8 +20354,8 @@ app.controller('DashboardController',['$scope', 'Member', 'SharedService', 'Chec
 
 
 }]);
-app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', 'Image', 'Location',
-	function(                            $scope,   Member,   Session,   Lesson,   Leader,   Shift,   Kickout,   AlertService,   School,   Image,   Location) {
+app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', 'Image', 'Location', 'Checkin',
+	function(                            $scope,   Member,   Session,   Lesson,   Leader,   Shift,   Kickout,   AlertService,   School,   Image,   Location,   Checkin) {
 
 	$scope.details = true;
 	$scope.lessons = false;
@@ -20357,6 +20363,8 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 	$scope.edit = false;
 
 	$scope.member = {};
+	$scope.checkins = [];
+	$scope.checkinInterval = 0;
 	$scope.loaded = false;
 
 	$scope.sessions = [];
@@ -20384,27 +20392,16 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 		$scope.photoHasBeenChanged;
 
 		if (pageName == 'details') {
-
 			$scope.details = true;
-
 		} else if (pageName == 'lessons') {
-
 			$scope.lessons = true;
-
 		} else if (pageName == 'kickout') {
-
 			$scope.kickout = true;
-
 		} else if (pageName == 'edit') {
-
 			$scope.edit = true;
-
 		} else {
-
 			$scope.details = true;
-
 		}
-
 	}
 
 	$scope.fetchData = function() {
@@ -20412,59 +20409,39 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 		if (MEMBER_ID === null) return false;
 
 		Member.get(MEMBER_ID).success(function(response) {
-
 			if (response.data.birthDate) {
-
 				response.data.birthDate = new Date(response.data.birthDate);
-
 			}
-
 			$scope.member = response.data;
 			$scope.loaded = true;
-
 		}).error(function(response) {
-
 			AlertService.broadcast('Sorry, there was a problem fetching data. This page may be rendered incorrectly.', 'error');
-			
 		});
-
 	}
 
 	$scope.updateMember = function() {
 
 		Member.update($scope.member).success(function(response) {
-
 			AlertService.broadcast(response.message, 'success');
-
 			if (response.data.birthDate) {
-
 				response.data.birthDate = new Date(response.data.birthDate);
-
 			}
 
 			$scope.member = response.data;
-
 			$scope.changePage('details');
-
 			$scope.photoHasBeenSaved = true;
-
 			document.body.scrollTop = document.documentElement.scrollTop = 0;
-
 		}).error(function(response) {
-
 			AlertService.broadcast("Sorry, something went wrong", 'error');
-
 		});
-
 	}
 
 	$scope.init = function() {
-
 		getLessons();
 		getLeaders();
 		getSchools();
 		getShifts();
-
+		getCheckins();
 	}
 
 	$scope.getSessions = function(memberId) {
@@ -20566,6 +20543,13 @@ app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson',
 
 	}
 
+	function getCheckins() {
+		Checkin.getForMember(MEMBER_ID, $scope.checkinInterval).success(function(response) {
+			$scope.checkins.push.apply($scope.checkins, response.data);
+			console.debug('$scope.checkins', $scope.checkins);
+			$scope.interval++;
+		});
+	}
 
 	$scope.clear = function() {
 

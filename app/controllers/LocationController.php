@@ -7,11 +7,8 @@ class LocationController extends BaseController {
 
 	public function all()
 	{
-
 		$locations = Location::where('admin', '=', false)->with('leaders')->get();
-
 		return Response::json(['data' => $locations], 200);
-
 	}
 
 	/**
@@ -21,7 +18,6 @@ class LocationController extends BaseController {
 	 */
 	public function leaders()
 	{
-
 		$location = Auth::user();
 		$leaders = $location->leaders;
 

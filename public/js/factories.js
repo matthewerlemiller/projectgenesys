@@ -116,6 +116,9 @@ app.factory('Checkin', ['$http', function($http) {
 		getTodayByLocation : function(locationId) {
 			return $http.get('/checkin/today/' + locationId);
 		},
+		getForMember : function(memberId, interval) {
+			return $http.get('/checkin/member/' + memberId + '?interval=' + interval);
+		},
 		chartDataByLocation : function(locationId) {
 			return $http.get('/checkin/chart/' + locationId);
 		},

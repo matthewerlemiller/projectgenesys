@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MemberRepository {
 
-
 	public function all()
 	{
 		$members = Member::all();

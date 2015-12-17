@@ -57,9 +57,7 @@
 						<td><p class="text-data"><span class="label">Birthdate</span> : @{{ member.birthDate | date:'mediumDate' }} </p></td>
 					</tr>
 				</table>
-
 			</div>
-	
 		</div>
 
 		<div class="Card member-details-section">
@@ -74,7 +72,6 @@
 						<div class="spacer"></div>
 						<div class="spacer"></div>
 					</div>
-
 					<div class="group">
 						<h3 class="subsection-title">Ministry</h3>
 						<p class="boolean-data"><span class="label">Attends High School Group</span> : @{{ member.attendsHighSchoolGroup | yesno }}</p>
@@ -91,11 +88,8 @@
 
 					</div>
 				</div>
-
 				<div class="column">
-
 					<div class="group">
-
 						<h3 class="subsection-title">Leadership</h3>
 						<p class="boolean-data"><span class="label">Jr. Staff</span> : @{{ member.leadsJrStaff | yesno }}</p>
 						<p class="boolean-data"><span class="label">Serves in Bus Ministry</span> : @{{ member.leadsBusMinistry | yesno }}</p>
@@ -106,13 +100,10 @@
 						<p class="boolean-data"><span class="label">Jr High Group Leader</span> : @{{ member.leadsJrHighGroup | yesno }} </p>
 						<p class="boolean-data"><span class="label">HigherGround Leader</span> : @{{ member.leadsHigherGround | yesno }} </p>
 						<div class="spacer"></div>
-
 					</div>
 
 					<div class="group">
-
 						<h3 class="subsection-title">Event</h3>
-
 						<p class="boolean-data"><span class="label">HS Summer Camp</span> : @{{ member.attendsHighSchoolSummerCamp | yesno }} </p>
 						<p class="boolean-data"><span class="label">HS Winter Camp</span> : @{{ member.attendsHighSchoolWinterCamp | yesno }} </p>
 						<p class="boolean-data"><span class="label">JH Summer Camp</span> : @{{ member.attendsJrHighSummerCamp | yesno }} </p>
@@ -120,20 +111,25 @@
 						<p class="boolean-data"><span class="label">Future Quest</span> : @{{ member.attendsFutureQuest | yesno }} </p>
 						<p class="boolean-data"><span class="label">YV Retreat</span> : @{{ member.attendsYvRetreat | yesno }} </p>
 						<div class="spacer"></div>
-
 					</div>
-
 				</div>
-
 			</div>
-
 		</div>
 
+		<div class="Card member-details-section">
+			<div class="Card-title">Checkin History</div>
+			<div class="Card-content">
+				<div class="column">
+					<div class="group">
+						<h3 class="subsection-title">Latest</h3>
+						<p ng-repeat="checkin in checkins">@{{ checkin.checkInDateTime | humanReadable }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div class="Card member-details-section">
-
 			<div class="Card-title">Emergency</div>
-
 			<div class="Card-content">
 				<table>
 					<tr>

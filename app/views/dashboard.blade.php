@@ -3,9 +3,7 @@
 @section('content')
 
 	<div class="main-wrapper">
-
 		<div class="add-new-button">
-
 			<a href="{{ route('member.create') }}" class="create-new"><i class="fa fa-plus"></i></a>
 		</div>
 
@@ -21,12 +19,8 @@
 						<p class="name">@{{ checkInLog.member.firstName }} @{{ checkInLog.member.lastName }}</p>
 					</div>
 				</a>
-
 			</div>
-
 		</div>
-
 	</div>
-
 
 @stop
