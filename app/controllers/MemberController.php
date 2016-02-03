@@ -136,31 +136,24 @@ class MemberController extends BaseController {
         
         foreach($searchTerms as $term) {    
             $query->where('firstName', 'ILIKE', '%'. $term .'%')
-                  ->orWhere('lastName', 'ILIKE', '%' . $term . '%');
-                  // ->orWhereRaw('LOWER(firstName) LIKE ' . $term);
+                  ->orWhere('lastName', 'ILIKE', '%' . $term . '%');            
         }
 
-        $results = $query->get();
+        $results = $query->take(10)->get();
 
         foreach($results as $result) {
-
             $member = Member::find($result->id);
             $memberLastCheckIn = $member->checklogs()->orderBy('id', 'desc')->get()->first()["checkInDateTime"];
 
             if ($memberLastCheckIn) {
-
                 $memberCheckedIn = Carbon::parse($memberLastCheckIn)->isToday() ? true : false;
-
             } else {
-
                 $memberCheckedIn = false;
             }
             
             $result->checkedIn = $memberCheckedIn;
         }
-        
         return Response::json(['data' => $results], 200);
-        
     }
 
 

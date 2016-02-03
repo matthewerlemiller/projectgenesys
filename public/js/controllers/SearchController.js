@@ -8,39 +8,24 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 	$scope.showResults = false;
 
 	$scope.searchForMember = function() {
-
 		if ($scope.query.length >= 2) {
-
 			var data = { query : $scope.query };
-
 			Member.search(data).success(function(response) {
-
 				if ($scope.query.length >= 2) {
-
 					$scope.results = response.data;
 					$scope.showResults = true;
-
-				}
-				
-
+				}		
 			}).error(function() {
-
 				console.log("There was a problem searching for this member");
-
 			});
-
 		} else {
-
 			$scope.clear();
-
 		}
 	}
 
 	$scope.clear = function() {
-
 		$scope.showResults = false;
 		$scope.results = [];
-
 	}
 
 	$scope.checkIn = function(id, index) {
