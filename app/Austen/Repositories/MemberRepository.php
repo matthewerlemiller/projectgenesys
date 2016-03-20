@@ -239,41 +239,27 @@ class MemberRepository {
 	 **/
 	public function status($id) 
 	{
-
-		try {
-				
+		try {			
 			$member = Member::where('id', '=', $id)->with('badBehaviorEvents.status')->get();
-
-			$member = $member[0];
-			
+			$member = $member[0];		
 			$badBehaviorEvents = $member->badBehaviorEvents;
 
 			if (count($badBehaviorEvents)) {
-
 				foreach($badBehaviorEvents as $event) {
-
 					if ($event->status->name === 'Suspended') {
-
 						return $event->status;
-
 					}
-
 				}
-
 				return $badBehaviorEvents[0]->status;
-				
 			}
-
 			$goodStatus = Status::where('name', '=', 'Good')->first();
 
 			return $goodStatus;
 
-		} catch (Exception $e) {
-			
+		} catch (Exception $e) {		
 			Log::error($e);
 
 			return false;
-
 		}
 
 	}
@@ -287,9 +273,7 @@ class MemberRepository {
 	 **/
 	public function kickout($id, $comments) 
 	{
-
 		try {
-			
 			$kickoutStatus = Status::where('name', '=', 'Kicked Out')->first();
 
 			$badBehaviorEvent = new BadBehaviorEvent;

@@ -126,20 +126,20 @@ class MemberController extends BaseController {
     }
 
 
-    public function searchMembers() {
-
+    public function searchMembers() 
+    {
         $q = Input::get('query');
-
-        $query = DB::table('members');
-
-        $searchTerms = explode(' ', $q);
+        // $query = DB::table('members');
+        // $searchTerms = explode(' ', $q);
         
-        foreach($searchTerms as $term) {    
-            $query->where('firstName', 'ILIKE', '%'. $term .'%')
-                  ->orWhere('lastName', 'ILIKE', '%' . $term . '%');            
-        }
+        // foreach($searchTerms as $term) {    
+        //     $query->where('firstName', 'ILIKE', '%'. $term .'%')
+        //           ->orWhere('lastName', 'ILIKE', '%' . $term . '%');            
+        // }
 
-        $results = $query->take(10)->get();
+        // $results = $query->take(10)->get();
+        
+        $results = Member::search($q)->get();
 
         foreach($results as $result) {
             $member = Member::find($result->id);

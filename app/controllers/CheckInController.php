@@ -35,12 +35,14 @@ class CheckInController extends BaseController {
 	 *
 	 * @return array Checklog
 	 */
-	public function getTodayByLocation($locationId) 
+	public function getTodayByLocation($locationId = null) 
 	{
 		if (!Auth::user()->admin) {
 			$checkedInMembers = Auth::user()->checklogs()->where('created_at', '>=', Carbon::today())->with('member')->orderBy('id', 'desc')->get();			
-		} else {
+		} elseif($locationId) {
 			$checkedInMembers = Checklog::where('locationId', '=', $locationId)->where('created_at', '>=', Carbon::today())->with('member')->orderBy('id', 'desc')->get();			
+		} else {
+			$checkedInMembers = Checklog::where('created_at', '>=', Carbon::today())->with('member')->orderBy('id', 'desc')->get();
 		}
 
 		return Response::json(['data' => $checkedInMembers], 200);

@@ -20086,6 +20086,8 @@ app.factory('Checkin', ['$http', function($http) {
 			return $http.post('/checkin/', data);
 		},
 		getTodayByLocation : function(locationId) {
+			if (!locationId) locationId = '';
+
 			return $http.get('/checkin/today/' + locationId);
 		},
 		getForMember : function(memberId, interval) {
@@ -20115,11 +20117,30 @@ app.factory('Location', ['$http', function($http) {
 }]);
 
 
-app.controller('AdminIndexController', ['$scope', function($scope) {
+(function() {
+    angular
+    .module('genesys')
+    .controller('AdminIndexController', AdminIndexController);
 
-	
+    AdminIndexController.$inject = ['$scope', 'Checkin'];
 
-}]);
+    function AdminIndexController(   $scope,   Checkin) {
+
+        function init() {
+            getAllCheckIns();
+        }
+
+        function getAllCheckIns() {
+            Checkin.getTodayByLocation().then(function(response) {
+                $scope.checkins = response.data.data;
+
+                console.debug('response', response);
+            });
+        }
+
+        init();
+    }
+})();
 app.controller('AdminLeadersController', ['$scope', 'Location', 'Leader', '$uibModal', 'AlertService', 
 	function(                              $scope,   Location,   Leader,   $uibModal,   AlertService) {
 
@@ -20332,27 +20353,18 @@ app.controller('DashboardController',['$scope', 'Member', 'SharedService', 'Chec
 	$scope.checkInLogs = [];
 
 	$scope.getCheckedIn = function() {
-
 		Checkin.getTodayByLocation(LOCATION_ID).success(function(response) {
-
-			$scope.checkInLogs = response.data;
-			
+			$scope.checkInLogs = response.data;		
 		}).error(function() {
 
 		});
-
 	}
 
 	$scope.getCheckedIn();
 	
 	$scope.$on('showCheckedIn', function() {
-
 		$scope.getCheckedIn();
-
 	});
-
-
-
 }]);
 app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', 'Image', 'Location', 'Checkin',
 	function(                            $scope,   Member,   Session,   Lesson,   Leader,   Shift,   Kickout,   AlertService,   School,   Image,   Location,   Checkin) {
@@ -20634,39 +20646,24 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 	$scope.showResults = false;
 
 	$scope.searchForMember = function() {
-
 		if ($scope.query.length >= 2) {
-
 			var data = { query : $scope.query };
-
 			Member.search(data).success(function(response) {
-
 				if ($scope.query.length >= 2) {
-
 					$scope.results = response.data;
 					$scope.showResults = true;
-
-				}
-				
-
+				}		
 			}).error(function() {
-
 				console.log("There was a problem searching for this member");
-
 			});
-
 		} else {
-
 			$scope.clear();
-
 		}
 	}
 
 	$scope.clear = function() {
-
 		$scope.showResults = false;
 		$scope.results = [];
-
 	}
 
 	$scope.checkIn = function(id, index) {
@@ -20707,6 +20704,10 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 		$scope.showResults = false;
 
 	});
+
+	// $scope.$watch('query', function() {
+	// 	$scope.searchForMember();
+	// });
 
 
 }]);

@@ -9,13 +9,13 @@ html, body {
 }
 
 a {
-	color:inherit;
-	text-decoration: none;
+    color:inherit;
+    text-decoration: none;
 }
 
 input, select, password{
-	// outline: none;
-	// webkit-appearance: none;
+    // outline: none;
+    // webkit-appearance: none;
 }
 
 .site-wrap {
@@ -31,11 +31,11 @@ input, select, password{
 }
 
 .left {
-	float:left;
+    float:left;
 }
 
 .right {
-	float:right;
+    float:right;
 }
 
 .margin-right {
@@ -43,7 +43,7 @@ input, select, password{
 }
 
 .clear {
-	clear:both;
+    clear:both;
 }
 
 .border-top {
@@ -58,7 +58,11 @@ input, select, password{
   width: 40px;
   height: 40px;
   position: relative;
-  
+}
+
+.highlight {
+    color:$primary; 
+    font-weight: bold;
 }
 
 .double-bounce1, .double-bounce2 {
@@ -161,43 +165,37 @@ input, select, password{
 }
 
 .submit-button {
-  text-align:center;
-  padding: 10px;
-  letter-spacing: .75px;
-  background-color:$primary;
-  @include small-button;
-  @include lato;
-  border-radius: 0;
-  width:100%;
-  margin-top: 10px;
-  cursor: pointer;
-  color:white;
-  appearance:none;
-  -webkit-appearance:none;
+    text-align:center;
+    padding: 10px;
+    letter-spacing: .75px;
+    background-color:$primary;
+    @include small-button;
+    @include lato;
+    border-radius: 0;
+    width:100%;
+    margin-top: 10px;
+    cursor: pointer;
+    color:white;
+    appearance:none;
+    -webkit-appearance:none;
 
-  &:active {
-
-    @include button-clicked
-
-  }
+    &:active {
+        @include button-clicked
+    }
 
 
 }
 
 .empty-alert {
 
-  text-align: center;
+    text-align: center;
 
 }
 
 .slide-up {
-
-  
-  &.ng-hide-add, &.ng-hide-remove {
-
-    @include transition(all .25s ease);
-
-  } 
+    &.ng-hide-add, &.ng-hide-remove {
+        @include transition(all .25s ease);
+    } 
 
   &.ng-hide-add {
 

@@ -67,5 +67,9 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 
 	});
 
+	// $scope.$watch('query', function() {
+	// 	$scope.searchForMember();
+	// });
+
 
 }]);

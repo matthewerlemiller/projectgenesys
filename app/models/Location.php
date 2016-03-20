@@ -7,7 +7,8 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class Location extends Eloquent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait;
+	use UserTrait;
+	use RemindableTrait;
 
 	protected $hidden = array('password', 'remember_token');
 

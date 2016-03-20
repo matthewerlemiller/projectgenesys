@@ -37,7 +37,7 @@
 			<div class="nav-container">
 				<a href="{{ route('home') }}"><img class="logo" src="{{ asset('img/yv-logo.png') }}"></a>
 				<div class="search-field-container">				
-					<input id="member-search-input" ng-keyup="searchForMember()" ng-model="query" class="search-field" type="search" autofocus ng-model="query" off-click="blurSearch()">
+					<input id="member-search-input" class="search-field" type="search" autofocus ng-model="query" off-click="blurSearch()" ng-change="searchForMember()" ng-model-options="{ debounce: 300 }">
 					<i class="fa fa-search search-field-icon"></i>
 				</div>				
 			</div>

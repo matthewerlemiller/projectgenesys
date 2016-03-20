@@ -22,6 +22,11 @@ class Member extends Eloquent {
 		return $this->hasMany('BadBehaviorEvent', 'memberId', 'id');
 	}
 
+	public function scopeSearch($query, $q) 
+	{
+		return empty($q) ? $query : $query->whereRaw("SELECT * FROM person WHERE to_tsvector(firstName, lastName) @@ to_tsquery('$q')", [$q]);
+	}
+
 }
 
 
