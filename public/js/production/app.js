@@ -20112,6 +20112,9 @@ app.factory('Location', ['$http', function($http) {
 		},
 		leaders : function() {
 			return $http.get('/location/leaders');
+		},
+		updateGoal : function(data) {
+			return $http.post('/location/goal', data);
 		}
 	}
 }]);
@@ -20247,6 +20250,49 @@ app.controller('AdminLeadersController', ['$scope', 'Location', 'Leader', '$uibM
 		init();
 	}
 ]);
+(function() {
+    angular
+    .module('genesys')
+    .controller('AdminLocationsController', AdminLocationsController);
+
+    AdminLocationsController.$inject = ['$scope', 'Location', '$uibModal', 'AlertService'];
+
+    function AdminLocationsController(   $scope,   Location,   $uibModal,   AlertService) {
+
+        $scope.locations = [];
+
+        function init() {
+            getLocations();
+        }
+
+        function getLocations() {
+            Location.all().success(function(response) {
+                $scope.locations = response.data;
+                console.debug('$scope.locations', response);
+            });
+        }
+
+        $scope.openLocationAssignmentModal = function(location) {
+            var modalInstance = $uibModal.open({
+                templateUrl : '../../modals/templates/goalAssignmentModal.html',
+                controller : 'GoalAssignmentModalController',
+                resolve : {
+                    location : function() {
+                        return location;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(goal) { 
+                $scope.locations[$scope.locations.indexOf(location)].goal = goal;
+                AlertService.broadcast('Goal updated!', 'success');
+            });
+        }
+
+        init();
+
+    }
+})();
 app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', 'Checkin',
 	function(                              $scope,   Image,   Member,   AlertService,   Checkin) {
 
@@ -20982,6 +21028,35 @@ sizeResults();
 
 // stickyHeader();
 
+(function() {
+    angular
+    .module('genesys')
+    .controller('GoalAssignmentModalController', GoalAssignmentModalController);
+
+    GoalAssignmentModalController.$inject = ['$scope', 'location', 'Location', 'AlertService', '$uibModalInstance'];
+
+    function GoalAssignmentModalController(   $scope,   location,   Location,   AlertService,   $uibModalInstance) {
+        $scope.location = angular.copy(location);
+        $scope.goal = $scope.location.goal;
+
+        $scope.save = function() {
+            var data = {
+                locationId : location.id,
+                goal : $scope.goal
+            }
+
+            Location.updateGoal(data).success(function(response) {
+                $uibModalInstance.close(response.data);
+            }).error(function() {
+                AlertService.broadcast('Sorry, there was a problem on our end. Contact admin.', 'error');
+            });
+        }
+
+        $scope.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
+        }
+    }
+})();
 app.controller('LocationAssignmentModalController', ['$scope', '$uibModalInstance', 'Leader', 'Location', 'leader', 
 	function(                                         $scope,   $uibModalInstance,   Leader,   Location,   leader) {
 
@@ -21018,9 +21093,7 @@ app.controller('LocationAssignmentModalController', ['$scope', '$uibModalInstanc
 		}
 
 		$scope.cancel = function() {
-
 			$uibModalInstance.dismiss('cancel');
-
 		}
 
 		$scope.changeLocationAssignment = function($locationIndex) {

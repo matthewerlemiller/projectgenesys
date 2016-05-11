@@ -34,9 +34,7 @@ app.controller('LocationAssignmentModalController', ['$scope', '$uibModalInstanc
 		}
 
 		$scope.cancel = function() {
-
 			$uibModalInstance.dismiss('cancel');
-
 		}
 
 		$scope.changeLocationAssignment = function($locationIndex) {

@@ -54,6 +54,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function() {
 
     Route::get('dashboard', ['as' => 'admin.index', 'uses' => 'AdminController@index']);
     Route::get('leaders', ['as' => 'admin.leaders', 'uses' => 'AdminController@leaders']);
+    Route::get('locations', ['as' => 'admin.locations', 'uses' => 'AdminController@locations']);
 
 });
 
@@ -79,6 +80,7 @@ Route::get('shift/get', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
 //Locations
 Route::get('location', ['as' => 'location.all', 'uses' => 'LocationController@all']);
 Route::get('location/leaders', ['as' => 'location.leaders', 'uses' => 'LocationController@leaders']);
+Route::post('location/goal', ['as' => 'location.updateGoal', 'uses' => 'LocationController@updateGoal']);
 
 
 

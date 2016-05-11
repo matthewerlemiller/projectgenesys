@@ -140,6 +140,9 @@ app.factory('Location', ['$http', function($http) {
 		},
 		leaders : function() {
 			return $http.get('/location/leaders');
+		},
+		updateGoal : function(data) {
+			return $http.post('/location/goal', data);
 		}
 	}
 }]);

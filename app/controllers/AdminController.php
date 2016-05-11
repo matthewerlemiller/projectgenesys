@@ -14,4 +14,9 @@ class AdminController extends BaseController {
 		return View::make('admin-leaders');
 	}
 
+    public function locations()
+    {
+        return View::make('admin-locations');
+    }
+
 }

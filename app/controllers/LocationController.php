@@ -25,4 +25,19 @@ class LocationController extends BaseController {
 
 	}
 
+
+	/*
+	 * Sets lesson goal amount for location
+	 */
+	public function updateGoal()
+	{
+		$locationId = Input::get('locationId');
+		$goal = Input::get('goal');
+
+		$location = Location::find($locationId);
+		$location->goal = $goal;
+		$location->save();
+
+		return Response::json(['data' => $goal], 200);
+	}
 }
