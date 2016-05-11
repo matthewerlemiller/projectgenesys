@@ -60,9 +60,9 @@ return array(
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
-			'database' => 'postgres',
-			'username' => 'postgres',
-			'password' => 'WfL78V2vQR1tfqloILyQjDRbJizCplC3sF4zdbA7R6N0bHGMPTzbczh78Su6rnM5',
+			'database' => $_ENV['database_name'],
+			'username' => $_ENV['database_username'],
+			'password' => $_ENV['database_secret'],
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
