@@ -1,358 +1,384 @@
 .Input {
-	border:2px solid $darkPrimary;
-	@include lato;
-	font-size:1rem;
-	padding:6px;
-	color:$darkgray;
-	background-color: #fff;
-	border-radius: 0;
+    border:2px solid $darkPrimary;
+    @include lato;
+    font-size:1rem;
+    padding:6px;
+    color:$darkgray;
+    background-color: #fff;
+    border-radius: 0;
 
-	&:focus {
-		outline: none;
-		border-style: dotted;
-	}
+    &:focus {
+        outline: none;
+        border-style: dotted;
+    }
 }
 
 .Form {
-	table {
-		width:100%;
-	}
+    table {
+        width:100%;
+    }
 
-	input[type="text"], input[type="date"], input[type="password"], input[type="email"], textarea, input[type="tel"] {
-		@extend .Input;
-		width:100%;
-	}
+    input[type="text"], input[type="date"], input[type="password"], input[type="email"], textarea, input[type="tel"] {
+        @extend .Input;
+        width:100%;
+    }
 
-	td {
-		padding:8px 15px;
-	}
-	
-	&-field {
-		margin-bottom: 15px;
-	}
+    td {
+        padding:8px 15px;
+    }
+    
+    &-field {
+        margin-bottom: 15px;
+    }
 
-	&-submit {
-		width:40%;
-		margin: 20px auto 50px auto;
-	}
+    &-submit {
+        width:40%;
+        margin: 20px auto 50px auto;
+    }
 
-	label {
-		color:$primary;
-		margin-bottom: 5px;
-		display: block;
-		font-size: 18px;
-		text-align: left;
-	}
+    label {
+        color:$primary;
+        margin-bottom: 5px;
+        display: block;
+        font-size: 18px;
+        text-align: left;
+    }
 
-	&-group {
-		margin-bottom: 15px;
+    &-group {
+        margin-bottom: 15px;
 
-		&--two-thirds {
-			width:((100% / 3) * 2);
-			float:left;
-		}
+        &--two-thirds {
+            width:((100% / 3) * 2);
+            float:left;
+        }
 
-		&--one-third {
-			width:(100% / 3);
-			float: left;
-		}
+        &--one-third {
+            width:(100% / 3);
+            float: left;
+        }
 
-		&--half {
-			width:50%;
-			float:left;
-		}
+        &--half {
+            width:50%;
+            float:left;
+        }
 
-		&--withPadding {
-			box-sizing:border-box;
-			padding-right: 15px;
-		}
-	}
+        &--withPadding {
+            box-sizing:border-box;
+            padding-right: 15px;
+        }
+    }
 
-	&-select {
-		width:100%;
-		position: relative;
-		background-color: white;
+    &-select {
+        width:100%;
+        position: relative;
+        background-color: white;
 
-		select {
-			-webkit-appearance: none;
-			background-color: transparent;
-		    width: 100%;
-		    height:100%;
-		    border-radius: 0;
-		    border:none;
-		    padding: 6px;
-		    font-size: 1rem;
-		    border: 2px solid black;
-		    @include lato;
+        select {
+            -webkit-appearance: none;
+            background-color: transparent;
+            width: 100%;
+            height:100%;
+            border-radius: 0;
+            border:none;
+            padding: 6px;
+            font-size: 1rem;
+            border: 2px solid black;
+            @include lato;
 
-		    &:focus {
-		    	outline: none;
-		    	border-style: dotted;
-		    }
-		}
+            &:focus {
+                outline: none;
+                border-style: dotted;
+            }
+        }
 
-	    &:after {
-	    	position: absolute;
-	    	height:100%;
-	    	width:35px;
-	    	background-color: $primary;
-	    	right:0;
-	    	top:0;
-	    	font-family: FontAwesome;
-	    	color:white;
-	    	content:'\f107';
-	    	text-align: center;
-	    	pointer-events:none;
-	    	font-size: 20px;
-    	    padding-top: 5px;
-    	    box-sizing: border-box;
-    	    border-top:2px solid $darkPrimary;
-    	    border-right:2px solid $darkPrimary;
-    	    border-bottom:2px solid $darkPrimary;
-	    }
-	}
+        &:after {
+            position: absolute;
+            height:100%;
+            width:35px;
+            background-color: $primary;
+            right:0;
+            top:0;
+            font-family: FontAwesome;
+            color:white;
+            content:'\f107';
+            text-align: center;
+            pointer-events:none;
+            font-size: 20px;
+            padding-top: 5px;
+            box-sizing: border-box;
+            border-top:2px solid $darkPrimary;
+            border-right:2px solid $darkPrimary;
+            border-bottom:2px solid $darkPrimary;
+        }
+    }
 }
 
 .StatusTag {
-	border-radius: 3px;
-	font-size: .90rem;
-	box-sizing:border-box;
-	padding:5px 10px;
-	white-space: nowrap;
+    border-radius: 3px;
+    font-size: .90rem;
+    box-sizing:border-box;
+    padding:5px 10px;
+    white-space: nowrap;
 
-	&--good {
+    &--good {
 
-		border: 2px solid $green;
-		background-color: lighten($green, 47%);
-		color:$green;
+        border: 2px solid $green;
+        background-color: lighten($green, 47%);
+        color:$green;
 
-	}
+    }
 
-	&--bad {
+    &--bad {
 
-		border: 2px solid $red;
-		background-color: lighten($red, 41%);
-		color:$red;
+        border: 2px solid $red;
+        background-color: lighten($red, 41%);
+        color:$red;
 
-	}
+    }
 
-	&--block {
+    &--block {
 
-		display: block;
+        display: block;
 
-	}
+    }
 
 }
 
 .Table {
 
-	width: 100%;
-	font-size: .8rem;
+    width: 100%;
+    font-size: .8rem;
 
 
-	th {
+    th {
 
-		height:auto;
-		font-size:1.25em;
-		color:white;
-		padding: 12px 20px;
-		background-color: $primary;
+        height:auto;
+        font-size:1.25em;
+        color:white;
+        padding: 12px 20px;
+        background-color: $primary;
 
-		&:nth-child(n+2) {
+        &:nth-child(n+2) {
 
-			border-left: 2px solid $darkPrimary;
+            border-left: 2px solid $darkPrimary;
 
-		}
+        }
 
-	}
+    }
 
-	tr {
+    tr {
 
 
 
-		&:nth-child(2n+2) {
+        &:nth-child(2n+2) {
 
-			background-color: lighten($primary, 40%);
-			border-top: 2px solid $darkPrimary;
-			border-bottom: 2px solid $darkPrimary;
+            background-color: lighten($primary, 40%);
+            border-top: 2px solid $darkPrimary;
+            border-bottom: 2px solid $darkPrimary;
 
-		}
+        }
 
-	}
+    }
 
-	td {
+    td {
 
-		@include box-sizing(border-box);
-		padding:10px;
-		text-align: center;
+        @include box-sizing(border-box);
+        padding:10px;
+        text-align: center;
 
-	}
+    }
 
 }
 
 
 .Card {
 
-	background-color: white;
-	width:100%;
-	border:2px solid $darkPrimary;
+    background-color: white;
+    width:100%;
+    border:2px solid $darkPrimary;
 
-	&-title {
+    &-title {
 
-		text-align: center;
-		color:$primary;
-		font-size: 1.25rem;
-		border-bottom: 2px solid $darkPrimary;
-		padding:14px 0;
-		font-weight: bold;
-		box-sizing:border-box;
+        text-align: center;
+        color:$primary;
+        font-size: 1.25rem;
+        border-bottom: 2px solid $darkPrimary;
+        padding:14px 0;
+        font-weight: bold;
+        box-sizing:border-box;
 
-	}
+    }
 
-	&-content {
+    &-content {
 
-		width:100%;
-		padding:25px;
-		box-sizing:border-box;
+        width:100%;
+        padding:25px;
+        box-sizing:border-box;
 
-	}
+    }
 
 }
 
 .Button {
 
-	display: inline-block;
-	box-sizing:border-box;	
-	color:white;
-	padding:8px 18px;
-	background-color: $primary;
-	border:2px solid $darkPrimary;
-	border-radius: 2px;
-	cursor: pointer;
+    display: inline-block;
+    box-sizing:border-box;  
+    color:white;
+    padding:8px 18px;
+    background-color: $primary;
+    border:2px solid $darkPrimary;
+    border-radius: 2px;
+    cursor: pointer;
 
-	&:hover {
+    &:hover {
 
-		background-color: darken($primary, 3%);
+        background-color: darken($primary, 3%);
 
-	}
+    }
 
-	&-group {
+    &-group {
 
-		margin-top: 15px;
+        margin-top: 15px;
 
-		.Button {
+        .Button {
 
-			margin-right: 5px;
+            margin-right: 5px;
 
-		}
+        }
 
-	}
+    }
 
-	&--success {
-		background-color: $green;
-		border-color:darken($green, 7%);
+    &--success {
+        background-color: $green;
+        border-color:darken($green, 7%);
 
-		&:hover {
-			background-color: darken($green, 3%);
-		}
-	}
+        &:hover {
+            background-color: darken($green, 3%);
+        }
+    }
 
-	&--neutral {
-		background-color: $lightgray;
-		border-color:darken($lightgray, 7%);
+    &--neutral {
+        background-color: $lightgray;
+        border-color:darken($lightgray, 7%);
 
-		&:hover {
-			background-color: darken($lightgray, 3%);
-		}
-	}
+        &:hover {
+            background-color: darken($lightgray, 3%);
+        }
+    }
 
-	&--error {
-		background-color: $red;
-		border-color:darken($red, 7%);
+    &--error {
+        background-color: $red;
+        border-color:darken($red, 7%);
 
-		&:hover {
-			background-color: darken($red, 3%);
-		}
-	}
+        &:hover {
+            background-color: darken($red, 3%);
+        }
+    }
 }
 
 
 .ActionTag {
-	color:white;
-	border-radius: 2px;
-	display: inline-block;
+    color:white;
+    border-radius: 2px;
+    display: inline-block;
 
-	&-content {
-		box-sizing:border-box;
-		display: inline-block;
-		padding:4px 5px 4px 8px;
-	}
+    &-content {
+        box-sizing:border-box;
+        display: inline-block;
+        padding:4px 5px 4px 8px;
+    }
 
-	&-button {
-		background-color: inherit;
-		width:20px;
-		display: inline-block;
-		text-align: center;
-		cursor: pointer;
-	}
+    &-button {
+        background-color: inherit;
+        width:20px;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+    }
 
-	&--success {
-		background-color: $green;
-		border:1px solid darken($green, 10%);
+    &--success {
+        background-color: $green;
+        border:1px solid darken($green, 10%);
 
-		& .ActionTag-content {
-			border-right:1px solid darken($green, 10%);	
-		}
-	}
+        & .ActionTag-content {
+            border-right:1px solid darken($green, 10%); 
+        }
+    }
 
-	&--warning {
-		background-color: $red;
-		border:1px solid darken($red, 10%);
+    &--warning {
+        background-color: $red;
+        border:1px solid darken($red, 10%);
 
-		& .ActionTag-content {
-			border-right:1px solid darken($red, 10%);	
-		}
-	}
+        & .ActionTag-content {
+            border-right:1px solid darken($red, 10%);   
+        }
+    }
 }
 
 .Flair {
-	color:white;
-	letter-spacing: 1px;
-	font-size: 14px;
-	@include box-sizing(border-box);
-	padding:9px 10px;
-	width:100%;
-	text-align: center;
-	position:absolute;
-	
-	&--green {
-		background-color: $green;
-		border: 2px solid darken($green, 7%);
-	}
+    color:white;
+    letter-spacing: 1px;
+    font-size: 14px;
+    @include box-sizing(border-box);
+    padding:9px 10px;
+    width:100%;
+    text-align: center;
+    position:absolute;
+    
+    &--green {
+        background-color: $green;
+        border: 2px solid darken($green, 7%);
+    }
 
-	&--orange {
-		background-color: $orange;
-		border: 2px solid darken($orange, 7%);
-	}
+    &--orange {
+        background-color: $orange;
+        border: 2px solid darken($orange, 7%);
+    }
 
-	&--small {
-		font-size: 12px;
-		padding: 6px;
-	}
+    &--small {
+        font-size: 12px;
+        padding: 6px;
+    }
 
-	&-top {
-		top:0;
-		border-left: none;
-		border-right: none;
-		border-top: none;
-	}
+    &-top {
+        top:0;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+    }
 
-	&-bottom {
-		bottom: 0px;
-		border-left: none;
-		border-right: none;
-		border-bottom: none;
-	}
+    &-bottom {
+        bottom: 0px;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+    }
 }
 
+.Indicator {
+    display: inline-block;
+    position: relative;
+    width:35px;
+    height:35px;
+    border-radius: 50%;
+    background-color: white;
+    border:2px solid $darkgray;
+
+    &--negative {
+        color:$red;
+        border-color:$red;
+    }
+
+    &--small {
+       width:27px;
+       height:27px; 
+    }
+
+    &-icon {
+        @include center;
+        font-size: 13px;
+
+        
+    }
+}
 
