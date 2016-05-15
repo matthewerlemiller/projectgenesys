@@ -10978,26 +10978,61 @@ angular.module('offClick', [])
     .directive('offClick', ['$rootScope', '$parse', function ($rootScope, $parse) {
     var id = 0;
     var listeners = {};
+    // add variable to detect touch users moving..
+    var touchMove = false;
 
+    // Add event listeners to handle various events. Destop will ignore touch events
+    document.addEventListener("touchmove", offClickEventHandler, true);
+    document.addEventListener("touchend", offClickEventHandler, true);
     document.addEventListener('click', offClickEventHandler, true);
 
     function targetInFilter(target, elms) {
         if (!target || !elms) return false;
         var elmsLen = elms.length;
-        for (var i = 0; i < elmsLen; ++i)
-        if (elms[i].contains(target)) return true;
+        for (var i = 0; i < elmsLen; ++i) {
+            var currentElem = elms[i];
+            var containsTarget = false;
+            try {
+                containsTarget = currentElem.contains(target);
+            } catch (e) {
+                // If the node is not an Element (e.g., an SVGElement) node.contains() throws Exception in IE,
+                // see https://connect.microsoft.com/IE/feedback/details/780874/node-contains-is-incorrect
+                // In this case we use compareDocumentPosition() instead.
+                if (typeof currentElem.compareDocumentPosition !== 'undefined') {
+                    containsTarget = currentElem === target || Boolean(currentElem.compareDocumentPosition(target) & 16);
+                }
+            }
+
+            if (containsTarget) {
+                return true;
+            }
+        }
         return false;
     }
 
     function offClickEventHandler(event) {
+        // If event is a touchmove adjust touchMove state
+        if( event.type === 'touchmove' ){
+            touchMove = true;
+            // And end function
+            return false;
+        }
+        // This will always fire on the touchend after the touchmove runs...
+        if( touchMove ){
+            // Reset touchmove to false
+            touchMove = false;
+            // And end function
+            return false;
+        }
         var target = event.target || event.srcElement;
         angular.forEach(listeners, function (listener, i) {
-            if (!(listener.elm.contains(target) || targetInFilter(target, listener.offClickFilter))) {
+            var filter = listener.offClickFilter();
+            if (!(listener.elm.contains(target) || targetInFilter(target, filter))) {
                 $rootScope.$evalAsync(function () {
                     listener.cb(listener.scope, {
                         $event: event
                     });
-                })
+                });
             }
 
         });
@@ -11011,8 +11046,6 @@ angular.module('offClick', [])
                 var elmId = id++;
                 var offClickFilter;
                 var removeWatcher;
-                
-                offClickFilter = document.querySelectorAll(scope.$eval(attr.offClickFilter));
 
                 if (attr.offClickIf) {
                     removeWatcher = $rootScope.$watch(function () {
@@ -11028,15 +11061,12 @@ angular.module('offClick', [])
                     on();
                 }
 
-                attr.$observe('offClickFilter', function (value) {
-                    offClickFilter = document.querySelectorAll(scope.$eval(value));
-                });
-
                 scope.$on('$destroy', function () {
                     off();
                     if (removeWatcher) {
                         removeWatcher();
                     }
+                    element = null;
                 });
 
                 function on() {
@@ -11044,11 +11074,14 @@ angular.module('offClick', [])
                         elm: element[0],
                         cb: fn,
                         scope: scope,
-                        offClickFilter: offClickFilter
+                        offClickFilter: function(){ 
+                            return document.querySelectorAll(scope.$eval(attr.offClickFilter)); 
+                        }
                     };
                 }
 
                 function off() {
+                    listeners[elmId] = null;
                     delete listeners[elmId];
                 }
             };
@@ -20412,6 +20445,35 @@ app.controller('DashboardController',['$scope', 'Member', 'SharedService', 'Chec
 		$scope.getCheckedIn();
 	});
 }]);
+(function() {
+    angular
+    .module('genesys')
+    .controller('MasterController', MasterController);
+
+    MasterController.$inject = ['$scope'];
+
+    function MasterController(   $scope) {
+        $scope.navOpen = false;
+
+        $scope.test = function() {
+            console.log('off click!!!');
+        }
+
+        $scope.toggleOpen = function() {
+
+            $scope.navOpen = !$scope.navOpen;
+        }
+
+        $scope.navClose = function() {
+            console.log("nav should be closing");
+            $scope.navOpen = false;
+        }
+
+        $scope.$watch('navOpen', function() {
+            console.debug('navOpen', $scope.navOpen);
+        });
+    }
+})();
 app.controller('MemberPageController', ['$scope', 'Member', 'Session', 'Lesson', 'Leader', 'Shift', 'Kickout', 'AlertService', 'School', 'Image', 'Location', 'Checkin',
 	function(                            $scope,   Member,   Session,   Lesson,   Leader,   Shift,   Kickout,   AlertService,   School,   Image,   Location,   Checkin) {
 
@@ -20686,9 +20748,7 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 	function(                       $scope,   Member,   SharedService,   Checkin) {
 
 	$scope.query = "";
-
 	$scope.results = [];
-
 	$scope.showResults = false;
 
 	$scope.searchForMember = function() {
@@ -20712,6 +20772,10 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 		$scope.results = [];
 	}
 
+	$scope.blurSearch = function() {
+		$("#member-search-input").blur();
+	}
+
 	$scope.checkIn = function(id, index) {
 
 		if ($scope.results[index].checkedIn !== true) {
@@ -20726,36 +20790,26 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 				$scope.results[index].checkedIn = true;
 
 				setTimeout(function() {
-
 					SharedService.broadcastShowCheckedIn();
 
 					$scope.results = [];
 					$scope.query = '';
-
 				}, 1000)
 				
 			}).error(function(response){
-
 				console.log(response.message);
-
 			});
-
 		}
-
 	}
 
 	
 	$scope.$on('showCheckedIn', function() {
-
 		$scope.showResults = false;
-
 	});
 
 	// $scope.$watch('query', function() {
 	// 	$scope.searchForMember();
 	// });
-
-
 }]);
 app.controller('ShiftController', ['$scope','Checkin', function($scope, Checkin) {
 

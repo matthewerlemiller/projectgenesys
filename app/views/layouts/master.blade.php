@@ -51,7 +51,7 @@
 @if(Route::currentRouteName() == 'login.get')
 <body class="login">
 @else
-<body class="home" ng-app="genesys">
+<body class="home" ng-app="genesys" ng-controller="MasterController">
 @endif
     
     <alerter></alerter>

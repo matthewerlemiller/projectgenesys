@@ -1,7 +1,11 @@
+html {
+    overflow-x:hidden;
+}
 body.home {
     margin: auto;
     background-color: white;
     height:1024px;
+    width:100%;
     overflow-x: hidden;
 
     .main-wrapper {
@@ -12,7 +16,6 @@ body.home {
     }
 
     .add-new-button {
-
         position:fixed;
         bottom: 25px;
         right: 25px;
@@ -33,10 +36,7 @@ body.home {
             i {
                 @include center;
             }
-
         }
-
-
     }
 
     .spacer {

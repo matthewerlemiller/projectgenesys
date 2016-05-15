@@ -1,5 +1,4 @@
 
-
 .offscreen-nav {
 
 	position: absolute;
@@ -51,14 +50,16 @@
 }
 
 //style the clickable label instead of the label itself
-label[for="nav-trigger"] {
+.trigger-proxy {
 
-	position: absolute;
-	width:40px;
-	height:40px;
-	top: 16px;
-    left: 77px;
-	z-index: 2;
+	// position: absolute;
+	// width:40px;
+	// height:40px;
+	// top: 16px;
+ //    left: 77px;
+	// z-index: 2;
+	display: inline-block;
+	margin-top: 3px;
 
 	.hamburger {
 		float:left;
@@ -78,17 +79,26 @@ label[for="nav-trigger"] {
 }
 
 // trigger functionality
-.nav-trigger:checked + label {
-    left: 270px;
+// .nav-trigger:checked + label {
+//     left: 270px;
+// }
+
+.label-triggered {
+	left: 270px;	
 }
 
 // move site content to the right
-.nav-trigger:checked ~ .site-wrap {
-    left: 200px;
-    box-shadow: 0 0 0px 2px rgba(0,0,0,0.5);
+// .nav-trigger:checked ~ .site-wrap {
+//     left: 200px;
+//     box-shadow: 0 0 0px 2px rgba(0,0,0,0.5);
+// }
+
+.site-wrap-triggered {
+	left: 200px;
+	box-shadow: 0 0 0px 2px rgba(0,0,0,0.5);
 }
 
-.nav-trigger + label, .site-wrap {
+.trigger-proxy, .site-wrap {
     transition: left 0.2s;
 }
 

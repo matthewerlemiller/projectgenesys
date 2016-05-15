@@ -1,5 +1,4 @@
-
-<nav class="offscreen-nav">
+<nav class="offscreen-nav" off-click="navClose()" off-click-filter="'#trigger-proxy'">
     <ul class="links-container">
         <a href="{{ route('home') }}"><li class="isFirst">Dashboard</li></a>
         @if(Auth::user()->admin)
@@ -18,27 +17,26 @@
     </ul>
 </nav>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger">
-    <div class="hamburger">
-        <div class="patty"></div>
-        <div class="patty"></div>
-        <div class="patty"></div>
-    </div>
+<!-- <input type="checkbox" id="nav-trigger" class="nav-trigger" ng-model="navOpen"/> -->
 
-
-</label>
 
 <!--
     entire site wrapper so content can be moved to the right when opening menu
     ends before script tags in master.blade.php
  -->
-<div class="site-wrap">
+<div class="site-wrap" ng-class="{'site-wrap-triggered' : navOpen }">
     <div class="header-container" ng-controller="SearchController">
             <div class="nav-container">
                 <a href="{{ route('home') }}"><img class="logo" src="{{ asset('img/yv-logo.png') }}"></a>
+                <div class="trigger-proxy" id="trigger-proxy" ng-click="toggleOpen();" ng-class="{'label-triggered' : navOpen }">
+                    <div class="hamburger">
+                        <div class="patty"></div>
+                        <div class="patty"></div>
+                        <div class="patty"></div>
+                    </div>
+                </div>
                 <div class="search-field-container">                
-                    <input id="member-search-input" class="search-field" type="search" autofocus ng-model="query" off-click="blurSearch()" ng-change="searchForMember()" ng-model-options="{ debounce: 300 }">
+                    <input id="member-search-input" class="search-field" type="search" ng-model="query" off-click="blurSearch()" ng-change="searchForMember()" ng-model-options="{ debounce: 300 }">
                     <i class="fa fa-search search-field-icon"></i>
                 </div>              
             </div>

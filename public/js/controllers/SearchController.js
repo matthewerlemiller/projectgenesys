@@ -2,9 +2,7 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 	function(                       $scope,   Member,   SharedService,   Checkin) {
 
 	$scope.query = "";
-
 	$scope.results = [];
-
 	$scope.showResults = false;
 
 	$scope.searchForMember = function() {
@@ -28,6 +26,10 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 		$scope.results = [];
 	}
 
+	$scope.blurSearch = function() {
+		$("#member-search-input").blur();
+	}
+
 	$scope.checkIn = function(id, index) {
 
 		if ($scope.results[index].checkedIn !== true) {
@@ -42,34 +44,24 @@ app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin
 				$scope.results[index].checkedIn = true;
 
 				setTimeout(function() {
-
 					SharedService.broadcastShowCheckedIn();
 
 					$scope.results = [];
 					$scope.query = '';
-
 				}, 1000)
 				
 			}).error(function(response){
-
 				console.log(response.message);
-
 			});
-
 		}
-
 	}
 
 	
 	$scope.$on('showCheckedIn', function() {
-
 		$scope.showResults = false;
-
 	});
 
 	// $scope.$watch('query', function() {
 	// 	$scope.searchForMember();
 	// });
-
-
 }]);
