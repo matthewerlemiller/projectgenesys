@@ -162,7 +162,6 @@
 	<div class="member-lessons-container" ng-show="lessons" ng-init="memberId = {{ $member->id }}; getSessions({{ $member->id }})">
 		<div class="table-container">
 			<table class="Table">
-
 				<tr>
 					<th>Leader</th>
 					<th>Date</th>
@@ -236,60 +235,33 @@
 
 
 	<div class="member-kickout-container" ng-show="kickout">
-
-
 		<div class="Card member-kickout-form">
-
 			<div class="Card-title">Kickout Form</div>
-
 			<div class="Card-content Form">
-
 				<div class="member-kickout-form-select">
-
 					<label for="kickout-form-shift">Shift</label>
-
 					<div class="Form-select">
-
 						<select name="kickout-form-shift" id="kickout-form-shift" ng-options="shift.id as shift.day + ' ' + shift.time for shift in shifts" ng-model="kickoutForm.shiftId" required>
 							<option value="">Choose One...</option>
 						</select>				
-
-					</div>
-
-					
-				</div>
-				
+					</div>				
+				</div>			
 				<div class="member-kickout-form-select">
 					<label>Leader</label>
-
 					<div class="Form-select">
-
 						<select name="kickout-form-leader" id="kickout-form-leader" ng-options="leader.id as leader.firstName + ' ' + leader.lastName for leader in leaders" ng-model="kickoutForm.leaderId" required>
 							<option value="">Choose One...</option>
 						</select>
-
-					</div>
-
-					
-				</div>
-
-				
-
+					</div>					
+				</div>			
 				<div class="clear"></div>
-
 				<label for="kickout-form-comments">Comments</label>
 				<textarea name="kickout-form-comments" id="kickout-form-comments" ng-model="kickoutForm.comments" required></textarea>
-
 				<div class="button submit-button" ng-click="createKickout()">Submit</div>
-
 			</div>
-
 		</div>
-
 	</div>
-
 	<div class="member-edit-container Form" ng-show="edit">
-	
 		<table class="Table">
 			<tr>
 				<th>Item</th>

@@ -10,7 +10,7 @@ class SchoolController extends BaseController {
 	 */
 	public function index()
 	{
-		$schools = School::all();
+		$schools = School::orderBy('name', 'asc')->get();
 
 		return Response::json(['data' => $schools], 200);
 	}
