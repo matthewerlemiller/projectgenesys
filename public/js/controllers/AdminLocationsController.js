@@ -20,7 +20,7 @@
             });
         }
 
-        $scope.openLocationAssignmentModal = function(location) {
+        $scope.openLocationGoalAssignmentModal = function(location) {
             var modalInstance = $uibModal.open({
                 templateUrl : '../../modals/templates/goalAssignmentModal.html',
                 controller : 'GoalAssignmentModalController',
@@ -37,7 +37,23 @@
             });
         }
 
-        init();
+        $scope.openLocationDirectorEditModal = function(location) {
+            var modalInstance = $uibModal.open({
+                templateUrl : '../../modals/templates/directorEditModal.html',
+                controller : 'DirectorEditModalController',
+                resolve : {
+                    location : function() {
+                        return location;
+                    }
+                }
+            });
 
+            modalInstance.result.then(function(email) {
+                $scope.locations[$scope.locations.indexOf(location)].director = email;
+                AlertService.broadcast('Director email updated!', 'success');
+            });
+        }
+
+        init();
     }
 })();

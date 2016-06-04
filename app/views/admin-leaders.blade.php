@@ -24,7 +24,7 @@
 					<input type="checkbox" ng-change="changeLocationAssignment($index)" ng-model="location.isChecked">@{{ location.name }}	
 				</span>
 			</div>
-			<div class="Button Button--success" ng-click="createLeader()">Add</div>
+			<div class="Button Button--success" ng-click="createLeader()">Create Leader</div>
 			<div class="Button Button--neutral" ng-click="clearLeader()">Clear</div>
 		</div>
 	</div>

@@ -20148,6 +20148,9 @@ app.factory('Location', ['$http', function($http) {
 		},
 		updateGoal : function(data) {
 			return $http.post('/location/goal', data);
+		},
+		updateDirector : function(data) {
+			return $http.post('/location/director', data);
 		}
 	}
 }]);
@@ -20305,7 +20308,7 @@ app.controller('AdminLeadersController', ['$scope', 'Location', 'Leader', '$uibM
             });
         }
 
-        $scope.openLocationAssignmentModal = function(location) {
+        $scope.openLocationGoalAssignmentModal = function(location) {
             var modalInstance = $uibModal.open({
                 templateUrl : '../../modals/templates/goalAssignmentModal.html',
                 controller : 'GoalAssignmentModalController',
@@ -20322,8 +20325,24 @@ app.controller('AdminLeadersController', ['$scope', 'Location', 'Leader', '$uibM
             });
         }
 
-        init();
+        $scope.openLocationDirectorEditModal = function(location) {
+            var modalInstance = $uibModal.open({
+                templateUrl : '../../modals/templates/directorEditModal.html',
+                controller : 'DirectorEditModalController',
+                resolve : {
+                    location : function() {
+                        return location;
+                    }
+                }
+            });
 
+            modalInstance.result.then(function(email) {
+                $scope.locations[$scope.locations.indexOf(location)].director = email;
+                AlertService.broadcast('Director email updated!', 'success');
+            });
+        }
+
+        init();
     }
 })();
 app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', 'Checkin',
@@ -21020,6 +21039,37 @@ sizeResults();
 
 // stickyHeader();
 
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .controller('DirectorEditModalController', DirectorEditModalController);
+
+    DirectorEditModalController.$inject = ['$scope', 'Location', 'location', 'AlertService', '$uibModalInstance'];
+
+    function DirectorEditModalController(   $scope,   Location,   location,   AlertService,   $uibModalInstance) {
+        $scope.location = angular.copy(location);
+        $scope.email = $scope.location.director;
+
+        $scope.save = function() {
+            var data = {
+               locationId : location.id,
+               director : $scope.email 
+            }
+
+            Location.updateDirector(data).success(function(response) {
+                $uibModalInstance.close(response.data);
+            }).error(function() {
+                AlertService.broadcast('Sorry, something went wrong on our end. Try again, or email "austenpayan@gmail.com"');
+            });
+        }
+
+        $scope.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
+        }
+    }
+})();
 (function() {
     angular
     .module('genesys')

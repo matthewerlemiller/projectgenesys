@@ -143,6 +143,9 @@ app.factory('Location', ['$http', function($http) {
 		},
 		updateGoal : function(data) {
 			return $http.post('/location/goal', data);
+		},
+		updateDirector : function(data) {
+			return $http.post('/location/director', data);
 		}
 	}
 }]);

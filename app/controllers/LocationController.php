@@ -40,4 +40,16 @@ class LocationController extends BaseController {
 
 		return Response::json(['data' => $goal], 200);
 	}
+
+	public function updateDirector()
+	{
+		$locationId = Input::get('locationId');
+		$director = Input::get('director');
+
+		$location = Location::find($locationId);
+		$location->director = $director;
+		$location->save();
+
+		return Response::json(['data' => $director], 200);
+	}
 }
