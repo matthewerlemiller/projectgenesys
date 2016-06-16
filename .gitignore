@@ -10,5 +10,5 @@ public/.sass-cache/
 public/css/.sass-cache/
 public/img/uploads/
 public/css/style.css.map
-
+public/node_modules
 !public/js/vendor

@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/production/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('production/css/app.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<script src="{{ asset('js/vendor/angular.js') }}"></script>-->
     <script src="{{ asset('bower_components/angular/angular.js') }}"></script>
@@ -68,7 +68,7 @@
 <!-- End of site wrap opened in nav.blade.php -->
 </div>
 
-<script src="{{ asset('js/production/app.js') }}"></script>
+<script src="{{ asset('production/js/app.js') }}"></script>
 
 
 
