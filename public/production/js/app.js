@@ -19632,530 +19632,568 @@ app.filter('humanReadable', function humanReadable($filter){
     return $filter('date')(tempdate, "EEE MMM d, y | h:mm a");
   }
 });
-app.factory('AlertService', ['$rootScope', function($rootScope) {
+(function() {
+    'use strict';
 
-	var AlertService = {};
+    angular
+    .module('genesys')
+    .factory('AlertService', AlertService);
 
-	AlertService.message = '';
+    AlertService.$inject = ['$rootScope'];
+    
+    function AlertService($rootScope) {
+        var AlertService = {};
 
-	AlertService.broadcast = function(message, type) {
+        AlertService.message = '';
 
-		this.message = message;
+        AlertService.broadcast = function(message, type) {
+            this.message = message;
 
-		if (type == 'success') {
+            if (type == 'success') {
+                this.broadcastSuccessAlert();
+            } else if (type == 'error') {
+                this.broadcastErrorAlert();
+            } else if (type == 'info') {
+                this.broadcastInfoAlert();
+            } else {
+                this.broadcastInfoAlert();
+            }
+        }
 
-			this.broadcastSuccessAlert();
+        AlertService.broadcastSuccessAlert = function() {
+            $rootScope.$broadcast('successAlert');
+        }
 
-		} else if (type == 'error') {
+        AlertService.broadcastErrorAlert = function() {
+            $rootScope.$broadcast('errorAlert');
+        }
 
-			this.broadcastErrorAlert();
+        AlertService.broadcastInfoAlert = function() {
+            $rootScope.$broadcast('infoAlert');
+        }
 
-		} else if (type == 'info') {
-
-			this.broadcastInfoAlert();
-
-		} else {
-
-			this.broadcastInfoAlert();
-
-		}
-
-	}
-
-	AlertService.broadcastSuccessAlert = function() {
-
-		$rootScope.$broadcast('successAlert');
-
-	}
-
-	AlertService.broadcastErrorAlert = function() {
-
-		$rootScope.$broadcast('errorAlert');
-
-	}
-
-	AlertService.broadcastInfoAlert = function() {
-
-		$rootScope.$broadcast('infoAlert');
-
-	}
-
-	return AlertService;
-
-}]);
-// Directive for mimicking ng-src for background image styling.
-app.directive('backImg', function(){
-
-    return function(scope, element, attrs){
-
-        attrs.$observe('backImg', function(value) {
-
-            element.css({
-
-                'background-image': 'url(' + value +')',
-                'background-size' : 'cover'
-                
-            });
-        });
+        return AlertService;
     };
-});
-
-
-app.directive('rankTube', ['Member', function(Member) {
-
-	return {
-
-		restrict : 'E',
-
-		scope : {
-
-			member : '=member',
-			loaded : '=loaded'
-
-		},
-
-		template : '<div class="rank-container">' +
-					'<div class="rank-tube-outer">' +
-						'<div class="rank-tube-inner" ng-class="{ \'new-width\' : member.rank.abbreviation === \'N\', \'junior-varsity-width\' : member.rank.abbreviation === \'JV\', \'varsity-width\' : member.rank.abbreviation === \'V\', \'advanced-width\' : member.rank.abbreviation === \'A\' }">' +
-							'<span class="rank-abbreviation-indicator">{{ member.rank.abbreviation }}</span>' +
-						'</div>' +
-						'<span class="rank-loading-indicator" ng-hide="loaded">Fetching Rank...</span>' +
-					'</div>' +
-					'<div class="rank-labels">' +
-						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'N\' }">New</span>' +
-						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'JV\' }">Junior Varsity</span>' +
-						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'V\' }">Varsity</span>' +
-						'<span ng-class="{ \'active\' : member.rank.abbreviation === \'A\' }">Advanced</span>' +
-					'</div>' +
-				'</div>',
-
-		link : function($scope, element, attrs) {
-
-
-		}
-
-	}
-
-}]);
-
-app.directive('alerter', ['$window', '$timeout', 'AlertService', function($window, $timeout, AlertService) {
-
-	return {
-
-		restrict : 'E',
-
-		template : '<div class="alert-container slide-up" ng-show="show">' +
-		'<div ng-class="{\'success-alert\' : alertType === \'success\', \'info-alert\' : alertType === \'info\', \'error-alert\' : alertType === \'error\'}">' +
-			'{{ message }}' +
-		'</div>' +
-        '<i class="fa fa-close" ng-click="show = false"></i>' +
-        '</div>',
-
-        scope : false,
-
-		link : function($scope, element, attrs) {
-
-			$scope.message = '';
-			$scope.show = false;
-			$scope.alertType = 'success';
-
-			$scope.$on('successAlert', function() {
-
-				$scope.alertType = 'success';	
-				display();
-
-			});
-
-			$scope.$on('infoAlert', function() {
-
-				$scope.alertType = 'info';
-				display();
-
-			});
-
-			$scope.$on('errorAlert', function() {
-
-				$scope.alertType = 'error';
-				display();
-
-			});
-
-			function display() {
-
-				$scope.message = AlertService.message;
-				$scope.show = true;
-
-				$timeout(function() {
-
-					$scope.show = false;
-
-				}, 4000)
-
-			}
-
-		}
-
-
-	}
-
-}]);
-
-app.directive('statusTag', ['Member', function(Member) {
-
-	return {
-
-		restrict : 'E',
-
-		template : '<span ng-show="loaded" class="StatusTag" ng-bind="statusTagText" ng-class="{ \'StatusTag--good\' : good === true, \'StatusTag--bad\' : good !== true, \'StatusTag--block\' : block }"></span>',
-
-		scope : {
-
-			member : '=member',
-			loaded : '=loaded',
-			block : '=block'
-
-		},
-
-		link : function($scope, element, attrs) {
-
-			$scope.statusTagText = "";
-
-			$scope.good = true;
-
-			function fetchStatus() {
-
-				Member.getStatus($scope.member.id).success(function(response) {
-
-					$scope.statusTagText = response.data.name;
-
-					if (response.data.name === 'Good') {
-
-						$scope.good = true;
-
-					} else {
-
-						$scope.good = false;
-
-					}
-
-				}).error(function(response) {
-
-					console.log("there was an error");
-
-				});
-
-			}
-
-			$scope.$watch(function(scope) {
-
-				return scope.member;
-
-			}, function() {
-
-				if ($scope.loaded) {
-
-					fetchStatus();
-
-				}
-
-			}); 			
-
-		}
-
-	}
-
-}]);
-
-app.directive('heatMap', ['Checkin', function(Checkin) {
-
-	return {
-
-		restrict : 'E',
-
-		template : '<div id="cal-heatmap"></div>',
-
-		link : function($scope, element, attrs) {
-
-			$scope.heatmapData = {};
-
-			function init() {
-
-				fetchHeatmapData();	
-
-			}
-
-
-			function fetchHeatmapData() {
-
-				Checkin.heatmapDataByLocation(LOCATION_ID).success(function(response) {
-
-					$scope.heatmapData = response.data;
-
-					initHeatmap();
-
-				});
-
-			}
-
-			function initHeatmap() {
-
-				var x = 9; 
-				var CurrentDate = new Date();
-				CurrentDate.setMonth(CurrentDate.getMonth() - x);
-
-
-				var cal = new CalHeatMap();
-				cal.init({
-					itemSelector : element[0],
-					domain: "month",
-					range: 10,
-					displayLegend: false,
-					start : CurrentDate,
-					itemName: ["check-in", "check-ins"],
-					data : $scope.heatmapData
-				});
-
-			}
-
-			init();
-
-
-		}
-
-	}
-
-}]);
-
-app.directive('adminCheckinBarChart', ['Checkin', function(Checkin) {
-
-	return {
-
-		restrict : 'E',
-
-		scope : {
-
-			locationId : '='
-
-		},
-
-		template : '<div></div>',
-
-		link : function($scope, element, attrs) {
-
-
-			function initChart() {
-
-				var n = 2; // number of layers
-				var m = 15; // number of samples per layer
-				var stack = d3.layout.stack();
-				var layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); }));
-				var yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); });
-				var yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
-
-				var margin = {top: 0, right: 15, bottom: 0, left: 15};
-				// var width = 960 - margin.left - margin.right;
-				var width = 684 - margin.left - margin.right;
-				var height = 200 - margin.top - margin.bottom;
-
-				var x = d3.scale.ordinal().domain(d3.range(m)).rangeRoundBands([0, width], .08);
-
-				var y = d3.scale.linear().domain([0, yStackMax]).range([height, 0]);
-
-				var color = d3.scale.linear().domain([0, n - 1]).range(["#aad", "#556"]);
-
-				var xAxis = d3.svg.axis().scale(x).tickSize(0).tickPadding(6).orient("bottom");
-
-				var svg = d3.select(element[0]).append("svg")
-				    .attr("width", width + margin.left + margin.right)
-				    .attr("height", height + margin.top + margin.bottom)
-				  .append("g")
-				    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-				var layer = svg.selectAll(".layer")
-				    .data(layers)
-				  .enter().append("g")
-				    .attr("class", "layer")
-				    .style("fill", function(d, i) { return color(i); });
-
-				var rect = layer.selectAll("rect")
-				    .data(function(d) { return d; })
-				  .enter().append("rect")
-				    .attr("x", function(d) { return x(d.x); })
-				    .attr("y", height)
-				    .attr("width", x.rangeBand())
-				    .attr("height", 0);
-
-				rect.transition()
-				    .delay(function(d, i) { return i * 10; })
-				    .attr("y", function(d) { return y(d.y0 + d.y); })
-				    .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
-
-				svg.append("g")
-				    .attr("class", "x axis")
-				    .attr("transform", "translate(0," + height + ")")
-				    .call(xAxis);
-	
-
-			}
-
-		}
-
-	}
-
-}]);
-
-app.factory('Member', function($http) {
-	return {
-		search : function(query) {
-			return $http.post('/member/search', query);
-		},
-		get : function(memberId) {
-			return $http.get('/member/get/' + memberId);
-		},
-		getStatus : function(memberId) {
-			return $http.get('/member/status/' + memberId);
-		},
-		update : function(data) {
-			return $http.put('/member/update/', data);
-		},
-		create : function(data) {
-			return $http.post('/member', data);
-		}
-	}
-});
-
-app.factory('Leader', function($http) {
-	return  {
-		all : function() {
-			return $http.get('/leader/all');
-		},
-		create : function(data) {
-			return $http.post('/leader', data)
-		},
-		search : function(query) {
-			return $http.post('/leader/search', query);	
-		},
-		updateLocations : function(data) {
-			return $http.post('/leader/locations', data);
-		},
-		assignToLocation : function(data) {
-			return $http.post('/leader/assign', data);
-		},
-		unassignFromLocation : function(data) {
-			return $http.post('/leader/unassign', data)
-		}
-	}
-});
-
-app.factory('Session', function($http) {
-	return {
-		get : function(memberId) {
-			return $http.get('/session/' + memberId);
-		},
-		store : function(data) {
-			return $http.post('/session', data);
-		}
-	}
-});
-
-app.factory('Shift', ['$http', function($http) {
-	return {
-		get : function() {
-			return $http.get('/shift/get');
-		}
-	}
-}]);
-
-app.factory('Lesson', ['$http', function($http) {
-	return {
-		get : function() {
-			return $http.get('/lesson');
-		}
-	}
-}]);
-
-app.factory('SharedService', function($rootScope) {
-	var sharedService = {};
-
-	sharedService.broadcastShowCheckedIn = function() {
-		$rootScope.$broadcast('showCheckedIn');
-	}
-
-	return sharedService;
-});
-
-
-app.factory('Image', ['$http', '$upload', function($http, $upload) {
-	return {
-		upload : function(file) {
-			return $upload.upload({
-				url : '/member/image',
-				file : file
-			});
-		}
-	}
-}]);
-
-app.factory('Kickout', ['$http', function($http) {
-	return {
-		store : function(data) {
-			return $http.post('/member/kickout', data);
-		}
-	}
-}]);
-
-app.factory('School', ['$http', function($http) {
-	return {
-		getAll : function() {
-			return $http.get('/school');
-		}
-	}
-}]);
-
-
-app.factory('Checkin', ['$http', function($http) {
-	return {
-		store : function(data) {
-			return $http.post('/checkin/', data);
-		},
-		getTodayByLocation : function(locationId) {
-			if (!locationId) locationId = '';
-
-			return $http.get('/checkin/today/' + locationId);
-		},
-		getForMember : function(memberId, interval) {
-			return $http.get('/checkin/member/' + memberId + '?interval=' + interval);
-		},
-		chartDataByLocation : function(locationId) {
-			return $http.get('/checkin/chart/' + locationId);
-		},
-		heatmapDataByLocation : function(locationId) {
-			return $http.get('/checkin/heatmap/' + locationId);
-		},
-		totalsByLocation : function(locationId) {
-			return $http.get('/checkin/totals/' + locationId);
-		}
-	}
-}]);
-
-app.factory('Location', ['$http', function($http) {
-	return {
-		all : function() {
-			return $http.get('/location');
-		},
-		leaders : function() {
-			return $http.get('/location/leaders');
-		},
-		updateGoal : function(data) {
-			return $http.post('/location/goal', data);
-		},
-		updateDirector : function(data) {
-			return $http.post('/location/director', data);
-		}
-	}
-}]);
-
-
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('SharedService', SharedService);
+
+    SharedService.$inject = ['$rootScope'];
+
+    function SharedService(   $rootScope) {
+        var sharedService = {};
+
+        sharedService.broadcastShowCheckedIn = function() {
+            $rootScope.$broadcast('showCheckedIn');
+        }
+
+        return sharedService;
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('Checkin', Checkin);
+
+    Checkin.$inject = ['$http'];
+
+    function Checkin(   $http) {
+        return {
+            store : function(data) {
+                return $http.post('/checkin/', data);
+            },
+            getTodayByLocation : function(locationId) {
+                if (!locationId) locationId = '';
+
+                return $http.get('/checkin/today/' + locationId);
+            },
+            getForMember : function(memberId, interval) {
+                return $http.get('/checkin/member/' + memberId + '?interval=' + interval);
+            },
+            chartDataByLocation : function(locationId) {
+                return $http.get('/checkin/chart/' + locationId);
+            },
+            heatmapDataByLocation : function(locationId) {
+                return $http.get('/checkin/heatmap/' + locationId);
+            },
+            totalsByLocation : function(locationId) {
+                return $http.get('/checkin/totals/' + locationId);
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('Image', Image);
+
+    Image.$inject = ['$http', '$upload'];
+
+    function Image(   $http,   $upload) {
+        return {
+            upload : function(file) {
+                return $upload.upload({
+                    url : '/member/image',
+                    file : file
+                });
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('Kickout', Kickout);
+
+    Kickout.$inject = ['$http'];
+
+    function Kickout(   $http) {
+        return {
+            store : function(data) {
+                return $http.post('/member/kickout', data);
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('Leader', Leader);
+
+    Leader.$inject = ['$http'];
+
+    function Leader(   $http) {
+        return  {
+            all : function() {
+                return $http.get('/leader/all');
+            },
+            create : function(data) {
+                return $http.post('/leader', data)
+            },
+            search : function(query) {
+                return $http.post('/leader/search', query); 
+            },
+            updateLocations : function(data) {
+                return $http.post('/leader/locations', data);
+            },
+            assignToLocation : function(data) {
+                return $http.post('/leader/assign', data);
+            },
+            unassignFromLocation : function(data) {
+                return $http.post('/leader/unassign', data)
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('Lesson', Lesson);
+
+    Lesson.$inject = ['$http'];
+
+    function Lesson(   $http) {
+        return {
+            get : function() {
+                return $http.get('/lesson');
+            }
+        }  
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('Location', Location);
+
+    Location.$inject = ['$http'];
+
+    function Location(   $http) {
+        return {
+            all : function() {
+                return $http.get('/location');
+            },
+            leaders : function() {
+                return $http.get('/location/leaders');
+            },
+            updateGoal : function(data) {
+                return $http.post('/location/goal', data);
+            },
+            updateDirector : function(data) {
+                return $http.post('/location/director', data);
+            }
+        }    
+    }
+})();
+(function() {
+    angular
+    .module('genesys')
+    .factory('Member', Member);
+
+    Member.$inject = ['$http'];
+    
+    function Member(   $http) {
+        return {
+            search : function(query) {
+                return $http.post('/member/search', query);
+            },
+            get : function(memberId) {
+                return $http.get('/member/get/' + memberId);
+            },
+            getStatus : function(memberId) {
+                return $http.get('/member/status/' + memberId);
+            },
+            update : function(data) {
+                return $http.put('/member/update/', data);
+            },
+            create : function(data) {
+                return $http.post('/member', data);
+            }
+        }
+    };
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('School', School);
+
+    School.$inject = ['$http'];
+
+    function School(   $http) {
+        return {
+            getAll : function() {
+                return $http.get('/school');
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('Session', Session);
+
+    Session.$inject = ['$http'];
+
+    function Session(   $http) {
+        return {
+            get : function(memberId) {
+                return $http.get('/session/' + memberId);
+            },
+            store : function(data) {
+                return $http.post('/session', data);
+            }
+        }  
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .factory('Shift', Shift);
+
+    Shift.$inject = ['$http'];
+
+    function Shift(   $http) {
+        return {
+            get : function() {
+                return $http.get('/shift/get');
+            }
+        }
+    }
+})();
+(function() {
+    angular
+    .module('genesys')
+    .directive('adminCheckinBarChart', AdminCheckinBarChart);
+
+    AdminCheckinBarChart.$inject = ['Checkin'];
+
+    function AdminCheckinBarChart(   Checkin) {
+        return {
+            restrict : 'E',
+            scope : {
+                locationId : '='
+            },
+            template : '<div></div>',
+
+            link : function($scope, element, attrs) {
+
+                function initChart() {
+                    var n = 2; // number of layers
+                    var m = 15; // number of samples per layer
+                    var stack = d3.layout.stack();
+                    var layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); }));
+                    var yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); });
+                    var yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+
+                    var margin = {top: 0, right: 15, bottom: 0, left: 15};
+                    // var width = 960 - margin.left - margin.right;
+                    var width = 684 - margin.left - margin.right;
+                    var height = 200 - margin.top - margin.bottom;
+
+                    var x = d3.scale.ordinal().domain(d3.range(m)).rangeRoundBands([0, width], .08);
+
+                    var y = d3.scale.linear().domain([0, yStackMax]).range([height, 0]);
+
+                    var color = d3.scale.linear().domain([0, n - 1]).range(["#aad", "#556"]);
+
+                    var xAxis = d3.svg.axis().scale(x).tickSize(0).tickPadding(6).orient("bottom");
+
+                    var svg = d3.select(element[0]).append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                      .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                    var layer = svg.selectAll(".layer")
+                        .data(layers)
+                      .enter().append("g")
+                        .attr("class", "layer")
+                        .style("fill", function(d, i) { return color(i); });
+
+                    var rect = layer.selectAll("rect")
+                        .data(function(d) { return d; })
+                      .enter().append("rect")
+                        .attr("x", function(d) { return x(d.x); })
+                        .attr("y", height)
+                        .attr("width", x.rangeBand())
+                        .attr("height", 0);
+
+                    rect.transition()
+                        .delay(function(d, i) { return i * 10; })
+                        .attr("y", function(d) { return y(d.y0 + d.y); })
+                        .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+                }
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .directive('alerter', Alerter);
+
+    Alerter.$inject = ['$window', '$timeout', 'AlertService'];
+
+    function Alerter(   $window,   $timeout,   AlertService) {
+        return {
+            restrict : 'E',
+            template : '<div class="alert-container slide-up" ng-show="show">' +
+            '<div ng-class="{\'success-alert\' : alertType === \'success\', \'info-alert\' : alertType === \'info\', \'error-alert\' : alertType === \'error\'}">' +
+                '{{ message }}' +
+            '</div>' +
+            '<i class="fa fa-close" ng-click="show = false"></i>' +
+            '</div>',
+            scope : false,
+            link : function($scope, element, attrs) {
+                $scope.message = '';
+                $scope.show = false;
+                $scope.alertType = 'success';
+
+                $scope.$on('successAlert', function() {
+                    $scope.alertType = 'success';   
+                    display();
+                });
+
+                $scope.$on('infoAlert', function() {
+                    $scope.alertType = 'info';
+                    display();
+                });
+
+                $scope.$on('errorAlert', function() {
+                    $scope.alertType = 'error';
+                    display();
+                });
+
+                function display() {
+                    $scope.message = AlertService.message;
+                    $scope.show = true;
+
+                    $timeout(function() {
+                        $scope.show = false;
+                    }, 4000);
+                }
+            }
+        }       
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .directive('backImg', BackImg);
+
+    BackImg.$inject = [];
+
+    function BackImg() {
+        return function(scope, element, attrs){
+            attrs.$observe('backImg', function(value) {
+                element.css({
+                    'background-image': 'url(' + value +')',
+                    'background-size' : 'cover'
+                });
+            });
+        };  
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .directive('heatMap', HeatMap);
+
+    HeatMap.$inject = ['Checkin'];
+
+    function HeatMap(   Checkin) {
+        return {
+            restrict : 'E',
+            template : '<div id="cal-heatmap"></div>',
+            link : function($scope, element, attrs) {
+                $scope.heatmapData = {};
+                function init() {
+                    fetchHeatmapData(); 
+                }
+
+                function fetchHeatmapData() {
+                    Checkin.heatmapDataByLocation(LOCATION_ID).success(function(response) {
+                        $scope.heatmapData = response.data;
+                        initHeatmap();
+                    });
+                }
+
+                function initHeatmap() {
+                    var x = 9; 
+                    var CurrentDate = new Date();
+                    var cal = new CalHeatMap();
+
+                    CurrentDate.setMonth(CurrentDate.getMonth() - x);
+
+                    cal.init({
+                        itemSelector : element[0],
+                        domain: "month",
+                        range: 10,
+                        displayLegend: false,
+                        start : CurrentDate,
+                        itemName: ["check-in", "check-ins"],
+                        data : $scope.heatmapData
+                    });
+                }
+
+                init();
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .directive('rankTube', RankTube);
+
+    RankTube.$inject = ['Member'];
+
+    function RankTube(   Member) {
+        return {
+            restrict : 'E',
+            scope : {
+                member : '=member',
+                loaded : '=loaded'
+            },
+            template : '<div class="rank-container">' +
+                        '<div class="rank-tube-outer">' +
+                            '<div class="rank-tube-inner" ng-class="{ \'new-width\' : member.rank.abbreviation === \'N\', \'junior-varsity-width\' : member.rank.abbreviation === \'JV\', \'varsity-width\' : member.rank.abbreviation === \'V\', \'advanced-width\' : member.rank.abbreviation === \'A\' }">' +
+                                '<span class="rank-abbreviation-indicator">{{ member.rank.abbreviation }}</span>' +
+                            '</div>' +
+                            '<span class="rank-loading-indicator" ng-hide="loaded">Fetching Rank...</span>' +
+                        '</div>' +
+                        '<div class="rank-labels">' +
+                            '<span ng-class="{ \'active\' : member.rank.abbreviation === \'N\' }">New</span>' +
+                            '<span ng-class="{ \'active\' : member.rank.abbreviation === \'JV\' }">Junior Varsity</span>' +
+                            '<span ng-class="{ \'active\' : member.rank.abbreviation === \'V\' }">Varsity</span>' +
+                            '<span ng-class="{ \'active\' : member.rank.abbreviation === \'A\' }">Advanced</span>' +
+                        '</div>' +
+                    '</div>',
+
+            link : function($scope, element, attrs) {}
+        } 
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .directive('statusTag', StatusTag);
+
+    StatusTag.$inject = ['Member'];
+
+    function StatusTag(   Member) {
+        return {
+            restrict : 'E',
+            template : '<span ng-show="loaded" class="StatusTag" ng-bind="statusTagText" ng-class="{ \'StatusTag--good\' : good === true, \'StatusTag--bad\' : good !== true, \'StatusTag--block\' : block }"></span>',
+            scope : {
+                member : '=member',
+                loaded : '=loaded',
+                block : '=block'
+            },
+            link : function($scope, element, attrs) {
+                $scope.statusTagText = "";
+                $scope.good = true;
+
+                function fetchStatus() {
+                    Member.getStatus($scope.member.id).success(function(response) {
+                        $scope.statusTagText = response.data.name;
+                        if (response.data.name === 'Good') {
+                            $scope.good = true;
+                        } else {
+                            $scope.good = false;
+                        }
+                    }).error(function(response) {
+                        console.log("there was an error");
+                    });
+                }
+
+                $scope.$watch(function(scope) {
+                    return scope.member;
+                }, function() {
+                    if ($scope.loaded) {
+                        fetchStatus();
+                    }
+                });             
+            }
+        }
+    }
+})();
 (function() {
     angular
     .module('genesys')
@@ -20180,112 +20218,119 @@ app.factory('Location', ['$http', function($http) {
         init();
     }
 })();
-app.controller('AdminLeadersController', ['$scope', 'Location', 'Leader', '$uibModal', 'AlertService', 
-	function(                              $scope,   Location,   Leader,   $uibModal,   AlertService) {
+(function() {
+    angular
+    .module('genesys')
+    .controller('AdminLeadersController', AdminLeadersController);
 
-		$scope.leaders = [];
-		$scope.newLeader = {
-			locationIdCollection : []
-		};
-		$scope.locations = [];
+    AdminLeadersController.$inject = ['$scope', 'Location', 'Leader', '$uibModal', 'AlertService'];
 
-		function init() {
-			getLeaders();
-			getLocations();
-		}
+    function AdminLeadersController(   $scope,   Location,   Leader,   $uibModal,   AlertService) {
+        $scope.leaders = [];
+        $scope.newLeader = {
+            locationIdCollection : []
+        };
+        $scope.locations = [];
 
-		function getLeaders() {
-			Leader.all().success(function(response) {
-				$scope.leaders = response.data;
-			});
-		}
+        function init() {
+            getLeaders();
+            getLocations();
+        }
 
-		function getLocations() {
-			Location.all().success(function(response) {
-				$scope.locations = response.data;
-			});
-		}
+        function getLeaders() {
+            Leader.all().success(function(response) {
+                $scope.leaders = response.data;
+            });
+        }
 
-		$scope.createLeader = function() {
-			var data = $scope.newLeader;
+        function getLocations() {
+            Location.all().success(function(response) {
+                $scope.locations = response.data;
+            });
+        }
 
-			if (!data.firstName || !data.lastName) return false;
+        $scope.createLeader = function() {
+            var data = $scope.newLeader;
 
-			Leader.create(data).success(function(response) {
-				AlertService.broadcast('Leader created!', 'success');
-				$scope.leaders.push(response.data);
-				$scope.clearLeader();
-			}).error(function(response) {
-				AlertService.broadcast('Something went wront, it was not your fault', 'error');
-			})
-		}
+            if (!data.firstName || !data.lastName) return false;
 
-		$scope.clearLeader = function() {
-			$scope.newLeader = {
-				locationIdCollection : []
-			}
-			clearLocationChecks();
-		}
+            Leader.create(data).success(function(response) {
+                AlertService.broadcast('Leader created!', 'success');
+                $scope.leaders.push(response.data);
+                $scope.clearLeader();
+            }).error(function(response) {
+                AlertService.broadcast('Something went wront, it was not your fault', 'error');
+            })
+        }
 
-		$scope.unassignFromLocation = function(leader, locationId) {
-			var data = {
-				locationId : locationId,
-				leaderId : leader.id
-			}
+        $scope.clearLeader = function() {
+            $scope.newLeader = {
+                locationIdCollection : []
+            }
+            clearLocationChecks();
+        }
 
-			Leader.unassignFromLocation(data).success(function(response) {
-				$scope.leaders[$scope.leaders.indexOf(leader)] = response.data;
-				AlertService.broadcast('Location unassigned', 'success');
-			});
-		}
+        $scope.unassignFromLocation = function(leader, locationId) {
+            var data = {
+                locationId : locationId,
+                leaderId : leader.id
+            }
 
-		$scope.openLocationAssignmentModal = function(leader) {
-			var modalInstance = $uibModal.open({
-				templateUrl : '../../modals/templates/locationAssignmentModal.html',
-				controller : 'LocationAssignmentModalController',
-				resolve : {
-					leader : function() {
-						return leader;
-					}
-				}
-			});
+            Leader.unassignFromLocation(data).success(function(response) {
+                $scope.leaders[$scope.leaders.indexOf(leader)] = response.data;
+                AlertService.broadcast('Location unassigned', 'success');
+            });
+        }
 
-			modalInstance.result.then(function(locations) {	
-				$scope.leaders[$scope.leaders.indexOf(leader)].locations = locations;
-				AlertService.broadcast('Locations Updated!', 'success');
-			});
-		}
+        $scope.openLocationAssignmentModal = function(leader) {
+            var modalInstance = $uibModal.open({
+                templateUrl : '../../modals/templates/locationAssignmentModal.html',
+                controller : 'LocationAssignmentModalController',
+                resolve : {
+                    leader : function() {
+                        return leader;
+                    }
+                }
+            });
 
-		$scope.changeLocationAssignment = function($locationIndex) {
-		    var locationId = $scope.locations[$locationIndex].id;
-		    
-		    if ($scope.locations[$locationIndex].isChecked) {
-		        if ($scope.newLeader.locationIdCollection.indexOf(locationId) === -1) {
-		            $scope.newLeader.locationIdCollection.push(locationId);
-		        }
-		    } else {
-		       if ($scope.leader.locationIdCollection.indexOf(locationId) !== -1) {
-		           $scope.leader.locationIdCollection.splice($scope.leader.locationIdCollection.indexOf(locationId), 1);
-		       } 
-		    }
-		}
+            modalInstance.result.then(function(locations) { 
+                $scope.leaders[$scope.leaders.indexOf(leader)].locations = locations;
+                AlertService.broadcast('Locations Updated!', 'success');
+            });
+        }
 
-		function clearLocationChecks() {
-			for(var i = 0; i < $scope.locations.length; i++) {
-				$scope.locations[i].isChecked = false;
-			}
-		}
+        $scope.changeLocationAssignment = function($locationIndex) {
+            var locationId = $scope.locations[$locationIndex].id;
+            
+            if ($scope.locations[$locationIndex].isChecked) {
+                if ($scope.newLeader.locationIdCollection.indexOf(locationId) === -1) {
+                    $scope.newLeader.locationIdCollection.push(locationId);
+                }
+            } else {
+               if ($scope.leader.locationIdCollection.indexOf(locationId) !== -1) {
+                   $scope.leader.locationIdCollection.splice($scope.leader.locationIdCollection.indexOf(locationId), 1);
+               } 
+            }
+        }
 
-		function extractIds(arrayOfObjects) {
-		    var newArray = arrayOfObjects.map(function(obj){
-		        return obj.id;
-		    });
-		    return newArray;
-		}
+        function clearLocationChecks() {
+            for(var i = 0; i < $scope.locations.length; i++) {
+                $scope.locations[i].isChecked = false;
+            }
+        }
 
-		init();
-	}
-]);
+        function extractIds(arrayOfObjects) {
+            var newArray = arrayOfObjects.map(function(obj){
+                return obj.id;
+            });
+            return newArray;
+        }
+
+        init();
+    }
+})();
+
+
 (function() {
     angular
     .module('genesys')
@@ -20345,125 +20390,103 @@ app.controller('AdminLeadersController', ['$scope', 'Location', 'Leader', '$uibM
         init();
     }
 })();
-app.controller('CreateMemberController', ['$scope', 'Image', 'Member', 'AlertService', 'Checkin',
-	function(                              $scope,   Image,   Member,   AlertService,   Checkin) {
+(function() {
+    'use strict';
 
-	$scope.image = null;
+    angular
+    .module('genesys')
+    .controller('CreateMemberController', CreateMemberController);
 
-	$scope.spinner = false;
+    CreateMemberController.$inject = ['$scope', 'Image', 'Member', 'AlertService', 'Checkin']
 
-	$scope.plus = true;
+    function CreateMemberController(   $scope,   Image,   Member,   AlertService,   Checkin) {
+        $scope.image = null;
+        $scope.spinner = false;
+        $scope.plus = true;
+        $scope.member = {};
+        $scope.created = false;
+        $scope.createdMember = {};
 
-	$scope.member = {};
+        $scope.$watch('files', function() {
+            $scope.onFileSelect($scope.files);
+        });
 
-	$scope.created = false;
+        $scope.onFileSelect = function(files) {
+            var file;
 
-	$scope.createdMember = {};
+            if (files && files.length) {
+                file = files[0];
+                $scope.spinner = true;
+                $scope.plus = false;
 
-	$scope.$watch('files', function() {
+                Image.upload(file).success(function(response) {
+                    $scope.spinner = false;
+                    $scope.image = response.data;
+                    $scope.member.image = response.data;
+                }).error(function(response) {
+                    $scope.spinner = false;
+                    $scope.plus = true;
+                });
+            }
+        }
 
-		$scope.onFileSelect($scope.files);
+        $scope.saveMember = function() {
+            Member.create($scope.member).success(function(response) {
+                $scope.created = true;
+                $scope.createdMember = response.data;
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+            }).error(function() {
+                AlertService.broadcast('There was an error, please try again', 'error');
+            });
+            return false;
+        }
 
-	});
+        $scope.checkInNewMember = function() {
+            var data = {
+                memberId : $scope.createdMember.id,
+                locationId : LOCATION_ID
+            }
+            Checkin.store(data).success(function(response) {
+                document.location.href="/";
+            }).error(function(response) {
+                AlertService.broadcast(response.message, 'error');
+            });
+        }
 
-	$scope.onFileSelect = function(files) {
+        $scope.redirectToDashboard = function() {
+            document.location.href="/";
+        }
+    };
+})();
 
-		var file;
+(function() {
+	'use strict';
 
-		if (files && files.length) {
+	angular
+	.module('genesys')
+	.controller('DashboardController', DashboardController);
 
-			file = files[0];
+	DashboardController.$inject = ['$scope', 'Member', 'SharedService', 'Checkin', 'AlertService'];
 
-			$scope.spinner = true;
-			$scope.plus = false;
+	function DashboardController(   $scope,   Member,   SharedService,   Checkin,   AlertService) {
+		$scope.checkInLogs = [];
 
-			Image.upload(file).success(function(response) {
-
-				$scope.spinner = false;
-				$scope.image = response.data;
-				$scope.member.image = response.data;
-
-			}).error(function(response) {
-
-				$scope.spinner = false;
-				$scope.plus = true;
-
-				console.log("There was an error");
-
+		$scope.getCheckedIn = function() {
+			Checkin.getTodayByLocation(LOCATION_ID).success(function(response) {
+				$scope.checkInLogs = response.data;		
+			}).error(function() {
+				AlertService.broadcast('Sorry, something went wrong', 'error');
 			});
-
-
 		}
 
-	}
-
-	$scope.saveMember = function() {
-
-		Member.create($scope.member).success(function(response) {
-
-			$scope.created = true;
-			$scope.createdMember = response.data;
-
-			document.body.scrollTop = document.documentElement.scrollTop = 0;
-
-		}).error(function() {
-
-			AlertService.broadcast('There was an error, please try again', 'error');
-
-		});
-
-		return false;
-
-	}
-
-	$scope.checkInNewMember = function() {
-
-		var data = {
-
-			memberId : $scope.createdMember.id,
-			locationId : LOCATION_ID
-
-		}
-
-		Checkin.store(data).success(function(response) {
-
-			document.location.href="/";
-
-		}).error(function(response) {
-
-			AlertService.broadcast(response.message, 'error');
-
-		});
-
-	}
-
-	$scope.redirectToDashboard = function() {
-
-		document.location.href="/";
-
-	}
-
-
-}]);
-app.controller('DashboardController',['$scope', 'Member', 'SharedService', 'Checkin', 
-	function(                          $scope,   Member,   SharedService,   Checkin) {
-
-	$scope.checkInLogs = [];
-
-	$scope.getCheckedIn = function() {
-		Checkin.getTodayByLocation(LOCATION_ID).success(function(response) {
-			$scope.checkInLogs = response.data;		
-		}).error(function() {
-
-		});
-	}
-
-	$scope.getCheckedIn();
-	
-	$scope.$on('showCheckedIn', function() {
 		$scope.getCheckedIn();
-	});
-}]);
+		
+		$scope.$on('showCheckedIn', function() {
+			$scope.getCheckedIn();
+		});
+	};
+})();
+
 (function() {
     angular
     .module('genesys')
@@ -20701,99 +20724,104 @@ app.controller('DashboardController',['$scope', 'Member', 'SharedService', 'Chec
 })();
 
 
-app.controller('SearchController',['$scope', 'Member', 'SharedService', 'Checkin',
-	function(                       $scope,   Member,   SharedService,   Checkin) {
+(function() {
+    angular
+    .module('genesys')
+    .controller('SearchController', SearchController);
 
-	$scope.query = "";
-	$scope.results = [];
-	$scope.showResults = false;
+    SearchController.$inject = ['$scope', 'Member', 'SharedService', 'Checkin'];
 
-	$scope.searchForMember = function() {
-		if ($scope.query.length >= 2) {
-			var data = { query : $scope.query };
-			Member.search(data).success(function(response) {
-				if ($scope.query.length >= 2) {
-					$scope.results = response.data;
-					$scope.showResults = true;
-				}		
-			}).error(function() {
-				console.log("There was a problem searching for this member");
-			});
-		} else {
-			$scope.clear();
-		}
-	}
+    function SearchController(   $scope,   Member,   SharedService,   Checkin) {
 
-	$scope.clear = function() {
-		$scope.showResults = false;
-		$scope.results = [];
-	}
+        $scope.query = "";
+        $scope.results = [];
+        $scope.showResults = false;
 
-	$scope.blurSearch = function() {
-		$("#member-search-input").blur();
-	}
+        $scope.searchForMember = function() {
+            if ($scope.query.length >= 2) {
+                var data = { query : $scope.query };
+                Member.search(data).success(function(response) {
+                    if ($scope.query.length >= 2) {
+                        $scope.results = response.data;
+                        $scope.showResults = true;
+                    }       
+                }).error(function() {
+                    console.log("There was a problem searching for this member");
+                });
+            } else {
+                $scope.clear();
+            }
+        }
 
-	$scope.checkIn = function(id, index) {
+        $scope.clear = function() {
+            $scope.showResults = false;
+            $scope.results = [];
+        }
 
-		if ($scope.results[index].checkedIn !== true) {
+        $scope.blurSearch = function() {
+            $("#member-search-input").blur();
+        }
 
-			var data = {
-				memberId : id,
-				locationId : LOCATION_ID
-			};
+        $scope.checkIn = function(id, index) {
 
-			Checkin.store(data).success(function(response) {
+            if ($scope.results[index].checkedIn !== true) {
 
-				$scope.results[index].checkedIn = true;
+                var data = {
+                    memberId : id,
+                    locationId : LOCATION_ID
+                };
 
-				setTimeout(function() {
-					SharedService.broadcastShowCheckedIn();
+                Checkin.store(data).success(function(response) {
 
-					$scope.results = [];
-					$scope.query = '';
-				}, 1000)
-				
-			}).error(function(response){
-				console.log(response.message);
-			});
-		}
-	}
+                    $scope.results[index].checkedIn = true;
 
-	
-	$scope.$on('showCheckedIn', function() {
-		$scope.showResults = false;
-	});
+                    setTimeout(function() {
+                        SharedService.broadcastShowCheckedIn();
 
-	// $scope.$watch('query', function() {
-	// 	$scope.searchForMember();
-	// });
-}]);
-app.controller('ShiftController', ['$scope','Checkin', function($scope, Checkin) {
+                        $scope.results = [];
+                        $scope.query = '';
+                    }, 1000)
+                    
+                }).error(function(response){
+                    console.log(response.message);
+                });
+            }
+        }
 
-	$scope.totals = {};
+        
+        $scope.$on('showCheckedIn', function() {
+            $scope.showResults = false;
+        });
+    };
+})();
+(function() {
+    'use strict';
 
-	function init() {
+    angular
+    .module('genesys')
+    .controller('ShiftController', ShiftController);
 
-		fetchTotals();
+    ShiftController.$inject = ['$scope','Checkin'];
 
-	}
+    function ShiftController(   $scope,  Checkin) {
+        $scope.totals = {};
 
-	function fetchTotals() {
+        function init() {
+            fetchTotals();
+        }
 
-		Checkin.totalsByLocation(LOCATION_ID).success(function(response) {
+        function fetchTotals() {
+            Checkin.totalsByLocation(LOCATION_ID).success(function(response) {
+                $scope.totals.day = response.data.day;
+                $scope.totals.week = response.data.week;
+                $scope.totals.month = response.data.month;
+                $scope.totals.all = response.data.all;
+            }); 
+        }
 
-			$scope.totals.day = response.data.day;
-			$scope.totals.week = response.data.week;
-			$scope.totals.month = response.data.month;
-			$scope.totals.all = response.data.all;
-
-		});	
-
-	}
-
-	init();
-
-}]);
+        init();
+    };
+})();
 
 //   This whole part is the live results search functionality
 
