@@ -21,16 +21,26 @@
                 $scope.good = true;
 
                 function fetchStatus() {
-                    Member.getStatus($scope.member.id).success(function(response) {
-                        $scope.statusTagText = response.data.name;
-                        if (response.data.name === 'Good') {
+
+                    if ($scope.member.status) {
+                        $scope.statusTagText = $scope.member.status.name;
+                        if ($scope.member.status.name === 'Good') {
                             $scope.good = true;
                         } else {
                             $scope.good = false;
                         }
-                    }).error(function(response) {
-                        console.log("there was an error");
-                    });
+                    } else {
+                        Member.getStatus($scope.member.id).success(function(response) {
+                            $scope.statusTagText = response.data.name;
+                            if (response.data.name === 'Good') {
+                                $scope.good = true;
+                            } else {
+                                $scope.good = false;
+                            }
+                        }).error(function(response) {
+                            console.log("there was an error");
+                        }); 
+                    }
                 }
 
                 $scope.$watch(function(scope) {

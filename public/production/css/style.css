@@ -547,6 +547,9 @@ a {
     border-color: #e32f1c; }
     .Button--error:hover {
       background-color: #e53f2e; }
+  .Button--disabled {
+    opacity: .4;
+    pointer-events: none; }
 
 .ActionTag {
   color: white;
@@ -590,6 +593,9 @@ a {
   .Flair--orange {
     background-color: #e67e22;
     border: 2px solid #cd6d17; }
+  .Flair--red {
+    background-color: #e74c3c;
+    border: 2px solid #e32f1c; }
   .Flair--small {
     font-size: 12px;
     padding: 6px; }
@@ -903,6 +909,10 @@ body.home {
     overflow: hidden; }
   .member-page-container .member-header-info {
     width: auto; }
+  .member-page-container .member-details-container .Card {
+    margin-bottom: 25px; }
+    .member-page-container .member-details-container .Card:first-child {
+      margin-top: 25px; }
   .member-page-container .member-details-container .rule {
     position: relative;
     border-bottom: 2px solid #0e2e6a; }

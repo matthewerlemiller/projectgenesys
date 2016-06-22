@@ -20171,16 +20171,26 @@ app.filter('humanReadable', function humanReadable($filter){
                 $scope.good = true;
 
                 function fetchStatus() {
-                    Member.getStatus($scope.member.id).success(function(response) {
-                        $scope.statusTagText = response.data.name;
-                        if (response.data.name === 'Good') {
+
+                    if ($scope.member.status) {
+                        $scope.statusTagText = $scope.member.status.name;
+                        if ($scope.member.status.name === 'Good') {
                             $scope.good = true;
                         } else {
                             $scope.good = false;
                         }
-                    }).error(function(response) {
-                        console.log("there was an error");
-                    });
+                    } else {
+                        Member.getStatus($scope.member.id).success(function(response) {
+                            $scope.statusTagText = response.data.name;
+                            if (response.data.name === 'Good') {
+                                $scope.good = true;
+                            } else {
+                                $scope.good = false;
+                            }
+                        }).error(function(response) {
+                            console.log("there was an error");
+                        }); 
+                    }
                 }
 
                 $scope.$watch(function(scope) {
@@ -20683,17 +20693,32 @@ app.filter('humanReadable', function humanReadable($filter){
         $scope.createKickout = function() {
             var data = $scope.kickoutForm;
             data.memberId = MEMBER_ID;
+            data.locationId = LOCATION_ID;
+
+            if (!validateKickoutData(data)) {
+                AlertService.broadcast('Please check all of the fields', 'error');
+                return false;
+            }
 
             Kickout.store(data).success(function(response) {
                 AlertService.broadcast(response.message, 'success');
+                $scope.fetchData();
             }).error(function(response) {
-                AlertService.broadcast(response.message, 'error');
+                AlertService.broadcast('There was an error, please fill in all fields', 'error');
             });
         }
 
         $scope.$watch('files', function() {
             $scope.onFileSelect($scope.files);
         });
+
+        function validateKickoutData(data) {
+            if (!data.shiftId || !data.leaderId || !data.comments) {
+                return false;
+            }
+
+            return true;
+        }
 
         $scope.onFileSelect = function(files) {
             var file;

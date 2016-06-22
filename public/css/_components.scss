@@ -220,7 +220,6 @@
 }
 
 .Button {
-
     display: inline-block;
     box-sizing:border-box;  
     color:white;
@@ -231,21 +230,15 @@
     cursor: pointer;
 
     &:hover {
-
         background-color: darken($primary, 3%);
-
     }
 
     &-group {
-
         margin-top: 15px;
 
         .Button {
-
             margin-right: 5px;
-
         }
-
     }
 
     &--success {
@@ -273,6 +266,11 @@
         &:hover {
             background-color: darken($red, 3%);
         }
+    }
+
+    &--disabled {
+        opacity: .4;
+        pointer-events:none;
     }
 }
 
@@ -333,6 +331,11 @@
     &--orange {
         background-color: $orange;
         border: 2px solid darken($orange, 7%);
+    }
+
+    &--red {
+        background-color: $red;
+        border: 2px solid darken($red, 7%);
     }
 
     &--small {

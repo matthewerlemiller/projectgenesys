@@ -1,409 +1,416 @@
 .member-page-container {
-	width:768px;
-	padding-left: 40px;
-	padding-right: 40px;
-	margin:auto;
+    width:768px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin:auto;
 
-	.member-header-container {
-		margin-top:25px;
-		position: relative;
-	}
-
-
-	.member-section-navigation {
-		margin-top: 25px;
-		margin-left: 15px;
-		float:left;
-		overflow: auto;
-		padding-bottom: 6px;
-		box-sizing:border-box;
-
-		li {
-			float:left;
-			padding: 10px 15px;
-			letter-spacing: .75px;
-			background-color:$primary;
-			@include small-button;
-			margin-right: 12px;
-			cursor: pointer;
-			color:white;
-
-			i {
-				margin-right: 5px;
-			}
-
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-
-		.member-section-selected {
-			background-color: #63B7FF;
-			border:2px solid $primary;
-		}
-	}
-
-	.member-profile-image {
-		float: left;
-		position: relative;
-		width:200px;
-		height:200px;
-		background-size: cover;
-		background-position: center;
-		margin-bottom: 10px;
-		border: 2px solid $darkgray;
-		overflow: hidden;
-	}
-
-	.member-header-info {
-		width: auto;
-	}
+    .member-header-container {
+        margin-top:25px;
+        position: relative;
+    }
 
 
-	.member-details-container {
+    .member-section-navigation {
+        margin-top: 25px;
+        margin-left: 15px;
+        float:left;
+        overflow: auto;
+        padding-bottom: 6px;
+        box-sizing:border-box;
 
-		.rule {
-			position:relative;
-			border-bottom: 2px solid $darkPrimary;
-		}
+        li {
+            float:left;
+            padding: 10px 15px;
+            letter-spacing: .75px;
+            background-color:$primary;
+            @include small-button;
+            margin-right: 12px;
+            cursor: pointer;
+            color:white;
 
-		.column {
-			margin-left:1px;
-			margin-right:1px;
-			width: 49%;
-			display: inline-table;
-			text-align: left;
+            i {
+                margin-right: 5px;
+            }
 
+            &:last-child {
+                margin-right: 0;
+            }
+        }
 
-			.subsection-title {
-				display:inline-block;
-				padding-bottom: 7px;
-				color:$primary;
-				font-weight: 700;
-				margin-bottom:5px;
-				margin-top: 5px;
-				border-bottom: 2px solid $darkPrimary;
-			}
+        .member-section-selected {
+            background-color: #63B7FF;
+            border:2px solid $primary;
+        }
+    }
 
-			p {
-				display: block;
-			}
+    .member-profile-image {
+        float: left;
+        position: relative;
+        width:200px;
+        height:200px;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 10px;
+        border: 2px solid $darkgray;
+        overflow: hidden;
+    }
 
-		}
-
-		.group {
-			margin-top: 7px;
-		}
-
-		.text-data, .boolean-data {
-			display: inline-block;
-			padding: 7px;
-			margin: 5px;
-			padding-left: 0;
-			margin-left: 0;
-			vertical-align: top;
-
-		}
-
-		.spacer {
-			height: 30px;
-			margin-bottom: 5px;
-		}
-
-		.boolean-data-true {
-
-		}
-
-		.boolean-data-false {
-
-		}
-
-		.data-empty {
-			color: $mediumGray;
-		}
-
-	}
-
-	.member-lessons-container {
-		margin-top:25px;
-	}
-
-	.add-lesson-container {
-
-		width: 200px;
-		background-color: white;
-		border:2px solid $darkPrimary;
-	}
-
-	.member-lesson-form {
-		padding: 12px;
-		box-sizing:border-box;
-
-		label {
-			font-size: 12px;
-		}
-
-	}
-
-	.title-wrap {
-		text-align:center;
-		padding:12px 0;
-		border-bottom: 2px solid $darkPrimary;
-		color:$primary;
-		font-weight: bold;
-	}
-
-	.section-title-white {
-		font-size: 2em;
-		font-weight:300;
-		margin-bottom:15px;
-		color: white;
-	}
+    .member-header-info {
+        width: auto;
+    }
 
 
-	.rule {
-		border-bottom: 2px solid $darkPrimary;
-		width:95%;
-		margin-bottom: 10px;
-	}
+    .member-details-container {
+        .Card {
+            margin-bottom: 25px;
 
-	p {
+            &:first-child {
+                margin-top: 25px;
+            }
+        }
 
-		line-height:22px;
-		margin-bottom: 10px;
+        .rule {
+            position:relative;
+            border-bottom: 2px solid $darkPrimary;
+        }
 
-		label {
-			margin-top:15px;
-			font-size:.9em;
-			// color:white;
-			color:$primary;
-		}
-	}
+        .column {
+            margin-left:1px;
+            margin-right:1px;
+            width: 49%;
+            display: inline-table;
+            text-align: left;
 
-	select {
-		width: 100%;
-		@include lato;
-	}
 
-	textarea {
-		-webkit-appearance:none;
-		@include lato;
-		font-size:1em;
-		padding:5px;
-		height:150px;
-		width:100%;
-		border:2px solid $darkPrimary;
-		outline:none;
-	}
+            .subsection-title {
+                display:inline-block;
+                padding-bottom: 7px;
+                color:$primary;
+                font-weight: 700;
+                margin-bottom:5px;
+                margin-top: 5px;
+                border-bottom: 2px solid $darkPrimary;
+            }
 
-	.table-container {
-		border: 2px solid $darkPrimary;
-		width: 465px;
-		height:600px;
-		float: right;
-		margin-right:5px;
-		background-color: white;
-	}
+            p {
+                display: block;
+            }
+
+        }
+
+        .group {
+            margin-top: 7px;
+        }
+
+        .text-data, .boolean-data {
+            display: inline-block;
+            padding: 7px;
+            margin: 5px;
+            padding-left: 0;
+            margin-left: 0;
+            vertical-align: top;
+
+        }
+
+        .spacer {
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        .boolean-data-true {
+
+        }
+
+        .boolean-data-false {
+
+        }
+
+        .data-empty {
+            color: $mediumGray;
+        }
+
+    }
+
+    .member-lessons-container {
+        margin-top:25px;
+    }
+
+    .add-lesson-container {
+
+        width: 200px;
+        background-color: white;
+        border:2px solid $darkPrimary;
+    }
+
+    .member-lesson-form {
+        padding: 12px;
+        box-sizing:border-box;
+
+        label {
+            font-size: 12px;
+        }
+
+    }
+
+    .title-wrap {
+        text-align:center;
+        padding:12px 0;
+        border-bottom: 2px solid $darkPrimary;
+        color:$primary;
+        font-weight: bold;
+    }
+
+    .section-title-white {
+        font-size: 2em;
+        font-weight:300;
+        margin-bottom:15px;
+        color: white;
+    }
+
+
+    .rule {
+        border-bottom: 2px solid $darkPrimary;
+        width:95%;
+        margin-bottom: 10px;
+    }
+
+    p {
+
+        line-height:22px;
+        margin-bottom: 10px;
+
+        label {
+            margin-top:15px;
+            font-size:.9em;
+            // color:white;
+            color:$primary;
+        }
+    }
+
+    select {
+        width: 100%;
+        @include lato;
+    }
+
+    textarea {
+        -webkit-appearance:none;
+        @include lato;
+        font-size:1em;
+        padding:5px;
+        height:150px;
+        width:100%;
+        border:2px solid $darkPrimary;
+        outline:none;
+    }
+
+    .table-container {
+        border: 2px solid $darkPrimary;
+        width: 465px;
+        height:600px;
+        float: right;
+        margin-right:5px;
+        background-color: white;
+    }
 }
 
 .member-details-section {
-	margin-bottom: 25px;
+    margin-bottom: 25px;
 
-	.label {
-		font-weight: bold;
-	}
+    .label {
+        font-weight: bold;
+    }
 
-	&:first-child {
-		margin-top: 25px;
-	}
+    &:first-child {
+        margin-top: 25px;
+    }
 
-	table {
-		width:100%;
-	}
+    table {
+        width:100%;
+    }
 }
 
 
 .member-profile-name {
-	position: relative;
-	float: left;	
-	font-size: 2.5em;
-	font-weight: normal;
-	margin-bottom:11px;
-	margin-left: 15px;
-	margin-top: 10px;
+    position: relative;
+    float: left;    
+    font-size: 2.5em;
+    font-weight: normal;
+    margin-bottom:11px;
+    margin-left: 15px;
+    margin-top: 10px;
 }
 
 .member-info-status-tag {
-	@include centerLeft;
-	left:104%;
-	top:60%;
+    @include centerLeft;
+    left:104%;
+    top:60%;
 }
 
 .rank-container {
-	position: relative;
-	margin-left: 15px;
-	float:left;
-	width:65%;
-	box-sizing:border-box;
-	margin-top: 16px;
+    position: relative;
+    margin-left: 15px;
+    float:left;
+    width:65%;
+    box-sizing:border-box;
+    margin-top: 16px;
 }
 
 .rank-tube-outer {
-	position: relative;
-	background-color: white;
-	box-shadow:inset 0px 0px 0px 2px $lightgray;
-	width:100%;
-	height:40px;
-	border-radius: 500px;
-	overflow: hidden;
+    position: relative;
+    background-color: white;
+    box-shadow:inset 0px 0px 0px 2px $lightgray;
+    width:100%;
+    height:40px;
+    border-radius: 500px;
+    overflow: hidden;
 }
 
 
 .rank-tube-inner {
 
-	background-color: $primary;
-	position: relative;
-	width:0%;
-	height:100%;
-	border-radius: 500px;
-	border:2px solid $darkPrimary;
-	@include transition(width .25s ease);
+    background-color: $primary;
+    position: relative;
+    width:0%;
+    height:100%;
+    border-radius: 500px;
+    border:2px solid $darkPrimary;
+    @include transition(width .25s ease);
 
-	&.new-width {
-		width:9.5%;
-	}
+    &.new-width {
+        width:9.5%;
+    }
 
-	&.junior-varsity-width {
-		width:39.5%;
-	}
+    &.junior-varsity-width {
+        width:39.5%;
+    }
 
-	&.varsity-width {
-		width:69.5%;
-	}
+    &.varsity-width {
+        width:69.5%;
+    }
 
-	&.advanced-width {
-		width:100%;
-	}
+    &.advanced-width {
+        width:100%;
+    }
 }
 
 
 .rank-labels {
-	margin-top: 6px;
+    margin-top: 6px;
 
-	span {
-		float:left;
-		width:30%;
-		text-align: center;
-		font-size: .75rem;
-		box-sizing:border-box;
-		color:lighten($lightgray, 5%);
+    span {
+        float:left;
+        width:30%;
+        text-align: center;
+        font-size: .75rem;
+        box-sizing:border-box;
+        color:lighten($lightgray, 5%);
 
-		&.active {
-			color:$primary;
-			font-weight: bold;
-		}
+        &.active {
+            color:$primary;
+            font-weight: bold;
+        }
 
-		&:first-child {
-			width:20%;
-			text-align: left;
-			padding-left: 10px;
-		}
+        &:first-child {
+            width:20%;
+            text-align: left;
+            padding-left: 10px;
+        }
 
-		&:last-child {
-			width:20%;
-			text-align: right;
-			padding-right: 10px;
-		}
-	}
+        &:last-child {
+            width:20%;
+            text-align: right;
+            padding-right: 10px;
+        }
+    }
 }
 
 .rank-abbreviation-indicator {
-	color:white;
-	@include centerRight;
-	right:15px;
+    color:white;
+    @include centerRight;
+    right:15px;
 }
 
 .rank-loading-indicator {
-	@include center;
-	color:$lightgray;
-	font-size: .9rem;
+    @include center;
+    color:$lightgray;
+    font-size: .9rem;
 }
 
 
 .member-kickout-form {
-	margin-top: 25px;
+    margin-top: 25px;
 
-	.submit {
-		margin-top: 20px;
-	}
+    .submit {
+        margin-top: 20px;
+    }
 }
 
 .member-kickout-form-select {
-	float:left;
-	width:50%;
-	box-sizing:border-box;
-	padding-left: 10px;
-	padding-right:0;
-	margin:20px 0;
+    float:left;
+    width:50%;
+    box-sizing:border-box;
+    padding-left: 10px;
+    padding-right:0;
+    margin:20px 0;
 
-	&:first-child {
-		padding-right:10px;
-		padding-left: 0;
-	}
+    &:first-child {
+        padding-right:10px;
+        padding-left: 0;
+    }
 
 
 }
 
 .member-edit-container {
-	margin-top: 25px;
-	border:2px solid $darkPrimary;
-	background-color: white;
+    margin-top: 25px;
+    border:2px solid $darkPrimary;
+    background-color: white;
 
-	label {
-		font-size: 15px;
-	}
+    label {
+        font-size: 15px;
+    }
 }
 
 .member-photo-upload {
-	width:100%;
-	height:100%;
-	@include center;
-	background-color: rgba(255,255,255, 0.8);
-	cursor: pointer;
+    width:100%;
+    height:100%;
+    @include center;
+    background-color: rgba(255,255,255, 0.8);
+    cursor: pointer;
 
-	i {
-		@include center;
-		font-size: 2rem;
-		color:$primary;
+    i {
+        @include center;
+        font-size: 2rem;
+        color:$primary;
 
-		&:after {
-			content:'Change Photo';
-			font-size: .8rem;
-			@include center;
-			top:140%;
-			text-align: center;
-			font-weight: bold;
-		}
-	}
+        &:after {
+            content:'Change Photo';
+            font-size: .8rem;
+            @include center;
+            top:140%;
+            text-align: center;
+            font-weight: bold;
+        }
+    }
 
-	&-field {
-		@include center;
-		width:100%;
-		height:100%;
-		z-index: 9; 
-	}
+    &-field {
+        @include center;
+        width:100%;
+        height:100%;
+        z-index: 9; 
+    }
 }
 
 .member-photo-changed-message {
-	width:100%;
-	height:25%;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	background-color: $red;
-	color:white;
-	text-align: center;
-	box-sizing:border-box;
-	padding:10px;
-	font-size: .8rem;
+    width:100%;
+    height:25%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: $red;
+    color:white;
+    text-align: center;
+    box-sizing:border-box;
+    padding:10px;
+    font-size: .8rem;
 }

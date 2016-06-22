@@ -5,13 +5,13 @@ use Austen\Repositories\ImageRepository;
 use Austen\Repositories\MemberRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class MemberController extends BaseController {
-
+class MemberController extends BaseController
+{
     protected $image;
-
     protected $member;
 
-    public function __construct(ImageRepository $image, MemberRepository $member) {
+    public function __construct(ImageRepository $image, MemberRepository $member)
+    {
         $this->image = $image;
         $this->member = $member;
     }
@@ -22,7 +22,8 @@ class MemberController extends BaseController {
      *
      * @return Response
      */
-    public function index() {
+    public function index()
+    {
         $members = $this->member->all();
         
         return View::make('listmembers')->withMembers($members);
@@ -34,10 +35,9 @@ class MemberController extends BaseController {
      *
      * @return Response
      */
-    public function create() {
-
+    public function create() 
+    {
         return View::make('addmember'); 
-
     }
 
 
@@ -46,17 +46,13 @@ class MemberController extends BaseController {
      *
      * @return Response
      */
-    public function store() {
-
-        // TODO : implement functionality to allow an optional automatic check 
-        // in of member after creation. 
-
+    public function store() 
+    {
         $member = $this->member->store(Input::all());
 
         if ($member === false) return Response::json(['message' => 'Sorry, there was an error.'], 404);
 
         return Response::json(['data' => $member], 200);
-
     }
 
 
@@ -66,16 +62,14 @@ class MemberController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function show($id) {
-
+    public function show($id) 
+    {
         $member = $this->member->find($id);
 
         if ($member === false) return Redirect::route('dashboard');
 
         return View::make('member')->with($member);
-
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -83,14 +77,12 @@ class MemberController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id) {
-        
+    public function edit($id) 
+    {    
         $member = Member::find($id);
 
         return View::make('editmember')->withMember($member);
-
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -98,7 +90,8 @@ class MemberController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update() {
+    public function update() 
+    {
         //TODO : Improve Edit functionality and validation.
 
         $member = $this->member->update(Input::all());
@@ -106,7 +99,6 @@ class MemberController extends BaseController {
         if ($member === false) return Response::json(['message' => "Sorry, update failed"], 404);
 
         return Response::json(['message' => 'update successful', 'data' => $member], 200);
-
     }
 
 
@@ -116,13 +108,13 @@ class MemberController extends BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id) {
+    public function destroy($id) 
+    {
         $deletion = $this->member->delete($id);
 
         if ($deletion === false) return Response::json(['message' => 'Sorry, there was a problem.'], 404); 
 
         return Response::json(['message' => 'Member deleted from database'], 200);
-
     }
 
 
@@ -142,24 +134,15 @@ class MemberController extends BaseController {
         // $results = Member::search($q)->get();
 
         foreach($results as $result) {
-            $member = Member::find($result->id);
-            $memberLastCheckIn = $member->checklogs()->orderBy('id', 'desc')->get()->first()["checkInDateTime"];
-
-            if ($memberLastCheckIn) {
-                $memberCheckedIn = Carbon::parse($memberLastCheckIn)->isToday() ? true : false;
-            } else {
-                $memberCheckedIn = false;
-            }
+            $memberCheckedIn = $this->isCheckedIn($result->id);
             
             $result->checkedIn = $memberCheckedIn;
         }
         return Response::json(['data' => $results], 200);
     }
 
-
-
-    public function uploadImage() {
-
+    public function uploadImage() 
+    {
         $file = Input::file('file');
         $upload = $this->image->upload($file, 'img/uploads/', false);
 
@@ -172,28 +155,28 @@ class MemberController extends BaseController {
 
 
     
-    public function get($memberId) {
-
+    public function get($memberId) 
+    {
         $member = $this->member->get($memberId);
 
         if ($member === false) return Response::json(['message' => 'Sorry, there was an error'], 404);
 
-        return Response::json(['data' => $member], 200);
+        $member->checkedIn = $this->isCheckedIn($member->id);
 
+        return Response::json(['data' => $member], 200);
     }
 
-    public function getStatus($memberId) {
-
+    public function getStatus($memberId) 
+    {
         $status = $this->member->status($memberId);
 
         if ($status === false) return Response::json(['message' => 'Sorry, something went wrong on our end. try again later'], 404);
 
-        return Response::json(['data' => $status], 200);
-        
+        return Response::json(['data' => $status], 200);  
     }
 
-    public function kickout() {
-
+    public function kickout() 
+    {
         $id = Input::get('memberId');
         $comments = Input::get('comments');
 
@@ -202,7 +185,23 @@ class MemberController extends BaseController {
         if ($kickoutEvent === false) return Response::json(['message' => 'Sorry, kickout failed because of a server error. Try again later'], 404);
 
         return Response::json(['message' => 'Member kicked out'], 200);
-
     }
 
+    /**
+     * Determines if member is checked in
+     * @return boolean 
+     */
+    private function isCheckedIn($memberId)
+    {
+        $member = Member::find($memberId);
+        $memberLastCheckIn = $member->checklogs()->orderBy('id', 'desc')->get()->first()["checkInDateTime"];
+
+        if ($memberLastCheckIn) {
+            $memberCheckedIn = Carbon::parse($memberLastCheckIn)->isToday() ? true : false;
+        } else {
+            $memberCheckedIn = false;
+        }
+
+        return $memberCheckedIn;
+    }
 }
