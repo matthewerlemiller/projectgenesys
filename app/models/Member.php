@@ -33,6 +33,7 @@ class Member extends Eloquent
 
     public function getStatusAttribute()
     {
+        /* This will need to be updated when we add suspension support, suspensions should last longer than 24 hours */
         $badBehaviorEvents = $this->badBehaviorEvents()->where('created_at', '>=', Carbon::now()->subDay())->where('active', '=', true)->get();
 
         if (count($badBehaviorEvents)) {

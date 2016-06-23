@@ -5,22 +5,22 @@
     .module('genesys')
     .controller('ShiftController', ShiftController);
 
-    ShiftController.$inject = ['$scope','Checkin'];
+    ShiftController.$inject = ['$scope', 'Checkin', 'Kickout', 'AlertService'];
 
-    function ShiftController(   $scope,  Checkin) {
-        $scope.totals = {};
+    function ShiftController(   $scope,   Checkin,   Kickout,   AlertService) {
+        $scope.kickouts = [];
 
         function init() {
-            fetchTotals();
+            fetchKickouts();
         }
 
-        function fetchTotals() {
-            Checkin.totalsByLocation(LOCATION_ID).success(function(response) {
-                $scope.totals.day = response.data.day;
-                $scope.totals.week = response.data.week;
-                $scope.totals.month = response.data.month;
-                $scope.totals.all = response.data.all;
-            }); 
+        function fetchKickouts() {
+            Kickout.getByLocationId(LOCATION_ID).success(function(response) {
+                $scope.kickouts = response.data;
+                console.log(response);
+            }).error(function() {
+                AlertService.broadcast('There was a problem fetching Kickouts', 'error');
+            });
         }
 
         init();

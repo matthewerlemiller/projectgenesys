@@ -11,6 +11,9 @@
         return {
             store : function(data) {
                 return $http.post('/member/kickout', data);
+            },
+            getByLocationId : function(locationId) {
+                return $http.get('/location/kickouts', { params : {locationId : locationId }});
             }
         }
     }

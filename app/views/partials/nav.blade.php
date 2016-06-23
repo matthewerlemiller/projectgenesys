@@ -11,6 +11,7 @@
         @if(!Auth::user()->admin)
         <a href="{{ route('member.create') }}"><li>Add Member</li></a>
         <a href="{{ route('shift.index') }}"><li>Shift</li></a>
+        <a href="{{ route('center.index') }}"><li>Center</li></a>
         @endif
         <a class="logout" href="{{ route('logout') }}"><li>Sign out</li></a>
         

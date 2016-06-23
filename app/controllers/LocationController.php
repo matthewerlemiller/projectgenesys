@@ -25,6 +25,17 @@ class LocationController extends BaseController {
 
 	}
 
+	public function kickouts()
+	{
+		$locationId = Input::get('locationId');
+
+		$location = Location::find($locationId);
+		$kickouts = $location->badBehaviorEvents()->whereHas('status', function($q) {
+			$q->where('name', '=', 'Kicked Out');
+		})->where('created_at', '>=', Carbon::now()->subDay())->where('active', '=', true)->with('member', 'shift', 'leader')->get();
+
+		return Response::json(['data' => $kickouts], 200);
+	}
 
 	/*
 	 * Sets lesson goal amount for location

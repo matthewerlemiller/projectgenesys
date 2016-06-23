@@ -1,0 +1,13 @@
+.u {
+    &-clear {
+        &:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+    }
+
+    &-smaller {
+        font-size:.7em;
+    }
+}

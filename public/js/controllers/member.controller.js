@@ -175,6 +175,7 @@
             Kickout.store(data).success(function(response) {
                 AlertService.broadcast(response.message, 'success');
                 $scope.fetchData();
+                $scope.changePage('details');
             }).error(function(response) {
                 AlertService.broadcast('There was an error, please fill in all fields', 'error');
             });

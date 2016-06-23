@@ -26,7 +26,7 @@
             <ul class="member-section-navigation" ng-cloak>
                 <li ng-click="changePage('details')" ng-class="{'member-section-selected' : details}"><i class="fa fa-list"></i>Details</li>
                 <li ng-click="changePage('lessons')" ng-class="{'member-section-selected' : lessons}"><i class="fa fa-star"></i>Lessons</li>
-                <li ng-click="changePage('kickout')" ng-class="{'member-section-selected' : kickout}"><i class="fa fa-thumbs-down"></i>Kickout</li>
+                <li ng-click="changePage('kickout')" ng-class="{'member-section-selected' : kickout, 'disabled' : member.status.name !== 'Good'}"><i class="fa fa-thumbs-down"></i>Kickout</li>
                 <li ng-click="changePage('edit')" ng-class="{'member-section-selected' : edit}"><i class="fa fa-pencil"></i>Edit</li>
             </ul>
             <div class="clear"></div>
@@ -444,21 +444,9 @@
                 <td><label>Emergency Contact Phone</label></td>
                 <td colspan="2"><input type="text" ng-model="member.emergencyContactPhone"></td>
             </tr>
-
         </table>
-
         <div class="button submit-button Form-submit" ng-click="updateMember()">Update</div>        
-
     </div>
-
 </div>
 
-
-
-
-
-
-
-
 @stop
-

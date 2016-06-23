@@ -35,6 +35,11 @@
             &:last-child {
                 margin-right: 0;
             }
+
+            &.disabled {
+                pointer-events:none;
+                opacity: .3;
+            }
         }
 
         .member-section-selected {

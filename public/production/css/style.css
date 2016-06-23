@@ -1,3 +1,11 @@
+.u-clear:after, .Grid:after, .Grid-item:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.u-smaller {
+  font-size: .7em; }
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -636,6 +644,45 @@ a {
     margin: 0;
     font-size: 13px; }
 
+.Grid {
+  width: 100%;
+  position: relative; }
+  .Grid-item {
+    position: relative;
+    width: 33.33333%;
+    float: left;
+    box-sizing: border-box; }
+    .Grid-item-photo {
+      float: left;
+      box-sizing: border-box;
+      position: relative;
+      background-size: cover;
+      background-position: center; }
+      .Grid-item-photo--negative {
+        border: 2px solid #e74c3c; }
+      .Grid-item-photo img {
+        width: 100%; }
+    .Grid-item-info {
+      float: right;
+      box-sizing: border-box; }
+  .Grid--medium .Grid-item {
+    font-size: .95rem;
+    padding-bottom: 3%; }
+    .Grid--medium .Grid-item:nth-child(3n+1) {
+      padding-right: 2%;
+      clear: left; }
+    .Grid--medium .Grid-item:nth-child(3n+2) {
+      padding-left: 1%;
+      padding-right: 1%; }
+    .Grid--medium .Grid-item:nth-child(3n) {
+      padding-left: 2%; }
+    .Grid--medium .Grid-item-photo {
+      width: 35%; }
+    .Grid--medium .Grid-item-info {
+      width: 65%;
+      padding-left: 7px;
+      line-height: 1.1; }
+
 body.login {
   background-color: #2E6CE3; }
 
@@ -894,6 +941,9 @@ body.home {
         margin-right: 5px; }
       .member-page-container .member-section-navigation li:last-child {
         margin-right: 0; }
+      .member-page-container .member-section-navigation li.disabled {
+        pointer-events: none;
+        opacity: .3; }
     .member-page-container .member-section-navigation .member-section-selected {
       background-color: #63B7FF;
       border: 2px solid #2E6CE3; }
@@ -1291,6 +1341,9 @@ body.home {
   border-left: 2px solid #0e2e6a;
   border-right: 2px solid #0e2e6a;
   border-top: 2px solid #0e2e6a;
+  margin: 20px 0; }
+
+.module-container {
   margin: 20px 0; }
 
 .cal-heatmap-container .graph-rect {

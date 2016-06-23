@@ -33,6 +33,6 @@ class Location extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function badBehaviorEvents()
 	{
-		return $this->hasMany('BadBehaviourEvent', 'locationId', 'id');
+		return $this->hasMany('BadBehaviorEvent', 'locationId', 'id');
 	}
 }

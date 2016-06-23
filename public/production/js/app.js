@@ -19761,6 +19761,9 @@ app.filter('humanReadable', function humanReadable($filter){
         return {
             store : function(data) {
                 return $http.post('/member/kickout', data);
+            },
+            getByLocationId : function(locationId) {
+                return $http.get('/location/kickouts', { params : {locationId : locationId }});
             }
         }
     }
@@ -20148,6 +20151,41 @@ app.filter('humanReadable', function humanReadable($filter){
         } 
     }
 })();
+(function(){
+    angular
+    .module('genesys')
+    .directive('square', Square);
+
+    var scopeApplyContainer;
+
+    Square.$inject = ['$window', '$timeout'];
+
+    function Square(   $window,   $timeout) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attributes) {
+                var breakWidth = attributes.squareBreak;
+
+                scope.getWidth = function () {
+                    return $(element).width();
+                };
+
+                scope.$watch(scope.getWidth, function (width) {
+                    if ($window.innerWidth < parseInt(breakWidth, 10)) {
+                        $(element).height('auto');
+                    } else {
+                        $(element).height(width);
+                    }
+                },true);
+
+                angular.element($window).bind('resize', function () {
+                    $timeout.cancel(scopeApplyContainer);
+                    scopeApplyContainer = $timeout(function(){scope.$apply();}, 5, false);
+                });
+            }
+        };
+    }
+})();
 (function() {
     'use strict';
 
@@ -20395,6 +20433,34 @@ app.filter('humanReadable', function humanReadable($filter){
                 $scope.locations[$scope.locations.indexOf(location)].director = email;
                 AlertService.broadcast('Director email updated!', 'success');
             });
+        }
+
+        init();
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+    .module('genesys')
+    .controller('CenterController', CenterController);
+
+    CenterController.$inject = ['$scope', 'Checkin'];
+
+    function CenterController(   $scope,   Checkin) {
+        $scope.totals = {};
+
+        function init() {
+            fetchTotals();
+        }
+
+        function fetchTotals() {
+            Checkin.totalsByLocation(LOCATION_ID).success(function(response) {
+                $scope.totals.day = response.data.day;
+                $scope.totals.week = response.data.week;
+                $scope.totals.month = response.data.month;
+                $scope.totals.all = response.data.all;
+            }); 
         }
 
         init();
@@ -20703,6 +20769,7 @@ app.filter('humanReadable', function humanReadable($filter){
             Kickout.store(data).success(function(response) {
                 AlertService.broadcast(response.message, 'success');
                 $scope.fetchData();
+                $scope.changePage('details');
             }).error(function(response) {
                 AlertService.broadcast('There was an error, please fill in all fields', 'error');
             });
@@ -20826,22 +20893,22 @@ app.filter('humanReadable', function humanReadable($filter){
     .module('genesys')
     .controller('ShiftController', ShiftController);
 
-    ShiftController.$inject = ['$scope','Checkin'];
+    ShiftController.$inject = ['$scope', 'Checkin', 'Kickout', 'AlertService'];
 
-    function ShiftController(   $scope,  Checkin) {
-        $scope.totals = {};
+    function ShiftController(   $scope,   Checkin,   Kickout,   AlertService) {
+        $scope.kickouts = [];
 
         function init() {
-            fetchTotals();
+            fetchKickouts();
         }
 
-        function fetchTotals() {
-            Checkin.totalsByLocation(LOCATION_ID).success(function(response) {
-                $scope.totals.day = response.data.day;
-                $scope.totals.week = response.data.week;
-                $scope.totals.month = response.data.month;
-                $scope.totals.all = response.data.all;
-            }); 
+        function fetchKickouts() {
+            Kickout.getByLocationId(LOCATION_ID).success(function(response) {
+                $scope.kickouts = response.data;
+                console.log(response);
+            }).error(function() {
+                AlertService.broadcast('There was a problem fetching Kickouts', 'error');
+            });
         }
 
         init();

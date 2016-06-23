@@ -1,13 +1,15 @@
 <?php
 
 
-class ShiftController extends BaseController {
+class ShiftController extends BaseController
+{
 
 	/**
 	 * Display shift page
 	 *
 	 */
-	public function index() {
+	public function index()
+	{
 		return View::make('shift');
 	}
 
@@ -23,5 +25,4 @@ class ShiftController extends BaseController {
 
 		return Response::json(['data' => $shifts], 200);
 	}
-
 }

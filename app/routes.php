@@ -48,6 +48,8 @@ Route::post('checkin', ['as' => 'checkin.store', 'uses' => 'CheckInController@st
 //Shift
 Route::get('shift', ['as' => 'shift.index', 'before' => 'auth', 'uses' => 'ShiftController@index']);
 
+//Center
+Route::get('center', ['as' => 'center.index', 'before' => 'auth', 'uses' => 'CenterController@index']);
 
 //Admin
 Route::group(array('prefix' => 'admin', 'before' => 'auth|admin'), function() {
@@ -80,6 +82,7 @@ Route::get('shift/get', ['as' => 'shift.get', 'uses' => 'ShiftController@get']);
 //Locations
 Route::get('location', ['as' => 'location.all', 'uses' => 'LocationController@all']);
 Route::get('location/leaders', ['as' => 'location.leaders', 'uses' => 'LocationController@leaders']);
+Route::get('location/kickouts', ['as' => 'location.kickouts', 'uses' => 'LocationController@kickouts']);
 Route::post('location/goal', ['as' => 'location.updateGoal', 'uses' => 'LocationController@updateGoal']);
 Route::post('location/director', ['as' => 'location.updateDirector', 'uses' => 'LocationController@updateDirector']);
 
