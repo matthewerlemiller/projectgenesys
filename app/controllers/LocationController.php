@@ -19,7 +19,7 @@ class LocationController extends BaseController {
 	public function leaders()
 	{
 		$location = Auth::user();
-		$leaders = $location->leaders;
+		$leaders = $location->leaders()->orderBy('firstName', 'ASC')->get();
 
 		return Response::json(['data' => $leaders], 200);
 
