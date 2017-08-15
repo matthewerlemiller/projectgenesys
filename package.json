@@ -1,0 +1,54 @@
+{
+  "name": "genesys",
+  "version": "2.0.0",
+  "description": "Project Genesys",
+  "main": "karma.conf.js",
+  "dependencies": {
+    "aphrodite": "^1.2.3",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "classnames": "^2.2.5",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "feather-icons": "^3.2.1",
+    "file-loader": "^0.11.1",
+    "history": "^4.6.3",
+    "modernizr": "^3.5.0",
+    "modernizr-webpack-plugin": "^1.0.5",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-feather": "^1.0.6",
+    "react-redux": "^5.0.6",
+    "react-svg-loader": "^1.1.1",
+    "redux": "^3.7.2",
+    "redux-first-router": "^1.9.14",
+    "redux-first-router-link": "^1.1.3",
+    "redux-logger": "^3.0.6",
+    "style-loader": "^0.18.2",
+    "validator": "^7.1.0",
+    "webpack": "^2.4.1"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development PLATFORM=web webpack",
+    "dev-watch": "cross-env NODE_ENV=development PLATFORM=web webpack --watch",
+    "build": "cross-env NODE_ENV=production PLATFORM=web webpack"
+  },
+  "repository": "git+https://github.com/matthewerlemiller/projectgenesys.git",
+  "author": "Austen Payan <austenpayan@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthewerlemiller/projectgenesys/issues"
+  },
+  "homepage": "https://github.com/matthewerlemiller/projectgenesys#readme"
+}
